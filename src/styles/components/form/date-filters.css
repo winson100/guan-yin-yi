@@ -1,0 +1,97 @@
+/* 日期筛选行 */
+.date-filter-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    width: 100%;
+    padding: var(--spacing-sm) 0;  /* 上下内间距8px */
+}
+
+/* 日期选择器 */
+.date-selector {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    width: 102px;  
+    padding: 0 var(--spacing-sm);
+    background-color: var(--neutral-color-nc10);
+    border-radius: var(--border-radius-small);
+    flex: 0 0 auto;  
+}
+
+.date-selector input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc80);
+    outline: none;
+}
+
+.date-text {
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc80);
+}
+
+.date-icon {
+    width: var(--icon-size-xsmall);
+    height: var(--icon-size-xsmall);
+    margin-left: var(--spacing-xs);
+}
+
+/* 日期分隔符 */
+.date-separator {
+    flex: 0 0 auto;  /* 不伸缩，保持固定宽度 */
+    width: 20px;     /* 固定宽度 */
+    text-align: center;
+    color: var(--neutral-color-nc80);
+}
+
+/* 时间筛选行有查询按钮 */
+.time-filter-row {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm);
+}
+
+/* 时间筛选行无查询按钮 */
+.time-filter-row-no-query {
+    display: flex;
+    align-items: center;
+}
+
+/* 时间输入框 */
+.time-input {
+    flex: 1;
+    height: 40px;
+    background-color: var(--neutral-color-nc10);
+    border-radius: var(--border-radius-small);
+    padding: 0 var(--spacing-md);
+    display: flex;
+    align-items: center;
+}
+
+.time-input input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc80);
+    outline: none;
+    text-align: center;
+}
+
+.time-input input::placeholder {
+    color: var(--neutral-color-nc70);
+}
+
+/* 时间分隔符 */
+.time-separator {
+    margin: 0 var(--spacing-md);
+    color: var(--neutral-color-nc80);
+}
+
+
+

@@ -1,0 +1,280 @@
+/* 特殊输入框组件样式 */
+.input-section {
+    width: 375px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-base);
+    overflow: hidden;
+}
+
+/* ================== 金额输入相关样式 ================== */
+.form-money-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 16px;
+    border-bottom: 1px solid var(--neutral-color-nc30);
+    padding-bottom: 4px;
+}
+
+/* 标题文本 */
+.input-label {
+    font-size: var(--font-size-32);
+    color: var(--neutral-color-nc90);
+}
+
+/* 输入行布局 */
+.input-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 输入框布局 */
+.currency-input {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+/* ¥字样式 */
+.currency-symbol {
+    color: var(--text-primary);
+    font-size: var(--font-size-50);
+    font-weight: var(--font-weight-regular);
+}
+
+/* 输入框默认文字 */
+.currency-input input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    width: 200px;
+    color: var(--neutral-color-nc70);
+}
+
+/* 输入框输入文字 */
+.currency-input input:not(:placeholder-shown) {
+    font-size: var(--font-size-50);
+    color: var(--neutral-color-nc90);
+    font-weight: var(--font-weight-medium);
+}
+
+/* 操作描述 */
+.input-action {
+    color: var(--auxiliary-color-ac4);
+    font-size: 14px;
+}
+
+/* 大写金额 */
+.amount-in-words {
+    font-size: var(--font-size-20);
+    color: var(--neutral-color-nc70);
+    margin-left: 24px;
+}
+
+/* 错误提示 */
+.input-error {
+    color: var(--auxiliary-color-ac3);
+    font-size: var(--font-size-24);
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+}
+
+/* 辅助提示 */
+.input-tip {
+    color: var(--neutral-color-nc70);
+    font-size: var(--font-size-24);
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+}
+
+/* ================== 一键输入相关样式 ================== */
+.onetime-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.onetime-input-example {
+    font-size: var(--font-size-28);
+    color: var(--auxiliary-color-ac3);
+}
+
+.onetime-input-area {
+    background-color: var(--neutral-color-nc10);
+    border-radius: var(--border-radius-base);
+    padding: var(--spacing-md);
+    min-height: 100px;
+}
+
+.onetime-input-placeholder {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc70);
+}
+
+.onetime-input-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.onetime-input-button button {
+    border: none;
+    outline: none;
+    height: 28px;
+    width: 80px;
+    background-color: #ECF3F9;
+    color: #576B95;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 14px;
+}
+
+/* ================== 验证码输入相关样式 ================== */
+.input-verification-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--neutral-color-nc30);
+}
+
+.input-verification-item:last-child {
+    border-bottom: none;
+}
+
+.input-verification-item .input-label {
+    width: 80px;
+}
+
+.input-verification-item input {
+    width: 180px;
+    border: none;
+    outline: none;
+    font-size: var(--font-size-28);
+    padding: var(--spacing-xs) 0;
+    text-align: right;
+}
+
+.input-verification-item input::placeholder {
+    color: var(--neutral-color-nc70);
+}
+
+.get-code-button {
+    width: 80px;
+    color: var(--auxiliary-color-ac4);
+    font-size: var(--font-size-28);
+    white-space: nowrap;
+    cursor: pointer;
+    text-align: center;
+}
+
+.get-code-button.countdown {
+    color: var(--neutral-color-nc70);
+}
+
+.verification-standalone-item {
+    display: flex;
+    align-items: center;
+    width: 295px;
+    padding: var(--spacing-md) var(--spacing-sm);
+    border-bottom: 1px solid var(--neutral-color-nc30);
+    background-color: var(--color-white);
+}
+
+.verification-standalone-item:last-child {
+    border-bottom: none;
+}
+
+.verification-standalone-item input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: var(--font-size-28);
+    padding: var(--spacing-xs) 0;
+}
+
+.countdown-text {
+    color: var(--neutral-color-nc70);
+    font-size: var(--font-size-28);
+}
+
+/* ================== 交易密码输入相关样式 ================== */
+.form-password-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--neutral-color-nc30);
+}
+
+.form-password-item .input-label {
+    flex: 1;
+}
+
+.form-password-item .password-input {
+    flex: 1;
+    text-align: right;
+    width: 100%;
+}
+
+.password-input input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: var(--font-size-28);
+    padding: var(--spacing-xs) 0;
+    text-align: right;
+}
+
+.password-dots {
+    font-family: sans-serif;
+    letter-spacing: 2px;
+}
+
+/* 密码点显示 */
+.password-dots-container {
+    width: 315px;
+}
+
+.password-dots-row {
+    display: flex;
+    width: 100%;
+    border: 1px solid #EEEEEE;
+    border-radius: 4px;
+}
+
+.password-dots-row input {
+    width: 47.5px;
+    height: 48px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-right: 1px solid #EEEEEE;
+    text-align: center;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.password-dots-row input:last-child {
+    border-right: none;
+}
+
+.password-dots-row input:focus {
+    outline: none;
+}
+
+/* ================== 其他特殊输入相关样式 ================== */
+
+
+
+
+

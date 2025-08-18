@@ -1,0 +1,95 @@
+/* 四周16px内边距 */
+.section {
+    background-color: var(--background-color);
+    padding: var(--spacing-lg);
+    width: 343px;
+}
+
+/* 上边距为0，其余16px */
+.pad-top-0 {
+    background-color: var(--background-color);
+    padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+    width: 343px;
+}
+
+/* 下边距为0，其余16px */
+.pad-bottom-0 {
+    background-color: var(--background-color);
+    padding: var(--spacing-lg) var(--spacing-lg) 0 var(--spacing-lg);
+    width: 343px;
+}
+
+/* 上下为0，左右16px */
+.pad-vertical-0 {
+    background-color: var(--background-color);
+    padding: 0 var(--spacing-lg);
+    width: 343px;
+}
+
+/* 透明背景样式 */
+.section-transparent {
+    padding: var(--spacing-lg);
+    width: 343px;
+}
+
+/* 透明背景上边距为0，其余16px */
+.section-transparent-top-0 {
+    padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+    width: 343px;
+}
+
+/* 透明背景下边距为0，其余16px */
+.section-transparent-bottom-0 {
+    padding: var(--spacing-lg) var(--spacing-lg) 0 var(--spacing-lg);
+    width: 343px;
+}
+
+/* 透明背景上下为0，左右16px */
+.section-transparent-vertical-0 {
+    padding: 0 var(--spacing-lg);
+    width: 343px;
+}
+
+/* 底部弹层标题，周16px内边距，上圆角 */
+.section-popup-title {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: var(--spacing-lg);
+    width: 343px;
+    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-full-width {
+    background-color: var(--color-white);
+    width: 375px;
+    overflow: hidden;
+}
+
+/* 底部弹窗容器结构 */
+.popup-container {
+    width: 375px;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    z-index: var(--z-index-popup);
+}
+
+/* 对话框弹层容器结构 */
+.dialog-popup-container {
+    width: 306px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: var(--z-index-popup);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

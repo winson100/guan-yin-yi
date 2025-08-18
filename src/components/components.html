@@ -1,0 +1,3139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/base/element.css">
+    <link rel="stylesheet" href="/src/styles/components/base/button-combination.css">
+    <link rel="stylesheet" href="/src/styles/components/base/carousel.css">
+    <link rel="stylesheet" href="/src/styles/components/base/tag-button.css">
+    <link rel="stylesheet" href="/src/styles/components/bar/nav-bar.css">
+    <link rel="stylesheet" href="/src/styles/components/bar/phone-speaker.css">
+    <link rel="stylesheet" href="/src/styles/components/bar/search-bar.css">
+    <link rel="stylesheet" href="/src/styles/components/bar/status-bar.css">
+    <link rel="stylesheet" href="/src/styles/components/bar/tab-bar.css">
+    <link rel="stylesheet" href="/src/styles/components/bar/top-tabs.css">
+    <link rel="stylesheet" href="/src/styles/components/bar/bottom-tabs.css">
+    <link rel="stylesheet" href="/src/styles/components/business/amount-display.css">
+    <link rel="stylesheet" href="/src/styles/components/business/card-id-upload.css">
+    <link rel="stylesheet" href="/src/styles/components/business/product-card.css">
+    <link rel="stylesheet" href="/src/styles/components/business/product-detail.css">
+    <link rel="stylesheet" href="/src/styles/components/business/steps.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-title.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-gradient.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-icons.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-actionsheet.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-password.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-sms.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-text.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-wheel.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/complex-dialog.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/dialog.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/empty-page.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/result-page.css">
+    <link rel="stylesheet" href="/src/styles/components/form/date-filters.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="group-title">基础组件</h1>
+        
+        <h2 class="category-title">一行两个按钮组合</h2>
+
+        <!-- 一行两个按钮 -->
+        <section class="section">
+            <div class="btn-group-2">
+                <button class="btn-large btn-secondary">
+                    <span class="btn-text">按钮</span>
+                </button>
+                <button class="btn-large btn-primary">
+                    <span class="btn-text">按钮</span>
+                </button>
+            </div>
+        </section>
+
+        <h2 class="category-title">一行三个按钮组合</h2>
+        <!-- 一行三个按钮 -->
+        <section class="section">
+            <div class="btn-group-3">
+                <button class="btn-large btn-secondary">
+                    <span class="btn-text">按钮</span>
+                </button>
+                <button class="btn-large btn-secondary">
+                    <span class="btn-text">按钮</span>
+                </button>
+                <button class="btn-large btn-primary">
+                    <span class="btn-text">按钮</span>
+                </button>
+            </div>
+        </section>
+
+        <h2 class="category-title">带图标的单按钮</h2>
+        <!-- 带图标的单按钮 -->
+        <section class="section">
+            <div class="btn-group-with-icon">
+                <button class="icon-btn">
+                    <div class="icon-btn__icon">
+                        <img src="/src/assets/images/icon16.png" alt="icon" />
+                    </div>
+                    <div class="icon-btn__text">操作描述</div>
+                </button>
+                <div class="btn-group-single">
+                    <button class="btn-large btn-primary">
+                        <span class="btn-large-text">按钮</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">带图标的双按钮</h2>
+        <!-- 带图标的双按钮 -->
+        <section class="section">
+            <div class="btn-group-with-icon">
+                <div class="icon-btn">
+                    <div class="icon-btn__icon">
+                        <img src="/src/assets/images/icon16.png" alt="icon" />
+                    </div>
+                    <div class="icon-btn__text">操作描述</div>
+                </div>
+                <div class="btn-group-2">
+                    <button class="btn-large btn-secondary">
+                        <span class="btn-text">按钮</span>
+                    </button>
+                    <button class="btn-large btn-primary">
+                        <span class="btn-text">按钮</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">全宽按钮</h2>
+        <!-- 全宽按钮 -->
+        <section class="section">
+            <div class="btn-group">
+                <button class="btn-large btn-primary">
+                    <span class="btn-text">按钮</span>
+                </button>
+            </div>
+        </section>
+
+        <h2 class="category-title">底部按钮组件</h2>
+        <!-- 底部带复选框和按钮 -->
+        <section class="">
+            <div class="footer-btn-group" class="">
+                <section class="pad-bottom-0">
+                    <label class="checkbox">
+                        <input type="checkbox">
+                        <span class="checkbox__text">勾选操作的相关描述文本描述</span>
+                    </label>
+                </section>
+                <section class="section">
+                    <div class="btn-group">
+                        <button class="btn-large btn-primary">
+                            <span class="btn-text">按钮</span>
+                        </button>
+                    </div>
+                </section>
+                <section class="pad-top-0">
+                    <div class="desc-text">操作描述</div>
+                </section>
+            </div>
+        </section>
+
+        <h2 class="category-title">折叠器</h2> 
+        <!-- 折叠器-只有图标 -->
+        <section class="pad-vertical-0">
+            <div class="accordion-header">
+                <img src="/src/assets/images/expand.png" alt="展开" class="accordion-icon">
+            </div>
+        </section>
+        
+        <div class="space-line"></div>
+        <!-- 折叠器-带文字 -->
+        <section class="pad-vertical-0">
+            <div class="accordion-header with-text">
+                <span class="accordion-title">内容展开</span>
+                <img src="/src/assets/images/expand.png" alt="展开" class="accordion-badge">
+            </div>
+        </section>
+
+        <h2 class="category-title">轮播组件-点状</h2>
+        <!-- 小型轮播组件 -->
+        <section class="section">
+            <div class="carousel-container-small">
+                <div class="dark-gray-area">
+                    <img src="/src/assets/images/banner-s01.png" alt="小banner1">
+                    <img src="/src/assets/images/banner-s02.png" alt="小banner2" style="display: none;">
+                </div>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                </div>
+            </div>
+        </section>
+        <div class="space-line"></div>
+        <!-- 大型轮播组件 -->
+        <section class="section">
+            <div class="carousel-container-larger">
+                <div class="carousel-content">
+                    <div class="white-area">
+                        <img src="/src/assets/images/banner-b01.png" alt="大banner1">
+                        <img src="/src/assets/images/banner-b02.png" alt="大banner2" style="display: none;">
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">轮播组件-条状</h2>
+        <!-- 条状轮播组件 -->
+        <section class="section">
+            <div class="carousel-content">
+                <div class="white-area">
+                    <img src="/src/assets/images/banner-s01.png" alt="小banner1">
+                    <img src="/src/assets/images/banner-s02.png" alt="小banner2" style="display: none;">
+                </div>
+                <div class="carousel-bars">
+                    <div class="carousel-bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">右侧漂浮按钮——产品详情</h2>
+        <!-- 右侧漂浮按钮——产品详情 -->
+        <section class="section-transparent-vertical-0">
+            <div class="tag-button-row">
+                <button class="detail-tag" href="javascript:void(0);">
+                    <span>产品详情</span>
+                    <img src="/src/assets/images/right arrow.png" class="icon-arrow" alt="箭头">
+                </button>
+            </div>
+        </section>
+
+        <h2 class="category-title">右侧漂浮按钮——回底部</h2>
+        <!-- 右侧漂浮按钮——回底部 -->
+        <section class="section-transparent-vertical-0">    
+            <div class="tag-button-row">
+                <button class="small-tag">
+                    <img src="/src/assets/images/returnbottom.png" class="icon-up" alt="回到底部">
+                    <span class="tag-text">回底部</span>
+                </button>
+            </div>
+        </section>
+
+        <h2 class="category-title">横向步骤条-默认</h2>
+        <!-- 横向步骤条 - 默认 -->
+        <section class="section">
+            <div class="steps-horizontal-wrapper">
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤一</div>
+                </div>
+                <div class="steps-horizontal-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤二</div>
+                </div>
+                <div class="steps-horizontal-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤三</div>
+                </div>
+                <div class="steps-horizontal-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤四</div>
+                </div>
+            </div>
+        </section>
+        <div class="space-line"></div>
+
+        <h2 class="category-title">横向步骤条-带进度</h2>
+        <!-- 横向步骤条 - 带进度 -->
+        <section class="section">
+            <div class="steps-horizontal-wrapper">
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon-active"></div>
+                    <div class="steps-horizontal-title">步骤一</div>
+                </div>
+                <div class="steps-horizontal-connector-active"></div>
+                <div class="steps-horizontal-item steps-horizontal-item-current">
+                    <img class="steps-horizontal-icon" src="/src/assets/images/currentstep.png" alt="当前步骤" >
+                    <div class="steps-horizontal-title">步骤二</div>
+                </div>
+                <div class="steps-horizontal-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤三</div>
+                </div>
+                <div class="steps-horizontal-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤四</div>
+                </div>
+            </div>
+        </section>
+        <div class="space-line"></div>
+
+        <h2 class="category-title">横向双文本步骤条-默认</h2>
+        <!-- 横向双文本步骤条 - 默认 -->
+        <section class="section">
+            <div class="steps-horizontal-wrapper">
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤一</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤二</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤三</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤四</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="space-line"></div>
+
+        <h2 class="category-title">横向双文本步骤条-带进度</h2>
+        <!-- 横向双文本步骤条 - 带进度 -->
+        <section class="section">
+            <div class="steps-horizontal-wrapper">
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon-active"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤一</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector-active"></div>
+                <div class="steps-horizontal-item steps-horizontal-item-current">
+                    <img class="steps-horizontal-icon" src="/src/assets/images/currentstep.png" alt="当前步骤" >
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤二</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤三</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤四</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">竖向步骤条-默认</h2>
+        <!-- 竖向步骤条 - 默认 -->
+        <section class="section">
+            <div class="steps-vertical-wrapper">
+                <div class="steps-vertical-container">
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤一标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line"></div>
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤二标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line"></div>
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤三标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line"></div>
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤四标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">竖向步骤条-带进度</h2>
+        <!-- 竖向步骤条 - 带进度 -->
+        <section class="section">
+            <div class="steps-vertical-wrapper">
+                <div class="steps-vertical-container">
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon-active"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤一标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line-active"></div>
+                    <div class="steps-vertical-item steps-vertical-item-current">
+                        <img class="steps-vertical-icon" src="/src/assets/images/currentstep.png" alt="当前步骤" >
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤二标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line"></div>
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤三标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line"></div>
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤四标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">常规列表</h2>
+        <!-- 常规列表 -->
+        <section class="pad-vertical-0">
+            <div class="regular-list-module-header">模块标题</div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+        </section>
+
+        <h2 class="category-title">常规类标无标题-带展开</h2>
+        <!-- 常规类标无标题-带展开 -->
+        <section class="pad-vertical-0">
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="regular-list-row">
+                <div class="regular-list-row-title">标题文本</div>
+                <div class="regular-list-row-value">返显信息</div>
+            </div>
+            <div class="accordion-header">
+                <img src="/src/assets/images/expand.png" alt="展开" class="accordion-icon">
+            </div>
+        </section>
+
+        <h2 class="category-title">双行文本列表项-无类型</h2>
+        <!-- 双行文本列表项-无类型 -->
+        <section class="pad-vertical-0">
+            <div class="regular-list-item">
+                <div class="regular-list-content-container">
+                    <div class="regular-list-title">标题文本(附属要素)</div>
+                    <div class="regular-list-subtitle">左侧摘要描述</div>
+                 </div>
+                <div class="regular-list-amount-container">
+                     <div class="regular-list-value">份额/金额信息</div>
+                    <div class="regular-list-status regular-list-status-success">右侧摘要描述</div>
+                </div>
+            </div>
+            <div class="regular-list-item">
+                <div class="regular-list-content-container">
+                    <div class="regular-list-title">非柜面转账(对方账号5954)</div>
+                    <div class="regular-list-subtitle">2023/01/01 00:00:00</div>
+                 </div>
+                <div class="regular-list-amount-container">
+                     <div class="regular-list-value">-100.00</div>
+                    <div class="regular-list-status regular-list-status-success">余额 3,000.00</div>
+                </div>
+            </div>
+            <div class="regular-list-item">
+                <div class="regular-list-content-container">
+                    <div class="regular-list-title">非柜面转账(对方账号5954)</div>
+                    <div class="regular-list-subtitle">2023/01/01 00:00:00</div>
+                 </div>
+                <div class="regular-list-amount-container">
+                     <div class="regular-list-value">-100.00</div>
+                    <div class="regular-list-status regular-list-status-success">余额 3,000.00</div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">双行文本列表项-带类型</h2>
+        <!-- 双行文本列表项-带类型 -->
+        <section class="pad-vertical-0">
+            <div class="regular-list-item">
+                <div class="regular-list-type-container">操作</div>
+                <div class="regular-list-content-container">
+                    <div class="regular-list-title">标题文本(附属要素)</div>
+                    <div class="regular-list-subtitle">左侧摘要描述</div>
+                 </div>
+                <div class="regular-list-amount-container">
+                     <div class="regular-list-value">份额/金额信息</div>
+                    <div class="regular-list-status regular-list-status-success">右侧摘要描述</div>
+                </div>
+            </div>
+            <div class="regular-list-item">
+                <div class="regular-list-type-container">撤单</div>
+                <div class="regular-list-content-container">
+                    <div class="regular-list-title">产品名称(产品代码)</div>
+                    <div class="regular-list-subtitle">2023/01/01 00:00:00</div>
+                </div>
+                <div class="regular-list-amount-container">
+                    <div class="regular-list-value">100.00份</div>
+                    <div class="regular-list-status regular-list-status-success">成功</div>
+                </div>
+            </div>
+            <div class="regular-list-item">
+                <div class="regular-list-type-container">撤单</div>
+                <div class="regular-list-content-container">
+                    <div class="regular-list-title">产品名称(产品代码)</div>
+                    <div class="regular-list-subtitle">2023/01/01 00:00:00</div>
+                </div>
+                <div class="regular-list-amount-container">
+                    <div class="regular-list-value">100.00份</div>
+                    <div class="regular-list-status regular-list-status-success">成功</div>
+                </div>
+            </div>
+        </section>
+
+        <h1 class="group-title">导航与定位组件</h1>
+
+        <h2 class="category-title">导航栏-白色背景-右侧图标按钮</h2>
+        <!-- 导航栏-白色背景-右侧图标按钮 -->
+        <section class="pad-vertical-0">
+                <div class="nav-bar nav-bar-white">
+                    <div class="nav-left">
+                        <img src="/src/assets/images/icon24.png" alt="左侧图标" class="nav-icon">
+                    </div>
+                    <div class="nav-title">页面标题</div>
+                    <div class="nav-right">
+                        <img src="/src/assets/images/icon24.png" alt="右侧图标1" class="nav-icon">
+                        <img src="/src/assets/images/icon24.png" alt="右侧图标2" class="nav-icon">
+                    </div>
+                </div>
+        </section>
+
+        <h2 class="category-title">导航栏-白色背景-右侧操作按钮</h2>
+        <!-- 导航栏-白色背景-右侧操作按钮 -->
+        <section class="pad-vertical-0">
+                <div class="nav-bar nav-bar-white nav-bar-action">
+                    <div class="nav-left">
+                        <img src="/src/assets/images/icon24.png" alt="左侧图标" class="nav-icon">
+                    </div>
+                    <div class="nav-title">页面标题</div>
+                    <div class="nav-action">
+                        <img src="/src/assets/images/icon16.png" alt="操作图标" class="action-icon">
+                        <span class="action-text">操作描述</span>
+                    </div>
+                </div>
+        </section>
+
+        <h2 class="category-title">导航栏-透明背景-左侧图标按钮</h2> 
+        <!-- 导航栏-透明背景-左侧图标按钮 -->
+        <section class="section-transparent-vertical-0">
+            <div class="nav-bar-wrap nav-bar-dark">
+                <div class="nav-bar nav-bar-transparent">
+                    <div class="nav-left">
+                        <img src="/src/assets/images/icon24.png" alt="左侧图标" class="nav-icon">
+                    </div>
+                    <div class="nav-right">
+                        <img src="/src/assets/images/icon16.png" alt="右侧图标1" class="nav-icon">
+                        <img src="/src/assets/images/icon16.png" alt="右侧图标2" class="nav-icon">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">导航栏-透明背景-右侧操作按钮</h2>
+        <!-- 导航栏-透明背景-右侧操作按钮 -->
+        <section class="section-transparent-vertical-0">
+            <div class="nav-bar-wrap nav-bar-dark">
+                <div class="nav-bar nav-bar-transparent nav-bar-action">
+                    <div class="nav-left">
+                        <img src="/src/assets/images/icon24.png" alt="左侧图标" class="nav-icon">
+                    </div>
+                    <div class="nav-action">
+                        <img src="/src/assets/images/icon12.png" alt="操作图标" class="action-icon">
+                        <span class="action-text">操作描述</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 手机话筒 -->
+        <h2 class="category-title">手机话筒</h2>
+        <section class="phone-speaker-wrap">
+            <div class="phone-speaker">
+                <div class="speaker-bar"></div>
+            </div>
+        </section>
+
+        <h2 class="category-title">搜索栏-白色背景-有取消文字按钮 </h2>
+        <!-- 搜索栏-白色背景-有取消文字按钮 -->
+        <section class="pad-vertical-0" role="search">
+            <form class="search-bar white">
+                <div class="search-box">
+                    <div class="search-icon">
+                        <img src="/src/assets/images/search.png" alt="搜索" class="search-icon">
+                    </div>
+                    <input type="text" placeholder="请输入" class="search-input">
+                    <div class="clear-btn">
+                        <img src="/src/assets/images/clear.png" alt="清除" class="clear-icon">
+                    </div>
+                </div>
+                <div class="cancel-btn">取消</div>
+            </form>
+        </section>    
+
+        <h2 class="category-title">搜索栏-白色背景-无取消文字按钮</h2>
+        <!-- 搜索栏-白色背景-无取消文字按钮-->
+        <section class="pad-vertical-0" role="search">
+            <form class="search-bar white">
+                <div class="search-box">
+                    <div class="search-icon">
+                        <img src="/src/assets/images/search.png" alt="搜索" class="search-icon">
+                    </div>
+                    <input type="text" placeholder="请输入" class="search-input">
+                    <div class="clear-btn">
+                        <img src="/src/assets/images/clear.png" alt="清除" class="clear-icon">
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <h2 class="category-title">搜索栏-白色背景-有图标按钮</h2>
+        <!-- 搜索栏-白色背景-有图标按钮 -->
+        <section class="pad-vertical-0" role="search">
+            <form class="search-bar white">
+                <div class="search-box">
+                    <div class="search-icon">
+                        <img src="/src/assets/images/search.png" alt="搜索" class="search-icon">
+                    </div>
+                    <input type="text" placeholder="请输入" class="search-input">
+                    <div class="clear-btn">
+                        <img src="/src/assets/images/clear.png" alt="清除" class="clear-icon">
+                    </div>
+                </div>
+                <div class="action-btns">
+                    <div class="action-btn">
+                        <img src="/src/assets/images/icon24.png" alt="操作图标1" class="srch-fun-icon">
+                    </div>
+                    <div class="action-btn">
+                        <img src="/src/assets/images/icon24.png" alt="操作图标2" class="srch-fun-icon">
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <h2 class="category-title">搜索栏-透明背景-有取消文字按钮</h2>
+        <!-- 搜索栏-透明背景-有取消文字按钮 -->
+        <section class="section-transparent-vertical-0" role="search">
+            <form class="search-bar transparent">
+                <div class="search-box">
+                    <div class="search-icon">
+                        <img src="/src/assets/images/search-white.png" alt="搜索" class="search-icon">
+                    </div>
+                    <input type="text" placeholder="请输入" class="search-input">
+                    <div class="clear-btn">
+                        <img src="/src/assets/images/clear.png" alt="清除" class="clear-icon">
+                    </div>
+                </div>
+                <div class="cancel-btn">取消</div>
+            </form>
+        </section>
+
+        <h2 class="category-title">搜索栏-透明背景-无取消文字按钮</h2>
+        <!-- 搜索栏-透明背景-无取消文字按钮-->
+        <section class="section-transparent-vertical-0" role="search">
+            <form class="search-bar transparent">
+                <div class="search-box">
+                    <div class="search-icon">
+                        <img src="/src/assets/images/search-white.png" alt="搜索" class="search-icon">
+                    </div>
+                    <input type="text" placeholder="请输入" class="search-input">
+                    <div class="clear-btn">
+                        <img src="/src/assets/images/clear.png" alt="清除" class="clear-icon">
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <h2 class="category-title">搜索栏-透明背景-有图标按钮</h2>
+        <!-- 搜索栏-透明背景-有图标按钮 -->
+        <section class="section-transparent-vertical-0" role="search">
+            <form class="search-bar transparent">
+                <div class="search-box">
+                    <div class="search-icon">
+                        <img src="/src/assets/images/search-white.png" alt="搜索" class="search-icon">
+                    </div>
+                    <input type="text" placeholder="请输入" class="search-input">
+                    <div class="clear-btn">
+                        <img src="/src/assets/images/clear.png" alt="清除" class="clear-icon">
+                    </div>
+                </div>
+                <div class="action-btns">
+                    <div class="action-btn">
+                        <img src="/src/assets/images/icon24.png" alt="操作图标1" class="srch-fun-icon">
+                    </div>
+                    <div class="action-btn">
+                        <img src="/src/assets/images/icon24.png" alt="操作图标2" class="srch-fun-icon">
+                    </div>
+                </div>
+            </form>
+    </section>
+
+        <h2 class="category-title">状态栏-白色背景</h2>
+        <!-- 状态栏-白色背景 -->
+        <section class="statusbar-wrapper">
+            <div class="statusbar">
+                <div class="statusbar-time">9:41</div>
+                <div class="statusbar-icons">
+                    <img src="/src/assets/images/signal.png" alt="信号" class="statusbar-signal">
+                    <img src="/src/assets/images/WiFi.png" alt="WiFi" class="statusbar-wifi">
+                    <img src="/src/assets/images/battery.png" alt="电池" class="statusbar-battery">
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">状态栏-透明背景</h2>
+        <!-- 状态栏-透明背景 -->
+        <section class="statusbar-wrapper statusbar-transparent">
+            <div class="statusbar statusbar-transparent">
+                <div class="statusbar-time">9:41</div>
+                <div class="statusbar-icons">
+                    <img src="/src/assets/images/signal_w.png" alt="信号" class="statusbar-signal">
+                    <img src="/src/assets/images/WiFi_w.png" alt="WiFi" class="statusbar-wifi">
+                    <img src="/src/assets/images/battery_w.png" alt="电池" class="statusbar-battery">
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">底部tab栏-首页</h2>
+        <!-- 底部tab栏-首页 -->
+        <section class="pad-vertical-0">
+            <nav class="tab-bar">
+                <div class="tab-item active">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/home_on.png" alt="首页" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">首页</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/caifu_off.png" alt="财富" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">财富</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/daikuan_off.png" alt="贷款" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">贷款</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/shenghuo_off.png" alt="生活" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">生活</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/my_off.png" alt="我的" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">我的</div>
+                </div>
+            </nav>
+        </section>
+
+        <div class="space-line"></div>
+        
+        <h2 class="category-title">底部tab栏-财富</h2>
+        <!-- 底部tab栏-财富 -->
+        <section class="pad-vertical-0">
+            <nav class="tab-bar" data-default-tab="caifu">
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/home_off.png" alt="首页" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">首页</div>
+                </div>
+                <div class="tab-item active">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/caifu_on.png" alt="财富" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">财富</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/daikuan_off.png" alt="贷款" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">贷款</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/shenghuo_off.png" alt="生活" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">生活</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/my_off.png" alt="我的" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">我的</div>
+                </div>
+            </nav>
+        </section>
+
+        <div class="space-line"></div>
+        
+        <h2 class="category-title">底部tab栏-贷款</h2>
+        <!-- 底部tab栏-贷款 -->
+        <section class="pad-vertical-0">
+            <nav class="tab-bar" data-default-tab="daikuan">
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/home_off.png" alt="首页" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">首页</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/caifu_off.png" alt="财富" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">财富</div>
+                </div>
+                <div class="tab-item active">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/daikuan_on.png" alt="贷款" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">贷款</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/shenghuo_off.png" alt="生活" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">生活</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/my_off.png" alt="我的" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">我的</div>
+                </div>
+            </nav>
+        </section>
+
+        <div class="space-line"></div>
+        
+        <h2 class="category-title">底部tab栏-生活</h2>
+        <!-- 底部tab栏-生活 -->
+        <section class="pad-vertical-0">
+            <nav class="tab-bar" data-default-tab="shenghuo">
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/home_off.png" alt="首页" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">首页</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/caifu_off.png" alt="财富" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">财富</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/daikuan_off.png" alt="贷款" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">贷款</div>
+                </div>
+                <div class="tab-item active">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/shenghuo_on.png" alt="生活" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">生活</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/my_off.png" alt="我的" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">我的</div>
+                </div>
+            </nav>
+        </section>
+
+        <div class="space-line"></div>
+        
+        <h2 class="category-title">底部tab栏-我的</h2>
+        <!-- 底部tab栏-我的 -->
+        <section class="pad-vertical-0">
+            <nav class="tab-bar" data-default-tab="my">
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/home_off.png" alt="首页" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">首页</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/caifu_off.png" alt="财富" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">财富</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/daikuan_off.png" alt="贷款" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">贷款</div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/shenghuo_off.png" alt="生活" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">生活</div>
+                </div>
+                <div class="tab-item active">
+                    <div class="tab-icon">
+                        <img src="/src/assets/images/my_on.png" alt="我的" class="tab-icon-img">
+                    </div>
+                    <div class="tab-text">我的</div>
+                </div>
+            </nav>
+        </section>
+
+        <h2 class="category-title">一类Tabs</h2>
+        <!-- 一类Tabs -->
+        <section class="pad-vertical-0">
+            <nav class="top-tabs" data-default-index="0">
+                <div class="top-tabs-item active">
+                    <div class="top-tabs-text">标题名称</div>
+                    <div class="indicator"><img src="/src/assets/images/tab_on.png" class="tab_on_img"></div>
+                </div>
+                <div class="top-tabs-item">
+                    <div class="top-tabs-text">标题名称</div>
+                </div>
+                <div class="top-tabs-item">
+                    <div class="top-tabs-text">标题名称</div>
+                </div>
+                <div class="top-tabs-item">
+                    <div class="top-tabs-text">标题名称</div>
+                </div>
+            </nav>
+        </section>
+
+        <h2 class="category-title">二类Tabs</h2>      
+        <!-- 二类Tabs -->
+        <section class="pad-vertical-0">
+            <nav class="top-tabs" data-default-index="0">
+                <div class="top-tabs-item active">
+                    <div class="top-tabs-text">标题名称</div>
+                    <div class="indicator"><img src="/src/assets/images/tab_on.png" class="tab_on_img"></div>
+                </div>
+                <div class="top-tabs-item">
+                    <div class="top-tabs-text">标题名称</div>
+                </div>
+                <div class="top-tabs-item">
+                    <div class="top-tabs-text">标题名称</div>
+                </div>
+                <div class="top-tabs-item">
+                    <div class="top-tabs-text">标题名称</div>
+                </div>
+            </nav>
+        </section>
+
+        <h2 class="category-title">一级Tabs</h2>        
+        <!-- 主选项卡 -->
+        <section class="pad-vertical-0">
+            <nav class="top-tabs">
+                <div class="top-tabs-item active">
+                    <div class="top-tabs-text">标题名称</div>
+                    <div class="indicator"><img src="/src/assets/images/tab_on.png" class="tab_on_img"></div>
+                </div>
+                <div class="top-tabs-item">
+                    <div class="top-tabs-text">标题名称</div>
+                </div>
+            </nav>
+        </section>
+        
+        <h2 class="category-title">二级Tabs</h2>
+        <!-- 分段选项卡 -->
+        <section class="pad-vertical-0">
+            <div class="SegmentedButton">
+                <div class="level-2 top-tabs" data-default-index="0">
+                    <div class="top-tabs-item active">
+                        <div class="top-tabs-text">标题</div>
+                    </div>
+                    <div class="top-tabs-item">
+                        <div class="top-tabs-text">标题</div>
+                    </div>
+                    <div class="top-tabs-item">
+                        <div class="top-tabs-text">标题</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h1 class="group-title">金融业务展示组件</h1>
+
+        <h2 class="category-title">基础金额展示-带显示隐藏金额</h2>
+        <!-- 基础金额展示-带显示隐藏金额 -->
+        <section class="section">
+            <div class="amount-display">
+                <span class="amount js-amount">200,000.00</span>
+                <img src="/src/assets/icons/visible.svg" alt="查看" class="icon-eye js-eye" style="cursor:pointer;">
+            </div>
+            <div class="amount-label">
+                <span>标题文本(元)</span>
+                <img src="/src/assets/images/help.png" alt="帮助" class="icon-help">
+                <div class="bubble-wrapper bubble-top" style="display:none;">
+                    <div class="triangle triangle-top triangle-top-left"></div>
+                    <div class="bubble">这里是气泡提示内容</div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">基础金额展示-无显示隐藏金额</h2>
+        <!-- 基础金额展示-无显示隐藏金额 -->
+        <section class="section">
+            <div class="amount-display">
+                <span class="amount js-amount">200,000.00</span>
+            </div>
+            <div class="amount-label">
+                <span>标题文本(元)</span>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">组合样式-三栏金额展示</h2>
+        <!-- 组合样式-三栏金额展示 -->
+        <section class="section">
+            <div class="amount-display">
+                <span class="amount js-amount">200,000.00</span>
+                <img src="/src/assets/icons/visible.svg" alt="查看" class="icon-eye js-eye" style="cursor:pointer;">
+            </div>
+            <div class="amount-label">
+                <span>标题文本(元)</span>
+                <img src="/src/assets/images/help.png" alt="帮助" class="icon-help">
+                <div class="bubble-wrapper bubble-top" style="display:none;">
+                    <div class="triangle triangle-top triangle-top-left"></div>
+                    <div class="bubble">这里是气泡提示内容</div>
+                </div>
+            </div>
+            <div class="amount-sub-list">
+                <div class="amount-sub-item">
+                    <span class="sub-amount">0.00</span>
+                    <span class="sub-label">标题文本(元)</span>
+                </div>
+                <div class="amount-sub-item">
+                    <span class="sub-amount">0.00</span>
+                    <span class="sub-label">标题文本(元)</span>
+                </div>
+                <div class="amount-sub-item">
+                    <span class="sub-amount">0.00</span>
+                    <span class="sub-label">标题文本(元)</span>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">组合样式-两栏金额展示</h2>
+        <!-- 组合样式-两栏金额展示 -->
+        <section class="section">
+            <div class="amount-display">
+                <span class="amount js-amount">200,000.00</span>
+                <img src="/src/assets/icons/visible.svg" alt="查看" class="icon-eye js-eye" style="cursor:pointer;">
+            </div>
+            <div class="amount-label">
+                <span>标题文本(元)</span>
+                <img src="/src/assets/images/help.png" alt="帮助" class="icon-help">
+                <div class="bubble-wrapper bubble-top" style="display:none;">
+                    <div class="triangle triangle-top triangle-top-left"></div>
+                    <div class="bubble">这里是气泡提示内容</div>
+                </div>
+            </div>
+            <div class="amount-sub-list two-columns">
+                <div class="amount-sub-item">
+                    <span class="sub-amount">0.00</span>
+                    <span class="sub-label">标题文本(元)</span>
+                </div>
+                <div class="amount-sub-item">
+                    <span class="sub-amount">0.00</span>
+                    <span class="sub-label">标题文本(元)</span>
+                </div>
+            </div>
+            <div class="amount-time">
+                <span>刷新时间：2023-08-24 15:31:12</span>
+                <img src="/src/assets/images/refresh.png" alt="刷新" class="icon-refresh">
+            </div>
+        </section>
+
+        <h2 class="category-title">组合样式-带按钮的金额展示</h2>
+        <!-- 组合样式-带按钮的金额展示 -->
+        <section class="section">
+            <div class="amount-display">
+                <span class="amount js-amount">200,000.00</span>
+                <img src="/src/assets/icons/visible.svg" alt="查看" class="icon-eye js-eye" style="cursor:pointer;">
+            </div>
+            <div class="amount-label">
+                <span>标题文本(元)</span>
+                <img src="/src/assets/images/help.png" alt="帮助" class="icon-help">
+                <div class="bubble-wrapper bubble-top" style="display:none;">
+                    <div class="triangle triangle-top triangle-top-left"></div>
+                    <div class="bubble">这里是气泡提示内容</div>
+                </div>
+            </div>
+            <div class="amount-btn-padding">
+                <button class="btn-large btn-primary">
+                    <span class="btn-text">按钮</span>
+                </button>
+            </div>
+        </section>
+        
+        <h2 class="category-title">上传银行卡</h2>
+        <!-- 上传银行卡 -->
+        <section class="section">
+            <div class="upload-section">
+                <div class="upload-item">
+                    <img src="/src/assets/images/frontofbankcard.png" alt="银行卡正面" class="upload-placeholder">
+                </div>
+                <div class="upload-item">
+                    <img src="/src/assets/images/bankcardreverseside.png" alt="银行卡反面" class="upload-placeholder">
+                </div> 
+            </div>     
+        </section>
+
+        <h2 class="category-title">卡片选择样式</h2>
+        <!-- 卡片选择样式部分 -->
+        <section class="section">
+            <p class="section-title">标题文本</p>
+            <div class="card-list">
+                <div class="card-item">
+                    <img src="/src/assets/images/cardImage1.png" alt="粉色银行卡" class="card-image">
+                    <img src="/src/assets/images/imgoff.png" alt="未选中" class="select-icon">
+                </div>
+                <div class="card-item">
+                    <img src="/src/assets/images/cardImage2.png" alt="黄色银行卡" class="card-image">
+                    <img src="/src/assets/images/imgoff.png" alt="已选中" class="select-icon">
+                </div>
+                <div class="card-item">
+                    <img src="/src/assets/images/cardImage1.png" alt="粉色银行卡" class="card-image">
+                    <img src="/src/assets/images/imgoff.png" alt="未选中" class="select-icon">
+                </div>
+                <div class="card-item">
+                    <img src="/src/assets/images/cardImage2.png" alt="黄色银行卡" class="card-image">
+                    <img src="/src/assets/images/imgoff.png" alt="已选中" class="select-icon">
+                </div>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">上传身份证</h2>
+        <!-- 上传身份证部分 -->
+        <section class="section">
+            <div class="id-card-section">
+                <div class="id-card-item">
+                    <img src="/src/assets/images/frontofIDcard.png" alt="身份证人像面" class="id-card-image">
+                </div>
+                <div class="id-card-item">
+                    <img src="/src/assets/images/reverseofIDcard.png" alt="身份证国徽面" class="id-card-image">
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">一级页面列表样式</h2>
+        <!-- 一级页面列表样式 -->
+        <section class="section-full-width">
+            <section class="product-item">
+                <div class="product-title">产品名称产品名称产品名称产品名称产品名称产品名称产品名称...</div>
+                <div class="product-info">
+                    <div class="yield-info">
+                        <div class="yield-rate">3.80%</div>
+                        <div class="yield-label">近7天年化</div>
+                    </div>
+                    <div class="product-features">
+                        <div class="redeem-info">快赎1万实时到账</div>
+                        <div class="feature-tags">
+                            <div class="property-tag gold">1万元起购</div>
+                            <div class="property-tag gold">低风险</div>
+                            <div class="property-tag gold">固定收益类</div>
+                            <div class="property-tag gold">固定收益类</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="product-item">
+                <div class="product-title">产品名称产品名称产品名称产品名称产品名称产品名称产品名称...</div>
+                <div class="product-info">
+                    <div class="yield-info">
+                        <div class="yield-rate">3.80%</div>
+                        <div class="yield-label">近7天年化</div>
+                    </div>
+                    <div class="product-features">
+                        <div class="redeem-info">快赎1万实时到账</div>
+                        <div class="feature-tags">
+                            <div class="property-tag gold">1万元起购</div>
+                            <div class="property-tag gold">低风险</div>
+                            <div class="property-tag gold">固定收益类</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="product-item">
+                <div class="product-title">产品名称产品名称产品名称产品名称产品名称产品名称产品名称...</div>
+                <div class="product-info">
+                    <div class="yield-info">
+                        <div class="yield-rate">3.80%</div>
+                        <div class="yield-label">近7天年化</div>
+                    </div>
+                    <div class="product-features">
+                        <div class="redeem-info">快赎1万实时到账</div>
+                        <div class="feature-tags">
+                            <div class="property-tag gold">1万元起购</div>
+                            <div class="property-tag gold">低风险</div>
+                            <div class="property-tag gold">固定收益类</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="option-row">
+                    <div class="normal-tip collapsible-tip">
+                        <div class="tip-content-gray">展示概要描述展示概要描述展示概要描述，展示概要描述展示概要描述展示概要描述。</div>
+                        <img src="/src/assets/images/expands.png" alt="图标" class="info-icon tip-toggle-icon">
+                    </div>
+                </div>
+            </section>
+        </section>
+        
+        <h2 class="category-title">二级页面列表样式</h2>
+        <!-- 二级页面列表样式 -->
+        <section class="product-list">
+            <section class="product-item">
+                <div class="product-title">产品名称产品名称产品名称产品名称产品名称产品名称产品名称...</div>
+                <div class="product-info">
+                    <div class="yield-info">
+                        <div class="yield-rate">3.80%</div>
+                        <div class="yield-label">近7天年化</div>
+                    </div>
+                    <div class="product-features">
+                        <div class="redeem-info">快赎1万实时到账</div>
+                        <div class="feature-tags">
+                            <div class="property-tag blue">1万元起购</div>
+                            <div class="property-tag blue">低风险</div>
+                            <div class="property-tag blue">固定收益类</div>
+                            <div class="property-tag blue">固定收益类</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="product-item">
+                <div class="product-title">产品名称产品名称产品名称产品名称产品名称产品名称产品名称...</div>
+                <div class="product-info">
+                    <div class="yield-info">
+                        <div class="yield-rate">3.80%</div>
+                        <div class="yield-label">近7天年化</div>
+                    </div>
+                    <div class="product-features">
+                        <div class="redeem-info">快赎1万实时到账</div>
+                        <div class="feature-tags">
+                            <div class="property-tag blue">1万元起购</div>
+                            <div class="property-tag blue">低风险</div>
+                            <div class="property-tag blue">固定收益类</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="product-item">
+                <div class="product-title">产品名称产品名称产品名称产品名称产品名称产品名称产品名称...</div>
+                <div class="product-info">
+                    <div class="yield-info">
+                        <div class="yield-rate">3.80%</div>
+                        <div class="yield-label">近7天年化</div>
+                    </div>
+                    <div class="product-features">
+                        <div class="redeem-info">快赎1万实时到账</div>
+                        <div class="feature-tags">
+                            <div class="property-tag blue">1万元起购</div>
+                            <div class="property-tag blue">低风险</div>
+                            <div class="property-tag blue">固定收益类</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="option-row">
+                    <div class="normal-tip collapsible-tip">
+                        <div class="tip-content-gray">展示概要描述。</div>
+                        <img src="/src/assets/images/expands.png" alt="图标" class="info-icon tip-toggle-icon">
+                    </div>
+                </div>
+            </section>
+        </section>
+        
+        <h2 class="category-title">一级页面卡片</h2>
+        <!-- 一级页面卡片 -->
+        <section class="section">
+            <div class="card-wrapper">
+                <div class="card-title-container">
+                    <div class="card-title">产品标题</div>
+                     <div class="feature-tags">
+                        <div class="property-tag gold">1万元起购</div>
+                        <div class="property-tag gold">低风险</div>
+                        <div class="property-tag gold">固定收益类</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-amount-grid">
+                        <div class="card-grid-item card-amount">200,000.00</div>
+                        <div class="card-grid-item card-rate">4.12%</div>
+                        <div class="card-grid-item card-amount-desc">金额标题(元)</div>
+                        <div class="card-grid-item card-rate-desc">百分比说明</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="button-container">
+                        <button class="btn-medium btn-auxiliary">
+                            <span class="btn-text">按钮</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="space-line"></div>
+        
+        <h2 class="category-title">一级页面卡片轮播</h2>
+        <section class="section">
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="card-container">
+                        <section class="card-wrapper">
+                            <div class="card-title-container">
+                                <div class="card-title">理财宝A</div>
+                                <div class="feature-tags">
+                                    <div class="property-tag gold">1万元起购</div>
+                                    <div class="property-tag gold">低风险</div>
+                                    <div class="property-tag gold">固定收益类</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-amount-grid">
+                                    <div class="card-grid-item card-amount">200,000.00</div>
+                                    <div class="card-grid-item card-rate">4.12%</div>
+                                    <div class="card-grid-item card-amount-desc">金额标题(元)</div>
+                                    <div class="card-grid-item card-rate-desc">百分比说明</div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="button-container">
+                                    <button class="btn-medium btn-auxiliary">
+                                        <span class="btn-text">立即购买</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="card-wrapper">
+                            <div class="card-title-container">
+                                <div class="card-title">理财宝B</div>
+                                <div class="feature-tags">
+                                    <div class="property-tag gold">5万元起购</div>
+                                    <div class="property-tag gold">中风险</div>
+                                    <div class="property-tag gold">浮动收益类</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-amount-grid">
+                                    <div class="card-grid-item card-amount">50,000.00</div>
+                                    <div class="card-grid-item card-rate">5.20%</div>
+                                    <div class="card-grid-item card-amount-desc">金额标题(元)</div>
+                                    <div class="card-grid-item card-rate-desc">百分比说明</div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="button-container">
+                                    <button class="btn-medium btn-auxiliary">
+                                        <span class="btn-text">立即购买</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="card-wrapper">
+                            <div class="card-title-container">
+                                <div class="card-title">理财宝C</div>
+                                <div class="feature-tags">
+                                    <div class="property-tag gold">10万元起购</div>
+                                    <div class="property-tag gold">高风险</div>
+                                    <div class="property-tag gold">创新型产品</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-amount-grid">
+                                    <div class="card-grid-item card-amount">100,000.00</div>
+                                    <div class="card-grid-item card-rate">6.66%</div>
+                                    <div class="card-grid-item card-amount-desc">金额标题(元)</div>
+                                    <div class="card-grid-item card-rate-desc">百分比说明</div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="button-container">
+                                    <button class="btn-medium btn-auxiliary">
+                                        <span class="btn-text">立即购买</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="card-wrapper">
+                            <div class="card-title-container">
+                                <div class="card-title">理财宝D</div>
+                                <div class="feature-tags">
+                                    <div class="property-tag gold">10万元起购</div>
+                                    <div class="property-tag gold">高风险</div>
+                                    <div class="property-tag gold">创新型产品</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-amount-grid">
+                                    <div class="card-grid-item card-amount">100,000.00</div>
+                                    <div class="card-grid-item card-rate">6.66%</div>
+                                    <div class="card-grid-item card-amount-desc">金额标题(元)</div>
+                                    <div class="card-grid-item card-rate-desc">百分比说明</div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="button-container">
+                                    <button class="btn-medium btn-auxiliary">
+                                        <span class="btn-text">立即购买</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="card-indicator">
+                        <span class="indicator-dot active"></span>
+                        <span class="indicator-dot"></span>
+                        <span class="indicator-dot"></span>
+                        <span class="indicator-dot"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">产品详情-两栏布局</h2>
+        <!-- 产品详情 - 两栏布局 -->
+        <section class="pad-top-0">
+            <div class="product-detail-button-container">
+                <button class="detail-tag" href="javascript:void(0);">
+                    <span>产品详情</span>
+                    <img src="/src/assets/images/right arrow.png" class="product-detail-arrow-icon" alt="箭头">
+                </button>
+            </div>
+            <div class="product-detail-header-container">
+                <div class="product-detail-title-container">
+                    <div class="product-detail-main-title">产品名称产品名称产品名称</div>
+                    <div class="product-detail-sub-title">(产品代码)</div>
+                </div>
+            </div>
+            <div class="product-detail-amount">200,000.00</div>
+            <div class="product-detail-amount-label">标题文本(元)</div>
+            <div class="product-detail-sub-amount-container two-columns">
+                <div class="product-detail-sub-amount-item-container">
+                    <span class="product-detail-sub-amount">0.00</span>
+                    <span class="product-detail-sub-amount-label">标题文本(元)</span>
+                </div>
+                <div class="product-detail-sub-amount-item-container">
+                    <span class="product-detail-sub-amount">0.00</span>
+                    <span class="product-detail-sub-amount-label">标题文本(元)</span>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">产品详情-三栏布局</h2>
+        <!-- 产品详情 - 三栏布局 -->
+        <section class="pad-top-0">
+            <div class="product-detail-button-container">
+                <button class="detail-tag" href="javascript:void(0);">
+                    <span>产品详情</span>
+                    <img src="/src/assets/images/right arrow.png" class="product-detail-arrow-icon" alt="箭头">
+                </button>
+            </div>
+            <div class="product-detail-header-container">
+                <div class="product-detail-title-container">
+                    <div class="product-detail-main-title">产品名称产品名称产品名称</div>
+                    <div class="product-detail-sub-title">(产品代码)</div>
+                </div>
+            </div>
+            <div class="product-detail-amount">200,000.00</div>
+            <div class="product-detail-amount-label">标题文本(元)</div>
+            <div class="product-detail-sub-amount-container">
+                <div class="product-detail-sub-amount-item-container">
+                    <span class="product-detail-sub-amount">0.00</span>
+                    <span class="product-detail-sub-amount-label">标题文本(元)</span>
+                </div>
+                <div class="product-detail-sub-amount-item-container">
+                    <span class="product-detail-sub-amount">0.00</span>
+                    <span class="product-detail-sub-amount-label">标题文本(元)</span>
+                </div>
+                <div class="product-detail-sub-amount-item-container">
+                    <span class="product-detail-sub-amount">0.00</span>
+                    <span class="product-detail-sub-amount-label">标题文本(元)</span>
+                </div>
+            </div>
+        </section>
+
+        
+        <h2 class="category-title">产品详情-两栏布局-有图标和带下拉箭头的一般提示</h2>
+        <!-- 产品详情-两栏布局-有图标和带下拉箭头的一般提示 -->
+        <section class="section">
+            <div class="product-detail-header-container">
+                <div>
+                    <div class="product-detail-title-container">
+                        <div class="product-detail-main-title">产品名称产品名称产品名称</div>
+                        <div class="product-detail-sub-title">(产品代码)</div>
+                    </div>
+                    <div class="product-detail-features-container">
+                        <span>产品属性</span>
+                        <span>|</span>
+                        <span>产品属性</span>
+                    </div>
+                </div>
+                <div>
+                    <img src="/src/assets/images/detailquotatag02.png" alt="额度充足" class="detail-quota-tag">
+                </div>
+            </div>
+            <div class="product-detail-sub-amount-container two-columns">
+                <div class="product-detail-sub-amount-item-container">
+                    <span class="product-detail-sub-amount">0.00</span>
+                    <span class="product-detail-sub-amount-label">标题文本(元)</span>
+                </div>
+                <div class="product-detail-sub-amount-item-container">
+                    <span class="product-detail-sub-amount">0.00</span>
+                    <span class="product-detail-sub-amount-label">标题文本(元)</span>
+                </div>
+            </div>
+            <div class="product-detail-expand-container">
+                <div class="normal-tip with-arrow">
+                    <div class="tip-content-gray">展示提示描述</div>
+                    <img src="/src/assets/images/expands.png" alt="图标" class="info-icon">
+                </div>
+            </div>
+        </section>
+
+        <h1 class="group-title">弹窗与提示组件</h1>
+        
+        <h2 class="category-title">底部弹窗-标题-单行文本</h2>
+        <!-- 底部弹窗-标题-单行文本 -->
+        <section class="section-popup-title">
+            <div class="popup-title-container">
+                <div class="popup-title-icon-wrapper">
+                    <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                </div>
+                <div class="popup-title-main-text">标题文本</div>
+                <div class="popup-title-action-btn">操作描述</div>
+            </div>
+        </section>
+        
+        <h2 class="category-title">底部弹窗-标题-双行文本</h2>
+        <!-- 底部弹窗-标题-双行文本 -->
+        <section class="section-popup-title">
+            <div class="popup-title-container popup-title-container-dual">
+                <div class="popup-title-icon-wrapper">
+                    <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                </div>
+                <div class="popup-title-content-wrapper">
+                    <div class="popup-title-main-text">标题文本</div>
+                    <div class="popup-title-sub-text">展示辅助信息描述</div>
+                </div>
+                <div class="popup-title-action-btn">操作描述</div>
+            </div>
+        </section>
+
+        <h2 class="category-title">底部弹窗-验证码和交易密码</h2>
+        <!-- 底部弹窗-验证码和交易密码 -->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>      
+            <!-- 底部弹窗-验证码和交易密码 -->
+            <div class="popup-container">
+                <!-- 弹窗头部 -->
+                <section class="section-popup-title">
+                    <div class="popup-title-container">
+                        <div class="popup-title-icon-wrapper">
+                            <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                        </div>
+                        <div class="popup-title-main-text">请输入验证码+交易密码</div>
+                        <div class="popup-title-action-btn">确定</div>
+                    </div>
+                </section>
+                <!-- 金额信息区块 -->
+                <div class="section">
+                    <div class="amount-info">
+                        <div class="amount-desc">弹窗提示文本文案</div>
+                        <div class="amount">¥20000.00</div>
+                    </div>
+                </div>
+                <!-- 输入区块 -->
+                <div class="pad-vertical-0">
+                    <!-- 独立验证码输入框 -->
+                    <div class="verification-input-container">
+                        <div class="verification-input-title">输入框标题</div> 
+                        <div class="verification-standalone-item">
+                            <input type="text" placeholder="请输入验证码">
+                            <div class="get-code-button">获取验证码</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <!-- 密码输入 -->
+                    <div class="password-dots-container">
+                        <div class="password-input-title">交易密码</div>
+                        <div class="password-dots-row">
+                            <input type="password" value="" maxlength="1">
+                            <input type="password" value="" maxlength="1">
+                            <input type="password" value="" maxlength="1">
+                            <input type="password" value="" maxlength="1">
+                            <input type="password" value="" maxlength="1">
+                            <input type="password" value="" maxlength="1">
+                        </div>
+                    </div>
+                </div>
+                <!-- 数字键盘区块 -->
+                <div class="popup-keyboard">
+                    <div class="popup-keyboard-header">
+                        <img src="/src/assets/images/logo.png" alt="东莞银行" class="bank-logo">
+                        <span class="keyboard-title">东莞银行安全键盘</span>
+                    </div>
+                    <div class="popup-key">1</div>
+                    <div class="popup-key">2</div>
+                    <div class="popup-key">3</div>
+                    <div class="popup-key">4</div>
+                    <div class="popup-key">5</div>
+                    <div class="popup-key">6</div>
+                    <div class="popup-key">7</div>
+                    <div class="popup-key">8</div>
+                    <div class="popup-key">9</div>
+                    <div class="popup-key empty"></div>
+                    <div class="popup-key">0</div>
+                    <div class="popup-key delete">
+                        <img src="/src/assets/images/Delete.png" alt="删除" class="popup-delete-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-图标按钮-两图标</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <!-- 底部弹窗-图标按钮-两图标 -->
+            <div class="popup-container">
+                <section class="popup-icons-container">
+                    <div class="popup-icons-wrapper">
+                        <div class="section-popup-title">
+                            <div class="popup-title">
+                                <div class="title-icon">
+                                    <img src="/src/assets/images/icon24.png" alt="图标">
+                                </div>
+                                <div class="title-text"></div>
+                                <div class="title-action"></div>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="popup-icons-grid popup-icons-grid-two">
+                                <div class="popup-icons-item">
+                                    <div class="popup-icons-item-wrapper">
+                                        <img src="/src/assets/images/wechat.png" alt="微信" class="popup-icons-item-img">
+                                    </div>
+                                    <div class="popup-icons-item-text">微信</div>
+                                </div>
+                                <div class="popup-icons-item">
+                                    <div class="popup-icons-item-wrapper">
+                                        <img src="/src/assets/images/wechatmoments.png" alt="朋友圈" class="popup-icons-item-img">
+                                    </div>
+                                    <div class="popup-icons-item-text">朋友圈</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <h2 class="category-title">底部弹窗-图标按钮-三图标</h2>       
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>       
+            <!-- 底部弹窗-图标按钮-三图标 -->
+            <div class="popup-container">
+                <section class="popup-icons-container">
+                    <div class="popup-icons-wrapper">
+                        <div class="popup-icons-header">
+                            <div class="popup-icons-back">
+                                <img src="/src/assets/images/icon24.png" alt="图标" class="popup-icons-back-img">
+                            </div>
+                        </div>
+                        <div class="popup-icons-content">
+                            <div class="popup-icons-grid popup-icons-grid-three">
+                                <div class="popup-icons-item">
+                                    <div class="popup-icons-item-wrapper">
+                                        <img src="/src/assets/images/wechat.png" alt="微信" class="popup-icons-item-img">
+                                    </div>
+                                    <div class="popup-icons-item-text">微信</div>
+                                </div>
+                                <div class="popup-icons-item">
+                                    <div class="popup-icons-item-wrapper">
+                                        <img src="/src/assets/images/wechatmoments.png" alt="朋友圈" class="popup-icons-item-img">
+                                    </div>
+                                    <div class="popup-icons-item-text">朋友圈</div>
+                                </div>
+                                <div class="popup-icons-item">
+                                    <div class="popup-icons-item-wrapper">
+                                        <img src="/src/assets/images/savepicture.png" alt="保存图片" class="popup-icons-item-img">
+                                    </div>
+                                    <div class="popup-icons-item-text">保存图片</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-选项列表-基础</h2>
+        <!-- 底部弹窗-选项列表-基础 -->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <section class="popup-container">
+                <section class="section-popup-title">
+                    <div class="popup-title-container">
+                        <div class="popup-title-icon-wrapper">
+                            <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                        </div>
+                        <div class="popup-title-main-text">标题文本</div>
+                        <div class="popup-title-action-btn">操作描述</div>
+                    </div>
+                </section>
+
+                <div class="pad-vertical-0 ">
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项一</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项二</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项三</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项四</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项五</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项六</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项七</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项八</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-bar">
+                    <div class="popup-indicator"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">底部弹窗-选项列表-带图标</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <!-- 底部弹窗-选项列表-带图标 -->
+            <section class="popup-container">
+                <section class="section-popup-title">
+                    <div class="popup-title-container">
+                        <div class="popup-title-icon-wrapper">
+                            <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                        </div>
+                        <div class="popup-title-main-text">标题文本</div>
+                        <div class="popup-title-action-btn">操作描述</div>
+                    </div>
+                </section>
+
+                <div class="pad-vertical-0 ">
+                    <div class="option-list">
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon">
+                            </div>
+                        </div>
+            
+                        <!-- 单行文本有图标选项-未选中状态 -->
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-bar">
+                    <div class="popup-indicator"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">底部弹窗-选项列表-带副标题</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <!-- 底部弹窗-选项列表-带副标题 -->
+            <section class="popup-container">
+                <section class="section-popup-title">
+                    <div class="popup-title-container">
+                        <div class="popup-title-icon-wrapper">
+                            <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                        </div>
+                        <div class="popup-title-main-text">标题文本</div>
+                        <div class="popup-title-action-btn">操作描述</div>
+                    </div>
+                </section>
+
+                <div class="pad-vertical-0">
+                    <div class="option-list">
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon">
+                            </div>
+                        </div>
+                        <!-- 双行文本无图标选项-未选中状态 -->
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-bar">
+                    <div class="popup-indicator"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">底部弹窗-选项列表-带图标和副标题</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <!-- 底部弹窗-选项列表-带图标和副标题 -->
+            <section class="popup-container">
+                <section class="section-popup-title">
+                    <div class="popup-title-container">
+                        <div class="popup-title-icon-wrapper">
+                            <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                        </div>
+                        <div class="popup-title-main-text">标题文本</div>
+                        <div class="popup-title-action-btn">操作描述</div>
+                    </div>
+                </section>
+
+                <div class="pad-vertical-0">
+                    <div class="option-list">
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon">
+                            </div>
+                        </div>
+                        <!-- 双行文本有图标选项-未选中状态 -->
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="/src/assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="/src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-bar">
+                    <div class="popup-indicator"></div>
+                </div>
+            </section>
+        </div>
+
+        <h2 class="category-title">底部弹窗-操作表单-基础</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <!-- 底部弹窗-操作表单-基础 -->
+            <div class="popup-container">
+                <section class="popup-actionsheet__container">
+                    <div class="popup-actionsheet__wrapper">
+                        <div class="popup-actionsheet__buttons">
+                            <button class="popup-actionsheet__button">按钮</button>
+                            <button class="popup-actionsheet__button">按钮</button>
+                            <button class="popup-actionsheet__button">按钮</button>
+                            <button class="popup-actionsheet__button">按钮</button>
+                            <button class="popup-actionsheet__button">按钮</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-操作表单-最后一个是取消按钮</h2> 
+        <!-- 底部弹窗-操作表单-最后一个是取消按钮 -->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <section class="popup-actionsheet__container">
+                    <div class="popup-actionsheet__wrapper">
+                        <div class="popup-actionsheet__buttons">
+                            <button class="popup-actionsheet__button">按钮</button>
+                            <button class="popup-actionsheet__button">按钮</button>
+                            <button class="popup-actionsheet__button">按钮</button>
+                            <button class="popup-actionsheet__button popup-actionsheet__button--separated">取消</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-交易密码-基础</h2>
+        <!-- 底部弹窗-交易密码-基础 -->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <section class="password-popup__container">
+                    <section class="section-popup-title">
+                        <div class="popup-title-container">
+                            <div class="popup-title-icon-wrapper">
+                                <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                            </div>
+                            <div class="popup-title-main-text">标题文本</div>
+                            <div class="popup-title-action-btn"></div>
+                        </div>
+                    </section>
+
+                    <div class="password-popup__content">
+                        <div class="password-popup__account-info">
+                            <div class="password-dots-container">
+                                <div class="password-input-title">请输入账户 6234 **** 0987 交易密码</div>
+                                <div class="password-dots-row">
+                                    <input type="password" value="" maxlength="1">
+                                    <input type="password" value="" maxlength="1">
+                                    <input type="password" value="" maxlength="1">
+                                    <input type="password" value="" maxlength="1">
+                                    <input type="password" value="" maxlength="1">
+                                    <input type="password" value="" maxlength="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-交易密码-有错误提示</h2>
+        <!-- 底部弹窗-交易密码-有错误提示-->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <section class="password-popup__container">
+                    <section class="section-popup-title">
+                        <div class="popup-title-container">
+                            <div class="popup-title-icon-wrapper">
+                                <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                            </div>
+                            <div class="popup-title-main-text">标题文本</div>
+                            <div class="popup-title-action-btn"></div>
+                        </div>
+                    </section>
+
+                    <div class="password-popup__content">
+                        <div class="password-popup__content">
+                            <div class="password-popup__account-info">
+                                <div class="password-dots-container">
+                                    <div class="password-input-title">请输入账户 6234 **** 0987 交易密码</div>
+                                    <div class="password-dots-row">
+                                        <input type="password" value="1" maxlength="1">
+                                        <input type="password" value="2" maxlength="1">
+                                        <input type="password" value="3" maxlength="1">
+                                        <input type="password" value="4" maxlength="1">
+                                        <input type="password" value="5" maxlength="1">
+                                        <input type="password" value="6" maxlength="1">
+                                    </div>
+                                </div>
+                                <div class="input-error">展示错误提示语</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        
+        <h2 class="category-title">交易密码弹窗-有辅助提示</h2>
+        <!-- 交易密码弹窗-有辅助提示 -->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <section class="password-popup__container">
+                    <section class="section-popup-title">
+                        <div class="popup-title-container">
+                            <div class="popup-title-icon-wrapper">
+                                <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                            </div>
+                            <div class="popup-title-main-text">标题文本</div>
+                            <div class="popup-title-action-btn"></div>
+                        </div>
+                    </section>
+
+                    <div class="password-popup__content">
+                        <div class="password-popup__content">
+                            <div class="password-popup__account-info">
+                                <div class="password-dots-container">
+                                    <div class="password-input-title">请输入账户 6234 **** 0987 交易密码</div>
+                                    <div class="password-dots-row">
+                                        <input type="password" value="1" maxlength="1">
+                                        <input type="password" value="2" maxlength="1">
+                                        <input type="password" value="3" maxlength="1">
+                                        <input type="password" value="4" maxlength="1">
+                                        <input type="password" value="5" maxlength="1">
+                                        <input type="password" value="6" maxlength="1">
+                                    </div>
+                                </div>
+                                <div class="input-tip">展示辅助提示语</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-短信验证码-基础</h2>
+         <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <!-- 底部弹窗-短信验证码-基础 -->
+                <section class="sms-popup__container">
+                    <section class="section-popup-title">
+                        <div class="popup-title-container">
+                            <div class="popup-title-icon-wrapper">
+                                <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                            </div>
+                            <div class="popup-title-main-text">标题文本</div>
+                            <div class="popup-title-action-btn">操作描述</div>
+                        </div>
+                    </section>
+                    <div class="section">
+                        <div class="sms-popup__content">
+                            <div class="verification-input-container">
+                                <div class="verification-input-title">预留手机号：138****0000</div> 
+                                <div class="verification-standalone-item">
+                                    <input type="text" placeholder="请输入验证码">
+                                    <div class="get-code-button">获取验证码</div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-短信验证码-错误提示</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <!-- 底部弹窗-短信验证码-错误提示 -->
+                <section class="sms-popup__container">
+                    <section class="section-popup-title">
+                        <div class="popup-title-container">
+                            <div class="popup-title-icon-wrapper">
+                                <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                            </div>
+                            <div class="popup-title-main-text">标题文本</div>
+                            <div class="popup-title-action-btn">操作描述</div>
+                        </div>
+                    </section>
+                    <div class="section">
+                        <div class="sms-popup__content">
+
+                            <div class="sms-input-section">
+                                <div class="verification-input-container">
+                                    <div class="verification-input-title">预留手机号：138****0000</div> 
+                                    <div class="verification-standalone-item">
+                                        <input type="text" placeholder="请输入验证码">
+                                        <div class="get-code-button">58s</div> 
+                                    </div>
+                                </div>
+                                <div class="input-error">展示错误提示语</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-文本式-同意按钮默认状态</h2> 
+        <!-- 底部弹窗-文本式-同意按钮默认状态-->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+                <section class="popup-container">
+                    <div class="popup-panel">
+                        <section class="section-popup-title">
+                            <div class="popup-title-container">
+                                <div class="popup-title-icon-wrapper">
+                                    <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                                </div>
+                                <div class="popup-title-main-text">请阅读并确认以下文件</div>
+                                <div class="popup-title-action-btn"></div>
+                            </div>
+                        </section>
+                        <div class="section">
+                            <div class="fb-bottom-popup-content-container">
+                            <p class="fb-bottom-popup-text">东莞银行（以下简称"我行"）尊重并保护用户（以下简称"您"）的隐私，您使用我行的服务时，我行将按照本隐私政策（以下简称"本政策"）收集、使用您的个人信息。同时，我行会通过本政策向您说明，我行如何为您提供访问、更新、控制和保护您信息的服务，若您向我行提供了本政策中列明的信息，您可享受更便捷、更便捷的服务，让我行更好地保护您的账户及资金安全，避免我行无法及时发现被欺诈而产生对您不利的影响。</p>
+                            <p class="fb-bottom-popup-text">第一条 信息收集与使用</p>
+                            <p class="fb-bottom-popup-text">为了您可以正常使用东莞银行信服务，在下列情形中我行有需要收集您的一些信息，用以向您提供服务，提升我行的服务质量，保障您的账户和资金安全以及执行国家法律法规及监管规定：</p>
+                            <p class="fb-bottom-popup-text">1. 在法律法规允许的范围内，我行可能会以下不同形式中收集并使用您的个人信息且无需征得您的授权同意：</p>
+                            </div>
+                        </div>
+                        <!-- 全宽按钮 -->
+                        <section id="combo-full-width" class="section">
+                            <div class="btn-group">
+                                <button class="btn-large btn-primary">
+                                    <span class="btn-text">我已阅读并同意</span>
+                                </button>
+                            </div>
+                        </section>
+                        <div class="bottom-bar">
+                            <div class="popup-indicator"></div>
+                        </div>
+                    </div>
+                </section>
+        </div>
+        
+        <h2 class="category-title">底部弹窗-文本式-按钮禁用状态</h2>
+        <!-- 底部弹窗-文本式-按钮禁用状态 -->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <section class="popup-container">
+                <div class="popup-panel">
+                    <section class="section-popup-title">
+                        <div class="popup-title-container">
+                            <div class="popup-title-icon-wrapper">
+                                <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                            </div>
+                            <div class="popup-title-main-text">请阅读并确认以下文件</div>
+                            <div class="popup-title-action-btn"></div>
+                        </div>
+                    </section>
+                    <div class="section">
+                        <div class="fb-bottom-popup-content-container">
+                        <p class="fb-bottom-popup-text">东莞银行（以下简称"我行"）尊重并保护用户（以下简称"您"）的隐私，您使用我行的服务时，我行将按照本隐私政策（以下简称"本政策"）收集、使用您的个人信息。同时，我行会通过本政策向您说明，我行如何为您提供访问、更新、控制和保护您信息的服务，若您向我行提供了本政策中列明的信息，您可享受更便捷、更便捷的服务，让我行更好地保护您的账户及资金安全，避免我行无法及时发现被欺诈而产生对您不利的影响。</p>
+                        <p class="fb-bottom-popup-text">第一条 信息收集与使用</p>
+                        <p class="fb-bottom-popup-text">为了您可以正常使用东莞银行信服务，在下列情形中我行有需要收集您的一些信息，用以向您提供服务，提升我行的服务质量，保障您的账户和资金安全以及执行国家法律法规及监管规定：</p>
+                        <p class="fb-bottom-popup-text">1. 在法律法规允许的范围内，我行可能会以下不同形式中收集并使用您的个人信息且无需征得您的授权同意：</p>
+                        </div>
+                    </div>
+                    <!-- 全宽按钮 -->
+                    <section id="combo-full-width" class="section">
+                        <div class="btn-group">
+                            <button class="btn-large btn-primary btn-disabled" disabled>
+                                <span class="btn-text">我已阅读并同意</span>
+                            </button>
+                        </div>
+                    </section>
+                    <div class="bottom-bar">
+                        <div class="popup-indicator"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <h2 class="category-title">底部弹窗-滚轮选择器-单列</h2>
+        <!-- 底部弹窗-滚轮选择器-单列 -->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <section class="fb-popup-container">
+                    <div class="fb-popup-panel">
+                        <section class="section-popup-title">
+                            <div class="popup-title-container">
+                                <div class="popup-title-icon-wrapper">
+                                    <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                                </div>
+                                <div class="popup-title-main-text">标题文本</div>
+                                <div class="popup-title-action-btn">操作描述</div>
+                            </div>
+                        </section>
+                        <section class="pad-vertical-0" data-picker="range">
+                            <div class="date-picker-panel">
+                                <div class="date-column">
+                                    <div class="date-item selected">选项一</div>
+                                    <div class="date-item">选项二</div>
+                                    <div class="date-item">选项三</div>
+                                    <div class="date-item">选项四</div>
+                                    <div class="date-item">选项五</div>
+                                    <div class="date-item">选项六</div>
+                                    <div class="date-item">选项七</div>
+                                    <div class="date-item">选项八</div>
+                                    <div class="date-item">选项九</div>
+                                    <div class="date-item">选项十</div>
+                                    <div class="date-item">选项十一</div>
+                                    <div class="date-item">选项十二</div>
+                                    <div class="date-item">选项十三</div>
+                                    <div class="date-item">选项十四</div>
+                                    <div class="date-item">选项十五</div>
+                                    <div class="date-item">选项十六</div>
+                                    <div class="date-item">选项十七</div>
+                                    <div class="date-item">选项十八</div>
+                                    <div class="date-item">选项十九</div>
+                                    <div class="date-item">选项二十</div>
+                                </div>
+                            </div>
+                            <div class="line-container">
+                                <div class="ele-line"></div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-滚轮选择器-两列</h2>
+        <!-- 底部弹窗-滚轮选择器-两列 -->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <section class="fb-popup-container">
+                    <div class="fb-popup-panel">
+                        <section class="section-popup-title">
+                            <div class="popup-title-container">
+                                <div class="popup-title-icon-wrapper">
+                                    <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                                </div>
+                                <div class="popup-title-main-text">标题文本</div>
+                                <div class="popup-title-action-btn">操作描述</div>
+                            </div>
+                        </section>
+                        <section class="pad-vertical-0" data-picker="range">
+                            <div class="date-picker-panel">
+                                <div class="date-column">
+                                    <div class="date-item selected">选项一</div>
+                                    <div class="date-item">选项二</div>
+                                    <div class="date-item">选项三</div>
+                                    <div class="date-item">选项四</div>
+                                    <div class="date-item">选项五</div>
+                                    <div class="date-item">选项六</div>
+                                    <div class="date-item">选项七</div>
+                                    <div class="date-item">选项八</div>
+                                    <div class="date-item">选项九</div>
+                                    <div class="date-item">选项十</div>
+                                    <div class="date-item">选项十一</div>
+                                    <div class="date-item">选项十二</div>
+                                    <div class="date-item">选项十三</div>
+                                    <div class="date-item">选项十四</div>
+                                    <div class="date-item">选项十五</div>
+                                    <div class="date-item">选项十六</div>
+                                    <div class="date-item">选项十七</div>
+                                    <div class="date-item">选项十八</div>
+                                    <div class="date-item">选项十九</div>
+                                    <div class="date-item">选项二十</div>
+                                </div>
+                                <div class="date-column">
+                                    <div class="date-item selected">选项一</div>
+                                    <div class="date-item">选项二</div>
+                                    <div class="date-item">选项三</div>
+                                    <div class="date-item">选项四</div>
+                                    <div class="date-item">选项五</div>
+                                    <div class="date-item">选项六</div>
+                                    <div class="date-item">选项七</div>
+                                    <div class="date-item">选项八</div>
+                                    <div class="date-item">选项九</div>
+                                    <div class="date-item">选项十</div>
+                                    <div class="date-item">选项十一</div>
+                                    <div class="date-item">选项十二</div>
+                                    <div class="date-item">选项十三</div>
+                                    <div class="date-item">选项十四</div>
+                                    <div class="date-item">选项十五</div>
+                                    <div class="date-item">选项十六</div>
+                                    <div class="date-item">选项十七</div>
+                                    <div class="date-item">选项十八</div>
+                                    <div class="date-item">选项十九</div>
+                                    <div class="date-item">选项二十</div>
+                                </div>
+                            </div>
+                            <div class="line-container">
+                                <div class="ele-line"></div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-滚轮选择器-三列</h2>
+        <!-- 底部弹窗-滚轮选择器-三列 -->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <section class="fb-popup-container">
+                    <div class="fb-popup-panel">
+                        <section class="section-popup-title">
+                            <div class="popup-title-container">
+                                <div class="popup-title-icon-wrapper">
+                                    <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                                </div>
+                                <div class="popup-title-main-text">标题文本</div>
+                                <div class="popup-title-action-btn">操作描述</div>
+                            </div>
+                        </section>
+                        <section class="pad-vertical-0" data-picker="range">
+                            <div class="date-picker-panel">
+                                <div class="date-column">
+                                    <div class="date-item selected">选项一</div>
+                                    <div class="date-item">选项二</div>
+                                    <div class="date-item">选项三</div>
+                                    <div class="date-item">选项四</div>
+                                    <div class="date-item">选项五</div>
+                                    <div class="date-item">选项六</div>
+                                    <div class="date-item">选项七</div>
+                                    <div class="date-item">选项八</div>
+                                    <div class="date-item">选项九</div>
+                                    <div class="date-item">选项十</div>
+                                    <div class="date-item">选项十一</div>
+                                    <div class="date-item">选项十二</div>
+                                    <div class="date-item">选项十三</div>
+                                    <div class="date-item">选项十四</div>
+                                    <div class="date-item">选项十五</div>
+                                    <div class="date-item">选项十六</div>
+                                    <div class="date-item">选项十七</div>
+                                    <div class="date-item">选项十八</div>
+                                    <div class="date-item">选项十九</div>
+                                    <div class="date-item">选项二十</div>
+                                </div>
+                                <div class="date-column">
+                                    <div class="date-item selected">选项一</div>
+                                    <div class="date-item">选项二</div>
+                                    <div class="date-item">选项三</div>
+                                    <div class="date-item">选项四</div>
+                                    <div class="date-item">选项六</div>
+                                    <div class="date-item">选项七</div>
+                                    <div class="date-item">选项八</div>
+                                    <div class="date-item">选项九</div>
+                                    <div class="date-item">选项十</div>
+                                    <div class="date-item">选项十一</div>
+                                    <div class="date-item">选项十二</div>
+                                    <div class="date-item">选项十三</div>
+                                </div>
+                                <div class="date-column">
+                                    <div class="date-item selected">选项一</div>
+                                    <div class="date-item">选项二</div>
+                                    <div class="date-item">选项三</div>
+                                    <div class="date-item">选项四</div>
+                                    <div class="date-item">选项五</div>
+                                    <div class="date-item">选项六</div>
+                                    <div class="date-item">选项七</div>
+                                    <div class="date-item">选项八</div>
+                                    <div class="date-item">选项九</div>
+                                    <div class="date-item">选项十</div>
+                                    <div class="date-item">选项十一</div>
+                                    <div class="date-item">选项十二</div>
+                                    <div class="date-item">选项十三</div>
+                                    <div class="date-item">选项十四</div>
+                                    <div class="date-item">选项十五</div>
+                                    <div class="date-item">选项十六</div>
+                                    <div class="date-item">选项十七</div>
+                                    <div class="date-item">选项十八</div>
+                                    <div class="date-item">选项十九</div>
+                                    <div class="date-item">选项二十</div>
+                                </div>
+                            </div>
+                            <div class="line-container">
+                                <div class="ele-line"></div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-滚轮选择器-时间范围</h2>
+        <!-- 底部弹窗-滚轮选择器-时间范围 -->
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <section class="fb-popup-container">
+                    <div class="fb-popup-panel">
+                        <section class="section-popup-title">
+                            <div class="popup-title-container">
+                                <div class="popup-title-icon-wrapper">
+                                    <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                                </div>
+                                <div class="popup-title-main-text">标题文本</div>
+                                <div class="popup-title-action-btn">操作描述</div>
+                            </div>
+                        </section>
+                        <div class="fb-wheel-container range">
+                            <div class="section">
+                                <div class="time-filter-row-no-query">
+                                    <div class="time-input">
+                                        <input type="text" placeholder="开始时间" readonly>
+                                    </div>
+                                    <div class="time-separator">至</div>
+                                    <div class="time-input">
+                                        <input type="text" placeholder="结束时间" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 滚动选择器 for 日期段选择 -->
+                            <section class="pad-vertical-0" data-picker="range">
+                                <div class="date-picker-panel">
+                                    <div class="date-column">
+                                        <div class="date-item">2005年</div>
+                                        <div class="date-item">2006年</div>
+                                        <div class="date-item">2007年</div>
+                                        <div class="date-item">2008年</div>
+                                        <div class="date-item">2009年</div>
+                                        <div class="date-item">2010年</div>
+                                        <div class="date-item">2011年</div>
+                                        <div class="date-item">2012年</div>
+                                        <div class="date-item">2013年</div>
+                                        <div class="date-item">2014年</div>
+                                        <div class="date-item">2015年</div>
+                                        <div class="date-item">2016年</div>
+                                        <div class="date-item">2017年</div>
+                                        <div class="date-item">2018年</div>
+                                        <div class="date-item">2019年</div>
+                                        <div class="date-item">2020年</div>
+                                        <div class="date-item">2021年</div>
+                                        <div class="date-item">2022年</div>
+                                        <div class="date-item selected">2023年</div>
+                                        <div class="date-item">2024年</div>
+                                        <div class="date-item">2025年</div>
+                                    </div>
+                                    <div class="date-column">
+                                        <div class="date-item">1月</div>
+                                        <div class="date-item">2月</div>
+                                        <div class="date-item">3月</div>
+                                        <div class="date-item">4月</div>
+                                        <div class="date-item">5月</div>
+                                        <div class="date-item selected">6月</div>
+                                        <div class="date-item">7月</div>
+                                        <div class="date-item">8月</div>
+                                        <div class="date-item">9月</div>
+                                        <div class="date-item">10月</div>
+                                        <div class="date-item">11月</div>
+                                        <div class="date-item">12月</div>
+                                    </div>
+                                    <div class="date-column">
+                                        <div class="date-item">1日</div>
+                                        <div class="date-item">2日</div>
+                                        <div class="date-item">3日</div>
+                                        <div class="date-item">4日</div>
+                                        <div class="date-item">5日</div>
+                                        <div class="date-item">6日</div>
+                                        <div class="date-item">7日</div>
+                                        <div class="date-item">8日</div>
+                                        <div class="date-item">9日</div>
+                                        <div class="date-item">10日</div>
+                                        <div class="date-item">11日</div>
+                                        <div class="date-item">12日</div>
+                                        <div class="date-item">13日</div>
+                                        <div class="date-item">14日</div>
+                                        <div class="date-item">15日</div>
+                                        <div class="date-item">16日</div>
+                                        <div class="date-item">17日</div>
+                                        <div class="date-item">18日</div>
+                                        <div class="date-item selected">19日</div>
+                                        <div class="date-item">20日</div>
+                                        <div class="date-item">21日</div>
+                                        <div class="date-item">22日</div>
+                                        <div class="date-item">23日</div>
+                                        <div class="date-item">24日</div>
+                                        <div class="date-item">25日</div>
+                                        <div class="date-item">26日</div>
+                                        <div class="date-item">27日</div>
+                                        <div class="date-item">28日</div>
+                                        <div class="date-item">29日</div>
+                                        <div class="date-item">30日</div>
+                                        <div class="date-item">31日</div>
+                                    </div>
+                                </div>
+                                <div class="line-container">
+                                    <div class="ele-line"></div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">弹层组件-长文本类型</h2>  
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="dialog-popup-container">
+                <!-- 弹层组件-长文本类型 -->
+                <section class="cdlg-container">
+                    <div class="cdlg-wrapper">
+                        <div class="cdlg-title">提示标题</div>
+                        <div class="cdlg-content cdlg-content--scrollable">
+                            我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容我是提示内容
+                        </div>
+                        <div class="cdlg-footer">
+                            <button class="cdlg-action-btn">按钮</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">弹层组件-卡片信息类型</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="dialog-popup-container">
+                <!-- 弹层组件-卡片信息类型 -->
+                <section class="cdlg-container">
+                    <div class="cdlg-wrapper">
+                        <div class="cdlg-title">提示标题</div>
+                        <div class="cdlg-content">
+                            我是提示内容我是提示内容。
+                        </div>
+                        <div class="cdlg-card-container">
+                            <img src="/src/assets/images/img001.png" alt="回单信息" class="cdlg-card-image">
+                        </div>
+                        <div class="cdlg-footer">
+                            <button class="cdlg-action-btn">按钮</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">弹层-基础单按钮</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="dialog-popup-container">
+                <!-- 弹层-基础单按钮 -->
+                <section class="dlg-container">
+                    <div class="dlg-title">提示标题</div>
+                    <div class="dlg-content">我是提示内容容器我是提示内容容器。</div>
+                    <div class="dlg-footer">
+                        <button class="dlg-action-btn">按钮</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">弹层-辅助描述</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="dialog-popup-container">
+                <!-- 弹层-辅助描述 -->
+                <section class="dlg-container">
+                    <div class="dlg-container">
+                        <div class="dlg-title">提示标题</div>
+                        <div class="dlg-content">我是提示内容容器我是提示内容容器。</div>
+                        <div class="dlg-description">辅助描述信息</div>
+                        <div class="dlg-footer">
+                            <button class="dlg-action-btn">按钮</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">弹层-强调描述</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="dialog-popup-container">
+                <!-- 弹层-强调描述 -->
+                <section class="dlg-container">
+                    <div class="dlg-container">
+                        <div class="dlg-title">提示标题</div>
+                        <div class="dlg-content">我是提示内容容器我是提示内容容器。</div>
+                        <div class="dlg-highlight-text">强调描述信息</div>
+                        <div class="dlg-footer">
+                            <button class="dlg-action-btn">按钮</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">弹层-输入框</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="dialog-popup-container">
+                <!-- 弹层-输入框 -->
+                <section class="dlg-container">
+                    <div class="dlg-container">
+                        <div class="dlg-title">提示标题</div>
+                        <div class="dlg-input-wrapper">
+                            <input type="text" placeholder="请输入XXXX" class="dlg-input-field">
+                        </div>
+                        <div class="dlg-footer dlg-footer--horizontal">
+                            <button class="dlg-action-btn">按钮</button>
+                            <button class="dlg-action-btn dlg-action-btn--primary">按钮</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">弹层-双按钮</h2>    
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="dialog-popup-container">
+                <!-- 弹层-水平按钮排列 -->
+                <section class="dlg-container">
+                    <div class="dlg-container">
+                        <div class="dlg-title">提示标题</div>
+                        <div class="dlg-content">我是提示内容容器我是提示内容容器。</div>
+                        <div class="dlg-footer dlg-footer--horizontal">
+                            <button class="dlg-action-btn">按钮</button>
+                            <button class="dlg-action-btn dlg-action-btn--primary">按钮</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <h2 class="category-title">弹层-垂直按钮排列</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="dialog-popup-container"> 
+                <!-- 弹层-垂直按钮排列 -->
+                <section class="dlg-container">
+                    <div class="dlg-container">
+                        <div class="dlg-title">提示标题</div>
+                        <div class="dlg-content">我是提示内容容器我是提示内容容器。</div>
+                        <div class="dlg-footer dlg-footer--vertical">
+                            <button class="dlg-action-btn">按钮</button>
+                            <button class="dlg-action-btn">按钮</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <h2 class="category-title">弹层-垂直三按钮</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="dialog-popup-container">  
+                <!-- 弹层-垂直三按钮 -->
+                <section class="dlg-container">
+                    <div class="dlg-container">
+                        <div class="dlg-title">提示标题</div>
+                        <div class="dlg-content">我是提示内容容器我是提示内容容器。</div>
+                        <div class="dlg-footer dlg-footer--vertical">
+                            <button class="dlg-action-btn">按钮</button>
+                            <button class="dlg-action-btn">按钮</button>
+                            <button class="dlg-action-btn">按钮</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <h2 class="category-title">弹层-垂直四按钮</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="dialog-popup-container">
+                <!-- 弹层-垂直四按钮 -->
+                <section class="dlg-container">
+                    <div class="dlg-container">
+                        <div class="dlg-title">提示标题</div>
+                        <div class="dlg-content">我是提示内容容器我是提示内容容器。</div>
+                        <div class="dlg-footer dlg-footer--vertical">
+                            <button class="dlg-action-btn">按钮</button>
+                            <button class="dlg-action-btn">按钮</button>
+                            <button class="dlg-action-btn">按钮</button>
+                            <button class="dlg-action-btn">按钮</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h1 class="group-title">其他组件</h1>
+
+        <h2 class="category-title">空白页组件</h2>
+        <!-- 基础空白页 -->
+        <section class="section">
+            <div class="empty-page-container">
+                <img src="/src/assets/images/emptypage.png" alt="空白页图标" class="empty-page-icon">
+                <p class="empty-page-message">展示提示语描述</p>
+            </div>
+        </section>
+
+        <h2 class="category-title">空白页组件-带按钮</h2>
+        <!-- 带按钮空白页 -->
+        <section class="section">
+            <div class="empty-page-container">
+                <img src="/src/assets/images/emptypage.png" alt="空白页图标" class="empty-page-icon">
+                <p class="empty-page-message">展示提示语描述</p>
+                <div class="empty-page-button-container">
+                    <button class="btn-medium btn-secondary">
+                        <span class="btn-text">按钮</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">基础结果页</h2>
+        <!-- 基础结果页 -->
+        <section class="result-section">
+            <div class="result-wrapper">
+                <img src="/src/assets/images/successfulresults.png" alt="操作结果" class="result__icon">
+                <p class="result__operation-title">操作结果</p>
+            </div>
+        </section>
+
+        <h2 class="category-title">带描述结果页</h2>
+        <!-- 带描述结果页 -->
+        <section class="result-section">
+            <div class="result-wrapper">
+                <img src="/src/assets/images/successfulresults.png" alt="操作结果" class="result__icon">
+                <p class="result__operation-title">操作结果</p>
+                <p class="result__description">展示操作结果的提示描述</p>
+            </div>
+        </section>
+
+    </div>
+    <script src="/src/js/base/element.js"></script>
+    <script src="/src/js/base/carousel.js"></script>
+    <script src="/src/js/bar/search-bar.js"></script>
+    <script src="/src/js/bar/tab-bar.js"></script>
+    <script src="/src/js/bar/top-tabs.js"></script>
+    <script src="/src/js/business/amount-display.js"></script>
+    <script src="/src/js/business/card-id-upload.js"></script>
+    <script src="/src/js/business/product-card.js"></script>
+    <script src="/src/js/form/date-filters.js"></script> 
+</body>
+</html> 

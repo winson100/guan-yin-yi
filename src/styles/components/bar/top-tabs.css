@@ -1,0 +1,131 @@
+/* 基础选项卡 */
+.top-tabs {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid var(--neutral-color-nc30);
+    height: 56px;
+    overflow-x: auto; /* 横向滚动 */
+    -webkit-overflow-scrolling: touch; /* iOS流畅滚动 */
+    scrollbar-width: none; /* Firefox隐藏滚动条 */
+    -ms-overflow-style: none; /* IE/Edge隐藏滚动条 */
+    user-select: none; /* 禁止选中 */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.top-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+/* 选项卡项目 */
+.top-tabs-item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex: 0 0 auto; /* 不等分宽度，内容自适应 */
+    min-width: 80px; /* 最小宽度，可根据需要调整 */
+    padding: 0 4px; /* 横向内边距缩小 */
+    height: 100%;
+    white-space: nowrap; /* 防止换行 */
+    user-select: none; /* 禁止选中 */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* 选项卡文本 */
+.top-tabs-text {
+    text-align: center;
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc70);
+}
+
+/* 选项卡指示器 */
+.indicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: url('../images/arcselection.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.tab_on_img {
+    width: 24px;
+    height: 5px;
+}
+
+.top-tabs-item.active .top-tabs-text {
+    color: var(--neutral-color-nc95);
+    font-weight: var(--font-weight-medium);
+}
+
+/* 二级Tabs样式 - Segmented Control */
+.SegmentedButton {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    height:50px;
+}
+
+.level-2 {
+    display: inline-flex;
+    height: 24px;
+}
+
+.level-2 .top-tabs-item {
+    height: 100%;
+    padding: 0 12px;
+    background-color: transparent;
+    border: 1px solid var(--auxiliary-color-ac4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    user-select: none; /* 禁止选中 */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.level-2 .top-tabs-item:first-child {
+    border-radius: var(--border-radius-pill) 0 0 var(--border-radius-pill);
+    border-right: none;
+}
+
+.level-2 .top-tabs-item:last-child {
+    border-radius: 0 var(--border-radius-pill) var(--border-radius-pill) 0;
+}
+
+.level-2 .top-tabs-text {
+    font-size: var(--font-size-28);
+    color: var(--auxiliary-color-ac4);
+    font-weight: var(--font-weight-regular);
+    line-height: 1;
+}
+
+.level-2 .top-tabs-item.active {
+    background-color: var(--auxiliary-color-ac4);
+    border: 1px solid var(--auxiliary-color-ac4);
+}
+
+.level-2 .top-tabs-item.active .top-tabs-text {
+    color: var(--color-white);
+}
+
+/* 优化二级tabs按钮宽度 */
+.level-2.top-tabs {
+  display: flex;
+}
+.level-2.top-tabs .top-tabs-item {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  box-sizing: border-box;
+  /* 可根据实际需要调整padding */
+  padding-left: 0;
+  padding-right: 0;
+} 

@@ -1,0 +1,72 @@
+/* 复杂弹层组件 */
+.cdlg-container {
+    width: 375px;
+}
+
+/* 复杂弹层主体样式 */
+.cdlg-wrapper {
+    width: 320px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-large);
+    overflow: hidden;
+    text-align: center;
+}
+
+/* 弹层标题 */
+.cdlg-title {
+    font-size: var(--font-size-32);
+    color: var(--neutral-color-nc95);
+    font-weight: var(--font-weight-medium);
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-sm);
+}
+
+/* 弹层内容 */
+.cdlg-content {
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc80);
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* 长文本内容样式 */
+.cdlg-content--scrollable {
+    max-height: 300px;
+    overflow-y: auto;
+    text-align: left;
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+}
+
+/* 卡片信息容器 */
+.cdlg-card-container {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+}
+
+/* 卡片图片 */
+.cdlg-card-image {
+    width: 100%;
+    border-radius: var(--border-radius-large);
+    display: block;
+}
+
+/* 弹层底部按钮区域 */
+.cdlg-footer {
+    display: flex;
+    border-top: 1px solid var(--border-color);
+}
+
+/* 按钮基础样式 */
+.cdlg-action-btn {
+    flex: 1;
+    height: 44px;
+    line-height: 44px;
+    padding: 0;
+    background-color: var(--color-white);
+    border: none;
+    font-size: var(--font-size-28);
+    color: var(--auxiliary-color-ac4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 

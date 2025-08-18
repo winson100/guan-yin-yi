@@ -1,0 +1,113 @@
+/* 搜索栏-基础样式 */
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+    box-sizing: border-box;
+}
+
+/* 搜索栏-白色背景 */
+.search-bar.white {
+    background-color: var(--color-white);
+}
+
+/* 搜索栏-透明背景 */
+.search-bar.transparent {
+    background-color: transparent;
+}
+
+/* 搜索栏-输入框 */
+.search-bar.white .search-box {
+    background-color: var(--neutral-color-nc10);
+}
+
+.search-bar.transparent .search-box {
+    background-color: rgba(255,255,255,0.25);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    height: 32px;
+    border-radius: var(--border-radius-pill);
+    padding: 0 var(--spacing-sm);
+    gap: var(--spacing-xs);
+}
+
+/* 搜索栏-图标 */
+.srch-fun-icon {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium);
+    object-fit: contain;
+    display: block;
+}
+
+.search-icon,
+.clear-icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    object-fit: contain;
+    display: block;
+}
+
+/* 搜索栏-输入框文本 */
+.search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc95);
+    outline: none;
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.search-input::placeholder {
+    color: var(--neutral-color-nc70);
+}
+
+.search-bar.transparent .search-input {
+    color: var(--color-white);
+}
+
+.search-bar.transparent .search-input::placeholder {
+    color: var(--color-white);
+}
+
+/* 搜索栏-清除按钮 */
+.clear-btn {
+    display: none; /* 默认隐藏 */
+}
+.search-box.has-text .clear-btn {
+    display: flex; /* 当输入框有内容时显示 */
+}
+
+/* 搜索栏-取消按钮 */
+.cancel-btn {
+    color: var(--neutral-color-nc95);
+    font-size: var(--font-size-28);
+    margin-left: var(--spacing-md);
+    white-space: nowrap;
+}
+
+/* 搜索栏-操作按钮组 */
+.action-btns {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-left: var(--spacing-md);
+    flex-shrink: 0;
+}
+
+/* 搜索栏-操作按钮 */
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+} 

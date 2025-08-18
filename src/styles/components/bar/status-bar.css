@@ -1,0 +1,80 @@
+/* 状态栏组件样式 */
+/* 白色背景状态栏 */
+.statusbar-wrapper {
+    background-color: var(--background-color);
+}
+
+/* 透明背景状态栏 */
+.statusbar-wrapper.statusbar-transparent {
+    background-color: transparent;
+}
+
+/* 状态栏 */
+.statusbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spacing-lg);
+    height: 44px;
+    width: 343px; 
+}
+
+/* 时间 */
+.statusbar-time {
+    font-size: var(--font-size-28);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* 状态图标容器 */
+.statusbar-icons {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+/* 信号图标 */
+.statusbar-signal {
+    width: 18px;
+    margin-right: var(--spacing-xxs);
+    height: var(--icon-size-small);
+    object-fit: contain;
+    display: block;
+}
+
+/* WiFi图标 */
+.statusbar-wifi {
+    width: 17px;
+    margin-right: var(--spacing-xxs);
+    height: var(--icon-size-small);
+    object-fit: contain;
+    display: block;
+}
+
+/* 电池图标 */
+.statusbar-battery {
+    width: 25px;
+    height: var(--icon-size-small);
+    object-fit: contain;
+    display: block;
+}
+
+/* 透明状态栏内容 */
+.statusbar-transparent {
+    background-color: transparent;
+    color: var(--background-color);
+}
+
+/* 图标尺寸调整 */
+.statusbar-signal {
+    width: 18px;
+    margin-right: var(--spacing-xxs);
+}
+
+.statusbar-wifi {
+    width: 17px;
+    margin-right: var(--spacing-xxs);
+}
+
+.statusbar-battery {
+    width: 25px;
+} 

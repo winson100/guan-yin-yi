@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金额展示样式</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/element.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/components/business/amount-display.css">
+</head>
+<body>
+    <div class="container">
+
+        <h2 class="category-title">基础金额展示-带显示隐藏金额</h2>
+        <!-- 基础金额展示-带显示隐藏金额 -->
+        <section class="section">
+            <div class="amount-display">
+                <span class="amount js-amount">200,000.00</span>
+                <img src="/src/assets/icons/visible.svg" alt="查看" class="icon-eye js-eye" style="cursor:pointer;">
+            </div>
+            <div class="amount-label">
+                <span>标题文本(元)</span>
+                <img src="/src/assets/images/help.png" alt="帮助" class="icon-help">
+                <div class="bubble-wrapper bubble-top" style="display:none;">
+                    <div class="triangle triangle-top triangle-top-left"></div>
+                    <div class="bubble">这里是气泡提示内容</div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">基础金额展示-无显示隐藏金额</h2>
+        <!-- 基础金额展示-无显示隐藏金额 -->
+        <section class="section">
+            <div class="amount-display">
+                <span class="amount js-amount">200,000.00</span>
+            </div>
+            <div class="amount-label">
+                <span>标题文本(元)</span>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">组合样式-三栏金额展示</h2>
+        <!-- 组合样式-三栏金额展示 -->
+        <section class="section">
+            <div class="amount-display">
+                <span class="amount js-amount">200,000.00</span>
+                <img src="/src/assets/icons/visible.svg" alt="查看" class="icon-eye js-eye" style="cursor:pointer;">
+            </div>
+            <div class="amount-label">
+                <span>标题文本(元)</span>
+                <img src="/src/assets/images/help.png" alt="帮助" class="icon-help">
+                <div class="bubble-wrapper bubble-top" style="display:none;">
+                    <div class="triangle triangle-top triangle-top-left"></div>
+                    <div class="bubble">这里是气泡提示内容</div>
+                </div>
+            </div>
+            <div class="amount-sub-list">
+                <div class="amount-sub-item">
+                    <span class="sub-amount">0.00</span>
+                    <span class="sub-label">标题文本(元)</span>
+                </div>
+                <div class="amount-sub-item">
+                    <span class="sub-amount">0.00</span>
+                    <span class="sub-label">标题文本(元)</span>
+                </div>
+                <div class="amount-sub-item">
+                    <span class="sub-amount">0.00</span>
+                    <span class="sub-label">标题文本(元)</span>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">组合样式-两栏金额展示</h2>
+        <!-- 组合样式-两栏金额展示 -->
+        <section class="section">
+            <div class="amount-display">
+                <span class="amount js-amount">200,000.00</span>
+                <img src="/src/assets/icons/visible.svg" alt="查看" class="icon-eye js-eye" style="cursor:pointer;">
+            </div>
+            <div class="amount-label">
+                <span>标题文本(元)</span>
+                <img src="/src/assets/images/help.png" alt="帮助" class="icon-help">
+                <div class="bubble-wrapper bubble-top" style="display:none;">
+                    <div class="triangle triangle-top triangle-top-left"></div>
+                    <div class="bubble">这里是气泡提示内容</div>
+                </div>
+            </div>
+            <div class="amount-sub-list two-columns">
+                <div class="amount-sub-item">
+                    <span class="sub-amount">0.00</span>
+                    <span class="sub-label">标题文本(元)</span>
+                </div>
+                <div class="amount-sub-item">
+                    <span class="sub-amount">0.00</span>
+                    <span class="sub-label">标题文本(元)</span>
+                </div>
+            </div>
+            <div class="amount-time">
+                <span>刷新时间：2023-08-24 15:31:12</span>
+                <img src="/src/assets/images/refresh.png" alt="刷新" class="icon-refresh">
+            </div>
+        </section>
+
+        <h2 class="category-title">组合样式-带按钮的金额展示</h2>
+        <!-- 组合样式-带按钮的金额展示 -->
+        <section class="section">
+            <div class="amount-display">
+                <span class="amount js-amount">200,000.00</span>
+                <img src="/src/assets/icons/visible.svg" alt="查看" class="icon-eye js-eye" style="cursor:pointer;">
+            </div>
+            <div class="amount-label">
+                <span>标题文本(元)</span>
+                <img src="/src/assets/images/help.png" alt="帮助" class="icon-help">
+                <div class="bubble-wrapper bubble-top" style="display:none;">
+                    <div class="triangle triangle-top triangle-top-left"></div>
+                    <div class="bubble">这里是气泡提示内容</div>
+                </div>
+            </div>
+            <div class="amount-btn-padding">
+                <button class="btn-large btn-primary">
+                    <span class="btn-text">按钮</span>
+                </button>
+            </div>
+        </section>
+    </div>
+    <script src="/src/js/business/amount-display.js"></script>
+</body>
+</html> 

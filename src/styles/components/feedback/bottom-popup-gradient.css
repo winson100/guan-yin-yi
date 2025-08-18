@@ -1,0 +1,19 @@
+/* 梯度式底部弹窗样式 */
+
+/* 金额信息区块 */
+.amount-info {
+    text-align: center;
+}
+
+.amount-desc {
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc70);
+    margin-bottom: var(--spacing-xs);
+}
+
+.amount {
+    font-size: var(--font-size-50);
+    color: var(--neutral-color-nc95);
+    font-weight: var(--font-weight-regular);
+}
+

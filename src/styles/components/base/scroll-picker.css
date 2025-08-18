@@ -1,0 +1,42 @@
+/* 日期选择面板 */
+.date-picker-panel {
+    display: flex;
+    height: 200px;
+}
+
+.date-column {
+    flex: 1;
+    overflow-y: scroll;
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE/Edge */
+}
+
+.date-column::-webkit-scrollbar {
+    display: none;                /* Chrome/Safari/Opera */
+}
+
+.date-column:last-child {
+    border-right: none;
+}
+
+.date-item {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc70);
+}
+
+.date-item.selected {
+    color: var(--neutral-color-nc95);
+    font-weight: var(--font-weight-medium);
+}
+
+/* 分割线容器 */
+.line-container {
+    position: relative;
+    top: -80px;
+    width: 100%;
+}
+

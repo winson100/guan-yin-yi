@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项式底部弹窗</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-title.css">
+    <link rel="stylesheet" href="/src/styles/components/form/form-options.css">
+    <link rel="stylesheet" href="/src/styles/base/element.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="category-title">底部弹窗-选项列表-基础</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <section class="section-popup-title">
+                    <div class="popup-title-container">
+                        <div class="popup-title-icon-wrapper">
+                            <img src="../../assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                        </div>
+                        <div class="popup-title-main-text">标题文本</div>
+                        <div class="popup-title-action-btn">操作描述</div>
+                    </div>
+                </section>
+
+                <div class="pad-vertical-0 ">
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项一</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项二</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项三</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项四</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项五</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项六</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项七</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                    <div class="form-option">
+                        <div class="option-content">
+                            <span class="option-label">选项八</span>
+                        </div>
+                        <div class="option-selected">
+                            <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-bar">
+                    <div class="popup-indicator"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">底部弹窗-选项列表-带图标</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <!-- 底部弹窗-选项列表-带图标 -->
+            <div class="popup-container">
+                <section class="section-popup-title">
+                    <div class="popup-title-container">
+                        <div class="popup-title-icon-wrapper">
+                            <img src="../../assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                        </div>
+                        <div class="popup-title-main-text">标题文本</div>
+                        <div class="popup-title-action-btn">操作描述</div>
+                    </div>
+                </section>
+
+                <div class="pad-vertical-0 ">
+                    <div class="option-list">
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon">
+                            </div>
+                        </div>
+            
+                        <!-- 单行文本有图标选项-未选中状态 -->
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <span class="option-label">选项文本</span>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-bar">
+                    <div class="popup-indicator"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">底部弹窗-选项列表-带副标题</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <!-- 底部弹窗-选项列表-带副标题 -->
+            <div class="popup-container">
+                <section class="section-popup-title">
+                    <div class="popup-title-container">
+                        <div class="popup-title-icon-wrapper">
+                            <img src="../../assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                        </div>
+                        <div class="popup-title-main-text">标题文本</div>
+                        <div class="popup-title-action-btn">操作描述</div>
+                    </div>
+                </section>
+
+                <div class="pad-vertical-0">
+                    <div class="option-list">
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon">
+                            </div>
+                        </div>
+                        <!-- 双行文本无图标选项-未选中状态 -->
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-bar">
+                    <div class="popup-indicator"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">底部弹窗-选项列表-带图标和副标题</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <!-- 底部弹窗-选项列表-带图标和副标题 -->
+            <div class="popup-container">
+                <section class="section-popup-title">
+                    <div class="popup-title-container">
+                        <div class="popup-title-icon-wrapper">
+                            <img src="../../assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                        </div>
+                        <div class="popup-title-main-text">标题文本</div>
+                        <div class="popup-title-action-btn">操作描述</div>
+                    </div>
+                </section>
+
+                <div class="pad-vertical-0">
+                    <div class="option-list">
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon">
+                            </div>
+                        </div>
+                        <!-- 双行文本有图标选项-未选中状态 -->
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                        <div class="form-option">
+                            <div class="option-content">
+                                <div class="form-option__icon">
+                                    <img src="../../assets/images/icon24.png" class="form-option__icon-placeholder">
+                                </div>
+                                <div class="option-text">
+                                    <span class="option-label">选项标题</span>
+                                    <span class="option-description">选项描述文本</span>
+                                </div>
+                            </div>
+                            <div class="option-selected">
+                                <img src="../../assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-bar">
+                    <div class="popup-indicator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

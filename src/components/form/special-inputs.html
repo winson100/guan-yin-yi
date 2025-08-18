@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特殊输入框</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/components/form/special-inputs.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 金额输入 -->
+        <h2 class="category-title">金额输入</h2>
+            <div class="pad-vertical-0">
+                <!-- 金额输入-默认状态 -->
+                <div class="form-money-item">
+                    <div class="input-label">标题文本</div>
+                    <div class="amount-in-words show"></div>
+                    <div class="input-content">
+                        <div class="currency-input">
+                            <span class="currency-symbol">¥</span>
+                            <input type="text" placeholder="请输入XXX">
+                        </div>
+                        <div class="input-action">操作描述</div>
+                    </div>
+                </div>
+                <!-- 金额输入-错误状态-->
+                <div class="form-money-item">
+                    <div class="input-label">标题文本</div>
+                    <div class="amount-in-words show">贰万元整</div>
+                    <div class="input-content">
+                        <div class="currency-input">
+                            <span class="currency-symbol">¥</span>
+                            <input type="text" value="2000000000.00" class="input-filled">
+                        </div>
+                        <div class="input-action">操作描述</div>
+                    </div>
+                </div>
+                <div class="input-error">展示错误提示语</div>                
+                <!-- 金额输入-辅助提示 -->
+                <div class="form-money-item">
+                    <div class="input-label">标题文本</div>
+                    <div class="amount-in-words show">贰万元整</div>
+                    <div class="input-content">
+                        <div class="currency-input">
+                            <span class="currency-symbol">¥</span>
+                            <input type="text" value="20000.00" class="input-filled">
+                        </div>
+                        <div class="input-action">操作描述</div>
+                    </div>
+                </div>
+                <div class="input-tip">展示辅助提示语</div>
+            </div>
+
+        <div class="space-line"></div>
+
+        <!-- 一键输入 -->
+        <h2 class="category-title">一键输入</h2>
+        <div class="section">
+            <div class="onetime-input-container">
+                <div class="input-label">展示提示语</div>
+                <div class="onetime-input-example">展示举例的示例文案</div>
+                <div class="onetime-input-area">
+                    <input type="text" class="onetime-input-placeholder" placeholder="展示占位提示语">
+                </div>
+                <div class="onetime-input-button">
+                    <button>一键输入</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-line"></div>
+
+        <!-- 验证码输入 -->
+        <h2 class="category-title">验证码输入</h2>
+        <div class="pad-vertical-0">
+            <!-- 验证码输入框 -->
+            <div class="input-verification-item">
+                <div class="input-label">验证码</div>
+                <input type="text" placeholder="请输入验证码">
+                <div class="get-code-button">获取验证码</div>
+            </div>
+        </div>
+        
+        <div class="space-line"></div>
+
+        <!-- 独立验证码输入框 -->
+        <div class="verification-standalone-item">
+            <input type="text" placeholder="请输入验证码">
+            <div class="get-code-button">获取验证码</div>
+        </div>
+
+        <div class="space-line"></div>
+
+        <!-- 交易密码输入 -->
+        <h2 class="category-title">交易密码输入</h2>
+
+        <div class="pad-vertical-0">
+            <!-- 交易密码输入框 -->
+            <div class="form-password-item">
+                <div class="input-label">交易密码</div>
+                <div class="input-content password-input">
+                    <input type="password" placeholder="请输入交易密码">
+                </div>
+            </div>
+        </div>
+
+        <div class="space-line"></div>
+
+        <!-- 密码输入组件 -->
+        <div class="input-section password-dots-container">
+            <div class="password-dots-row">
+                <input type="password" value="">
+                <input type="password" value="">
+                <input type="password" value="">
+                <input type="password" value="">
+                <input type="password" value="">
+                <input type="password" value="">
+            </div>
+        </div>
+
+        <div class="space-line"></div>
+    </div>
+    <script src="/src/js/base/element.js"></script>
+</body>
+</html> 

@@ -1,0 +1,192 @@
+/* 
+ * 基础变量定义文件
+ * 包含全局使用的颜色、字体、基础间距等变量
+ */
+
+:root {
+    /* ============= 颜色定义 ============= */
+    
+    /* 主题色阶定义 */
+    --theme-color-1: #5F0A0B;     /* 最深色阶 - 暗红褐色 */
+    --theme-color-2: #8A1415;     /* 深红色 */
+    --theme-color-3: #A62627;     /* 砖红色 */
+    --theme-color-4: #C33E3F;     /* 朱红色 */
+    --theme-color-5: #DB5556;     /* 主题红，主色（原ta1） */
+    --theme-color-6: #E2706F;     /* 浅红色 */
+    --theme-color-7: #E98E8D;     /* 粉红色 */
+    --theme-color-8: #F1B7B6;     /* 淡粉色 */
+    --theme-color-9: #FFE2E2;     /* 浅粉色（原ta2） */
+    --theme-color-10: #FFF1F1;    /* 最浅色阶 - 雾粉色 */
+    
+    /* 中性色定义 */
+    --neutral-color-ncb: #434C67;  /* NCB - 只用于内页：强调文本、底部弹出层标题 */
+    --neutral-color-nc95: #333333; /* NC95 - 首页：楼层标题、重要文本，内页：楼层标题、一级标题 */
+    --neutral-color-nc90: #4D4D4D; /* NC90 - 页面主标题、正文、弹窗标题、主要文本 */
+    --neutral-color-nc80: #666666; /* NC80 - 次要文本 */
+    --neutral-color-nc70: #999999; /* NC70 - 辅助文本、输入框提示文 */
+    --neutral-color-nc50: #CCCCCC; /* NC50 - 组件未激活状态、组件禁用状态 */
+    --neutral-color-nc30: #EBEBEB; /* NC30 - 分割线、描边 */
+    --neutral-color-nc10: #F6F6F6; /* NC10 - 背景层、筛选标签背景 */
+    
+    /* 辅助色定义 */
+    --auxiliary-color-ac1: #F08201; /* AC1 - 强调文本 */
+    --auxiliary-color-ac2: #19A75F; /* AC2 - 数据下跌 */
+    --auxiliary-color-ac3: #ED6635; /* AC3 - 报错提示 */
+    --auxiliary-color-ac4: #576B95; /* AC4 - 文字按钮、文本链接 */
+    --auxiliary-color-aa1: #ED462F; /* AA1 - 图标点缀主色 */
+    --auxiliary-color-aa2: #01A4EA; /* AA2 - 图标点缀辅色 */
+    --auxiliary-color-al1: #8F724B; /* AL1 - 首页标签文本色 */
+    --auxiliary-color-al2: #FCF7E8; /* AL2 - 首页标签背景色、重要提示背景 */
+    --auxiliary-color-al3: #576B95; /* AL3 - 内页标签文本色 */
+    --auxiliary-color-al4: #ECF3F9; /* AL4 - 内页标签背景色 */
+    
+    /* 基础颜色 */
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    
+    /* 功能色定义 */
+    --color-success: #52C41A;      /* 成功色 */
+    --color-warning: #FAAD14;      /* 警告色 */
+    --color-error: #FF4D4F;        /* 错误色 */
+
+    /* 颜色功能别名 */
+    --text-color-primary: var(--neutral-color-nc90);   /* 主要文本颜色 */
+    --text-color-secondary: var(--neutral-color-nc80);  /* 次要文本颜色 */
+    --text-color-disabled: var(--neutral-color-nc50);   /* 禁用状态文本颜色 */
+    --border-color: var(--neutral-color-nc30);         /* 边框颜色 */
+    --background-color: var(--color-white);            /* 背景色 */
+    --background-color-grey: var(--neutral-color-nc10); /* 灰色背景 */
+    --link-color: var(--auxiliary-color-ac4);          /* 链接颜色 */
+
+    /* 透明度定义 */
+    --opacity-0: 0;          /* 完全透明 */
+    --opacity-10: 0.1;       /* 10%不透明度 */
+    --opacity-20: 0.2;       /* 20%不透明度 */
+    --opacity-30: 0.3;       /* 30%不透明度 */
+    --opacity-40: 0.4;       /* 40%不透明度 */
+    --opacity-50: 0.5;       /* 50%不透明度 */
+    --opacity-60: 0.6;       /* 60%不透明度 */
+    --opacity-70: 0.7;       /* 70%不透明度 */
+    --opacity-80: 0.8;       /* 80%不透明度 */
+    --opacity-90: 0.9;       /* 90%不透明度 */
+    --opacity-100: 1;        /* 完全不透明 */
+
+    /* ============= 字体定义 ============= */
+    
+    /* 字体族 */
+    --font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* 字号定义 */
+    --font-size-60: 30px;  /* 持仓金额数字 */
+    --font-size-50: 25px;  /* 输入金额数字 */
+    --font-size-36: 18px;  /* 强调文案 */
+    --font-size-32: 16px;  /* 大标题、一级标题、表单文字 */
+    --font-size-28: 14px;  /* 二级标题、主要内容 */
+    --font-size-26: 13px;  /* 正文，主要用于协议 */
+    --font-size-24: 12px;  /* 三级标题、辅助文案、文本标签 */
+    --font-size-20: 10px;  /* 标签、角标 */
+    
+    /* 字号别名 */
+    --font-size-base: var(--font-size-28);    /* 基础字号 */
+    --font-size-small: var(--font-size-24);   /* 小号字体 */
+    --font-size-large: var(--font-size-32);   /* 大号字体 */
+    --font-size-xlarge: var(--font-size-36);  /* 特大号字体 */
+    
+    /* 字重定义 */
+    --font-weight-thin: 100;       /* 极细 */
+    --font-weight-light: 300;      /* 细体 */
+    --font-weight-regular: 400;    /* 常规 */
+    --font-weight-medium: 500;     /* 中等 */
+    --font-weight-semibold: 600;   /* 半粗 */
+    --font-weight-bold: 700;       /* 粗体 */
+    --font-weight-black: 900;      /* 特粗 */
+
+    /* ============= 间距定义 ============= */
+    
+    /* 基础间距 */
+    --spacing-xxs: 2px;     /* 特小间距 */
+    --spacing-xs: 4px;      /* 极小间距 */
+    --spacing-sm: 8px;      /* 小间距 */
+    --spacing-md: 12px;     /* 中等间距 */
+    --spacing-lg: 16px;     /* 大间距 */
+    --spacing-xl: 24px;     /* 特大间距 */
+    --spacing-xxl: 32px;    /* 超大间距 */
+    
+    /* 圆角定义 */
+    --border-radius-none: 0;        /* 无圆角 */
+    --border-radius-small: 2px;     /* 小圆角 */
+    --border-radius-base: 4px;      /* 基础圆角 */
+    --border-radius-medium: 6px;    /* 中等圆角 */
+    --border-radius-large: 8px;     /* 大圆角 */
+    --border-radius-circle: 50%;    /* 圆形 */
+    --border-radius-pill: 20px;     /* 胶囊形按钮 */
+    
+    /* 阴影定义 */
+    --box-shadow-none: none;                              /* 无阴影 */
+    --box-shadow-small: 0 1px 2px rgba(0, 0, 0, 0.1);    /* 小阴影 */
+    --box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15);    /* 基础阴影 */
+    --box-shadow-large: 0 4px 16px rgba(0, 0, 0, 0.2);   /* 大阴影 */
+    --box-shadow-float: 0 8px 24px rgba(0, 0, 0, 0.25);  /* 浮动阴影 */
+
+    /* 负间距 */
+    --spacing-negative-xxs: -2px;   /* 特小负间距 */
+    --spacing-negative-xs: -4px;    /* 极小负间距 */
+    --spacing-negative-sm: -8px;    /* 小负间距 */
+    --spacing-negative-md: -12px;   /* 中等负间距 */
+    --spacing-negative-lg: -16px;   /* 大负间距 */
+    --spacing-negative-xl: -24px;   /* 特大负间距 */
+    --spacing-negative-xxl: -32px;  /* 超大负间距 */
+
+    /* 间距别名 */
+    --spacing-gap: var(--spacing-md);           /* 常用间隔 */
+    --spacing-padding: var(--spacing-lg);       /* 内边距 */
+    --spacing-margin: var(--spacing-lg);        /* 外边距 */
+    --spacing-section: var(--spacing-xl);       /* 区块间距 */
+    --spacing-component: var(--spacing-md);     /* 组件内间距 */
+    --spacing-text: var(--spacing-xs);          /* 文本间距 */
+    --spacing-icon: var(--spacing-xs);          /* 图标间距 */
+    --spacing-form: var(--spacing-sm);          /* 表单间距 */
+    --spacing-button: var(--spacing-sm);        /* 按钮内间距 */
+    --spacing-list: var(--spacing-sm);          /* 列表项间距 */
+
+    /* ============= 尺寸定义 ============= */
+    
+    /* 图标尺寸 */
+    --icon-size-xsmall: 12px;    /* 特小图标 */
+    --icon-size-small: 16px;     /* 小图标 */
+    --icon-size-medium: 24px;    /* 中图标 */
+    --icon-size-large: 32px;     /* 大图标 */
+    --icon-size-xlarge: 40px;    /* 特大图标 */
+
+    /* ============= 层级定义 ============= */
+    
+    /* 基础层级值 */
+    --z-index-negative: -1;        /* 负层级 */
+    --z-index-0: 0;               /* 基础层级 */
+    --z-index-1: 10;              /* 第一层 */
+    --z-index-2: 20;              /* 第二层 */
+    --z-index-3: 30;              /* 第三层 */
+    --z-index-4: 40;              /* 第四层 */
+    --z-index-5: 50;              /* 第五层 */
+    --z-index-6: 60;              /* 第六层 */
+    --z-index-max: 999;           /* 最高层 */
+
+    /* 计划层级别名 */
+    --z-index-page: var(--z-index-0);          /* 页面基础层 */
+    --z-index-mask: var(--z-index-1);          /* 遮罩层 */
+    --z-index-navigation: var(--z-index-2);     /* 导航层 */
+    --z-index-popup: var(--z-index-3);         /* 弹出层 */
+    --z-index-modal: var(--z-index-4);         /* 模态框层 */
+    --z-index-toast: var(--z-index-5);         /* 轻提示层 */
+    --z-index-loading: var(--z-index-6);       /* 加载层 */
+}
+
+.icon-arrow, .icon-up {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    max-width: var(--icon-size-small);
+    max-height: var(--icon-size-small);
+    min-width: var(--icon-size-small);
+    min-height: var(--icon-size-small);
+    object-fit: contain;
+} 

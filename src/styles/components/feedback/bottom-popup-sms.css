@@ -1,0 +1,15 @@
+/* 短信验证码组件样式 */
+
+.sms-popup__container {
+    width: 375px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+    overflow: hidden;
+}
+
+.sms-popup__content {
+    display: flex;
+    flex-direction: column;
+    height: 325px;
+    align-items: stretch;
+}

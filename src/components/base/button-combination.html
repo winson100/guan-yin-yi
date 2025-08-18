@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按钮</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/base/element.css">
+    <link rel="stylesheet" href="/src/styles/components/base/button-combination.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="category-title">按钮组合</h2>
+
+        <!-- 一行两个按钮 -->
+        <section class="section">
+            <div class="btn-group-2">
+                <button class="btn-large btn-secondary">
+                    <span class="btn-text">按钮</span>
+                </button>
+                <button class="btn-large btn-primary">
+                    <span class="btn-text">按钮</span>
+                </button>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+
+        <!-- 一行三个按钮 -->
+        <section class="section">
+            <div class="btn-group-3">
+                <button class="btn-large btn-secondary">
+                    <span class="btn-text">按钮</span>
+                </button>
+                <button class="btn-large btn-secondary">
+                    <span class="btn-text">按钮</span>
+                </button>
+                <button class="btn-large btn-primary">
+                    <span class="btn-text">按钮</span>
+                </button>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+
+        <!-- 带图标的单按钮 -->
+        <section class="section">
+            <div class="btn-group-with-icon">
+                <div class="icon-btn">
+                    <div class="icon-btn__icon">
+                        <img src="/src/assets/images/icon16.png" alt="icon" />
+                    </div>
+                    <div class="icon-btn__text">操作描述</div>
+                </div>
+                <div class="btn-group-single">
+                    <button class="btn-large btn-primary">
+                        <span class="btn-large-text">按钮</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+
+        <!-- 带图标的双按钮 -->
+        <section class="section">
+            <div class="btn-group-with-icon">
+                <div class="icon-btn">
+                    <div class="icon-btn__icon">
+                        <img src="/src/assets/images/icon16.png" alt="icon" />
+                    </div>
+                    <div class="icon-btn__text">操作描述</div>
+                </div>
+                <div class="btn-group-2">
+                    <button class="btn-large btn-secondary">
+                        <span class="btn-text">按钮</span>
+                    </button>
+                    <button class="btn-large btn-primary">
+                        <span class="btn-text">按钮</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+
+        <!-- 全宽按钮 -->
+        <section class="section">
+            <div class="btn-group">
+                <button class="btn-large btn-primary">
+                    <span class="btn-text">按钮</span>
+                </button>
+            </div>
+        </section>
+
+        <h2 class="category-title">底部按钮组件</h2>
+        <!-- 底部带复选框和按钮 -->
+        <section class="">
+            <div class="footer-btn-group" class="">
+                <section class="pad-bottom-0">
+                    <label class="checkbox">
+                        <input type="checkbox">
+                        <span class="checkbox__text">勾选操作的相关描述文本描述</span>
+                    </label>
+                </section>
+                <section class="section">
+                    <div class="btn-group">
+                        <button class="btn-large btn-primary">
+                            <span class="btn-text">按钮</span>
+                        </button>
+                    </div>
+                </section>
+                <section class="pad-top-0">
+                    <div class="desc-text">操作描述</div>
+                </section>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+        
+    </div>
+</body>
+</html> 

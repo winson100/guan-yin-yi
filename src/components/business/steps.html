@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>步骤条组件</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/components/business/steps.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="category-title">竖向步骤条</h2>
+        <!-- 竖向步骤条 - 默认 -->
+        <section class="section">
+            <div class="steps-vertical-wrapper">
+                <div class="steps-vertical-container">
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤一标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line"></div>
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤二标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line"></div>
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤三标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line"></div>
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤四标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+
+        <!-- 竖向步骤条 - 带进度 -->
+        <section class="section">
+            <div class="steps-vertical-wrapper">
+                <div class="steps-vertical-container">
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon-active"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤一标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line-active"></div>
+                    <div class="steps-vertical-item steps-vertical-item-current">
+                        <img class="steps-vertical-icon" src="/src/assets/images/currentstep.png" alt="当前步骤" >
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤二标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line"></div>
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤三标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                    <div class="steps-vertical-line"></div>
+                    <div class="steps-vertical-item">
+                        <div class="steps-vertical-icon"></div>
+                        <div class="steps-vertical-content">
+                            <div class="steps-vertical-title">步骤四标题</div>
+                            <div class="steps-vertical-desc">描述文本</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">横向步骤条</h2>
+        <!-- 横向步骤条 - 默认 -->
+        <section class="section">
+            <div class="steps-horizontal-wrapper">
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤一</div>
+                </div>
+                <div class="steps-horizontal-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤二</div>
+                </div>
+                <div class="steps-horizontal-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤三</div>
+                </div>
+                <div class="steps-horizontal-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤四</div>
+                </div>
+            </div>
+        </section>
+        <div class="space-line"></div>
+
+        <!-- 横向步骤条 - 带进度 -->
+        <section class="section">
+            <div class="steps-horizontal-wrapper">
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon-active"></div>
+                    <div class="steps-horizontal-title">步骤一</div>
+                </div>
+                <div class="steps-horizontal-connector-active"></div>
+                <div class="steps-horizontal-item steps-horizontal-item-current">
+                    <img class="steps-horizontal-icon" src="/src/assets/images/currentstep.png" alt="当前步骤" >
+                    <div class="steps-horizontal-title">步骤二</div>
+                </div>
+                <div class="steps-horizontal-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤三</div>
+                </div>
+                <div class="steps-horizontal-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-title">步骤四</div>
+                </div>
+            </div>
+        </section>
+        <div class="space-line"></div>
+
+        <h2 class="category-title">横向双文本步骤条</h2>
+        <!-- 横向双文本步骤条 - 默认 -->
+        <section class="section">
+            <div class="steps-horizontal-wrapper">
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤一</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤二</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤三</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤四</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="space-line"></div>
+
+        <!-- 横向双文本步骤条 - 带进度 -->
+        <section class="section">
+            <div class="steps-horizontal-wrapper">
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon-active"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤一</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector-active"></div>
+                <div class="steps-horizontal-item steps-horizontal-item-current">
+                    <img class="steps-horizontal-icon" src="/src/assets/images/currentstep.png" alt="当前步骤" >
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤二</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤三</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+                <div class="steps-horizontal-dual-connector"></div>
+                <div class="steps-horizontal-item">
+                    <div class="steps-horizontal-icon"></div>
+                    <div class="steps-horizontal-content">
+                        <div class="steps-horizontal-title">步骤四</div>
+                        <div class="steps-horizontal-desc">描述文本</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="space-line"></div>
+    </div>
+</body>
+</html> 

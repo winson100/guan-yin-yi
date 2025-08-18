@@ -1,0 +1,27 @@
+/* 结果内容容器 */
+.result-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-white);
+}
+
+.result__icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.result__operation-title {
+    font-size: var(--font-size-32);
+    color: var(--neutral-color-nc95);
+    text-align: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.result__description {
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc70);
+    text-align: center;
+} 

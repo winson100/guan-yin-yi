@@ -1,0 +1,12 @@
+/* 底部文本弹窗内容 */
+.fb-bottom-popup-content-container {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.fb-bottom-popup-text {
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc80);
+    line-height: 1.5;
+    margin-top: 0;
+}

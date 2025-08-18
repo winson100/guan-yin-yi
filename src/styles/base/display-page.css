@@ -1,0 +1,67 @@
+/* 元件和组件展示页面样式 */
+body {
+    font-family: var(--font-family);
+    background-color: var(--neutral-color-nc30);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 375px;
+    margin: 0 auto;
+}
+
+/* 标题样式 */
+.category-title {
+    font-size: var(--font-size-36);
+    color: var(--neutral-color-nc95);
+    font-weight: var(--font-weight-medium);
+    margin: var(--spacing-xxl) 0 var(--spacing-lg);
+}
+
+/* 分组标题样式 */
+.group-title {
+    font-size: var(--font-size-50);
+    color: var(--theme-color-5);
+    font-weight: var(--font-weight-medium);
+    margin: var(--spacing-xxl) 0 var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--theme-color-5);
+}
+
+/* 分隔与间距 */
+.space-line {
+    height: var(--spacing-lg);
+}
+
+/* 按钮展示区网格布局 */
+.mb-button-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, auto);
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-large);
+    margin-bottom: var(--spacing-xl);
+}
+
+.mb-button-section .button-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+}
+
+.mb-button-section .button-label {
+    font-size: var(--font-size-24);
+    color: var(--neutral-color-nc70);
+    margin-top: var(--spacing-sm);
+    text-align: center;
+}
+
+
+
+
+
+

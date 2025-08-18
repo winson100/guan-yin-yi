@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>银行卡&身份证上传</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/components/business/card-id-upload.css">
+</head>
+<body>
+    <div class="container">
+        
+        <h2 class="category-title">上传银行卡</h2>
+        <!-- 上传银行卡 -->
+        <section class="section">
+            <div class="upload-section">
+                <div class="upload-item">
+                    <img src="/src/assets/images/frontofbankcard.png" alt="银行卡正面" class="upload-placeholder">
+                </div>
+                <div class="upload-item">
+                    <img src="/src/assets/images/bankcardreverseside.png" alt="银行卡反面" class="upload-placeholder">
+                </div> 
+            </div>     
+        </section>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">卡片选择样式</h2>
+        <!-- 卡片选择样式部分 -->
+        <section class="section">
+            <p class="section-title">标题文本</p>
+            <div class="card-list">
+                <div class="card-item">
+                    <img src="/src/assets/images/cardImage1.png" alt="粉色银行卡" class="card-image">
+                    <img src="/src/assets/images/imgoff.png" alt="未选中" class="select-icon">
+                </div>
+                <div class="card-item">
+                    <img src="/src/assets/images/cardImage2.png" alt="黄色银行卡" class="card-image">
+                    <img src="/src/assets/images/imgoff.png" alt="已选中" class="select-icon">
+                </div>
+                <div class="card-item">
+                    <img src="/src/assets/images/cardImage1.png" alt="粉色银行卡" class="card-image">
+                    <img src="/src/assets/images/imgoff.png" alt="未选中" class="select-icon">
+                </div>
+                <div class="card-item">
+                    <img src="/src/assets/images/cardImage2.png" alt="黄色银行卡" class="card-image">
+                    <img src="/src/assets/images/imgoff.png" alt="已选中" class="select-icon">
+                </div>
+            </div>
+        </section>
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">上传身份证</h2>
+        <!-- 上传身份证部分 -->
+        <section class="section">
+            <div class="id-card-section">
+                <div class="id-card-item">
+                    <img src="/src/assets/images/frontofIDcard.png" alt="身份证人像面" class="id-card-image">
+                </div>
+                <div class="id-card-item">
+                    <img src="/src/assets/images/reverseofIDcard.png" alt="身份证国徽面" class="id-card-image">
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="/src/js/business/card-id-upload.js"></script>
+</body>
+</html> 

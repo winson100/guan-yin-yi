@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播组件</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/components/base/carousel.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="category-title">轮播组件-点状</h2>
+        <!-- 小型轮播组件 -->
+        <section class="section">
+            <div class="carousel-container-small">
+                <div class="dark-gray-area carousel-track">
+                    <img src="/src/assets/images/banner-s01.png" alt="小banner1">
+                    <img src="/src/assets/images/banner-s02.png" alt="小banner2">
+                </div>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                </div>
+            </div>
+        </section>
+        <div class="space-line"></div>
+        <!-- 大型轮播组件 -->
+        <section class="section">
+            <div class="carousel-container-larger">
+                <div class="carousel-content">
+                    <div class="white-area">
+                        <img src="/src/assets/images/banner-b01.png" alt="大banner1">
+                        <img src="/src/assets/images/banner-b02.png" alt="大banner2" style="display: none;">
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="category-title">轮播组件-条状</h2>
+        <!-- 条状轮播组件 -->
+        <section class="section">
+            <div class="carousel-content">
+                <div class="white-area">
+                    <img src="/src/assets/images/banner-s01.png" alt="小banner1">
+                    <img src="/src/assets/images/banner-s02.png" alt="小banner2" style="display: none;">
+                </div>
+                <div class="carousel-bars">
+                    <div class="carousel-bar"></div>
+                </div>
+            </div>
+        </section>
+        <div class="space-line"></div>
+    </div>
+    
+    <script src="/src/js/base/carousel.js"></script>
+    <script>
+        images.forEach(img => {
+            img.addEventListener('dragstart', e => e.preventDefault());
+        });
+    </script>
+</body>
+</html> 

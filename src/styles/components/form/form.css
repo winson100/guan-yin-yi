@@ -1,0 +1,246 @@
+/* 普通输入框 */
+.form-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--neutral-color-nc30);
+    min-height: 54px;
+}
+.form-item:last-child {
+    border-bottom: none;
+}
+.form-label {
+    font-size: var(--font-size-32);
+    color: var(--neutral-color-nc95);
+    display: flex;
+    align-items: center;
+}
+.form-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.form-input input {
+    border: none;
+    background: transparent;
+    text-align: right;
+    font-size: var(--font-size-32);
+    color: var(--neutral-color-nc95);
+    font-weight: var(--font-weight-regular);
+    padding: var(--spacing-xs) 0;
+    width: 200px;
+    outline: none;
+}
+.form-input input::placeholder {
+    color: var(--neutral-color-nc70);
+}
+
+/* 普通输入框禁用 */
+.form-input input:disabled {
+    color: var(--neutral-color-nc70);
+}
+
+/* 普通输入框右侧有图标 */
+.focus-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.focus-icon-img {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    margin-left: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 普通输入框右侧有图标且强调文本 */
+.form-input input.form-input-emphasize {
+    color: var(--auxiliary-color-ac4);
+}
+.form-input input.form-input-emphasize::placeholder {
+    color: var(--auxiliary-color-ac4);
+}
+
+/* 标题带图标输入框 */
+.form-label__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--spacing-sm);
+}
+.form-label__icon-img {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium);
+}
+
+/* 标题带图标输入框禁用 */
+/* 复用.form-input input:disabled */
+
+/* 标题带图标输入框右侧有图标 */
+.focus-icon-lefticon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 标题带图标输入框右侧有图标且强调文本 */
+.form-input input.focus-icon-input-lefticon-emphasize {
+    color: var(--auxiliary-color-ac4);
+}
+.form-input input.focus-icon-input-lefticon-emphasize::placeholder {
+    color: var(--auxiliary-color-ac4);
+}
+
+/* 带操作描述的输入框 */
+.form-input-with-action {
+    display: flex;
+    align-items: center;
+}
+.action-icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    margin-right: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.action-text {
+    color: var(--auxiliary-color-ac4);
+    font-size: var(--font-size-28);
+}
+
+/* 带开关的输入框 */
+.form-switch {
+    position: relative;
+    display: inline-block;
+}
+.toggle-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.toggle-label {
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+    border-radius: 11px;
+    background-color: var(--neutral-color-nc50);
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s;
+}
+.toggle-label:after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    top: 2px;
+    left: 2px;
+    transition: left 0.2s;
+}
+.toggle-input:checked + .toggle-label {
+    background-color: var(--auxiliary-color-ac4);
+}
+.toggle-input:checked + .toggle-label:after {
+    left: 20px;
+}
+.form-switch.blue .toggle-input:checked + .toggle-label {
+    background-color: var(--auxiliary-color-ac4);
+}
+
+/* 普通双文本 */
+.form-item-double {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--neutral-color-nc30);
+}
+.form-item-double:last-child {
+    border-bottom: none;
+}
+.form-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.form-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.form-sublabel, .form-subtext {
+    font-size: var(--font-size-24);
+    color: var(--neutral-color-nc70);
+}
+
+/* 带错误提示的双文本 */
+.error-icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    margin-left: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 带左侧图标的双文本 */
+.form-left.with-icon {
+    flex-direction: row;
+    align-items: center;
+}
+.big-icon {
+    width: var(--icon-size-xlarge);
+    height: var(--icon-size-xlarge);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.with-icon .big-icon {
+    margin-bottom: 0;
+    margin-right: var(--spacing-sm);
+}
+.form-text-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-title {
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc95);
+    margin-bottom: var(--spacing-xs);
+}
+.form-input-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.form-input-row input {
+    border: none;
+    background: transparent;
+    text-align: right;
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc95);
+    padding: var(--spacing-xs) 0;
+    width: 170px;
+    outline: none;
+}
+.form-input-row input::placeholder {
+    color: var(--neutral-color-nc70);
+}
+
+/* 带左侧图标和错误提示的双文本 */
+/* 复用.error-icon、.form-left.with-icon等 */
+
+/* 带开关的双文本 */
+/* 复用.form-switch、.toggle-input、.toggle-label等 */
+
+.focus-icon-lefticon-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 

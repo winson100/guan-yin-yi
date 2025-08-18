@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>短信验证码</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/base/element.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-sms.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-title.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="category-title">底部弹窗-短信验证码-基础</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <!-- 底部弹窗-短信验证码-基础 -->
+                <section class="sms-popup__container">
+                    <section class="section-popup-title">
+                        <div class="popup-title-container">
+                            <div class="popup-title-icon-wrapper">
+                                <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                            </div>
+                            <div class="popup-title-main-text">标题文本</div>
+                            <div class="popup-title-action-btn">操作描述</div>
+                        </div>
+                    </section>
+                    <div class="section">
+                        <div class="sms-popup__content">
+                            <div class="verification-input-container">
+                                <div class="verification-input-title">预留手机号：138****0000</div> 
+                                <div class="verification-standalone-item">
+                                    <input type="text" placeholder="请输入验证码">
+                                    <div class="get-code-button">获取验证码</div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <h2 class="category-title">底部弹窗-短信验证码-错误提示</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>
+            <div class="popup-container">
+                <!-- 底部弹窗-短信验证码-错误提示 -->
+                <section class="sms-popup__container">
+                    <section class="section-popup-title">
+                        <div class="popup-title-container">
+                            <div class="popup-title-icon-wrapper">
+                                <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                            </div>
+                            <div class="popup-title-main-text">标题文本</div>
+                            <div class="popup-title-action-btn">操作描述</div>
+                        </div>
+                    </section>
+                    <div class="section">
+                        <div class="sms-popup__content">
+
+                            <div class="sms-input-section">
+                                <div class="verification-input-container">
+                                    <div class="verification-input-title">预留手机号：138****0000</div> 
+                                    <div class="verification-standalone-item">
+                                        <input type="text" placeholder="请输入验证码">
+                                        <div class="get-code-button">58s</div> 
+                                    </div>
+                                </div>
+                                <div class="input-error">展示错误提示语</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="/src/js/base/element.js"></script>
+</body>
+</html> 

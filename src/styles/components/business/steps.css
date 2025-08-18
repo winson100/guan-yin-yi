@@ -1,0 +1,205 @@
+/* 步骤条组件 */
+.steps-container {
+    width: 375px;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius-large);
+    overflow: hidden;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg);
+}
+
+/* ------- 竖向步骤条 ------- */
+/* 容器类 */
+.steps-vertical-wrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.steps-vertical-container {
+    padding: var(--spacing-sm) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: var(--spacing-sm);
+}
+
+/* 步骤项 */
+.steps-vertical-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* 图标样式 - 基础 */
+.steps-vertical-icon, 
+.steps-vertical-icon-active {
+    width: var(--spacing-xs);
+    height: var(--spacing-xs);
+    border-radius: var(--border-radius-circle);
+    margin-right: var(--spacing-lg);
+    margin-top: var(--spacing-xs);
+}
+
+/* 默认图标 */
+.steps-vertical-icon {
+    background-color: var(--text-color-disabled);
+}
+
+/* 激活图标 */
+.steps-vertical-icon-active {
+    background-color: var(--link-color);
+}
+
+/* 当前步骤图标 */
+.steps-vertical-item-current .steps-vertical-icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    background-color: transparent;
+    margin-top: var(--spacing-xxs);
+    margin-left: var(--spacing-negative-xs);
+    margin-right: var(--spacing-lg);
+}
+
+/* 内容样式 */
+.steps-vertical-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+}
+
+.steps-vertical-title {
+    font-size: var(--font-size-base);
+    color: var(--neutral-color-nc95);
+    margin-bottom: var(--spacing-xxs);
+    text-align: left;
+}
+
+.steps-vertical-desc {
+    font-size: var(--font-size-small);
+    color: var(--text-color-secondary);
+    text-align: left;
+}
+
+/* 连接线样式 - 基础 */
+.steps-vertical-line,
+.steps-vertical-line-active {
+    width: 1px;
+    height: calc(var(--spacing-xxl) + var(--spacing-lg)); /* 40px */
+    margin-left: var(--spacing-xxs);
+    margin-bottom: var(--spacing-xs);
+    margin-top: var(--spacing-negative-lg);
+}
+
+/* 默认连接线 */
+.steps-vertical-line {
+    background-color: var(--text-color-disabled);
+}
+
+/* 激活连接线 */
+.steps-vertical-line-active {
+    background-color: var(--link-color);
+}
+
+/* ------- 横向步骤条 ------- */
+/* 容器类 */
+.steps-horizontal-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* 步骤项 */
+.steps-horizontal-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* 图标样式 - 基础 */
+.steps-horizontal-icon,
+.steps-horizontal-icon-active {
+    width: var(--spacing-xs);
+    height: var(--spacing-xs);
+    border-radius: var(--border-radius-circle);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* 默认图标 */
+.steps-horizontal-icon {
+    background-color: var(--neutral-color-nc70);
+}
+
+/* 激活图标 */
+.steps-horizontal-icon-active {
+    background-color: var(--link-color);
+}
+
+/* 当前步骤图标 */
+.steps-horizontal-item-current .steps-horizontal-icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    margin-top: var(--spacing-negative-xxs);
+    margin-bottom: var(--spacing-md);
+}
+
+/* 标题样式 */
+.steps-horizontal-title {
+    font-size: var(--font-size-small);
+    color: var(--text-color-primary);
+    text-align: center;
+}
+
+/* 连接线样式 - 基础 */
+.steps-horizontal-connector,
+.steps-horizontal-connector-active {
+    flex-grow: 1;
+    height: 1px;
+    margin: 0 var(--spacing-xs);
+    margin-bottom: var(--spacing-xxl);
+}
+
+/* 默认连接线 */
+.steps-horizontal-connector {
+    background-color: var(--border-color);
+}
+
+/* 激活连接线 */
+.steps-horizontal-connector-active {
+    background-color: var(--auxiliary-color-ac4);
+}
+
+/* ------- 横向双文本步骤条 ------- */
+/* 内容容器 */
+.steps-horizontal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.steps-horizontal-desc {
+    font-size: var(--font-size-small);
+    color: var(--text-color-secondary);
+}
+
+/* 双文本连接线 - 基础 */
+.steps-horizontal-dual-connector,
+.steps-horizontal-dual-connector-active {
+    flex-grow: 1;
+    height: 1px;
+    margin: 0 var(--spacing-xs);
+    margin-bottom: calc(var(--spacing-xxl) + var(--spacing-lg)); /* 48px */
+
+}
+
+/* 默认双文本连接线 */
+.steps-horizontal-dual-connector {
+    background-color: var(--border-color);
+}
+
+/* 激活双文本连接线 */
+.steps-horizontal-dual-connector-active {
+    background-color: var(--auxiliary-color-ac4);
+} 

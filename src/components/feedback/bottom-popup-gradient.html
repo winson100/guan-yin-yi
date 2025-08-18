@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梯度式底部弹窗</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/base/element.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-gradient.css">
+    <link rel="stylesheet" href="/src/styles/components/feedback/bottom-popup-title.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="category-title">底部弹窗-验证码和交易密码</h2>
+        <div class="base-mask-demo">
+            <div class="base-mask"></div>      
+            <!-- 底部弹窗-验证码和交易密码 -->
+            <div class="popup-container">
+                <!-- 弹窗头部 -->
+                <section class="section-popup-title">
+                    <div class="popup-title-container">
+                        <div class="popup-title-icon-wrapper">
+                            <img src="/src/assets/images/icon24.png" alt="图标" class="popup-title-icon-img">
+                        </div>
+                        <div class="popup-title-main-text">请输入验证码+交易密码</div>
+                        <div class="popup-title-action-btn">确定</div>
+                    </div>
+                </section>
+                <!-- 金额信息区块 -->
+                <div class="section">
+                    <div class="amount-info">
+                        <div class="amount-desc">弹窗提示文本文案</div>
+                        <div class="amount">¥20000.00</div>
+                    </div>
+                </div>
+                <!-- 输入区块 -->
+                <div class="pad-vertical-0">
+                    <!-- 独立验证码输入框 -->
+                    <div class="verification-input-container">
+                        <div class="verification-input-title">输入框标题</div> 
+                        <div class="verification-standalone-item">
+                            <input type="text" placeholder="请输入验证码">
+                            <div class="get-code-button">获取验证码</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <!-- 密码输入 -->
+                    <div class="password-dots-container">
+                        <div class="password-input-title">交易密码</div>
+                        <div class="password-dots-row">
+                            <input type="password" value="" maxlength="1">
+                            <input type="password" value="" maxlength="1">
+                            <input type="password" value="" maxlength="1">
+                            <input type="password" value="" maxlength="1">
+                            <input type="password" value="" maxlength="1">
+                            <input type="password" value="" maxlength="1">
+                        </div>
+                    </div>
+                </div>
+                <!-- 数字键盘区块 -->
+                <div class="popup-keyboard">
+                    <div class="popup-keyboard-header">
+                        <img src="/src/assets/images/logo.png" alt="东莞银行" class="bank-logo">
+                        <span class="keyboard-title">东莞银行安全键盘</span>
+                    </div>
+                    <div class="popup-key">1</div>
+                    <div class="popup-key">2</div>
+                    <div class="popup-key">3</div>
+                    <div class="popup-key">4</div>
+                    <div class="popup-key">5</div>
+                    <div class="popup-key">6</div>
+                    <div class="popup-key">7</div>
+                    <div class="popup-key">8</div>
+                    <div class="popup-key">9</div>
+                    <div class="popup-key empty"></div>
+                    <div class="popup-key">0</div>
+                    <div class="popup-key delete">
+                        <img src="/src/assets/images/Delete.png" alt="删除" class="popup-delete-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/src/js/base/element.js"></script>
+</body>
+</html> 

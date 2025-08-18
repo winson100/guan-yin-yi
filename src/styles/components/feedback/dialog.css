@@ -1,0 +1,97 @@
+/* 弹层容器 */
+.dlg-container {
+    width: 280px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-large);
+    overflow: hidden;
+    text-align: center;
+}
+
+/* 弹层内容元素 */
+.dlg-title {
+    font-size: var(--font-size-32);
+    color: var(--neutral-color-nc95);
+    font-weight: var(--font-weight-medium);
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-sm);
+}
+
+.dlg-content {
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc80);
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    line-height: 1.5;
+}
+
+.dlg-description {
+    font-size: var(--font-size-24);
+    color: var(--neutral-color-nc70);
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    text-align: left;
+}
+
+.dlg-highlight-text {
+    font-size: var(--font-size-24);
+    color: var(--auxiliary-color-ac1);
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    text-align: left;
+}
+
+/* 输入框元素 */
+.dlg-input-wrapper {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+}
+
+.dlg-input-field {
+    width: 220px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-base);
+    padding: 0 var(--spacing-md);
+    font-size: var(--font-size-28);
+}
+
+.dlg-input-field:focus {
+    outline: none;
+}
+
+.dlg-input-field::placeholder {
+    color: var(--neutral-color-nc70);
+}
+
+/* 底部按钮区域 */
+.dlg-footer {
+    display: flex;
+    border-top: 1px solid var(--border-color);
+}
+
+.dlg-action-btn {
+    flex: 1;
+    height: 44px;
+    line-height: 44px;
+    padding: 0;
+    background-color: var(--color-white);
+    border: none;
+    font-size: var(--font-size-28);
+    color: var(--auxiliary-color-ac4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dlg-action-btn--primary {
+    font-weight: var(--font-weight-medium);
+}
+
+/* 按钮布局变体 */
+.dlg-footer--horizontal .dlg-action-btn:not(:last-child) {
+    border-right: 1px solid var(--border-color);
+}
+
+.dlg-footer--vertical {
+    flex-direction: column;
+}
+
+.dlg-footer--vertical .dlg-action-btn:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+} 

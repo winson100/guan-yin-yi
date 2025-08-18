@@ -1,0 +1,26 @@
+/* 空白页组件 */
+.empty-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-page-icon {
+    width: 120px;
+    height: 100px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.empty-page-message {
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc70);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.empty-page-button-container {
+    min-width: 120px;
+    display: flex;
+    justify-content: center;
+} 

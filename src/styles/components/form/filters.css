@@ -1,0 +1,41 @@
+/* 筛选组件样式 */
+.filter-section {
+    width: 375px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-none);
+    overflow: hidden;
+}
+
+/* 筛选行 */
+.filter-row {
+    display: flex;
+    width: 100%;
+    height: 31px;
+}
+
+/* 筛选项 */
+.filter-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+    padding: 0 var(--spacing-md);
+    cursor: pointer;
+    position: relative;
+}
+
+/* 筛选文本 */
+.filter-text {
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc80);
+}
+
+/* 筛选图标 */
+.filter-icon {
+    width: var(--icon-size-xsmall);
+    height: var(--icon-size-xsmall);
+    margin-left: var(--spacing-xs);
+}
+
+

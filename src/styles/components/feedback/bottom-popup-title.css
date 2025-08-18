@@ -1,0 +1,65 @@
+/* 底部弹窗标题组件 */
+/* 主容器 */
+.popup-title-container {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    text-align: center;
+}
+
+/* 图标容器与图片 */
+.popup-title-icon-wrapper {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium);
+    margin-right: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-title-icon-img {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium);
+    object-fit: cover;
+}
+
+/* 主标题文本 */
+.popup-title-main-text {
+    flex: 1;
+    text-align: center;
+    font-size: var(--font-size-32);
+    color: var(--neutral-color-nc95);
+    font-weight: var(--font-weight-medium);
+}
+
+/* 操作按钮 */
+.popup-title-action-btn {
+    width: 56px;
+    font-size: var(--font-size-28);
+    color: var(--auxiliary-color-ac4);
+    margin-left: auto;
+    text-align: right;
+}
+
+/* 双行文本弹窗 */
+.popup-title-container-dual {
+    align-items: flex-start;
+}
+
+/* 内容容器 */
+.popup-title-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* 副标题文本 */
+.popup-title-sub-text {
+    font-size: var(--font-size-24);
+    color: var(--neutral-color-nc70);
+    line-height: 1.4;
+    text-align: center;
+} 
+

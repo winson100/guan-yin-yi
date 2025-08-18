@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单</title>
+    <link rel="stylesheet" href="/src/styles/base/variables.css">
+    <link rel="stylesheet" href="/src/styles/base/display-page.css">
+    <link rel="stylesheet" href="/src/styles/base/section.css">
+    <link rel="stylesheet" href="/src/styles/components/form/form.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="category-title">单文本样式</h2>
+        <div class="pad-vertical-0">
+            <!-- 普通输入框 -->
+            <div class="form-item">
+                <div class="form-label">标题文本</div>
+                <div class="form-input">
+                    <input type="text" placeholder="辅助/强调/返显/输入">
+                </div>
+            </div>
+
+            <!-- 普通输入框禁用 -->
+            <div class="form-item">
+                <div class="form-label">标题文本</div>
+                <div class="form-input">
+                    <input type="text" disabled placeholder="全禁用输入框，不能输入、不能修改、不能获取焦点">
+                </div>
+            </div>
+
+            <!-- 普通输入框右侧有图标 -->
+            <div class="form-item">
+                <div class="form-label">标题文本</div>
+                <div class="form-input">
+                    <input type="text" placeholder="辅助/强调/返显/输入">
+                    <div class="focus-icon">
+                        <img src="/src/assets/images/icon16.png" alt="图标" class="focus-icon-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 普通输入框右侧有图标且获取焦点清除placeholder -->
+            <div class="form-item">
+                <div class="form-label">标题文本</div>
+                <div class="form-input">
+                    <input type="text" class="focus-icon-input-single-clear" placeholder="辅助/强调/返显/输入">
+                    <div class="focus-icon-single-clear">
+                        <img src="/src/assets/images/icon16.png" alt="图标" class="focus-icon-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 普通输入框右侧有图标且强调文本 -->
+            <div class="form-item">
+                <div class="form-label">标题文本</div>
+                <div class="form-input">
+                    <input type="text" class="form-input-emphasize" placeholder="辅助/强调/返显/输入">
+                    <div class="focus-icon">
+                        <img src="/src/assets/images/icon16.png" alt="图标" class="focus-icon-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 标题带图标输入框 -->
+            <div class="form-item">
+                <div class="form-label">
+                    <div class="form-label__icon">
+                        <img src="/src/assets/images/icon24.png" alt="图标" class="form-label__icon-img">
+                    </div>
+                    标题文本
+                </div>
+                <div class="form-input">
+                    <input type="text" placeholder="辅助/强调/返显/输入">
+                </div>
+            </div>
+
+            <!-- 标题带图标输入框禁用 -->
+            <div class="form-item">
+                <div class="form-label">
+                    <div class="form-label__icon">
+                        <img src="/src/assets/images/icon24.png" alt="图标" class="form-label__icon-img">
+                    </div>
+                    标题文本
+                </div>
+                <div class="form-input">
+                    <input type="text" disabled placeholder="全禁用输入框，不能输入、不能修改、不能获取焦点">
+                </div>
+            </div>
+
+            <!-- 标题带图标输入框右侧有图标 -->
+            <div class="form-item">
+                <div class="form-label">
+                    <div class="form-label__icon">
+                        <img src="/src/assets/images/icon24.png" alt="图标" class="form-label__icon-img">
+                    </div>
+                    标题文本
+                </div>
+                <div class="form-input">
+                    <input type="text" class="focus-icon-input-lefticon" placeholder="辅助/强调/返显/输入">
+                    <div class="focus-icon-lefticon">
+                        <img src="/src/assets/images/icon16.png" alt="图标" class="focus-icon-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 标题带图标输入框右侧有图标且获取焦点清除placeholder -->
+            <div class="form-item">
+                <div class="form-label">
+                    <div class="form-label__icon">
+                        <img src="/src/assets/images/icon24.png" alt="图标" class="form-label__icon-img">
+                    </div>
+                    标题文本
+                </div>
+                <div class="form-input">
+                    <input type="text" class="focus-icon-input-lefticon-clear" placeholder="辅助/强调/返显/输入">
+                    <div class="focus-icon-lefticon-clear">
+                        <img src="/src/assets/images/icon16.png" alt="图标" class="focus-icon-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 标题带图标输入框右侧有图标且强调文本 -->
+            <div class="form-item">
+                <div class="form-label">
+                    <div class="form-label__icon">
+                        <img src="/src/assets/images/icon24.png" alt="图标" class="form-label__icon-img">
+                    </div>
+                    标题文本
+                </div>
+                <div class="form-input">
+                    <input type="text" class="focus-icon-input-lefticon-emphasize" placeholder="辅助/强调/返显/输入">
+                    <div class="focus-icon-lefticon">
+                        <img src="/src/assets/images/icon16.png" alt="图标" class="focus-icon-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 带操作描述的输入框 -->
+            <div class="form-item">
+                <div class="form-label">标题文本</div>
+                <div class="form-input-with-action">
+                    <div class="action-icon">
+                        <img src="/src/assets/images/icon16.png" alt="操作" class="action-icon-img">
+                    </div>
+                    <div class="action-text">操作描述</div>
+                </div>
+            </div>
+
+            <!-- 带开关的输入框 -->
+            <div class="form-item">
+                <div class="form-label">标题文本</div>
+                <div class="form-switch">
+                    <input type="checkbox" id="toggle" class="toggle-input">
+                    <label for="toggle" class="toggle-label"></label>
+                </div>
+            </div>
+        </div> 
+
+        <div class="space-line"></div>
+
+        <h2 class="category-title">双文本样式</h2>
+        <div class="pad-vertical-0">
+            <!-- 普通双文本 -->
+            <div class="form-item-double">
+                <div class="form-left">
+                    <div class="form-label">标题文本</div>
+                    <div class="form-sublabel">左侧描要描述</div>
+                </div>
+                <div class="form-right">
+                    <div class="form-input">
+                        <input type="text" placeholder="辅助/强调/返显/输入">
+                    </div>
+                    <div class="form-subtext">右侧描要描述</div>
+                </div>
+            </div>
+
+            <!-- 带错误提示的双文本 -->
+            <div class="form-item-double">
+                <div class="form-left">
+                    <div class="form-label">标题文本</div>
+                    <div class="form-sublabel">左侧描要描述</div>
+                </div>
+                <div class="form-right">
+                    <div class="form-input">
+                        <input type="text" placeholder="辅助/强调/返显/输入">
+                        <div class="error-icon">
+                            <img src="/src/assets/images/icon16.png" alt="图标" class="focus-icon-img">
+                        </div>
+                    </div>
+                    <div class="form-subtext">右侧描要描述</div>
+                </div>
+            </div>
+
+            <!-- 带左侧图标的双文本 -->
+            <div class="form-item-double">
+                <div class="form-left with-icon">
+                    <div class="big-icon">
+                        <img src="/src/assets/images/icon40.png" alt="图标" class="big-icon-img">
+                    </div>
+                    <div class="form-text-group">
+                        <div class="form-title">标题文本</div>
+                        <div class="form-sublabel">左侧描要描述</div>
+                    </div>
+                </div>
+                <div class="form-right">
+                    <div class="form-input-row">
+                        <input type="text" placeholder="辅助/强调/返显/输入">
+                    </div>
+                    <div class="form-subtext">右侧描要描述</div>
+                </div>
+            </div>
+
+            <!-- 带左侧图标和错误提示的双文本 -->
+            <div class="form-item-double">
+                <div class="form-left with-icon">
+                    <div class="big-icon">
+                        <img src="/src/assets/images/icon40.png" alt="图标" class="big-icon-img">
+                    </div>
+                    <div class="form-text-group">
+                        <div class="form-title">标题文本</div>
+                        <div class="form-sublabel">左侧描要描述</div>
+                    </div>
+                </div>
+                <div class="form-right">
+                    <div class="form-input-row">
+                        <input type="text" placeholder="辅助/强调/返显/输入">
+                        <div class="error-icon">
+                            <img src="/src/assets/images/icon16.png" alt="图标" class="focus-icon-img">
+                        </div>
+                    </div>
+                    <div class="form-subtext">右侧描要描述</div>
+                </div>
+            </div>
+
+            <!-- 带开关的双文本 -->
+            <div class="form-item-double">
+                <div class="form-left">
+                    <div class="form-label">标题文本</div>
+                    <div class="form-sublabel">左侧描要描述</div>
+                </div>
+                <div class="form-right">
+                    <div class="form-switch blue">
+                        <input type="checkbox" id="toggle2" class="toggle-input" checked>
+                        <label for="toggle2" class="toggle-label"></label>
+                    </div>
+                    <div class="form-subtext">右侧描要描述</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

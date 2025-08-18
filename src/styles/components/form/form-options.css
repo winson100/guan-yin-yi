@@ -1,0 +1,82 @@
+/* 表单区域 */
+.form-section {
+    width: 375px;
+    background-color: var(--color-white);
+    overflow: hidden;
+}
+
+/* 表单选项 */
+.form-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-color);
+    min-height: 38px;
+    cursor: pointer;
+}
+
+.form-option:last-child {
+    border-bottom: none;
+}
+
+/* 选项内容 */
+.option-content {
+    display: flex;
+    align-items: center;
+}
+
+/* 选项图标 */
+.form-option__icon {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium);
+    background-color: var(--auxiliary-color-aa1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-small);
+    margin-right: var(--spacing-sm);
+}
+
+/* 图标占位符 */
+.form-option__icon-placeholder {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium);
+}
+
+/* 选项标签 */
+.option-label {
+    font-size: var(--font-size-base);
+    color: var(--text-color-primary);
+}
+
+/* 选中状态 */
+.option-selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 选中图标 */
+.selected-icon {
+    width: var(--icon-size-medium);
+    height: var(--icon-size-medium);
+}
+
+/* 选项文本 */
+.option-text {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 选项描述 */
+.option-description {
+    font-size: var(--font-size-small);
+    color: var(--neutral-color-nc70);
+    margin-top: var(--spacing-xs);
+}
+
+/* 选中图标隐藏（未选中状态） */
+.not-selected {
+    display: none;
+} 

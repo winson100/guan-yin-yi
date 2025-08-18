@@ -1,0 +1,140 @@
+/* 底部弹窗容器基础样式 */
+.fb-popup-container {
+    width: var(--popup-width, 375px);
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+    overflow: hidden;
+    margin-bottom: var(--spacing-xl);
+}
+
+.fb-popup-container:last-child {
+    margin-bottom: 0;
+}
+
+.fb-popup-panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* 基础滚轮组件 */
+.fb-wheel-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.fb-wheel-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.fb-wheel-item {
+    height: var(--wheel-item-height, 54px);
+    line-height: var(--wheel-item-height, 54px);
+    text-align: center;
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc70);
+    transition: all 0.3s;
+}
+
+.fb-wheel-item.active {
+    color: var(--neutral-color-nc95);
+    font-weight: var(--font-weight-medium);
+}
+
+.fb-wheel-highlight {
+    position: absolute;
+    top: 50%;
+    left: var(--spacing-md);
+    right: var(--spacing-md);
+    height: var(--wheel-highlight-height, 44px);
+    transform: translateY(-50%);
+    border-bottom: var(--border-width-thin, 1px) solid var(--neutral-color-nc30);
+    pointer-events: none;
+}
+
+/* 多列滚轮组件 */
+.fb-wheel-container.multiple {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.fb-wheel-column {
+    flex: 1;
+    height: 100%;
+}
+
+.fb-wheel-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, var(--opacity-100)) 0%,
+        rgba(255, 255, 255, var(--opacity-60)) 15%,
+        rgba(255, 255, 255, var(--opacity-0)) 30%,
+        rgba(255, 255, 255, var(--opacity-0)) 70%,
+        rgba(255, 255, 255, var(--opacity-60)) 85%,
+        rgba(255, 255, 255, var(--opacity-100)) 100%
+    );
+    pointer-events: none;
+}
+
+/* 时间范围选择组件 */
+.fb-wheel-container.range {
+    position: relative;
+    overflow: hidden;
+}
+
+.fb-time-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-lg) var(--spacing-lg) 0 var(--spacing-lg);
+    background-color: var(--color-white);
+}
+
+.fb-time-input-box {
+    flex: 1;
+    max-width: calc(50% - var(--spacing-lg));
+    height: var(--input-height, 44px);
+    line-height: var(--input-height, 44px);
+    padding: 0 var(--spacing-lg);
+    background-color: var(--neutral-color-nc10);
+    border-radius: var(--border-radius-base);
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc95);
+    text-align: center;
+}
+
+.fb-time-separator {
+    padding: 0 var(--spacing-lg);
+    font-size: var(--font-size-28);
+    color: var(--neutral-color-nc70);
+    flex: none;
+}
+
+.fb-date-group {
+    display: flex;
+    gap: var(--spacing-lg);
+    padding: 0 var(--spacing-lg);
+    height: calc(100% - var(--date-group-offset, 76px));
+}
+
+.fb-wheel-wrapper-range {
+    position: relative;
+    height: 100%;
+}
+
+.fb-wheel-highlight-range {
+    position: absolute;
+    top: 51%;
+    left: var(--spacing-md);
+    right: var(--spacing-md);
+    height: var(--wheel-highlight-height, 44px);
+    transform: translateY(-50%);
+    border-bottom: var(--border-width-thin, 1px) solid var(--neutral-color-nc30);
+    pointer-events: none;
+}

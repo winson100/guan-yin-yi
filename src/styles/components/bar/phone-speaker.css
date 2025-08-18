@@ -1,0 +1,24 @@
+/* 手机话筒组件样式 */
+/* 手机话筒容器 */
+.phone-speaker-wrap {
+    width: 375px;
+    background-color: var(--background-color-grey);
+}
+
+/* 手机话筒 */
+.phone-speaker {
+    width: 100%;
+    height: 30px;
+    background-color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 话筒条 */
+.speaker-bar {
+    width: 120px;
+    height: 5px;
+    background-color: var(--neutral-color-nc95);
+    border-radius: var(--border-radius-small);
+} 

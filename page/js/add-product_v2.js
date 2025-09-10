@@ -5,7 +5,121 @@
 class AddProductPage {
     constructor() {
         this.currentProductType = '';
-        this.currentForeignType = '';
+        
+        // 汇率默认值配置 (以CNY为基准)
+        this.exchangeRates = {
+            'CNY': {
+                'USD': 0.14,    // 1 CNY = 0.14 USD
+                'EUR': 0.13,    // 1 CNY = 0.13 EUR
+                'GBP': 0.11,    // 1 CNY = 0.11 GBP
+                'HKD': 1.09,    // 1 CNY = 1.09 HKD
+                'JPY': 20.5,    // 1 CNY = 20.5 JPY
+                'AUD': 0.21,    // 1 CNY = 0.21 AUD
+                'CAD': 0.19,    // 1 CNY = 0.19 CAD
+                'SGD': 0.19,    // 1 CNY = 0.19 SGD
+                'CHF': 0.12     // 1 CNY = 0.12 CHF
+            },
+            'USD': {
+                'CNY': 7.2,     // 1 USD = 7.2 CNY
+                'EUR': 0.92,    // 1 USD = 0.92 EUR
+                'GBP': 0.79,    // 1 USD = 0.79 GBP
+                'HKD': 7.8,     // 1 USD = 7.8 HKD
+                'JPY': 147.0,   // 1 USD = 147.0 JPY
+                'AUD': 1.52,    // 1 USD = 1.52 AUD
+                'CAD': 1.36,    // 1 USD = 1.36 CAD
+                'SGD': 1.35,    // 1 USD = 1.35 SGD
+                'CHF': 0.88     // 1 USD = 0.88 CHF
+            },
+            'EUR': {
+                'CNY': 7.8,     // 1 EUR = 7.8 CNY
+                'USD': 1.09,    // 1 EUR = 1.09 USD
+                'GBP': 0.86,    // 1 EUR = 0.86 GBP
+                'HKD': 8.5,     // 1 EUR = 8.5 HKD
+                'JPY': 160.0,   // 1 EUR = 160.0 JPY
+                'AUD': 1.66,    // 1 EUR = 1.66 AUD
+                'CAD': 1.48,    // 1 EUR = 1.48 CAD
+                'SGD': 1.47,    // 1 EUR = 1.47 SGD
+                'CHF': 0.96     // 1 EUR = 0.96 CHF
+            },
+            'GBP': {
+                'CNY': 9.1,     // 1 GBP = 9.1 CNY
+                'USD': 1.27,    // 1 GBP = 1.27 USD
+                'EUR': 1.16,    // 1 GBP = 1.16 EUR
+                'HKD': 9.9,     // 1 GBP = 9.9 HKD
+                'JPY': 186.0,   // 1 GBP = 186.0 JPY
+                'AUD': 1.93,    // 1 GBP = 1.93 AUD
+                'CAD': 1.72,    // 1 GBP = 1.72 CAD
+                'SGD': 1.71,    // 1 GBP = 1.71 SGD
+                'CHF': 1.12     // 1 GBP = 1.12 CHF
+            },
+            'HKD': {
+                'CNY': 0.92,    // 1 HKD = 0.92 CNY
+                'USD': 0.13,    // 1 HKD = 0.13 USD
+                'EUR': 0.12,    // 1 HKD = 0.12 EUR
+                'GBP': 0.10,    // 1 HKD = 0.10 GBP
+                'JPY': 18.8,    // 1 HKD = 18.8 JPY
+                'AUD': 0.19,    // 1 HKD = 0.19 AUD
+                'CAD': 0.17,    // 1 HKD = 0.17 CAD
+                'SGD': 0.17,    // 1 HKD = 0.17 SGD
+                'CHF': 0.11     // 1 HKD = 0.11 CHF
+            },
+            'JPY': {
+                'CNY': 0.049,   // 1 JPY = 0.049 CNY
+                'USD': 0.0068,  // 1 JPY = 0.0068 USD
+                'EUR': 0.0063,  // 1 JPY = 0.0063 EUR
+                'GBP': 0.0054,  // 1 JPY = 0.0054 GBP
+                'HKD': 0.053,   // 1 JPY = 0.053 HKD
+                'AUD': 0.010,   // 1 JPY = 0.010 AUD
+                'CAD': 0.0092,  // 1 JPY = 0.0092 CAD
+                'SGD': 0.0092,  // 1 JPY = 0.0092 SGD
+                'CHF': 0.0060   // 1 JPY = 0.0060 CHF
+            },
+            'AUD': {
+                'CNY': 4.8,     // 1 AUD = 4.8 CNY
+                'USD': 0.66,    // 1 AUD = 0.66 USD
+                'EUR': 0.60,    // 1 AUD = 0.60 EUR
+                'GBP': 0.52,    // 1 AUD = 0.52 GBP
+                'HKD': 5.1,     // 1 AUD = 5.1 HKD
+                'JPY': 97.0,    // 1 AUD = 97.0 JPY
+                'CAD': 0.89,    // 1 AUD = 0.89 CAD
+                'SGD': 0.89,    // 1 AUD = 0.89 SGD
+                'CHF': 0.58     // 1 AUD = 0.58 CHF
+            },
+            'CAD': {
+                'CNY': 5.4,     // 1 CAD = 5.4 CNY
+                'USD': 0.74,    // 1 CAD = 0.74 USD
+                'EUR': 0.68,    // 1 CAD = 0.68 EUR
+                'GBP': 0.58,    // 1 CAD = 0.58 GBP
+                'HKD': 5.7,     // 1 CAD = 5.7 HKD
+                'JPY': 109.0,   // 1 CAD = 109.0 JPY
+                'AUD': 1.12,    // 1 CAD = 1.12 AUD
+                'SGD': 0.99,    // 1 CAD = 0.99 SGD
+                'CHF': 0.65     // 1 CAD = 0.65 CHF
+            },
+            'SGD': {
+                'CNY': 5.4,     // 1 SGD = 5.4 CNY
+                'USD': 0.74,    // 1 SGD = 0.74 USD
+                'EUR': 0.68,    // 1 SGD = 0.68 EUR
+                'GBP': 0.58,    // 1 SGD = 0.58 GBP
+                'HKD': 5.7,     // 1 SGD = 5.7 HKD
+                'JPY': 109.0,   // 1 SGD = 109.0 JPY
+                'AUD': 1.12,    // 1 SGD = 1.12 AUD
+                'CAD': 1.01,    // 1 SGD = 1.01 CAD
+                'CHF': 0.65     // 1 SGD = 0.65 CHF
+            },
+            'CHF': {
+                'CNY': 8.3,     // 1 CHF = 8.3 CNY
+                'USD': 1.14,    // 1 CHF = 1.14 USD
+                'EUR': 1.04,    // 1 CHF = 1.04 EUR
+                'GBP': 0.89,    // 1 CHF = 0.89 GBP
+                'HKD': 8.9,     // 1 CHF = 8.9 HKD
+                'JPY': 167.0,   // 1 CHF = 167.0 JPY
+                'AUD': 1.73,    // 1 CHF = 1.73 AUD
+                'CAD': 1.54,    // 1 CHF = 1.54 CAD
+                'SGD': 1.54     // 1 CHF = 1.54 SGD
+            }
+        };
+        
         this.init();
     }
 
@@ -55,12 +169,27 @@ class AddProductPage {
             this.showProductTypeOptions();
         });
 
+        // 产品名称选择 - 动态绑定事件
+        const productNameField = document.getElementById('productName');
+        
+        // 禁用自动完成功能
+        productNameField.setAttribute('autocomplete', 'off');
+        productNameField.setAttribute('autocorrect', 'off');
+        productNameField.setAttribute('autocapitalize', 'off');
+        productNameField.setAttribute('spellcheck', 'false');
+        
+        productNameField.addEventListener('click', () => {
+            // 只有衍生品类型才显示弹窗
+            if (this.currentProductType === 'derivative') {
+                this.showProductNameOptions();
+            }
+        });
+
         // 币种选择
         const currencyFields = [
-            'depositCurrency', 'loanCurrency',
+            'depositCurrency', 'loanCurrency', 'creditCurrency',
             'sellCurrency', 'buyCurrency', 'nearSellCurrency', 'nearBuyCurrency',
-            'farSellCurrency', 'farBuyCurrency',
-            'depositFeeCurrency', 'loanFeeCurrency', 'foreignFeeCurrency'
+            'farSellCurrency', 'farBuyCurrency'
         ];
         currencyFields.forEach(fieldId => {
             const field = document.getElementById(fieldId);
@@ -71,13 +200,9 @@ class AddProductPage {
             }
         });
 
-        // 外汇类型选择
-        document.getElementById('foreignType').addEventListener('click', () => {
-            this.showForeignTypeOptions();
-        });
 
         // 期限单位选择
-        const periodUnitFields = ['depositPeriodUnit', 'loanPeriodUnit'];
+        const periodUnitFields = ['depositPeriodUnit', 'loanPeriodUnit', 'creditPeriodUnit'];
         periodUnitFields.forEach(fieldId => {
             const field = document.getElementById(fieldId);
             if (field) {
@@ -169,42 +294,63 @@ class AddProductPage {
      */
     onProductTypeChange(type) {
         this.currentProductType = type;
-        
+
         // 隐藏所有表单
         this.hideAllForms();
-        
+
         // 清除错误提示
         this.clearAllErrors();
-        
+
+        // 更新产品名称显示
+        this.updateProductNameDisplay(type);
+
         if (type === 'deposit') {
             document.getElementById('depositForm').style.display = 'block';
         } else if (type === 'loan') {
             document.getElementById('loanForm').style.display = 'block';
-        } else if (type === 'foreign') {
+        } else if (type === 'credit') {
+            document.getElementById('creditForm').style.display = 'block';
+        } else if (type === 'spot') {
+            document.getElementById('foreignForm').style.display = 'block';
+            document.getElementById('spotForwardForm').style.display = 'block';
+            this.updateExchangeRatePlaceholder();
+        } else if (type === 'derivative') {
             document.getElementById('foreignForm').style.display = 'block';
         }
     }
 
+
     /**
-     * 外汇类型变化处理
+     * 更新产品名称显示
      */
-    onForeignTypeChange(type) {
-        this.currentForeignType = type;
-        
-        // 隐藏外汇子表单
-        document.getElementById('spotForwardForm').style.display = 'none';
-        document.getElementById('swapForm').style.display = 'none';
-        
-        if (type === 'foreign_spot' || type === 'foreign_forward') {
-            document.getElementById('spotForwardForm').style.display = 'block';
-            // 更新即期/远期汇率提示
-            this.updateExchangeRatePlaceholder();
-        } else if (type === 'foreign_swap') {
-            document.getElementById('swapForm').style.display = 'block';
-            // 更新掉期汇率提示和币种关联
-            this.updateSwapRatePlaceholders();
-            this.updateSwapCurrencyFields();
+    updateProductNameDisplay(type) {
+        const productNameContainer = document.getElementById('productNameContainer');
+        const productNameInput = document.getElementById('productName');
+        const productNameArrow = document.getElementById('productNameArrow');
+        const productNameLabel = document.getElementById('productNameLabel');
+
+        if (type === 'credit' || type === 'spot') {
+            // 信用证和即期：隐藏产品名称
+            productNameContainer.style.display = 'none';
+        } else if (type === 'derivative') {
+            // 衍生：显示为下拉框
+            productNameContainer.style.display = 'block';
+            productNameInput.placeholder = '请选择产品名称';
+            productNameInput.readOnly = true;
+            productNameArrow.style.display = 'block';
+            productNameLabel.textContent = '产品名称';
+        } else {
+            // 存款和贷款：手工输入
+            productNameContainer.style.display = 'block';
+            productNameInput.placeholder = '请输入产品名称';
+            productNameInput.readOnly = false;
+            productNameArrow.style.display = 'none';
+            productNameLabel.textContent = '产品名称';
         }
+
+        // 清除产品名称值
+        productNameInput.value = '';
+        productNameInput.dataset.value = '';
     }
 
     /**
@@ -213,6 +359,7 @@ class AddProductPage {
     hideAllForms() {
         document.getElementById('depositForm').style.display = 'none';
         document.getElementById('loanForm').style.display = 'none';
+        document.getElementById('creditForm').style.display = 'none';
         document.getElementById('foreignForm').style.display = 'none';
     }
 
@@ -292,7 +439,28 @@ class AddProductPage {
     }
 
     /**
-     * 更新即期/远期汇率提示
+     * 获取汇率默认值
+     */
+    getExchangeRate(sellCurrency, buyCurrency) {
+        if (!sellCurrency || !buyCurrency || sellCurrency === buyCurrency) {
+            return null;
+        }
+        
+        // 直接查找汇率
+        if (this.exchangeRates[sellCurrency] && this.exchangeRates[sellCurrency][buyCurrency]) {
+            return this.exchangeRates[sellCurrency][buyCurrency];
+        }
+        
+        // 如果直接查找不到，尝试反向查找并计算倒数
+        if (this.exchangeRates[buyCurrency] && this.exchangeRates[buyCurrency][sellCurrency]) {
+            return 1 / this.exchangeRates[buyCurrency][sellCurrency];
+        }
+        
+        return null;
+    }
+
+    /**
+     * 更新即期/远期汇率提示和默认值
      */
     updateExchangeRatePlaceholder() {
         const sellCurrencyField = document.getElementById('sellCurrency');
@@ -304,13 +472,21 @@ class AddProductPage {
         if (sellCurrency && buyCurrency) {
             const placeholder = `请输入${sellCurrency}兑${buyCurrency}汇率`;
             exchangeRateField.placeholder = placeholder;
+            
+            // 如果汇率字段为空，自动填充默认汇率
+            if (!exchangeRateField.value) {
+                const defaultRate = this.getExchangeRate(sellCurrency, buyCurrency);
+                if (defaultRate !== null) {
+                    exchangeRateField.value = defaultRate.toFixed(4);
+                }
+            }
         } else {
             exchangeRateField.placeholder = '请输入汇率';
         }
     }
 
     /**
-     * 更新掉期汇率提示
+     * 更新掉期汇率提示和默认值
      */
     updateSwapRatePlaceholders() {
         const nearSellCurrencyField = document.getElementById('nearSellCurrency');
@@ -328,6 +504,14 @@ class AddProductPage {
         if (nearSellCurrency && nearBuyCurrency) {
             const nearPlaceholder = `请输入${nearSellCurrency}兑${nearBuyCurrency}汇率`;
             nearRateField.placeholder = nearPlaceholder;
+            
+            // 如果近端汇率字段为空，自动填充默认汇率
+            if (!nearRateField.value) {
+                const defaultRate = this.getExchangeRate(nearSellCurrency, nearBuyCurrency);
+                if (defaultRate !== null) {
+                    nearRateField.value = defaultRate.toFixed(4);
+                }
+            }
         } else {
             nearRateField.placeholder = '请输入近端汇率';
         }
@@ -337,6 +521,14 @@ class AddProductPage {
         if (nearBuyCurrency && nearSellCurrency) {
             const farPlaceholder = `请输入${nearBuyCurrency}兑${nearSellCurrency}汇率`;
             farRateField.placeholder = farPlaceholder;
+            
+            // 如果远端汇率字段为空，自动填充默认汇率
+            if (!farRateField.value) {
+                const defaultRate = this.getExchangeRate(nearBuyCurrency, nearSellCurrency);
+                if (defaultRate !== null) {
+                    farRateField.value = defaultRate.toFixed(4);
+                }
+            }
         } else {
             farRateField.placeholder = '请输入远端汇率';
         }
@@ -384,10 +576,10 @@ class AddProductPage {
         if (nearBuyCurrency && nearBuyCurrencyText) {
             farSellCurrencyField.value = nearBuyCurrencyText;
             farSellCurrencyField.dataset.value = nearBuyCurrency;
-            
-            // 自动填充手续费币种（按照近端买入币种）
-            this.autoFillFeeCurrency('nearBuyCurrency', nearBuyCurrency, nearBuyCurrencyText);
         }
+        
+        // 更新远端汇率提示和默认值
+        this.updateSwapRatePlaceholders();
         
         // 更新期末收益币种显示
         this.updateFinalIncomeCurrency();
@@ -486,19 +678,29 @@ class AddProductPage {
             errors.push({ field: 'productType', message: '请选择产品种类' });
         }
 
-        // 验证产品名称
-        const productName = document.getElementById('productName').value.trim();
-        if (!productName) {
-            errors.push({ field: 'productName', message: '请输入产品名称' });
-        } else if (productName.length > 50) {
-            errors.push({ field: 'productName', message: '产品名称长度不能超过50个字符' });
+        // 根据产品类型验证产品名称
+        if (productType === 'deposit' || productType === 'loan') {
+            const productName = document.getElementById('productName').value.trim();
+            if (!productName) {
+                errors.push({ field: 'productName', message: '请输入产品名称' });
+            } else if (productName.length > 50) {
+                errors.push({ field: 'productName', message: '产品名称长度不能超过50个字符' });
+            }
+        } else if (productType === 'derivative') {
+            const productName = document.getElementById('productName').dataset.value;
+            if (!productName) {
+                errors.push({ field: 'productName', message: '请选择产品名称' });
+            }
         }
+        // 信用证和即期不需要验证产品名称
 
         // 根据产品类型验证特定字段
         if (productType === 'deposit' || productType === 'loan') {
             this.validateDepositLoanFields(errors, productType);
-        } else if (productType === 'foreign') {
-            this.validateForeignFields(errors);
+        } else if (productType === 'credit') {
+            this.validateCreditFields(errors);
+        } else if (productType === 'spot' || productType === 'derivative') {
+            this.validateForeignFields(errors, productType);
         }
 
         result.errors = errors;
@@ -567,47 +769,92 @@ class AddProductPage {
             }
         }
 
-        // 验证手续费
-        const feeAmount = parseFloat(document.getElementById(`${prefix}FeeAmount`).value);
-        const feeCurrencyField = document.getElementById(`${prefix}FeeCurrency`);
-        const feeCurrency = feeCurrencyField.dataset.value || feeCurrencyField.value;
-        if (feeAmount && feeAmount > 0) {
-            if (!feeCurrency) {
-                errors.push({ field: `${prefix}FeeCurrency`, message: '请选择手续费币种' });
+        // 验证手续费金额（仅对贷款产品）
+        if (prefix === 'loan') {
+            const feeAmount = parseFloat(document.getElementById(`${prefix}FeeAmount`).value);
+            if (feeAmount && feeAmount > 0) {
+                if (feeAmount > 999999999.99) {
+                    errors.push({ field: `${prefix}FeeAmount`, message: '手续费金额不能超过999,999,999.99' });
+                }
             }
-            if (feeAmount > 999999999.99) {
-                errors.push({ field: `${prefix}FeeAmount`, message: '手续费金额不能超过999,999,999.99' });
+        }
+
+    }
+
+    /**
+     * 验证信用证字段
+     */
+    validateCreditFields(errors) {
+        // 验证币种
+        const currencyField = document.getElementById('creditCurrency');
+        const currency = currencyField.dataset.value || currencyField.value;
+        if (!currency) {
+            errors.push({ field: 'creditCurrency', message: '请选择币种' });
+        }
+
+        // 验证金额
+        const amount = parseFloat(document.getElementById('creditAmount').value);
+        if (!amount || amount <= 0) {
+            errors.push({ field: 'creditAmount', message: '金额需为正数且保留2位小数' });
+        } else if (amount > 999999999.99) {
+            errors.push({ field: 'creditAmount', message: '金额不能超过999,999,999.99' });
+        }
+
+        // 验证期限单位
+        const periodUnitField = document.getElementById('creditPeriodUnit');
+        const periodUnit = periodUnitField.dataset.value || periodUnitField.value;
+        if (!periodUnit) {
+            errors.push({ field: 'creditPeriodUnit', message: '请选择期限单位' });
+        }
+
+        // 验证期限
+        const period = parseInt(document.getElementById('creditPeriod').value);
+        if (!period || period <= 0) {
+            errors.push({ field: 'creditPeriod', message: '期限需为正整数' });
+        } else if (periodUnit) {
+            // 根据期限单位设置不同的最大值
+            let maxPeriod = 1825; // 默认最大天数
+            let errorMessage = '期限不能超过1825天';
+
+            if (periodUnit === 'year') {
+                maxPeriod = 5; // 最大5年
+                errorMessage = '期限不能超过5年';
+            } else if (periodUnit === 'month') {
+                maxPeriod = 60; // 最大60个月
+                errorMessage = '期限不能超过60个月';
+            } else if (periodUnit === 'day') {
+                maxPeriod = 1825; // 最大1825天
+                errorMessage = '期限不能超过1825天';
             }
+
+            if (period > maxPeriod) {
+                errors.push({ field: 'creditPeriod', message: errorMessage });
+            }
+        }
+
+        // 验证手续费金额
+        const feeAmount = parseFloat(document.getElementById('creditFeeAmount').value);
+        if (!feeAmount || feeAmount <= 0) {
+            errors.push({ field: 'creditFeeAmount', message: '手续费金额需为正数且保留2位小数' });
+        } else if (feeAmount > 999999999.99) {
+            errors.push({ field: 'creditFeeAmount', message: '手续费金额不能超过999,999,999.99' });
         }
     }
 
     /**
      * 验证外汇字段
      */
-    validateForeignFields(errors) {
-        const foreignTypeField = document.getElementById('foreignType');
-        const foreignType = foreignTypeField.dataset.value || foreignTypeField.value;
-        if (!foreignType) {
-            errors.push({ field: 'foreignType', message: '请选择外汇类型' });
-            return;
-        }
-
-        if (foreignType === 'foreign_spot' || foreignType === 'foreign_forward') {
+    validateForeignFields(errors, productType) {
+        if (productType === 'spot') {
+            // 即期交易验证
             this.validateSpotForwardFields(errors);
-        } else if (foreignType === 'foreign_swap') {
-            this.validateSwapFields(errors);
-        }
-
-        // 验证手续费
-        const feeAmount = parseFloat(document.getElementById('foreignFeeAmount').value);
-        const feeCurrencyField = document.getElementById('foreignFeeCurrency');
-        const feeCurrency = feeCurrencyField.dataset.value || feeCurrencyField.value;
-        if (feeAmount && feeAmount > 0) {
-            if (!feeCurrency) {
-                errors.push({ field: 'foreignFeeCurrency', message: '请选择手续费币种' });
-            }
-            if (feeAmount > 999999999.99) {
-                errors.push({ field: 'foreignFeeAmount', message: '手续费金额不能超过999,999,999.99' });
+        } else if (productType === 'derivative') {
+            // 衍生产品验证
+            const productName = document.getElementById('productName').dataset.value;
+            if (productName === 'forward') {
+                this.validateSpotForwardFields(errors);
+            } else if (productName === 'swap') {
+                this.validateSwapFields(errors);
             }
         }
     }
@@ -744,7 +991,15 @@ class AddProductPage {
     collectFormData() {
         const productTypeField = document.getElementById('productType');
         const productType = productTypeField.dataset.value || productTypeField.value;
-        const productName = document.getElementById('productName').value.trim();
+
+        // 根据产品类型处理产品名称
+        let productName = '';
+        if (productType === 'deposit' || productType === 'loan') {
+            productName = document.getElementById('productName').value.trim();
+        } else if (productType === 'derivative') {
+            productName = document.getElementById('productName').dataset.value || '';
+        }
+        // 信用证和即期不需要产品名称
 
         const baseData = {
             type: productType,
@@ -753,8 +1008,10 @@ class AddProductPage {
 
         if (productType === 'deposit' || productType === 'loan') {
             return this.collectDepositLoanData(baseData, productType);
-        } else if (productType === 'foreign') {
-            return this.collectForeignData(baseData);
+        } else if (productType === 'credit') {
+            return this.collectCreditData(baseData);
+        } else if (productType === 'spot' || productType === 'derivative') {
+            return this.collectForeignData(baseData, productType);
         }
 
         return null;
@@ -783,12 +1040,32 @@ class AddProductPage {
             principal: parseFloat(document.getElementById(`${prefix}Principal`).value) || 0
         };
 
-        // 手续费信息
-        const feeAmount = parseFloat(document.getElementById(`${prefix}FeeAmount`).value);
-        const feeCurrencyField = document.getElementById(`${prefix}FeeCurrency`);
-        const feeCurrency = feeCurrencyField.dataset.value || feeCurrencyField.value;
-        data.feeCurrency = feeCurrency || null;
-        data.feeAmount = feeAmount || null;
+        // 收集手续费金额（仅对贷款产品）
+        if (prefix === 'loan') {
+            data.feeAmount = parseFloat(document.getElementById(`${prefix}FeeAmount`).value) || null;
+        }
+
+        return data;
+    }
+
+    /**
+     * 收集信用证数据
+     */
+    collectCreditData(baseData) {
+        const currencyField = document.getElementById('creditCurrency');
+        const currency = currencyField.dataset.value || currencyField.value;
+
+        const periodUnitField = document.getElementById('creditPeriodUnit');
+        const periodUnit = periodUnitField.dataset.value || periodUnitField.value;
+
+        const data = {
+            ...baseData,
+            currency: currency,
+            amount: parseFloat(document.getElementById('creditAmount').value),
+            period: parseInt(document.getElementById('creditPeriod').value),
+            periodUnit: periodUnit,
+            feeAmount: parseFloat(document.getElementById('creditFeeAmount').value)
+        };
 
         return data;
     }
@@ -796,9 +1073,19 @@ class AddProductPage {
     /**
      * 收集外汇数据
      */
-    collectForeignData(baseData) {
-        const foreignTypeField = document.getElementById('foreignType');
-        const foreignType = foreignTypeField.dataset.value || foreignTypeField.value;
+    collectForeignData(baseData, productType) {
+        let foreignType = '';
+        if (productType === 'spot') {
+            foreignType = 'foreign_spot';
+        } else if (productType === 'derivative') {
+            const productName = document.getElementById('productName').dataset.value;
+            if (productName === 'forward') {
+                foreignType = 'foreign_forward';
+            } else if (productName === 'swap') {
+                foreignType = 'foreign_swap';
+            }
+        }
+
         const data = {
             ...baseData,
             type: foreignType
@@ -842,12 +1129,6 @@ class AddProductPage {
             });
         }
 
-        // 手续费信息
-        const feeAmount = parseFloat(document.getElementById('foreignFeeAmount').value);
-        const feeCurrencyField = document.getElementById('foreignFeeCurrency');
-        const feeCurrency = feeCurrencyField.dataset.value || feeCurrencyField.value;
-        data.feeCurrency = feeCurrency || null;
-        data.feeAmount = feeAmount || null;
 
         return data;
     }
@@ -931,13 +1212,13 @@ class AddProductPage {
     showProductTypeOptions() {
         const mask = document.getElementById('productTypeMask');
         mask.style.display = 'flex';
-        
+
         // 绑定确定按钮事件
         const confirmBtn = mask.querySelector('.popup-title-action-btn');
         confirmBtn.onclick = () => {
             this.confirmProductTypeSelection();
         };
-        
+
         // 绑定选项点击事件
         const options = mask.querySelectorAll('.form-option');
         options.forEach(option => {
@@ -950,7 +1231,41 @@ class AddProductPage {
                 option.querySelector('.selected-icon').classList.remove('not-selected');
             };
         });
-        
+
+        // 绑定遮罩点击关闭事件
+        mask.onclick = (e) => {
+            if (e.target === mask) {
+                mask.style.display = 'none';
+            }
+        };
+    }
+
+    /**
+     * 显示产品名称选项列表
+     */
+    showProductNameOptions() {
+        const mask = document.getElementById('productNameMask');
+        mask.style.display = 'flex';
+
+        // 绑定确定按钮事件
+        const confirmBtn = mask.querySelector('.popup-title-action-btn');
+        confirmBtn.onclick = () => {
+            this.confirmProductNameSelection();
+        };
+
+        // 绑定选项点击事件
+        const options = mask.querySelectorAll('.form-option');
+        options.forEach(option => {
+            option.onclick = () => {
+                // 移除其他选中状态
+                options.forEach(o => {
+                    o.querySelector('.selected-icon').classList.add('not-selected');
+                });
+                // 添加当前选中状态
+                option.querySelector('.selected-icon').classList.remove('not-selected');
+            };
+        });
+
         // 绑定遮罩点击关闭事件
         mask.onclick = (e) => {
             if (e.target === mask) {
@@ -965,23 +1280,68 @@ class AddProductPage {
     confirmProductTypeSelection() {
         const mask = document.getElementById('productTypeMask');
         const selectedOption = mask.querySelector('.form-option .selected-icon:not(.not-selected)');
-        
+
         if (selectedOption) {
             const optionElement = selectedOption.closest('.form-option');
             const value = optionElement.dataset.value;
             const text = optionElement.querySelector('.option-label').textContent;
-            
+
             // 更新输入框显示和存储实际值
             const inputField = document.getElementById('productType');
             inputField.value = text;
             inputField.dataset.value = value;
-            
+
             // 处理产品种类变化
             this.onProductTypeChange(value);
         }
-        
+
         // 隐藏弹窗
         mask.style.display = 'none';
+    }
+
+    /**
+     * 确认产品名称选择
+     */
+    confirmProductNameSelection() {
+        const mask = document.getElementById('productNameMask');
+        const selectedOption = mask.querySelector('.form-option .selected-icon:not(.not-selected)');
+
+        if (selectedOption) {
+            const optionElement = selectedOption.closest('.form-option');
+            const value = optionElement.dataset.value;
+            const text = optionElement.querySelector('.option-label').textContent;
+
+            // 更新输入框显示和存储实际值
+            const inputField = document.getElementById('productName');
+            inputField.value = text;
+            inputField.dataset.value = value;
+
+            // 处理衍生产品子类型变化
+            this.onDerivativeTypeChange(value);
+        }
+
+        // 隐藏弹窗
+        mask.style.display = 'none';
+    }
+
+    /**
+     * 衍生产品子类型变化处理
+     */
+    onDerivativeTypeChange(type) {
+        // 隐藏外汇子表单
+        document.getElementById('spotForwardForm').style.display = 'none';
+        document.getElementById('swapForm').style.display = 'none';
+
+        if (type === 'forward') {
+            document.getElementById('spotForwardForm').style.display = 'block';
+            // 更新远期汇率提示
+            this.updateExchangeRatePlaceholder();
+        } else if (type === 'swap') {
+            document.getElementById('swapForm').style.display = 'block';
+            // 更新掉期汇率提示和币种关联
+            this.updateSwapRatePlaceholders();
+            this.updateSwapCurrencyFields();
+        }
     }
 
     /**
@@ -1037,48 +1397,12 @@ class AddProductPage {
             
             // 根据更新的币种更新汇率提示
             this.updateExchangeRatePlaceholders(fieldId);
-            
-            // 自动填充手续费币种
-            this.autoFillFeeCurrency(fieldId, value, text);
         }
         
         // 隐藏弹窗
         mask.style.display = 'none';
     }
 
-    /**
-     * 显示外汇类型选项列表
-     */
-    showForeignTypeOptions() {
-        const mask = document.getElementById('foreignTypeMask');
-        mask.style.display = 'flex';
-        
-        // 绑定确定按钮事件
-        const confirmBtn = mask.querySelector('.popup-title-action-btn');
-        confirmBtn.onclick = () => {
-            this.confirmForeignTypeSelection();
-        };
-        
-        // 绑定选项点击事件
-        const options = mask.querySelectorAll('.form-option');
-        options.forEach(option => {
-            option.onclick = () => {
-                // 移除其他选中状态
-                options.forEach(o => {
-                    o.querySelector('.selected-icon').classList.add('not-selected');
-                });
-                // 添加当前选中状态
-                option.querySelector('.selected-icon').classList.remove('not-selected');
-            };
-        });
-        
-        // 绑定遮罩点击关闭事件
-        mask.onclick = (e) => {
-            if (e.target === mask) {
-                mask.style.display = 'none';
-            }
-        };
-    }
 
     /**
      * 更新期末收益币种显示
@@ -1088,11 +1412,16 @@ class AddProductPage {
         if (!currencyLabel) return;
         
         // 掉期产品：期末收益按照近端买入币种计算
-        if (this.currentProductType === 'foreign' && this.currentForeignType === 'foreign_swap') {
-            const nearBuyCurrencyField = document.getElementById('nearBuyCurrency');
-            const nearBuyCurrency = nearBuyCurrencyField.dataset.value || '';
-            if (nearBuyCurrency) {
-                currencyLabel.textContent = `(${nearBuyCurrency})`;
+        if (this.currentProductType === 'derivative') {
+            const productName = document.getElementById('productName').dataset.value;
+            if (productName === 'swap') {
+                const nearBuyCurrencyField = document.getElementById('nearBuyCurrency');
+                const nearBuyCurrency = nearBuyCurrencyField.dataset.value || '';
+                if (nearBuyCurrency) {
+                    currencyLabel.textContent = `(${nearBuyCurrency})`;
+                } else {
+                    currencyLabel.textContent = '';
+                }
             } else {
                 currencyLabel.textContent = '';
             }
@@ -1101,67 +1430,7 @@ class AddProductPage {
         }
     }
 
-    /**
-     * 自动填充手续费币种
-     */
-    autoFillFeeCurrency(fieldId, currencyValue, currencyText) {
-        // 存款产品：币种自动带入手续费币种
-        if (this.currentProductType === 'deposit' && fieldId === 'depositCurrency') {
-            const feeCurrencyField = document.getElementById('depositFeeCurrency');
-            feeCurrencyField.value = currencyText;
-            feeCurrencyField.dataset.value = currencyValue;
-        }
-        
-        // 贷款产品：币种自动带入手续费币种
-        if (this.currentProductType === 'loan' && fieldId === 'loanCurrency') {
-            const feeCurrencyField = document.getElementById('loanFeeCurrency');
-            feeCurrencyField.value = currencyText;
-            feeCurrencyField.dataset.value = currencyValue;
-        }
-        
-        // 外汇产品：即期/远期，卖出币种自动带入手续费币种
-        if (this.currentProductType === 'foreign' && 
-            (this.currentForeignType === 'foreign_spot' || this.currentForeignType === 'foreign_forward') && 
-            fieldId === 'sellCurrency') {
-            const feeCurrencyField = document.getElementById('foreignFeeCurrency');
-            feeCurrencyField.value = currencyText;
-            feeCurrencyField.dataset.value = currencyValue;
-        }
-        
-        // 外汇产品：掉期，近端买入币种自动带入手续费币种
-        if (this.currentProductType === 'foreign' && 
-            this.currentForeignType === 'foreign_swap' && 
-            fieldId === 'nearBuyCurrency') {
-            const feeCurrencyField = document.getElementById('foreignFeeCurrency');
-            feeCurrencyField.value = currencyText;
-            feeCurrencyField.dataset.value = currencyValue;
-        }
-    }
 
-    /**
-     * 确认外汇类型选择
-     */
-    confirmForeignTypeSelection() {
-        const mask = document.getElementById('foreignTypeMask');
-        const selectedOption = mask.querySelector('.form-option .selected-icon:not(.not-selected)');
-        
-        if (selectedOption) {
-            const optionElement = selectedOption.closest('.form-option');
-            const value = optionElement.dataset.value;
-            const text = optionElement.querySelector('.option-label').textContent;
-            
-            // 更新输入框显示和存储实际值
-            const inputField = document.getElementById('foreignType');
-            inputField.value = text;
-            inputField.dataset.value = value;
-            
-            // 处理外汇类型变化
-            this.onForeignTypeChange(value);
-        }
-        
-        // 隐藏弹窗
-        mask.style.display = 'none';
-    }
 
     /**
      * 显示期限单位选项列表

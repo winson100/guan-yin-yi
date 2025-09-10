@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>编辑产品 - 存贷组合产品测算器</title>
+    <title>添加新产品 - 存贷组合产品测算器</title>
     
     <!-- 组件库样式 -->
     <link rel="stylesheet" href="../src/styles/base/variables.css">
@@ -45,7 +45,7 @@
                         <div class="nav-left">
                             <img src="../src/assets/icons/arrow-left.svg" alt="返回" class="nav-icon" id="backBtn">
                         </div>
-                        <div class="nav-title">编辑产品</div>
+                        <div class="nav-title">添加新产品</div>
                         <div class="nav-right">
                             <img src="../src/assets/icons/home.svg" alt="首页" class="nav-icon" id="homeBtn">
                         </div>
@@ -74,7 +74,7 @@
                             <div class="form-field">
                                 <div class="form-label required" id="productNameLabel">产品名称</div>
                                 <div class="form-input">
-                                    <input type="text" id="productName" class="form-input-field" placeholder="请输入产品名称" maxlength="50" required>
+                                    <input type="text" id="productName" class="form-input-field" placeholder="请输入产品名称" maxlength="50" autocomplete="off" required>
                                     <div class="select-arrow" id="productNameArrow" style="display: none;">
                                         <img src="../src/assets/icons/arrow-down.svg" alt="选择" class="arrow-icon">
                                     </div>
@@ -683,6 +683,7 @@
                     </div>
                 </div>
 
+
                 <!-- 产品名称选择弹窗 -->
                 <div class="base-mask" id="productNameMask" style="display: none;">
                     <div class="popup-container">
@@ -725,7 +726,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <!-- 期限单位选择弹窗 -->
                 <div class="base-mask" id="periodUnitMask" style="display: none;">
@@ -790,6 +790,6 @@
 
     <!-- JavaScript -->
     <script src="js/database_v2.js"></script>
-    <script src="js/edit-product.js"></script>
+    <script src="js/add-product_v2.js"></script>
 </body>
 </html>

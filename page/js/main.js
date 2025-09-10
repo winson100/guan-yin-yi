@@ -70,6 +70,11 @@ class MainPage {
         document.getElementById('closeHelpBtn').addEventListener('click', () => {
             this.hideHelp();
         });
+
+        // 公告点击事件
+        document.getElementById('announcementTip').addEventListener('click', () => {
+            this.goToQuoteDetails();
+        });
     }
 
     /**
@@ -118,16 +123,23 @@ class MainPage {
      */
     renderProductItem(product) {
         const typeText = this.getProductTypeText(product.type);
-        const typeClass = this.getProductTypeClass(product.type);
+        const typeClass = this.getProductTypeClass(product.type, product);
         const income = this.getProductIncome(product);
         const details = this.getProductDetails(product);
+
+        // 处理产品名称显示：如果没有名称或者是远期/掉期相关名称，只显示产品类型标签
+        const productNameDisplay = product.name && product.name.trim() && 
+            product.name !== '远期' && product.name !== '掉期' &&
+            product.name !== 'forward' && product.name !== 'swap' ? 
+            `<div class="product-name">${product.name}</div>` : 
+            '';
 
         return `
             <div class="product-item" data-id="${product.id}">
                 <!-- 默认状态：一行显示 -->
                 <div class="product-row">
                     <div class="product-info-group">
-                        <div class="product-name">${product.name}</div>
+                        ${productNameDisplay}
                         <div class="product-type ${typeClass}">${typeText}</div>
                     </div>
                     <div class="product-income">
@@ -159,9 +171,12 @@ class MainPage {
         const typeMap = {
             'deposit': '存款',
             'loan': '贷款',
-            'foreign_spot': '外汇-即期',
-            'foreign_forward': '外汇-远期',
-            'foreign_swap': '外汇-掉期'
+            'credit': '信用证',
+            'spot': '即期',
+            'derivative': '衍生',
+            'foreign_spot': '即期',
+            'foreign_forward': '远期',
+            'foreign_swap': '掉期'
         };
         return typeMap[type] || '未知';
     }
@@ -169,9 +184,23 @@ class MainPage {
     /**
      * 获取产品类型样式类
      */
-    getProductTypeClass(type) {
-        if (type.startsWith('foreign')) {
-            return 'foreign';
+    getProductTypeClass(type, product = null) {
+        if (type === 'spot' || type === 'foreign_spot') {
+            return 'foreign'; // 即期使用蓝色
+        } else if (type === 'foreign_forward') {
+            return 'forward'; // 远期使用紫色
+        } else if (type === 'foreign_swap') {
+            return 'swap'; // 掉期使用深粉色
+        } else if (type === 'derivative') {
+            // 衍生品需要根据产品名称判断
+            if (product && product.name) {
+                if (product.name === 'forward' || product.name === '远期') {
+                    return 'forward'; // 远期使用紫色
+                } else if (product.name === 'swap' || product.name === '掉期') {
+                    return 'swap'; // 掉期使用深粉色
+                }
+            }
+            return 'derivative'; // 默认使用衍生品类型
         }
         return type;
     }
@@ -180,23 +209,27 @@ class MainPage {
      * 获取产品收益
      */
     getProductIncome(product) {
-        // 获取手续费金额，如果没有录入则为0
-        const feeAmount = parseFloat(product.feeAmount) || 0;
-        
         switch (product.type) {
             case 'deposit':
-                // 存款收益 = 利息 - 手续费
-                return (product.interest || 0) - feeAmount;
+                // 存款收益 = 利息
+                return product.interest || 0;
             case 'loan':
-                // 贷款收益 = -(利息 + 手续费)，贷款是支出
-                return -((product.interest || 0) + feeAmount);
-            case 'foreign_swap':
-                // 掉期收益 = 期末收益 - 手续费
-                return (product.finalIncome || 0) - feeAmount;
+                // 贷款收益 = -利息，贷款是支出（不包含手续费）
+                return -(product.interest || 0);
+            case 'credit':
+                // 信用证收益 = 0，不计算手续费
+                return 0;
+            case 'spot':
             case 'foreign_spot':
+                // 即期交易通常没有直接收益
+                return 0;
+            case 'derivative':
+            case 'foreign_swap':
+                // 衍生/掉期收益 = 期末收益（不包含手续费）
+                return product.finalIncome || 0;
             case 'foreign_forward':
-                // 即期/远期交易通常没有直接收益，但可能有手续费支出
-                return -feeAmount;
+                // 远期交易通常没有直接收益
+                return 0;
             default:
                 return 0;
         }
@@ -222,12 +255,15 @@ class MainPage {
         switch (product.type) {
             case 'deposit':
             case 'loan':
+            case 'credit':
                 return product.currency || 'CNY';
+            case 'spot':
             case 'foreign_spot':
             case 'foreign_forward':
                 return product.buyCurrency || 'CNY';
+            case 'derivative':
             case 'foreign_swap':
-                // 掉期交易通常以近端买入币种作为收益币种
+                // 衍生/掉期交易通常以近端买入币种作为收益币种
                 return product.nearBuyCurrency || 'CNY';
             default:
                 return 'CNY';
@@ -258,6 +294,34 @@ class MainPage {
 
         switch (product.type) {
             case 'deposit':
+                details = `
+                    <div class="detail-item">
+                        <div class="detail-label">币种</div>
+                        <div class="detail-value">${product.currency}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">金额</div>
+                        <div class="detail-value">${this.formatAmount(product.amount)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">利率</div>
+                        <div class="detail-value">${product.rate}%</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">期限</div>
+                        <div class="detail-value">${this.formatPeriodDisplay(product.period, product.periodUnit)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">利息</div>
+                        <div class="detail-value">${this.formatAmount(product.interest)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">本息</div>
+                        <div class="detail-value">${this.formatAmount(product.principal)}</div>
+                    </div>
+                `;
+                break;
+
             case 'loan':
                 details = `
                     <div class="detail-item">
@@ -274,11 +338,15 @@ class MainPage {
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">期限</div>
-                        <div class="detail-value">${product.period}年</div>
+                        <div class="detail-value">${this.formatPeriodDisplay(product.period, product.periodUnit)}</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">利息</div>
                         <div class="detail-value">${this.formatAmount(product.interest)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">手续费金额</div>
+                        <div class="detail-value">${this.formatAmount(product.feeAmount)}</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">本息</div>
@@ -287,7 +355,29 @@ class MainPage {
                 `;
                 break;
 
+            case 'credit':
+                details = `
+                    <div class="detail-item">
+                        <div class="detail-label">币种</div>
+                        <div class="detail-value">${product.currency}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">金额</div>
+                        <div class="detail-value">${this.formatAmount(product.amount)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">期限</div>
+                        <div class="detail-value">${this.formatPeriodDisplay(product.period, product.periodUnit)}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">手续费金额</div>
+                        <div class="detail-value">${this.formatAmount(product.feeAmount)}</div>
+                    </div>
+                `;
+                break;
+
             case 'foreign_spot':
+            case 'spot':
             case 'foreign_forward':
                 details = `
                     <div class="detail-item">
@@ -351,19 +441,6 @@ class MainPage {
                 break;
         }
 
-        // 添加手续费信息
-        if (product.feeAmount && product.feeAmount > 0) {
-            details += `
-                <div class="detail-item">
-                    <div class="detail-label">手续费币种</div>
-                    <div class="detail-value">${product.feeCurrency}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">手续费金额</div>
-                    <div class="detail-value">${this.formatAmount(product.feeAmount)}</div>
-                </div>
-            `;
-        }
 
         return details;
     }
@@ -517,7 +594,7 @@ class MainPage {
      * 跳转到添加产品页面
      */
     goToAddProduct() {
-        window.location.href = 'add-product.html';
+        window.location.href = 'add-product_v2.html';
     }
 
     /**
@@ -525,6 +602,13 @@ class MainPage {
      */
     goToSummary() {
         window.location.href = 'summary.html';
+    }
+
+    /**
+     * 跳转到报价详情页面
+     */
+    goToQuoteDetails() {
+        window.location.href = 'quote-details.html';
     }
 
     /**
@@ -547,6 +631,26 @@ class MainPage {
             return '0.00';
         }
         return parseFloat(amount).toFixed(2);
+    }
+
+    /**
+     * 获取期限单位显示文本
+     */
+    getPeriodUnitDisplayText(unit) {
+        const unitMap = {
+            'year': '年',
+            'month': '月',
+            'day': '日'
+        };
+        return unitMap[unit] || '年'; // 默认为年
+    }
+
+    /**
+     * 格式化期限显示
+     */
+    formatPeriodDisplay(period, periodUnit) {
+        const unit = this.getPeriodUnitDisplayText(periodUnit);
+        return `${period}${unit}`;
     }
 
     /**

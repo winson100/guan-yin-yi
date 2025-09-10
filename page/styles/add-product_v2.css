@@ -4,8 +4,11 @@
 
 /* 主内容区域 - 固定高度，内容可滚动 */
 .main-content {
-    height: calc(100vh - 88px - 120px); /* 总高度 - 状态栏导航栏(88px) - 底部工具栏(120px) */
-    margin-top: 88px; /* 为状态栏和导航栏留出空间，定位在导航栏下方 */
+    position: absolute;
+    top: 88px; /* 导航栏高度 */
+    bottom: 120px; /* 底部操作栏和手机话筒高度 */
+    left: 0;
+    right: 0;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -45,16 +48,17 @@ section.pad-vertical-0 {
 
 /* 表单容器 */
 .product-form {
-    flex: 1;
     display: flex;
     flex-direction: column;
     padding: var(--spacing-lg); /* 添加表单内边距 */
     background-color: var(--color-white); /* 添加白色背景 */
+    min-height: 100%;
 }
 
 /* 表单区域 */
 .product-form-section {
     /* 移除分组样式，让所有字段连续显示 */
+    display: block;
 }
 
 /* 表单项 */
@@ -148,6 +152,21 @@ section.pad-vertical-0 {
 
 /* 产品种类输入框特殊样式 */
 #productType.form-input-field[readonly] {
+    padding-right: 40px; /* 为箭头图标留出空间 */
+}
+
+/*币种输入框特殊样式 */
+#creditCurrency.form-input-field[readonly] {
+    padding-right: 40px; /* 为箭头图标留出空间 */
+}
+
+/*期限单位输入框特殊样式 */
+#creditPeriodUnit.form-input-field[readonly] {
+    padding-right: 40px; /* 为箭头图标留出空间 */
+}
+
+/*产品名称输入框特殊样式 */
+#productName.form-input-field[readonly] {
     padding-right: 40px; /* 为箭头图标留出空间 */
 }
 

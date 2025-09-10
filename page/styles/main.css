@@ -4,13 +4,16 @@
 
 /* 主内容区域 - 固定高度，内容可滚动 */
 .main-content {
-    flex: 1;
+    position: absolute;
+    top: 88px; /* 导航栏高度 */
+    bottom: 120px; /* 底部操作栏和手机话筒高度 */
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 120px; /* 为底部操作栏和手机话筒留出空间 */
 }
 
 
@@ -29,7 +32,27 @@
 /* 产品列表容器 */
 .product-list-container {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     background-color: var(--color-white); /* 添加白色背景 */
+    height: 100%;
+    overflow: hidden;
+}
+
+/* 公告区域 */
+.announcement-section {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.announcement-section .emphasis-tip {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.announcement-section .emphasis-tip:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 产品列表头部 */
@@ -55,16 +78,21 @@
 
 /* 产品列表 */
 .product-list {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--spacing-md);
 }
 
 /* 产品项 */
 .product-item {
     padding: 0 !important;
-    margin: 0 16px;
-    width: 343px;
+    margin: 0;
+    width: 100%;
     border-bottom: 1px solid var(--border-color);
     transition: all 0.3s ease;
 }
@@ -121,8 +149,31 @@
     color: var(--color-white);
 }
 
+.product-type.credit {
+    background-color: #FF8800; /* 橙色 */
+    color: var(--color-white);
+}
+
 .product-type.foreign {
-    background-color: var(--auxiliary-color-ac4);
+    background-color: #0066CC; /* 蓝色 - 即期 */
+    color: var(--color-white);
+}
+
+/* 远期产品样式 */
+.product-type.forward {
+    background-color: #9932CC; /* 紫色 - 远期 */
+    color: var(--color-white);
+}
+
+/* 掉期产品样式 */
+.product-type.swap {
+    background-color: #FF1493; /* 深粉色 - 掉期 */
+    color: var(--color-white);
+}
+
+/* 衍生品产品样式 */
+.product-type.derivative {
+    background-color: #20B2AA; /* 浅海绿色 - 衍生品 */
     color: var(--color-white);
 }
 
@@ -229,9 +280,14 @@
 
 /* 空状态 */
 .empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: var(--spacing-xxl) var(--spacing-lg);
-    border-bottom: 1px solid var(--border-color);
+    min-height: 200px;
 }
 
 .empty-icon {

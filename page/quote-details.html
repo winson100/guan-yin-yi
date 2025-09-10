@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报价详情 - 存贷组合产品测算器</title>
+    
+    <!-- 组件库样式 -->
+    <link rel="stylesheet" href="../src/styles/base/variables.css">
+    <link rel="stylesheet" href="../src/styles/base/display-page.css">
+    <link rel="stylesheet" href="../src/styles/base/section.css">
+    <link rel="stylesheet" href="../src/styles/base/element.css">
+    <link rel="stylesheet" href="../src/styles/base/iphone-preview.css">
+    <link rel="stylesheet" href="../src/styles/components/bar/nav-bar.css">
+    <link rel="stylesheet" href="../src/styles/components/bar/status-bar.css">
+    <link rel="stylesheet" href="../src/styles/components/bar/phone-speaker.css">
+    
+    <!-- 页面样式 -->
+    <link rel="stylesheet" href="styles/quote-details.css">
+</head>
+<body>
+    <div class="iphone-container">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+            <div class="content-area">
+                <!-- 状态栏 -->
+                <section class="statusbar-wrapper">
+                    <div class="statusbar">
+                        <div class="statusbar-time">9:41</div>
+                        <div class="statusbar-icons">
+                            <img src="../src/assets/images/signal.png" alt="信号" class="statusbar-signal">
+                            <img src="../src/assets/images/WiFi.png" alt="WiFi" class="statusbar-wifi">
+                            <img src="../src/assets/images/battery.png" alt="电池" class="statusbar-battery">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 导航栏 -->
+                <section class="pad-vertical-0">
+                    <div class="nav-bar nav-bar-white">
+                        <div class="nav-left">
+                            <img src="../src/assets/icons/arrow-left.svg" alt="返回" class="nav-icon" id="backBtn">
+                        </div>
+                        <div class="nav-title">报价详情</div>
+                        <div class="nav-right">
+                            <img src="../src/assets/icons/home.svg" alt="首页" class="nav-icon" id="homeBtn">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 主内容区域 -->
+                <div class="main-content">
+                    <div class="scrollable-content">
+                        <!-- 报价内容区域 -->
+                        <div class="quote-content" id="quoteContent">
+                            <!-- 报价图片1 -->
+                            <div class="quote-image-section">
+                                <img src="../src/assets/images/banner01.png" alt="报价图片1" class="quote-image">
+                            </div>
+
+                            <!-- 报价信息1 -->
+                            <div class="quote-info-section">
+                                <div class="quote-info-card">
+                                    <div class="quote-info-header">
+                                        <h3 class="quote-title">人民币存款利率</h3>
+                                        <div class="quote-date">更新时间：2025-01-18</div>
+                                    </div>
+                                    <div class="quote-details">
+                                        <div class="quote-item">
+                                            <div class="quote-label">活期存款</div>
+                                            <div class="quote-value">0.20%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">定期存款（3个月）</div>
+                                            <div class="quote-value">1.15%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">定期存款（6个月）</div>
+                                            <div class="quote-value">1.35%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">定期存款（1年）</div>
+                                            <div class="quote-value">1.45%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">定期存款（2年）</div>
+                                            <div class="quote-value">1.65%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">定期存款（3年）</div>
+                                            <div class="quote-value">2.05%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">定期存款（5年）</div>
+                                            <div class="quote-value">2.50%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 报价图片2 -->
+                            <div class="quote-image-section">
+                                <img src="../src/assets/images/banner02.png" alt="报价图片2" class="quote-image">
+                            </div>
+
+                            <!-- 报价信息2 -->
+                            <div class="quote-info-section">
+                                <div class="quote-info-card">
+                                    <div class="quote-info-header">
+                                        <h3 class="quote-title">外汇汇率</h3>
+                                        <div class="quote-date">更新时间：2025-01-18 09:30</div>
+                                    </div>
+                                    <div class="quote-details">
+                                        <div class="quote-item">
+                                            <div class="quote-label">美元/人民币</div>
+                                            <div class="quote-value">7.1850</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">欧元/人民币</div>
+                                            <div class="quote-value">7.8230</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">英镑/人民币</div>
+                                            <div class="quote-value">9.1250</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">港币/人民币</div>
+                                            <div class="quote-value">0.9180</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">日元/人民币</div>
+                                            <div class="quote-value">0.0485</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">澳元/人民币</div>
+                                            <div class="quote-value">4.7850</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">加元/人民币</div>
+                                            <div class="quote-value">5.3650</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 报价图片3 -->
+                            <div class="quote-image-section">
+                                <img src="../src/assets/images/banner-s01.png" alt="报价图片3" class="quote-image">
+                            </div>
+
+                            <!-- 报价信息3 -->
+                            <div class="quote-info-section">
+                                <div class="quote-info-card">
+                                    <div class="quote-info-header">
+                                        <h3 class="quote-title">贷款利率</h3>
+                                        <div class="quote-date">更新时间：2025-01-18</div>
+                                    </div>
+                                    <div class="quote-details">
+                                        <div class="quote-item">
+                                            <div class="quote-label">个人消费贷款</div>
+                                            <div class="quote-value">3.65% - 5.80%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">个人经营贷款</div>
+                                            <div class="quote-value">3.85% - 6.20%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">住房贷款</div>
+                                            <div class="quote-value">3.10% - 4.20%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">汽车贷款</div>
+                                            <div class="quote-value">4.50% - 6.80%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">小微企业贷款</div>
+                                            <div class="quote-value">3.45% - 5.50%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 报价图片4 -->
+                            <div class="quote-image-section">
+                                <img src="../src/assets/images/banner-s02.png" alt="报价图片4" class="quote-image">
+                            </div>
+
+                            <!-- 报价信息4 -->
+                            <div class="quote-info-section">
+                                <div class="quote-info-card">
+                                    <div class="quote-info-header">
+                                        <h3 class="quote-title">理财产品</h3>
+                                        <div class="quote-date">更新时间：2025-01-18</div>
+                                    </div>
+                                    <div class="quote-details">
+                                        <div class="quote-item">
+                                            <div class="quote-label">稳健型理财（30天）</div>
+                                            <div class="quote-value">2.80% - 3.20%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">稳健型理财（90天）</div>
+                                            <div class="quote-value">3.10% - 3.50%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">平衡型理财（180天）</div>
+                                            <div class="quote-value">3.50% - 4.20%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">成长型理财（365天）</div>
+                                            <div class="quote-value">4.20% - 5.50%</div>
+                                        </div>
+                                        <div class="quote-item">
+                                            <div class="quote-label">进取型理财（730天）</div>
+                                            <div class="quote-value">5.50% - 7.80%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 手机话筒 -->
+                <section class="phone-speaker-wrap">
+                    <div class="phone-speaker">
+                        <div class="speaker-bar"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/quote-details.js"></script>
+</body>
+</html>

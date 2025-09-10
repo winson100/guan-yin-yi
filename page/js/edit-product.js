@@ -5,8 +5,122 @@
 class EditProductPage {
     constructor() {
         this.currentProductType = '';
-        this.currentForeignType = '';
         this.currentProductId = null;
+        
+        // 汇率默认值配置 (以CNY为基准)
+        this.exchangeRates = {
+            'CNY': {
+                'USD': 0.14,    // 1 CNY = 0.14 USD
+                'EUR': 0.13,    // 1 CNY = 0.13 EUR
+                'GBP': 0.11,    // 1 CNY = 0.11 GBP
+                'HKD': 1.09,    // 1 CNY = 1.09 HKD
+                'JPY': 20.5,    // 1 CNY = 20.5 JPY
+                'AUD': 0.21,    // 1 CNY = 0.21 AUD
+                'CAD': 0.19,    // 1 CNY = 0.19 CAD
+                'SGD': 0.19,    // 1 CNY = 0.19 SGD
+                'CHF': 0.12     // 1 CNY = 0.12 CHF
+            },
+            'USD': {
+                'CNY': 7.2,     // 1 USD = 7.2 CNY
+                'EUR': 0.92,    // 1 USD = 0.92 EUR
+                'GBP': 0.79,    // 1 USD = 0.79 GBP
+                'HKD': 7.8,     // 1 USD = 7.8 HKD
+                'JPY': 147.0,   // 1 USD = 147.0 JPY
+                'AUD': 1.52,    // 1 USD = 1.52 AUD
+                'CAD': 1.36,    // 1 USD = 1.36 CAD
+                'SGD': 1.35,    // 1 USD = 1.35 SGD
+                'CHF': 0.88     // 1 USD = 0.88 CHF
+            },
+            'EUR': {
+                'CNY': 7.8,     // 1 EUR = 7.8 CNY
+                'USD': 1.09,    // 1 EUR = 1.09 USD
+                'GBP': 0.86,    // 1 EUR = 0.86 GBP
+                'HKD': 8.5,     // 1 EUR = 8.5 HKD
+                'JPY': 160.0,   // 1 EUR = 160.0 JPY
+                'AUD': 1.66,    // 1 EUR = 1.66 AUD
+                'CAD': 1.48,    // 1 EUR = 1.48 CAD
+                'SGD': 1.47,    // 1 EUR = 1.47 SGD
+                'CHF': 0.96     // 1 EUR = 0.96 CHF
+            },
+            'GBP': {
+                'CNY': 9.1,     // 1 GBP = 9.1 CNY
+                'USD': 1.27,    // 1 GBP = 1.27 USD
+                'EUR': 1.16,    // 1 GBP = 1.16 EUR
+                'HKD': 9.9,     // 1 GBP = 9.9 HKD
+                'JPY': 186.0,   // 1 GBP = 186.0 JPY
+                'AUD': 1.93,    // 1 GBP = 1.93 AUD
+                'CAD': 1.72,    // 1 GBP = 1.72 CAD
+                'SGD': 1.71,    // 1 GBP = 1.71 SGD
+                'CHF': 1.12     // 1 GBP = 1.12 CHF
+            },
+            'HKD': {
+                'CNY': 0.92,    // 1 HKD = 0.92 CNY
+                'USD': 0.13,    // 1 HKD = 0.13 USD
+                'EUR': 0.12,    // 1 HKD = 0.12 EUR
+                'GBP': 0.10,    // 1 HKD = 0.10 GBP
+                'JPY': 18.8,    // 1 HKD = 18.8 JPY
+                'AUD': 0.19,    // 1 HKD = 0.19 AUD
+                'CAD': 0.17,    // 1 HKD = 0.17 CAD
+                'SGD': 0.17,    // 1 HKD = 0.17 SGD
+                'CHF': 0.11     // 1 HKD = 0.11 CHF
+            },
+            'JPY': {
+                'CNY': 0.049,   // 1 JPY = 0.049 CNY
+                'USD': 0.0068,  // 1 JPY = 0.0068 USD
+                'EUR': 0.0063,  // 1 JPY = 0.0063 EUR
+                'GBP': 0.0054,  // 1 JPY = 0.0054 GBP
+                'HKD': 0.053,   // 1 JPY = 0.053 HKD
+                'AUD': 0.010,   // 1 JPY = 0.010 AUD
+                'CAD': 0.0092,  // 1 JPY = 0.0092 CAD
+                'SGD': 0.0092,  // 1 JPY = 0.0092 SGD
+                'CHF': 0.0060   // 1 JPY = 0.0060 CHF
+            },
+            'AUD': {
+                'CNY': 4.8,     // 1 AUD = 4.8 CNY
+                'USD': 0.66,    // 1 AUD = 0.66 USD
+                'EUR': 0.60,    // 1 AUD = 0.60 EUR
+                'GBP': 0.52,    // 1 AUD = 0.52 GBP
+                'HKD': 5.1,     // 1 AUD = 5.1 HKD
+                'JPY': 97.0,    // 1 AUD = 97.0 JPY
+                'CAD': 0.89,    // 1 AUD = 0.89 CAD
+                'SGD': 0.89,    // 1 AUD = 0.89 SGD
+                'CHF': 0.58     // 1 AUD = 0.58 CHF
+            },
+            'CAD': {
+                'CNY': 5.4,     // 1 CAD = 5.4 CNY
+                'USD': 0.74,    // 1 CAD = 0.74 USD
+                'EUR': 0.68,    // 1 CAD = 0.68 EUR
+                'GBP': 0.58,    // 1 CAD = 0.58 GBP
+                'HKD': 5.7,     // 1 CAD = 5.7 HKD
+                'JPY': 109.0,   // 1 CAD = 109.0 JPY
+                'AUD': 1.12,    // 1 CAD = 1.12 AUD
+                'SGD': 0.99,    // 1 CAD = 0.99 SGD
+                'CHF': 0.65     // 1 CAD = 0.65 CHF
+            },
+            'SGD': {
+                'CNY': 5.4,     // 1 SGD = 5.4 CNY
+                'USD': 0.74,    // 1 SGD = 0.74 USD
+                'EUR': 0.68,    // 1 SGD = 0.68 EUR
+                'GBP': 0.58,    // 1 SGD = 0.58 GBP
+                'HKD': 5.7,     // 1 SGD = 5.7 HKD
+                'JPY': 109.0,   // 1 SGD = 109.0 JPY
+                'AUD': 1.12,    // 1 SGD = 1.12 AUD
+                'CAD': 1.01,    // 1 SGD = 1.01 CAD
+                'CHF': 0.65     // 1 SGD = 0.65 CHF
+            },
+            'CHF': {
+                'CNY': 8.3,     // 1 CHF = 8.3 CNY
+                'USD': 1.14,    // 1 CHF = 1.14 USD
+                'EUR': 1.04,    // 1 CHF = 1.04 EUR
+                'GBP': 0.89,    // 1 CHF = 0.89 GBP
+                'HKD': 8.9,     // 1 CHF = 8.9 HKD
+                'JPY': 167.0,   // 1 CHF = 167.0 JPY
+                'AUD': 1.73,    // 1 CHF = 1.73 AUD
+                'CAD': 1.54,    // 1 CHF = 1.54 CAD
+                'SGD': 1.54     // 1 CHF = 1.54 SGD
+            }
+        };
+        
         this.init();
     }
 
@@ -73,7 +187,12 @@ class EditProductPage {
         const typeMap = {
             'deposit': '存款',
             'loan': '贷款',
-            'foreign': '外汇'
+            'credit': '信用证',
+            'spot': '即期',
+            'derivative': '衍生',
+            'foreign_spot': '即期',
+            'foreign_forward': '远期',
+            'foreign_swap': '掉期'
         };
         return typeMap[type] || type;
     }
@@ -98,6 +217,18 @@ class EditProductPage {
     }
 
     /**
+     * 获取期限单位显示文本
+     */
+    getPeriodUnitDisplayText(unit) {
+        const unitMap = {
+            'year': '年',
+            'month': '月',
+            'day': '日'
+        };
+        return unitMap[unit] || unit;
+    }
+
+    /**
      * 获取外汇类型显示文本
      */
     getForeignTypeDisplayText(type) {
@@ -115,8 +246,12 @@ class EditProductPage {
     fillFormData(product) {
         // 设置产品种类
         let productTypeForSelect = product.type;
-        if (product.type === 'foreign_spot' || product.type === 'foreign_forward' || product.type === 'foreign_swap') {
-            productTypeForSelect = 'foreign';
+        if (product.type === 'foreign_spot') {
+            productTypeForSelect = 'spot';
+        } else if (product.type === 'foreign_forward') {
+            productTypeForSelect = 'derivative';
+        } else if (product.type === 'foreign_swap') {
+            productTypeForSelect = 'derivative';
         }
         
         const productTypeField = document.getElementById('productType');
@@ -136,6 +271,9 @@ class EditProductPage {
             case 'loan':
                 this.fillLoanData(product);
                 break;
+            case 'credit':
+                this.fillCreditData(product);
+                break;
             case 'foreign_spot':
             case 'foreign_forward':
             case 'foreign_swap':
@@ -154,15 +292,15 @@ class EditProductPage {
         
         document.getElementById('depositAmount').value = product.amount || '';
         document.getElementById('depositRate').value = product.rate || '';
+        
+        // 设置期限单位
+        const periodUnitField = document.getElementById('depositPeriodUnit');
+        periodUnitField.value = this.getPeriodUnitDisplayText(product.periodUnit || 'year');
+        periodUnitField.dataset.value = product.periodUnit || 'year';
+        
         document.getElementById('depositPeriod').value = product.period || '';
         document.getElementById('depositInterest').value = this.formatAmount(product.interest) || '';
         document.getElementById('depositPrincipal').value = this.formatAmount(product.principal) || '';
-        
-        const feeCurrencyField = document.getElementById('depositFeeCurrency');
-        feeCurrencyField.value = this.getCurrencyDisplayText(product.feeCurrency || '');
-        feeCurrencyField.dataset.value = product.feeCurrency || '';
-        
-        document.getElementById('depositFeeAmount').value = product.feeAmount || '';
     }
 
     /**
@@ -175,27 +313,62 @@ class EditProductPage {
         
         document.getElementById('loanAmount').value = product.amount || '';
         document.getElementById('loanRate').value = product.rate || '';
+        
+        // 设置期限单位
+        const periodUnitField = document.getElementById('loanPeriodUnit');
+        periodUnitField.value = this.getPeriodUnitDisplayText(product.periodUnit || 'year');
+        periodUnitField.dataset.value = product.periodUnit || 'year';
+        
         document.getElementById('loanPeriod').value = product.period || '';
         document.getElementById('loanInterest').value = this.formatAmount(product.interest) || '';
         document.getElementById('loanPrincipal').value = this.formatAmount(product.principal) || '';
-        
-        const feeCurrencyField = document.getElementById('loanFeeCurrency');
-        feeCurrencyField.value = this.getCurrencyDisplayText(product.feeCurrency || '');
-        feeCurrencyField.dataset.value = product.feeCurrency || '';
-        
+
         document.getElementById('loanFeeAmount').value = product.feeAmount || '';
+    }
+
+    /**
+     * 填充信用证产品数据
+     */
+    fillCreditData(product) {
+        const currencyField = document.getElementById('creditCurrency');
+        currencyField.value = this.getCurrencyDisplayText(product.currency || 'CNY');
+        currencyField.dataset.value = product.currency || 'CNY';
+        
+        document.getElementById('creditAmount').value = product.amount || '';
+        
+        // 设置期限单位
+        const periodUnitField = document.getElementById('creditPeriodUnit');
+        periodUnitField.value = this.getPeriodUnitDisplayText(product.periodUnit || 'year');
+        periodUnitField.dataset.value = product.periodUnit || 'year';
+        
+        document.getElementById('creditPeriod').value = product.period || '';
+        document.getElementById('creditFeeAmount').value = product.feeAmount || '';
     }
 
     /**
      * 填充外汇产品数据
      */
     fillForeignData(product) {
-        // 设置外汇类型
-        const foreignTypeField = document.getElementById('foreignType');
-        foreignTypeField.value = this.getForeignTypeDisplayText(product.type);
-        foreignTypeField.dataset.value = product.type;
-        this.currentForeignType = product.type;
-        this.onForeignTypeChange(product.type);
+        // 根据产品类型设置产品名称
+        if (product.type === 'foreign_forward') {
+            const productNameField = document.getElementById('productName');
+            productNameField.value = '远期';
+            productNameField.dataset.value = 'forward';
+        } else if (product.type === 'foreign_swap') {
+            const productNameField = document.getElementById('productName');
+            productNameField.value = '掉期';
+            productNameField.dataset.value = 'swap';
+        }
+
+        // 调用相应的类型变化处理
+        if (product.type === 'foreign_spot') {
+            // 即期产品显示即期/远期表单
+            this.onDerivativeTypeChange('forward');
+        } else if (product.type === 'foreign_forward') {
+            this.onDerivativeTypeChange('forward');
+        } else if (product.type === 'foreign_swap') {
+            this.onDerivativeTypeChange('swap');
+        }
 
         if (product.type === 'foreign_swap') {
             // 掉期交易
@@ -237,10 +410,6 @@ class EditProductPage {
             document.getElementById('exchangeRate').value = product.exchangeRate || '';
             document.getElementById('buyAmount').value = this.formatAmount(product.buyAmount) || '';
         }
-
-        // 手续费
-        document.getElementById('foreignFeeCurrency').value = product.feeCurrency || '';
-        document.getElementById('foreignFeeAmount').value = product.feeAmount || '';
     }
 
     /**
@@ -272,11 +441,20 @@ class EditProductPage {
             this.showProductTypeOptions();
         });
 
+        // 产品名称选择 - 动态绑定事件
+        const productNameField = document.getElementById('productName');
+        productNameField.addEventListener('click', () => {
+            // 只有衍生品类型才显示弹窗
+            if (this.currentProductType === 'derivative') {
+                this.showProductNameOptions();
+            }
+        });
+
         // 币种选择
         const currencyFields = [
-            'depositCurrency', 'depositFeeCurrency', 'loanCurrency', 'loanFeeCurrency',
+            'depositCurrency', 'loanCurrency', 'creditCurrency',
             'sellCurrency', 'buyCurrency', 'nearSellCurrency', 'nearBuyCurrency',
-            'farSellCurrency', 'farBuyCurrency', 'foreignFeeCurrency'
+            'farSellCurrency', 'farBuyCurrency'
         ];
         currencyFields.forEach(fieldId => {
             const field = document.getElementById(fieldId);
@@ -287,9 +465,15 @@ class EditProductPage {
             }
         });
 
-        // 外汇类型选择
-        document.getElementById('foreignType').addEventListener('click', () => {
-            this.showForeignTypeOptions();
+        // 期限单位选择
+        const periodUnitFields = ['depositPeriodUnit', 'loanPeriodUnit', 'creditPeriodUnit'];
+        periodUnitFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.addEventListener('click', () => {
+                    this.showPeriodUnitOptions(fieldId);
+                });
+            }
         });
 
         // 表单提交
@@ -312,7 +496,7 @@ class EditProductPage {
      * 绑定存款产品字段事件
      */
     bindDepositFields() {
-        const fields = ['depositAmount', 'depositRate', 'depositPeriod'];
+        const fields = ['depositAmount', 'depositRate', 'depositPeriod', 'depositPeriodUnit'];
         fields.forEach(fieldId => {
             const field = document.getElementById(fieldId);
             if (field) {
@@ -327,7 +511,7 @@ class EditProductPage {
      * 绑定贷款产品字段事件
      */
     bindLoanFields() {
-        const fields = ['loanAmount', 'loanRate', 'loanPeriod'];
+        const fields = ['loanAmount', 'loanRate', 'loanPeriod', 'loanPeriodUnit'];
         fields.forEach(fieldId => {
             const field = document.getElementById(fieldId);
             if (field) {
@@ -392,8 +576,58 @@ class EditProductPage {
             document.getElementById('depositForm').style.display = 'block';
         } else if (type === 'loan') {
             document.getElementById('loanForm').style.display = 'block';
-        } else if (type === 'foreign') {
+        } else if (type === 'credit') {
+            document.getElementById('creditForm').style.display = 'block';
+        } else if (type === 'spot' || type === 'derivative') {
             document.getElementById('foreignForm').style.display = 'block';
+        }
+        
+        // 更新产品名称显示
+        this.updateProductNameDisplay(type);
+    }
+
+    /**
+     * 更新产品名称显示
+     */
+    updateProductNameDisplay(type) {
+        const productNameContainer = document.getElementById('productNameContainer');
+        const productNameField = document.getElementById('productName');
+        const productNameArrow = document.getElementById('productNameArrow');
+        const productNameLabel = document.getElementById('productNameLabel');
+        
+        if (type === 'deposit' || type === 'loan') {
+            // 存款和贷款：手工输入，必输
+            productNameContainer.style.display = 'block';
+            productNameField.readOnly = false;
+            productNameField.placeholder = '请输入产品名称';
+            productNameArrow.style.display = 'none';
+            productNameLabel.textContent = '产品名称';
+        } else if (type === 'credit' || type === 'spot') {
+            // 信用证和即期：隐藏
+            productNameContainer.style.display = 'none';
+        } else if (type === 'derivative') {
+            // 衍生：下拉框，必输
+            productNameContainer.style.display = 'block';
+            productNameField.readOnly = true;
+            productNameField.placeholder = '请选择产品名称';
+            productNameArrow.style.display = 'block';
+            productNameLabel.textContent = '产品名称';
+        }
+    }
+
+    /**
+     * 衍生品类型变化处理
+     */
+    onDerivativeTypeChange(type) {
+        // 隐藏所有外汇子表单
+        document.getElementById('spotForwardForm').style.display = 'none';
+        document.getElementById('swapForm').style.display = 'none';
+
+        // 显示对应的外汇子表单
+        if (type === 'forward') {
+            document.getElementById('spotForwardForm').style.display = 'block';
+        } else if (type === 'swap') {
+            document.getElementById('swapForm').style.display = 'block';
         }
     }
 
@@ -425,10 +659,20 @@ class EditProductPage {
     calculateDeposit() {
         const amount = parseFloat(document.getElementById('depositAmount').value) || 0;
         const rate = parseFloat(document.getElementById('depositRate').value) || 0;
-        const period = parseFloat(document.getElementById('depositPeriod').value) || 0;
+        const period = parseInt(document.getElementById('depositPeriod').value) || 0;
+        const periodUnitField = document.getElementById('depositPeriodUnit');
+        const periodUnit = periodUnitField.dataset.value || 'year';
 
         if (amount > 0 && rate > 0 && period > 0) {
-            const interest = amount * rate / 100 * period;
+            // 根据期限单位调整计算
+            let adjustedPeriod = period;
+            if (periodUnit === 'month') {
+                adjustedPeriod = period / 12; // 转换为年
+            } else if (periodUnit === 'day') {
+                adjustedPeriod = period / 365; // 转换为年
+            }
+            
+            const interest = (amount * rate * adjustedPeriod) / 100;
             const principal = amount + interest;
 
             document.getElementById('depositInterest').value = this.formatAmount(interest);
@@ -445,10 +689,20 @@ class EditProductPage {
     calculateLoan() {
         const amount = parseFloat(document.getElementById('loanAmount').value) || 0;
         const rate = parseFloat(document.getElementById('loanRate').value) || 0;
-        const period = parseFloat(document.getElementById('loanPeriod').value) || 0;
+        const period = parseInt(document.getElementById('loanPeriod').value) || 0;
+        const periodUnitField = document.getElementById('loanPeriodUnit');
+        const periodUnit = periodUnitField.dataset.value || 'year';
 
         if (amount > 0 && rate > 0 && period > 0) {
-            const interest = amount * rate / 100 * period;
+            // 根据期限单位调整计算
+            let adjustedPeriod = period;
+            if (periodUnit === 'month') {
+                adjustedPeriod = period / 12; // 转换为年
+            } else if (periodUnit === 'day') {
+                adjustedPeriod = period / 365; // 转换为年
+            }
+            
+            const interest = (amount * rate * adjustedPeriod) / 100;
             const principal = amount + interest;
 
             document.getElementById('loanInterest').value = this.formatAmount(interest);
@@ -482,27 +736,37 @@ class EditProductPage {
         const nearRate = parseFloat(document.getElementById('nearRate').value) || 0;
         const farRate = parseFloat(document.getElementById('farRate').value) || 0;
 
-        if (nearSellAmount > 0 && nearRate > 0 && farRate > 0) {
-            // 近端买入金额
+        // 计算近端买入金额（近端卖出金额 × 近端汇率）
+        if (nearSellAmount > 0 && nearRate > 0) {
             const nearBuyAmount = nearSellAmount * nearRate;
             document.getElementById('nearBuyAmount').value = this.formatAmount(nearBuyAmount);
-
-            // 远端买入金额（等于近端买入金额）
-            document.getElementById('farBuyAmount').value = this.formatAmount(nearBuyAmount);
-
-            // 远端卖出金额
-            const farSellAmount = nearBuyAmount / farRate;
-            document.getElementById('farSellAmount').value = this.formatAmount(farSellAmount);
-
-            // 期末收益（近端卖出金额 - 远端卖出金额）
-            const finalIncome = nearSellAmount - farSellAmount;
-            document.getElementById('finalIncome').value = this.formatAmount(finalIncome);
         } else {
             document.getElementById('nearBuyAmount').value = '';
-            document.getElementById('farBuyAmount').value = '';
+        }
+
+        // 计算远端相关金额
+        if (nearSellAmount > 0 && nearRate > 0 && farRate > 0) {
+            const nearBuyAmount = nearSellAmount * nearRate; // 近端买入金额
+            
+            // 新的远端金额计算逻辑
+            const farBuyAmount = nearSellAmount; // 远端买入金额 = 近端卖出金额
+            const farSellAmount = farBuyAmount / farRate; // 远端卖出金额 = 远端买入金额 ÷ 远端汇率
+            
+            document.getElementById('farSellAmount').value = this.formatAmount(farSellAmount);
+            document.getElementById('farBuyAmount').value = this.formatAmount(farBuyAmount);
+            
+            // 期末收益计算公式：近端买入金额 - 近端卖出金额 × (1/远端汇率)
+            // 收益币种按照近端买入币种
+            const finalIncome = nearBuyAmount - (nearSellAmount / farRate);
+            document.getElementById('finalIncome').value = this.formatAmount(finalIncome);
+        } else {
             document.getElementById('farSellAmount').value = '';
+            document.getElementById('farBuyAmount').value = '';
             document.getElementById('finalIncome').value = '';
         }
+        
+        // 更新期末收益币种显示
+        this.updateFinalIncomeCurrency();
     }
 
     /**
@@ -725,33 +989,30 @@ class EditProductPage {
     collectFormData() {
         const productTypeField = document.getElementById('productType');
         const productType = productTypeField.dataset.value || productTypeField.value;
-        let actualType = productType;
-        
-        // 如果是外汇类型，需要从foreignType字段获取实际类型
-        if (productType === 'foreign') {
-            const foreignTypeField = document.getElementById('foreignType');
-            actualType = foreignTypeField.dataset.value || foreignTypeField.value;
+
+        // 根据产品类型处理产品名称
+        let productName = '';
+        if (productType === 'deposit' || productType === 'loan') {
+            productName = document.getElementById('productName').value.trim();
+        } else if (productType === 'derivative') {
+            productName = document.getElementById('productName').dataset.value || '';
         }
-        
-        const productData = {
-            name: document.getElementById('productName').value.trim(),
-            type: actualType
+        // 信用证和即期不需要产品名称
+
+        const baseData = {
+            type: productType,
+            name: productName
         };
 
-        // 根据产品类型收集相应数据
-        switch (productType) {
-            case 'deposit':
-                Object.assign(productData, this.collectDepositData());
-                break;
-            case 'loan':
-                Object.assign(productData, this.collectLoanData());
-                break;
-            case 'foreign':
-                Object.assign(productData, this.collectForeignData());
-                break;
+        if (productType === 'deposit' || productType === 'loan') {
+            return this.collectDepositLoanData(baseData, productType);
+        } else if (productType === 'credit') {
+            return this.collectCreditData(baseData);
+        } else if (productType === 'spot' || productType === 'derivative') {
+            return this.collectForeignData(baseData, productType);
         }
 
-        return productData;
+        return null;
     }
 
     /**
@@ -783,6 +1044,59 @@ class EditProductPage {
     }
 
     /**
+     * 收集信用证数据
+     */
+    collectCreditData(baseData) {
+        const currencyField = document.getElementById('creditCurrency');
+        const currency = currencyField.dataset.value || currencyField.value;
+
+        const periodUnitField = document.getElementById('creditPeriodUnit');
+        const periodUnit = periodUnitField.dataset.value || periodUnitField.value;
+
+        const data = {
+            ...baseData,
+            currency: currency,
+            amount: parseFloat(document.getElementById('creditAmount').value),
+            period: parseInt(document.getElementById('creditPeriod').value),
+            periodUnit: periodUnit,
+            feeAmount: parseFloat(document.getElementById('creditFeeAmount').value)
+        };
+
+        return data;
+    }
+
+    /**
+     * 收集存款/贷款数据
+     */
+    collectDepositLoanData(baseData, type) {
+        const prefix = type === 'deposit' ? 'deposit' : 'loan';
+        
+        const currencyField = document.getElementById(`${prefix}Currency`);
+        const currency = currencyField.dataset.value || currencyField.value;
+        
+        const periodUnitField = document.getElementById(`${prefix}PeriodUnit`);
+        const periodUnit = periodUnitField.dataset.value || periodUnitField.value;
+        
+        const data = {
+            ...baseData,
+            currency: currency,
+            amount: parseFloat(document.getElementById(`${prefix}Amount`).value),
+            rate: parseFloat(document.getElementById(`${prefix}Rate`).value),
+            period: parseInt(document.getElementById(`${prefix}Period`).value),
+            periodUnit: periodUnit,
+            interest: parseFloat(document.getElementById(`${prefix}Interest`).value) || 0,
+            principal: parseFloat(document.getElementById(`${prefix}Principal`).value) || 0
+        };
+        
+        // 只有贷款产品才收集手续费
+        if (prefix === 'loan') {
+            data.feeAmount = parseFloat(document.getElementById(`${prefix}FeeAmount`).value) || null;
+        }
+        
+        return data;
+    }
+
+    /**
      * 收集贷款产品数据
      */
     collectLoanData() {
@@ -794,9 +1108,6 @@ class EditProductPage {
 
         const currencyField = document.getElementById('loanCurrency');
         const currency = currencyField.dataset.value || currencyField.value;
-        
-        const feeCurrencyField = document.getElementById('loanFeeCurrency');
-        const feeCurrency = feeCurrencyField.dataset.value || feeCurrencyField.value;
 
         return {
             currency: currency,
@@ -805,7 +1116,6 @@ class EditProductPage {
             period: period,
             interest: interest,
             principal: principal,
-            feeCurrency: feeCurrency || null,
             feeAmount: parseFloat(document.getElementById('loanFeeAmount').value) || null
         };
     }
@@ -813,26 +1123,50 @@ class EditProductPage {
     /**
      * 收集外汇产品数据
      */
-    collectForeignData() {
-        const foreignTypeField = document.getElementById('foreignType');
-        const foreignType = foreignTypeField.dataset.value || foreignTypeField.value;
-        
-        const feeCurrencyField = document.getElementById('foreignFeeCurrency');
-        const feeCurrency = feeCurrencyField.dataset.value || feeCurrencyField.value;
-        
-        const baseData = {
-            feeCurrency: feeCurrency || null,
-            feeAmount: parseFloat(document.getElementById('foreignFeeAmount').value) || null
+    collectForeignData(baseData, productType) {
+        let foreignType = '';
+        if (productType === 'spot') {
+            foreignType = 'foreign_spot';
+        } else if (productType === 'derivative') {
+            const productName = document.getElementById('productName').dataset.value;
+            if (productName === 'forward') {
+                foreignType = 'foreign_forward';
+            } else if (productName === 'swap') {
+                foreignType = 'foreign_swap';
+            }
+        }
+
+        const data = {
+            ...baseData,
+            type: foreignType
         };
 
-        if (foreignType === 'foreign_swap') {
+        if (foreignType === 'foreign_spot' || foreignType === 'foreign_forward') {
+            const sellCurrencyField = document.getElementById('sellCurrency');
+            const sellCurrency = sellCurrencyField.dataset.value || sellCurrencyField.value;
+            const buyCurrencyField = document.getElementById('buyCurrency');
+            const buyCurrency = buyCurrencyField.dataset.value || buyCurrencyField.value;
+            
+            Object.assign(data, {
+                sellCurrency: sellCurrency,
+                buyCurrency: buyCurrency,
+                sellAmount: parseFloat(document.getElementById('sellAmount').value),
+                exchangeRate: parseFloat(document.getElementById('exchangeRate').value),
+                buyAmount: parseFloat(document.getElementById('buyAmount').value) || 0
+            });
+        } else if (foreignType === 'foreign_swap') {
             // 掉期交易数据
             const nearSellAmount = parseFloat(document.getElementById('nearSellAmount').value);
             const nearRate = parseFloat(document.getElementById('nearRate').value);
             const farRate = parseFloat(document.getElementById('farRate').value);
             const nearBuyAmount = nearSellAmount * nearRate;
-            const farSellAmount = nearBuyAmount / farRate;
-            const finalIncome = nearSellAmount - farSellAmount;
+            
+            // 新的远端金额计算逻辑
+            const farBuyAmount = nearSellAmount; // 远端买入金额 = 近端卖出金额
+            const farSellAmount = farBuyAmount / farRate; // 远端卖出金额 = 远端买入金额 ÷ 远端汇率
+            
+            // 期末收益计算公式：近端买入金额 - 近端卖出金额 × (1/远端汇率)
+            const finalIncome = nearBuyAmount - (nearSellAmount / farRate);
 
             const nearSellCurrencyField = document.getElementById('nearSellCurrency');
             const nearSellCurrency = nearSellCurrencyField.dataset.value || nearSellCurrencyField.value;
@@ -846,8 +1180,7 @@ class EditProductPage {
             const farBuyCurrencyField = document.getElementById('farBuyCurrency');
             const farBuyCurrency = farBuyCurrencyField.dataset.value || farBuyCurrencyField.value;
 
-            return {
-                ...baseData,
+            Object.assign(data, {
                 nearSellCurrency: nearSellCurrency,
                 nearBuyCurrency: nearBuyCurrency,
                 nearSellAmount: nearSellAmount,
@@ -856,31 +1189,13 @@ class EditProductPage {
                 farSellCurrency: farSellCurrency,
                 farBuyCurrency: farBuyCurrency,
                 farRate: farRate,
-                farBuyAmount: nearBuyAmount,
+                farBuyAmount: farBuyAmount,
                 farSellAmount: farSellAmount,
                 finalIncome: finalIncome
-            };
-        } else {
-            // 即期/远期交易数据
-            const sellAmount = parseFloat(document.getElementById('sellAmount').value);
-            const exchangeRate = parseFloat(document.getElementById('exchangeRate').value);
-            const buyAmount = sellAmount * exchangeRate;
-
-            const sellCurrencyField = document.getElementById('sellCurrency');
-            const sellCurrency = sellCurrencyField.dataset.value || sellCurrencyField.value;
-            
-            const buyCurrencyField = document.getElementById('buyCurrency');
-            const buyCurrency = buyCurrencyField.dataset.value || buyCurrencyField.value;
-
-            return {
-                ...baseData,
-                sellCurrency: sellCurrency,
-                buyCurrency: buyCurrency,
-                sellAmount: sellAmount,
-                exchangeRate: exchangeRate,
-                buyAmount: buyAmount
-            };
+            });
         }
+        
+        return data;
     }
 
     /**
@@ -998,6 +1313,61 @@ class EditProductPage {
     }
 
     /**
+     * 显示产品名称选项列表
+     */
+    showProductNameOptions() {
+        const mask = document.getElementById('productNameMask');
+        mask.style.display = 'flex';
+        
+        // 绑定确定按钮事件
+        const confirmBtn = mask.querySelector('.popup-title-action-btn');
+        confirmBtn.onclick = () => {
+            this.confirmProductNameSelection();
+        };
+        
+        // 绑定选项点击事件
+        const options = mask.querySelectorAll('.form-option');
+        options.forEach(option => {
+            option.onclick = () => {
+                // 清除其他选项的选中状态
+                options.forEach(opt => {
+                    const icon = opt.querySelector('.selected-icon');
+                    icon.classList.add('not-selected');
+                });
+                
+                // 设置当前选项为选中状态
+                const icon = option.querySelector('.selected-icon');
+                icon.classList.remove('not-selected');
+            };
+        });
+    }
+
+    /**
+     * 确认产品名称选择
+     */
+    confirmProductNameSelection() {
+        const mask = document.getElementById('productNameMask');
+        const selectedOption = mask.querySelector('.form-option .selected-icon:not(.not-selected)');
+        
+        if (selectedOption) {
+            const optionElement = selectedOption.closest('.form-option');
+            const value = optionElement.dataset.value;
+            const text = optionElement.querySelector('.option-label').textContent;
+            
+            // 更新输入框显示和存储实际值
+            const inputField = document.getElementById('productName');
+            inputField.value = text;
+            inputField.dataset.value = value;
+            
+            // 处理衍生品类型变化
+            this.onDerivativeTypeChange(value);
+        }
+        
+        // 隐藏弹窗
+        mask.style.display = 'none';
+    }
+
+    /**
      * 显示币种选项列表
      */
     showCurrencyOptions(fieldId) {
@@ -1050,6 +1420,9 @@ class EditProductPage {
             
             // 根据更新的币种更新汇率提示
             this.updateExchangeRatePlaceholders(fieldId);
+            
+            // 自动填充手续费币种
+            this.autoFillFeeCurrency(fieldId, value, text);
         }
         
         // 隐藏弹窗
@@ -1116,7 +1489,28 @@ class EditProductPage {
     }
 
     /**
-     * 更新即期/远期汇率提示
+     * 获取汇率默认值
+     */
+    getExchangeRate(sellCurrency, buyCurrency) {
+        if (!sellCurrency || !buyCurrency || sellCurrency === buyCurrency) {
+            return null;
+        }
+        
+        // 直接查找汇率
+        if (this.exchangeRates[sellCurrency] && this.exchangeRates[sellCurrency][buyCurrency]) {
+            return this.exchangeRates[sellCurrency][buyCurrency];
+        }
+        
+        // 如果直接查找不到，尝试反向查找并计算倒数
+        if (this.exchangeRates[buyCurrency] && this.exchangeRates[buyCurrency][sellCurrency]) {
+            return 1 / this.exchangeRates[buyCurrency][sellCurrency];
+        }
+        
+        return null;
+    }
+
+    /**
+     * 更新即期/远期汇率提示和默认值
      */
     updateExchangeRatePlaceholder() {
         const sellCurrencyField = document.getElementById('sellCurrency');
@@ -1128,13 +1522,21 @@ class EditProductPage {
         if (sellCurrency && buyCurrency) {
             const placeholder = `请输入${sellCurrency}兑${buyCurrency}汇率`;
             exchangeRateField.placeholder = placeholder;
+            
+            // 如果汇率字段为空，自动填充默认汇率
+            if (!exchangeRateField.value) {
+                const defaultRate = this.getExchangeRate(sellCurrency, buyCurrency);
+                if (defaultRate !== null) {
+                    exchangeRateField.value = defaultRate.toFixed(4);
+                }
+            }
         } else {
             exchangeRateField.placeholder = '请输入汇率';
         }
     }
 
     /**
-     * 更新掉期汇率提示
+     * 更新掉期汇率提示和默认值
      */
     updateSwapRatePlaceholders() {
         const nearSellCurrencyField = document.getElementById('nearSellCurrency');
@@ -1144,24 +1546,132 @@ class EditProductPage {
         
         const nearSellCurrency = nearSellCurrencyField.dataset.value || '';
         const nearBuyCurrency = nearBuyCurrencyField.dataset.value || '';
-        const farSellCurrency = farSellCurrencyField.dataset.value || '';
-        const farBuyCurrency = farBuyCurrencyField.dataset.value || '';
         
         const nearRateField = document.getElementById('nearRate');
         const farRateField = document.getElementById('farRate');
         
+        // 近端汇率提示：近端卖出币种兑近端买入币种
         if (nearSellCurrency && nearBuyCurrency) {
             const nearPlaceholder = `请输入${nearSellCurrency}兑${nearBuyCurrency}汇率`;
             nearRateField.placeholder = nearPlaceholder;
+            
+            // 如果近端汇率字段为空，自动填充默认汇率
+            if (!nearRateField.value) {
+                const defaultRate = this.getExchangeRate(nearSellCurrency, nearBuyCurrency);
+                if (defaultRate !== null) {
+                    nearRateField.value = defaultRate.toFixed(4);
+                }
+            }
         } else {
             nearRateField.placeholder = '请输入近端汇率';
         }
         
-        if (farSellCurrency && farBuyCurrency) {
-            const farPlaceholder = `请输入${farSellCurrency}兑${farBuyCurrency}汇率`;
+        // 远端汇率提示：远端卖出币种兑远端买入币种
+        // 根据掉期币种关联关系：远端卖出币种 = 近端买入币种，远端买入币种 = 近端卖出币种
+        if (nearBuyCurrency && nearSellCurrency) {
+            const farPlaceholder = `请输入${nearBuyCurrency}兑${nearSellCurrency}汇率`;
             farRateField.placeholder = farPlaceholder;
+            
+            // 如果远端汇率字段为空，自动填充默认汇率
+            if (!farRateField.value) {
+                const defaultRate = this.getExchangeRate(nearBuyCurrency, nearSellCurrency);
+                if (defaultRate !== null) {
+                    farRateField.value = defaultRate.toFixed(4);
+                }
+            }
         } else {
             farRateField.placeholder = '请输入远端汇率';
+        }
+    }
+
+    /**
+     * 更新期末收益币种显示
+     */
+    updateFinalIncomeCurrency() {
+        const currencyLabel = document.getElementById('finalIncomeCurrency');
+        if (!currencyLabel) return;
+        
+        // 掉期产品：期末收益按照近端买入币种计算
+        if (this.currentProductType === 'foreign' && this.currentForeignType === 'foreign_swap') {
+            const nearBuyCurrencyField = document.getElementById('nearBuyCurrency');
+            const nearBuyCurrency = nearBuyCurrencyField.dataset.value || '';
+            if (nearBuyCurrency) {
+                currencyLabel.textContent = `(${nearBuyCurrency})`;
+            } else {
+                currencyLabel.textContent = '';
+            }
+        } else {
+            currencyLabel.textContent = '';
+        }
+    }
+
+    /**
+     * 自动填充手续费币种
+     */
+    autoFillFeeCurrency(fieldId, currencyValue, currencyText) {
+        // 存款产品：币种自动带入手续费币种
+        if (this.currentProductType === 'deposit' && fieldId === 'depositCurrency') {
+            const feeCurrencyField = document.getElementById('depositFeeCurrency');
+            feeCurrencyField.value = currencyText;
+            feeCurrencyField.dataset.value = currencyValue;
+        }
+        
+        // 贷款产品：币种自动带入手续费币种
+        if (this.currentProductType === 'loan' && fieldId === 'loanCurrency') {
+            const feeCurrencyField = document.getElementById('loanFeeCurrency');
+            feeCurrencyField.value = currencyText;
+            feeCurrencyField.dataset.value = currencyValue;
+        }
+        
+        // 外汇产品：即期/远期，卖出币种自动带入手续费币种
+        if (this.currentProductType === 'foreign' && 
+            (this.currentForeignType === 'foreign_spot' || this.currentForeignType === 'foreign_forward') && 
+            fieldId === 'sellCurrency') {
+            const feeCurrencyField = document.getElementById('foreignFeeCurrency');
+            feeCurrencyField.value = currencyText;
+            feeCurrencyField.dataset.value = currencyValue;
+        }
+        
+        // 外汇产品：掉期，近端卖出币种自动带入手续费币种
+        if (this.currentProductType === 'foreign' && 
+            this.currentForeignType === 'foreign_swap' && 
+            fieldId === 'nearSellCurrency') {
+            const feeCurrencyField = document.getElementById('foreignFeeCurrency');
+            feeCurrencyField.value = currencyText;
+            feeCurrencyField.dataset.value = currencyValue;
+        }
+    }
+
+    /**
+     * 更新掉期币种字段关联
+     */
+    updateSwapCurrencyFields() {
+        const nearSellCurrencyField = document.getElementById('nearSellCurrency');
+        const nearBuyCurrencyField = document.getElementById('nearBuyCurrency');
+        const farSellCurrencyField = document.getElementById('farSellCurrency');
+        const farBuyCurrencyField = document.getElementById('farBuyCurrency');
+        
+        const nearSellCurrency = nearSellCurrencyField.dataset.value || '';
+        const nearBuyCurrency = nearBuyCurrencyField.dataset.value || '';
+        const nearSellCurrencyText = nearSellCurrencyField.value || '';
+        const nearBuyCurrencyText = nearBuyCurrencyField.value || '';
+        
+        // 当选择近端卖出币种时，自动设置为远端买入币种
+        if (nearSellCurrency && nearSellCurrencyText) {
+            farBuyCurrencyField.value = nearSellCurrencyText;
+            farBuyCurrencyField.dataset.value = nearSellCurrency;
+            
+            // 自动填充手续费币种
+            this.autoFillFeeCurrency('nearSellCurrency', nearSellCurrency, nearSellCurrencyText);
+        }
+        
+        // 当选择近端买入币种时，自动设置为远端卖出币种
+        if (nearBuyCurrency && nearBuyCurrencyText) {
+            farSellCurrencyField.value = nearBuyCurrencyText;
+            farSellCurrencyField.dataset.value = nearBuyCurrency;
+            
+            // 更新期末收益币种显示
+            this.updateFinalIncomeCurrency();
         }
     }
 
@@ -1176,7 +1686,74 @@ class EditProductPage {
         // 掉期汇率字段
         else if (['nearSellCurrency', 'nearBuyCurrency', 'farSellCurrency', 'farBuyCurrency'].includes(fieldId)) {
             this.updateSwapRatePlaceholders();
+            // 对于掉期币种字段，还需要更新币种关联
+            if (['nearSellCurrency', 'nearBuyCurrency'].includes(fieldId)) {
+                this.updateSwapCurrencyFields();
+            }
         }
+    }
+
+    /**
+     * 显示期限单位选项列表
+     */
+    showPeriodUnitOptions(fieldId) {
+        const mask = document.getElementById('periodUnitMask');
+        mask.style.display = 'flex';
+        
+        // 绑定确定按钮事件
+        const confirmBtn = mask.querySelector('.popup-title-action-btn');
+        confirmBtn.onclick = () => {
+            this.confirmPeriodUnitSelection(fieldId);
+        };
+        
+        // 绑定选项点击事件
+        const options = mask.querySelectorAll('.form-option');
+        options.forEach(option => {
+            option.onclick = () => {
+                // 移除其他选中状态
+                options.forEach(o => {
+                    o.querySelector('.selected-icon').classList.add('not-selected');
+                });
+                // 添加当前选中状态
+                option.querySelector('.selected-icon').classList.remove('not-selected');
+            };
+        });
+        
+        // 绑定遮罩点击关闭事件
+        mask.onclick = (e) => {
+            if (e.target === mask) {
+                mask.style.display = 'none';
+            }
+        };
+    }
+
+    /**
+     * 确认期限单位选择
+     */
+    confirmPeriodUnitSelection(fieldId) {
+        const mask = document.getElementById('periodUnitMask');
+        const selectedOption = mask.querySelector('.form-option .selected-icon:not(.not-selected)');
+        
+        if (selectedOption) {
+            const optionElement = selectedOption.closest('.form-option');
+            const value = optionElement.dataset.value;
+            const text = optionElement.querySelector('.option-label').textContent;
+            
+            // 更新输入框显示和存储实际值
+            const inputField = document.getElementById(fieldId);
+            inputField.value = text;
+            inputField.dataset.value = value;
+            
+            // 重新计算利息和本息
+            if (fieldId === 'depositPeriodUnit') {
+                this.calculateDeposit();
+            } else if (fieldId === 'loanPeriodUnit') {
+                this.calculateLoan();
+            }
+        }
+        
+        // 隐藏弹窗
+        mask.style.display = 'none';
     }
 }
 

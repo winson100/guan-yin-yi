@@ -7,7 +7,139 @@ class SummaryPage {
         this.products = [];
         this.currencyIncomes = {};
         this.exchangeRates = {};
+
+        // 汇率默认值配置 (以CNY为基准)
+        this.defaultExchangeRates = {
+            'CNY': {
+                'USD': 0.14,    // 1 CNY = 0.14 USD
+                'EUR': 0.13,    // 1 CNY = 0.13 EUR
+                'GBP': 0.11,    // 1 CNY = 0.11 GBP
+                'HKD': 1.09,    // 1 CNY = 1.09 HKD
+                'JPY': 20.5,    // 1 CNY = 20.5 JPY
+                'AUD': 0.21,    // 1 CNY = 0.21 AUD
+                'CAD': 0.19,    // 1 CNY = 0.19 CAD
+                'SGD': 0.19,    // 1 CNY = 0.19 SGD
+                'CHF': 0.12     // 1 CNY = 0.12 CHF
+            },
+            'USD': {
+                'CNY': 7.2,     // 1 USD = 7.2 CNY
+                'EUR': 0.92,    // 1 USD = 0.92 EUR
+                'GBP': 0.79,    // 1 USD = 0.79 GBP
+                'HKD': 7.8,     // 1 USD = 7.8 HKD
+                'JPY': 147.0,   // 1 USD = 147.0 JPY
+                'AUD': 1.52,    // 1 USD = 1.52 AUD
+                'CAD': 1.36,    // 1 USD = 1.36 CAD
+                'SGD': 1.35,    // 1 USD = 1.35 SGD
+                'CHF': 0.88     // 1 USD = 0.88 CHF
+            },
+            'EUR': {
+                'CNY': 7.8,     // 1 EUR = 7.8 CNY
+                'USD': 1.09,    // 1 EUR = 1.09 USD
+                'GBP': 0.86,    // 1 EUR = 0.86 GBP
+                'HKD': 8.5,     // 1 EUR = 8.5 HKD
+                'JPY': 160.0,   // 1 EUR = 160.0 JPY
+                'AUD': 1.66,    // 1 EUR = 1.66 AUD
+                'CAD': 1.48,    // 1 EUR = 1.48 CAD
+                'SGD': 1.47,    // 1 EUR = 1.47 SGD
+                'CHF': 0.96     // 1 EUR = 0.96 CHF
+            },
+            'GBP': {
+                'CNY': 9.1,     // 1 GBP = 9.1 CNY
+                'USD': 1.27,    // 1 GBP = 1.27 USD
+                'EUR': 1.16,    // 1 GBP = 1.16 EUR
+                'HKD': 9.9,     // 1 GBP = 9.9 HKD
+                'JPY': 186.0,   // 1 GBP = 186.0 JPY
+                'AUD': 1.93,    // 1 GBP = 1.93 AUD
+                'CAD': 1.72,    // 1 GBP = 1.72 CAD
+                'SGD': 1.71,    // 1 GBP = 1.71 SGD
+                'CHF': 1.12     // 1 GBP = 1.12 CHF
+            },
+            'HKD': {
+                'CNY': 0.92,    // 1 HKD = 0.92 CNY
+                'USD': 0.13,    // 1 HKD = 0.13 USD
+                'EUR': 0.12,    // 1 HKD = 0.12 EUR
+                'GBP': 0.10,    // 1 HKD = 0.10 GBP
+                'JPY': 18.8,    // 1 HKD = 18.8 JPY
+                'AUD': 0.19,    // 1 HKD = 0.19 AUD
+                'CAD': 0.17,    // 1 HKD = 0.17 CAD
+                'SGD': 0.17,    // 1 HKD = 0.17 SGD
+                'CHF': 0.11     // 1 HKD = 0.11 CHF
+            },
+            'JPY': {
+                'CNY': 0.049,   // 1 JPY = 0.049 CNY
+                'USD': 0.0068,  // 1 JPY = 0.0068 USD
+                'EUR': 0.0063,  // 1 JPY = 0.0063 EUR
+                'GBP': 0.0054,  // 1 JPY = 0.0054 GBP
+                'HKD': 0.053,   // 1 HKD = 0.053 JPY
+                'AUD': 0.010,   // 1 JPY = 0.010 AUD
+                'CAD': 0.0092,  // 1 JPY = 0.0092 CAD
+                'SGD': 0.0092,  // 1 JPY = 0.0092 SGD
+                'CHF': 0.0060   // 1 JPY = 0.0060 CHF
+            },
+            'AUD': {
+                'CNY': 4.8,     // 1 AUD = 4.8 CNY
+                'USD': 0.66,    // 1 AUD = 0.66 USD
+                'EUR': 0.60,    // 1 AUD = 0.60 EUR
+                'GBP': 0.52,    // 1 AUD = 0.52 GBP
+                'HKD': 5.1,     // 1 AUD = 5.1 HKD
+                'JPY': 97.0,    // 1 AUD = 97.0 JPY
+                'CAD': 0.89,    // 1 AUD = 0.89 CAD
+                'SGD': 0.89,    // 1 AUD = 0.89 SGD
+                'CHF': 0.58     // 1 AUD = 0.58 CHF
+            },
+            'CAD': {
+                'CNY': 5.4,     // 1 CAD = 5.4 CNY
+                'USD': 0.74,    // 1 CAD = 0.74 USD
+                'EUR': 0.68,    // 1 CAD = 0.68 EUR
+                'GBP': 0.58,    // 1 CAD = 0.58 GBP
+                'HKD': 5.7,     // 1 CAD = 5.7 HKD
+                'JPY': 109.0,   // 1 CAD = 109.0 JPY
+                'AUD': 1.12,    // 1 CAD = 1.12 AUD
+                'SGD': 0.99,    // 1 CAD = 0.99 SGD
+                'CHF': 0.65     // 1 CAD = 0.65 CHF
+            },
+            'SGD': {
+                'CNY': 5.4,     // 1 SGD = 5.4 CNY
+                'USD': 0.74,    // 1 SGD = 0.74 USD
+                'EUR': 0.68,    // 1 SGD = 0.68 EUR
+                'GBP': 0.58,    // 1 SGD = 0.58 GBP
+                'HKD': 5.7,     // 1 SGD = 5.7 HKD
+                'JPY': 109.0,   // 1 SGD = 109.0 JPY
+                'AUD': 1.12,    // 1 SGD = 1.12 AUD
+                'CAD': 1.01,    // 1 SGD = 1.01 CAD
+                'CHF': 0.65     // 1 SGD = 0.65 CHF
+            },
+            'CHF': {
+                'CNY': 8.3,     // 1 CHF = 8.3 CNY
+                'USD': 1.14,    // 1 CHF = 1.14 USD
+                'EUR': 1.04,    // 1 CHF = 1.04 EUR
+                'GBP': 0.89,    // 1 CHF = 0.89 GBP
+                'HKD': 8.9,     // 1 CHF = 8.9 HKD
+                'JPY': 167.0,   // 1 CHF = 167.0 JPY
+                'AUD': 1.73,    // 1 CHF = 1.73 AUD
+                'CAD': 1.54,    // 1 CHF = 1.54 CAD
+                'SGD': 1.54     // 1 CHF = 1.54 SGD
+            }
+        };
+
         this.init();
+    }
+
+    /**
+     * 初始化默认汇率
+     */
+    initializeDefaultRates() {
+        // 为所有外币设置默认汇率（如果用户还没有设置的话）
+        const foreignCurrencies = ['USD', 'EUR', 'GBP', 'HKD', 'JPY', 'AUD', 'CAD', 'SGD', 'CHF'];
+
+        foreignCurrencies.forEach(currency => {
+            if (!this.exchangeRates[currency] || this.exchangeRates[currency] <= 0) {
+                const defaultRate = this.getDefaultExchangeRate(currency, 'CNY');
+                if (defaultRate && defaultRate > 0) {
+                    this.exchangeRates[currency] = defaultRate;
+                }
+            }
+        });
     }
 
     /**
@@ -17,13 +149,16 @@ class SummaryPage {
         try {
             // 初始化数据库
             await window.productDB.init();
-            
+
+            // 初始化默认汇率
+            this.initializeDefaultRates();
+
             // 绑定事件
             this.bindEvents();
-            
+
             // 加载产品数据并计算收益
             await this.loadAndCalculate();
-            
+
         } catch (error) {
             console.error('页面初始化失败:', error);
             this.showError('页面初始化失败，请刷新重试');
@@ -80,10 +215,12 @@ class SummaryPage {
      */
     calculateCurrencyIncomes() {
         this.currencyIncomes = {};
+        this.totalFeesCNY = 0; // 总手续费（人民币）
         
         this.products.forEach(product => {
             const income = this.getProductIncome(product);
             const currency = this.getProductCurrency(product);
+            const feeCNY = this.getProductFeeCNY(product);
             
             if (!this.currencyIncomes[currency]) {
                 this.currencyIncomes[currency] = {
@@ -92,9 +229,12 @@ class SummaryPage {
                 };
             }
             
-            // 计算收益（已包含手续费）
+            // 计算收益（不包含手续费）
             this.currencyIncomes[currency].income += income;
             this.currencyIncomes[currency].total = this.currencyIncomes[currency].income;
+            
+            // 累计手续费（人民币）
+            this.totalFeesCNY += feeCNY;
         });
     }
 
@@ -102,23 +242,23 @@ class SummaryPage {
      * 获取产品收益
      */
     getProductIncome(product) {
-        // 获取手续费金额，如果没有录入则为0
-        const feeAmount = parseFloat(product.feeAmount) || 0;
-        
         switch (product.type) {
             case 'deposit':
-                // 存款收益 = 利息 - 手续费
-                return (product.interest || 0) - feeAmount;
+                // 存款收益 = 利息
+                return product.interest || 0;
             case 'loan':
-                // 贷款收益 = -(利息 + 手续费)，贷款是支出
-                return -((product.interest || 0) + feeAmount);
+                // 贷款收益 = -利息，贷款是支出（不包含手续费）
+                return -(product.interest || 0);
+            case 'credit':
+                // 信用证收益 = 0，不计算手续费
+                return 0;
             case 'foreign_swap':
-                // 掉期收益 = 期末收益 - 手续费
-                return (product.finalIncome || 0) - feeAmount;
+                // 掉期收益 = 期末收益（不包含手续费）
+                return product.finalIncome || 0;
             case 'foreign_spot':
             case 'foreign_forward':
-                // 即期/远期交易通常没有直接收益，但可能有手续费支出
-                return -feeAmount;
+                // 即期/远期交易通常没有直接收益
+                return 0;
             default:
                 return 0;
         }
@@ -140,6 +280,59 @@ class SummaryPage {
             default:
                 return 'CNY';
         }
+    }
+
+    /**
+     * 获取汇率默认值
+     */
+    getDefaultExchangeRate(fromCurrency, toCurrency) {
+        // 如果是相同币种，返回1
+        if (fromCurrency === toCurrency) {
+            return 1;
+        }
+
+        // 从默认汇率配置中查找
+        if (this.defaultExchangeRates[fromCurrency] && this.defaultExchangeRates[fromCurrency][toCurrency]) {
+            return this.defaultExchangeRates[fromCurrency][toCurrency];
+        }
+
+        // 尝试反向查找
+        if (this.defaultExchangeRates[toCurrency] && this.defaultExchangeRates[toCurrency][fromCurrency]) {
+            return 1 / this.defaultExchangeRates[toCurrency][fromCurrency];
+        }
+
+        return null;
+    }
+
+    /**
+     * 获取产品手续费（转换为人民币）
+     */
+    getProductFeeCNY(product) {
+        const feeAmount = parseFloat(product.feeAmount) || 0;
+        if (feeAmount === 0) {
+            return 0;
+        }
+
+        // 获取手续费币种
+        const feeCurrency = product.feeCurrency || this.getProductCurrency(product);
+
+        // 如果手续费币种是人民币，直接返回
+        if (feeCurrency === 'CNY') {
+            return feeAmount;
+        }
+
+        // 如果手续费币种不是人民币，需要汇率转换
+        // 优先使用用户设置的汇率，如果没有则使用默认汇率
+        let rate = this.exchangeRates[feeCurrency];
+        if (!rate || rate <= 0) {
+            rate = this.getDefaultExchangeRate(feeCurrency, 'CNY');
+        }
+
+        if (rate && rate > 0) {
+            return feeAmount * rate;
+        }
+
+        return 0; // 没有汇率时返回0
     }
 
 
@@ -178,8 +371,15 @@ class SummaryPage {
         const currencyName = this.getCurrencyName(currency);
         const incomeClass = this.getIncomeClass(data.total);
         const isCNY = currency === 'CNY';
-        const hasRate = this.exchangeRates[currency] && this.exchangeRates[currency] > 0;
-        const cnyConverted = hasRate ? data.total * this.exchangeRates[currency] : (isCNY ? data.total : 0);
+
+        // 获取当前汇率（优先用户设置的，如果没有则使用默认值）
+        let currentRate = this.exchangeRates[currency];
+        if (!currentRate || currentRate <= 0) {
+            currentRate = this.getDefaultExchangeRate(currency, 'CNY');
+        }
+
+        const hasRate = currentRate && currentRate > 0;
+        const cnyConverted = hasRate ? data.total * currentRate : (isCNY ? data.total : 0);
         
         return `
             <div class="currency-item ${hasRate ? 'has-rate' : 'no-rate'}" data-currency="${currency}">
@@ -190,7 +390,7 @@ class SummaryPage {
                     <div class="currency-income">
                         <div class="income-amount ${incomeClass}">${this.formatAmountWithSign(data.total)} ${currency}</div>
                         ${!isCNY && hasRate ? `
-                            <div class="income-label">≈ ${this.formatCNYAmountWithSign(cnyConverted)}</div>
+                            <div class="income-label">${this.formatCNYAmountWithSign(cnyConverted)}</div>
                         ` : ''}
                     </div>
                 </div>
@@ -199,14 +399,14 @@ class SummaryPage {
                     <div class="exchange-rate-section">
                         <div class="rate-input-group">
                             <div class="rate-label">汇率</div>
-                            <input type="number" 
-                                   class="rate-input" 
+                            <input type="number"
+                                   class="rate-input"
                                    data-currency="${currency}"
                                    placeholder="请输入${currency}对人民币汇率"
-                                   step="0.01" 
-                                   min="0.01" 
+                                   step="0.01"
+                                   min="0.01"
                                    max="9999.99"
-                                   value="${this.exchangeRates[currency] || ''}">
+                                   value="${currentRate && currentRate > 0 ? currentRate.toFixed(4) : ''}">
                         </div>
                         <div class="rate-error" data-currency="${currency}" style="display: none;"></div>
                     </div>
@@ -321,6 +521,9 @@ class SummaryPage {
         // 更新汇率转换显示
         this.updateRateConversionDisplay(currency);
         
+        // 重新计算手续费（因为汇率变化可能影响手续费的人民币金额）
+        this.calculateCurrencyIncomes();
+        
         // 重新计算人民币汇总
         this.calculateCNYSummary();
     }
@@ -343,11 +546,11 @@ class SummaryPage {
             const incomeLabel = incomeElement.querySelector('.income-label');
             
             if (incomeLabel) {
-                incomeLabel.textContent = `≈ ${this.formatCNYAmountWithSign(cnyConverted)}`;
+                incomeLabel.textContent = `${this.formatCNYAmountWithSign(cnyConverted)}`;
             } else {
                 const newLabel = document.createElement('div');
                 newLabel.className = 'income-label';
-                newLabel.textContent = `≈ ${this.formatCNYAmountWithSign(cnyConverted)}`;
+                newLabel.textContent = `${this.formatCNYAmountWithSign(cnyConverted)}`;
                 incomeElement.appendChild(newLabel);
             }
         } else {
@@ -430,6 +633,7 @@ class SummaryPage {
     calculateCNYSummary() {
         const cnyTotalAmount = document.getElementById('cnyTotalAmount');
         const cnyBreakdown = document.getElementById('cnyBreakdown');
+        const feeTotalAmount = document.getElementById('feeTotalAmount');
         
         let totalCNY = 0;
         const breakdownItems = [];
@@ -458,6 +662,20 @@ class SummaryPage {
                 }
             }
         });
+        
+        // 更新手续费汇总显示（手续费是支出，显示为负数）
+        if (feeTotalAmount) {
+            feeTotalAmount.textContent = this.formatCNYAmountWithSign(-this.totalFeesCNY);
+        }
+        
+        // 添加手续费汇总到明细中
+        if (this.totalFeesCNY !== 0) {
+            breakdownItems.push({
+                currency: '手续费',
+                amount: -this.totalFeesCNY // 手续费是支出，显示为负数
+            });
+            totalCNY -= this.totalFeesCNY; // 从总收益中扣除手续费
+        }
         
         // 更新总金额
         cnyTotalAmount.textContent = this.formatCNYAmountWithSign(totalCNY);

@@ -117,9 +117,22 @@
 
                             <div class="form-item">
                                 <div class="form-field">
-                                    <div class="form-label required">期限(年)</div>
+                                    <div class="form-label required">期限单位</div>
                                     <div class="form-input">
-                                        <input type="number" id="depositPeriod" class="form-input-field" placeholder="请输入期限" min="1" max="1825" required>
+                                        <input type="text" id="depositPeriodUnit" class="form-input-field" placeholder="请选择期限单位" readonly required>
+                                        <div class="select-arrow">
+                                            <img src="../src/assets/icons/arrow-down.svg" alt="选择" class="arrow-icon">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-error" id="depositPeriodUnitError" style="display: none;"></div>
+                            </div>
+
+                            <div class="form-item">
+                                <div class="form-field">
+                                    <div class="form-label required">期限</div>
+                                    <div class="form-input">
+                                        <input type="number" id="depositPeriod" class="form-input-field" placeholder="请输入期限" min="1" required>
                                     </div>
                                 </div>
                                 <div class="input-error" id="depositPeriodError" style="display: none;"></div>
@@ -147,10 +160,7 @@
                                 <div class="form-field">
                                     <div class="form-label">手续费币种</div>
                                     <div class="form-input">
-                                        <input type="text" id="depositFeeCurrency" class="form-input-field" placeholder="请选择币种" readonly>
-                                        <div class="select-arrow">
-                                            <img src="../src/assets/icons/arrow-down.svg" alt="选择" class="arrow-icon">
-                                        </div>
+                                        <input type="text" id="depositFeeCurrency" class="form-input-field" placeholder="自动填充" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -203,9 +213,22 @@
 
                             <div class="form-item">
                                 <div class="form-field">
-                                    <div class="form-label required">期限(年)</div>
+                                    <div class="form-label required">期限单位</div>
                                     <div class="form-input">
-                                        <input type="number" id="loanPeriod" class="form-input-field" placeholder="请输入期限" min="1" max="1825" required>
+                                        <input type="text" id="loanPeriodUnit" class="form-input-field" placeholder="请选择期限单位" readonly required>
+                                        <div class="select-arrow">
+                                            <img src="../src/assets/icons/arrow-down.svg" alt="选择" class="arrow-icon">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-error" id="loanPeriodUnitError" style="display: none;"></div>
+                            </div>
+
+                            <div class="form-item">
+                                <div class="form-field">
+                                    <div class="form-label required">期限</div>
+                                    <div class="form-input">
+                                        <input type="number" id="loanPeriod" class="form-input-field" placeholder="请输入期限" min="1" required>
                                     </div>
                                 </div>
                                 <div class="input-error" id="loanPeriodError" style="display: none;"></div>
@@ -233,10 +256,7 @@
                                 <div class="form-field">
                                     <div class="form-label">手续费币种</div>
                                     <div class="form-input">
-                                        <input type="text" id="loanFeeCurrency" class="form-input-field" placeholder="请选择币种" readonly>
-                                        <div class="select-arrow">
-                                            <img src="../src/assets/icons/arrow-down.svg" alt="选择" class="arrow-icon">
-                                        </div>
+                                        <input type="text" id="loanFeeCurrency" class="form-input-field" placeholder="自动填充" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -440,7 +460,7 @@
 
                                 <div class="form-item">
                                     <div class="form-field">
-                                        <div class="form-label">期末收益</div>
+                                        <div class="form-label">期末收益 <span id="finalIncomeCurrency" class="currency-label"></span></div>
                                         <div class="form-input">
                                             <input type="text" id="finalIncome" class="form-input-field" readonly placeholder="自动计算">
                                         </div>
@@ -453,10 +473,7 @@
                                 <div class="form-field">
                                     <div class="form-label">手续费币种</div>
                                     <div class="form-input">
-                                        <input type="text" id="foreignFeeCurrency" class="form-input-field" placeholder="请选择币种" readonly>
-                                        <div class="select-arrow">
-                                            <img src="../src/assets/icons/arrow-down.svg" alt="选择" class="arrow-icon">
-                                        </div>
+                                        <input type="text" id="foreignFeeCurrency" class="form-input-field" placeholder="自动填充" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -676,6 +693,57 @@
                             <div class="form-option" data-value="foreign_swap">
                                 <div class="option-content">
                                     <span class="option-label">掉期</span>
+                                </div>
+                                <div class="option-selected">
+                                    <img src="../src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-bar">
+                            <div class="popup-indicator"></div>
+                        </div>
+                        
+                        <!-- 弹层手机话筒 -->
+                        <div class="phone-speaker-wrap">
+                            <div class="phone-speaker">
+                                <div class="speaker-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 期限单位选择弹窗 -->
+                <div class="base-mask" id="periodUnitMask" style="display: none;">
+                    <div class="popup-container">
+                        <section class="section-popup-title">
+                            <div class="popup-title-container">
+                                <div class="popup-title-icon-wrapper"></div>
+                                <div class="popup-title-main-text">选择期限单位</div>
+                                <div class="popup-title-action-btn">确定</div>
+                            </div>
+                        </section>
+
+                        <div class="pad-vertical-0" style="margin-bottom: 20px;">
+                            <div class="form-option" data-value="year">
+                                <div class="option-content">
+                                    <span class="option-label">年</span>
+                                </div>
+                                <div class="option-selected">
+                                    <img src="../src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                                </div>
+                            </div>
+                            <div class="form-option" data-value="month">
+                                <div class="option-content">
+                                    <span class="option-label">月</span>
+                                </div>
+                                <div class="option-selected">
+                                    <img src="../src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                                </div>
+                            </div>
+                            <div class="form-option" data-value="day">
+                                <div class="option-content">
+                                    <span class="option-label">日</span>
                                 </div>
                                 <div class="option-selected">
                                     <img src="../src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">

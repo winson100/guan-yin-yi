@@ -11,6 +11,16 @@
     padding-bottom: 30px; /* 为手机话筒留出空间 */
 }
 
+/* 可滚动内容容器 */
+.scrollable-content {
+    height: 693px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
 /* 手机话筒固定在手机框底部 */
 .phone-speaker-wrap {
     position: absolute;
@@ -24,9 +34,7 @@
 
 /* 币种收益区域 */
 .currency-income-section {
-    flex: 1;
     padding: var(--spacing-lg);
-    overflow-y: auto;
     background: var(--color-white);
 }
 
@@ -113,7 +121,7 @@
 .rate-input {
     flex: 1;
     padding: var(--spacing-sm) var(--spacing-md);
-    border: 1px solid var(--border-color);
+    border: none;
     border-radius: var(--border-radius-base);
     font-size: var(--font-size-26);
     color: var(--text-color-primary);
@@ -121,14 +129,24 @@
     transition: all 0.3s ease;
 }
 
+/* 删除数字输入框的步进器 */
+.rate-input::-webkit-outer-spin-button,
+.rate-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.rate-input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 .rate-input:focus {
     outline: none;
-    border-color: var(--theme-color-5);
     box-shadow: 0 0 0 2px rgba(219, 85, 86, 0.1);
 }
 
 .rate-input.error {
-    border-color: var(--auxiliary-color-ac3);
+    box-shadow: 0 0 0 2px rgba(237, 102, 53, 0.1);
 }
 
 .rate-error {
@@ -153,6 +171,32 @@
 
 .cny-summary-card {
     background: var(--color-white);
+    padding: var(--spacing-lg);
+}
+
+/* 手续费汇总区域 */
+.fee-summary-section {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.fee-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fee-label {
+    font-size: var(--font-size-28);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-color-primary);
+}
+
+.fee-amount {
+    font-size: var(--font-size-32);
+    font-weight: var(--font-weight-semibold);
+    color: var(--auxiliary-color-ac2); /* 手续费显示为绿色（负数） */
 }
 
 .cny-summary-header {

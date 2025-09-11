@@ -127,10 +127,10 @@ class MainPage {
         const income = this.getProductIncome(product);
         const details = this.getProductDetails(product);
 
-        // 处理产品名称显示：如果没有名称或者是远期/掉期相关名称，只显示产品类型标签
+        // 处理产品名称显示：如果没有名称或者是远期/掉期/期权相关名称，只显示产品类型标签
         const productNameDisplay = product.name && product.name.trim() && 
-            product.name !== '远期' && product.name !== '掉期' &&
-            product.name !== 'forward' && product.name !== 'swap' ? 
+            product.name !== '远期' && product.name !== '掉期' && product.name !== '期权' &&
+            product.name !== 'forward' && product.name !== 'swap' && product.name !== 'option' ? 
             `<div class="product-name">${product.name}</div>` : 
             '';
 
@@ -176,7 +176,8 @@ class MainPage {
             'derivative': '衍生',
             'foreign_spot': '即期',
             'foreign_forward': '远期',
-            'foreign_swap': '掉期'
+            'foreign_swap': '掉期',
+            'foreign_option': '期权'
         };
         return typeMap[type] || '未知';
     }
@@ -191,6 +192,8 @@ class MainPage {
             return 'forward'; // 远期使用紫色
         } else if (type === 'foreign_swap') {
             return 'swap'; // 掉期使用深粉色
+        } else if (type === 'foreign_option') {
+            return 'option'; // 期权使用橙色
         } else if (type === 'derivative') {
             // 衍生品需要根据产品名称判断
             if (product && product.name) {
@@ -198,6 +201,8 @@ class MainPage {
                     return 'forward'; // 远期使用紫色
                 } else if (product.name === 'swap' || product.name === '掉期') {
                     return 'swap'; // 掉期使用深粉色
+                } else if (product.name === 'option' || product.name === '期权') {
+                    return 'option'; // 期权使用橙色
                 }
             }
             return 'derivative'; // 默认使用衍生品类型
@@ -230,6 +235,10 @@ class MainPage {
             case 'foreign_forward':
                 // 远期交易通常没有直接收益
                 return 0;
+            case 'foreign_option':
+                // 期权收益 = 期权费（收入为正，支出为负）
+                const optionFeeAmount = product.optionFeeAmount || 0;
+                return product.optionFeeType === 'income' ? optionFeeAmount : -optionFeeAmount;
             default:
                 return 0;
         }
@@ -366,8 +375,8 @@ class MainPage {
                         <div class="detail-value">${this.formatAmount(product.amount)}</div>
                     </div>
                     <div class="detail-item">
-                        <div class="detail-label">期限</div>
-                        <div class="detail-value">${this.formatPeriodDisplay(product.period, product.periodUnit)}</div>
+                        <div class="detail-label">有效期</div>
+                        <div class="detail-value">${product.expiryDate || ''}</div>
                     </div>
                     <div class="detail-item">
                         <div class="detail-label">手续费金额</div>
@@ -436,6 +445,19 @@ class MainPage {
                     <div class="detail-item">
                         <div class="detail-label">期末收益</div>
                         <div class="detail-value">${this.formatAmount(product.finalIncome)}</div>
+                    </div>
+                `;
+                break;
+
+            case 'foreign_option':
+                details = `
+                    <div class="detail-item">
+                        <div class="detail-label">期权费用类型</div>
+                        <div class="detail-value">${product.optionFeeType === 'income' ? '收入' : '支出'}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">期权费CNY</div>
+                        <div class="detail-value">${this.formatAmount(product.optionFeeAmount)}</div>
                     </div>
                 `;
                 break;

@@ -2,6 +2,12 @@
  * 存贷组合产品测算器 - 添加产品页面样式
  */
 
+/* 有效期选择弹窗特殊样式 */
+#expiryDateMask .popup-container {
+    height: 256px;
+    max-height: 80vh;
+}
+
 /* 主内容区域 - 固定高度，内容可滚动 */
 .main-content {
     position: absolute;
@@ -175,6 +181,8 @@ section.pad-vertical-0 {
 #loanCurrency.form-input-field[readonly],
 #depositPeriodUnit.form-input-field[readonly],
 #loanPeriodUnit.form-input-field[readonly],
+#creditExpiryDate.form-input-field[readonly],
+#optionFeeType.form-input-field[readonly],
 #foreignType.form-input-field[readonly],
 #sellCurrency.form-input-field[readonly],
 #buyCurrency.form-input-field[readonly],

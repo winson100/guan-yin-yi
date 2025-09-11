@@ -30,7 +30,6 @@
     width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 报价信息区域 */
@@ -39,29 +38,28 @@
 }
 
 .quote-info-card {
-    background: #ffffff;
+    background: var(--color-white);
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--border-color);
 }
 
 .quote-info-header {
     margin-bottom: 16px;
     padding-bottom: 12px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .quote-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333333;
+    font-size: var(--font-size-32);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-color-primary);
     margin: 0 0 4px 0;
 }
 
 .quote-date {
-    font-size: 12px;
-    color: #999999;
+    font-size: var(--font-size-24);
+    color: var(--text-color-secondary);
     margin: 0;
 }
 
@@ -85,15 +83,15 @@
 }
 
 .quote-label {
-    font-size: 14px;
-    color: #666666;
+    font-size: var(--font-size-24);
+    color: var(--text-color-secondary);
     flex: 1;
 }
 
 .quote-value {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333333;
+    font-size: var(--font-size-26);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-color-primary);
     text-align: right;
     min-width: 80px;
 }
@@ -118,30 +116,3 @@
     }
 }
 
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-    .quote-info-card {
-        background: #2a2a2a;
-        border-color: #404040;
-    }
-    
-    .quote-title {
-        color: #ffffff;
-    }
-    
-    .quote-label {
-        color: #cccccc;
-    }
-    
-    .quote-value {
-        color: #ffffff;
-    }
-    
-    .quote-info-header {
-        border-bottom-color: #404040;
-    }
-    
-    .quote-item {
-        border-bottom-color: #404040;
-    }
-}

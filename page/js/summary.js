@@ -259,6 +259,10 @@ class SummaryPage {
             case 'foreign_forward':
                 // 即期/远期交易通常没有直接收益
                 return 0;
+            case 'foreign_option':
+                // 期权收益 = 期权费（收入为正，支出为负）
+                const optionFeeAmount = product.optionFeeAmount || 0;
+                return product.optionFeeType === 'income' ? optionFeeAmount : -optionFeeAmount;
             default:
                 return 0;
         }
@@ -277,6 +281,8 @@ class SummaryPage {
                 return product.buyCurrency; // 以买入币种为准
             case 'foreign_swap':
                 return product.nearBuyCurrency; // 以近端买入币种为准
+            case 'foreign_option':
+                return 'CNY'; // 期权费固定为人民币
             default:
                 return 'CNY';
         }

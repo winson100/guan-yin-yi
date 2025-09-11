@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../src/styles/components/base/button-combination.css">
     <link rel="stylesheet" href="../src/styles/components/feedback/bottom-popup-title.css">
     <link rel="stylesheet" href="../src/styles/components/form/form-options.css">
+    <link rel="stylesheet" href="../src/styles/components/base/scroll-picker.css">
     
     <!-- 页面样式 -->
     <link rel="stylesheet" href="styles/add-product_v2.css">
@@ -276,25 +277,15 @@
 
                             <div class="form-item">
                                 <div class="form-field">
-                                    <div class="form-label required">期限单位</div>
+                                    <div class="form-label required">有效期</div>
                                     <div class="form-input">
-                                        <input type="text" id="creditPeriodUnit" class="form-input-field" placeholder="请选择期限单位" readonly required>
+                                        <input type="text" id="creditExpiryDate" class="form-input-field" placeholder="请选择有效期" readonly required>
                                         <div class="select-arrow">
                                             <img src="../src/assets/icons/arrow-down.svg" alt="选择" class="arrow-icon">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="input-error" id="creditPeriodUnitError" style="display: none;"></div>
-                            </div>
-
-                            <div class="form-item">
-                                <div class="form-field">
-                                    <div class="form-label required">期限</div>
-                                    <div class="form-input">
-                                        <input type="number" id="creditPeriod" class="form-input-field" placeholder="请输入期限" min="1" required>
-                                    </div>
-                                </div>
-                                <div class="input-error" id="creditPeriodError" style="display: none;"></div>
+                                <div class="input-error" id="creditExpiryDateError" style="display: none;"></div>
                             </div>
 
                             <div class="form-item">
@@ -361,11 +352,12 @@
 
                                 <div class="form-item">
                                     <div class="form-field">
-                                        <div class="form-label">买入金额</div>
+                                        <div class="form-label required">买入金额</div>
                                         <div class="form-input">
-                                            <input type="text" id="buyAmount" class="form-input-field" readonly placeholder="自动计算">
+                                            <input type="number" id="buyAmount" class="form-input-field" placeholder="请输入买入金额" step="0.01" min="0.01" max="999999999.99" required>
                                         </div>
                                     </div>
+                                    <div class="input-error" id="buyAmountError" style="display: none;"></div>
                                 </div>
                             </div>
 
@@ -489,6 +481,32 @@
                                             <input type="text" id="finalIncome" class="form-input-field" readonly placeholder="自动计算">
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- 期权表单 -->
+                            <div id="optionForm" style="display: none;">
+                                <div class="form-item">
+                                    <div class="form-field">
+                                        <div class="form-label required">期权费用类型</div>
+                                        <div class="form-input">
+                                            <input type="text" id="optionFeeType" class="form-input-field" placeholder="请选择期权费用类型" readonly required>
+                                            <div class="select-arrow">
+                                                <img src="../src/assets/icons/arrow-down.svg" alt="选择" class="arrow-icon">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-error" id="optionFeeTypeError" style="display: none;"></div>
+                                </div>
+
+                                <div class="form-item">
+                                    <div class="form-field">
+                                        <div class="form-label required">期权费CNY</div>
+                                        <div class="form-input">
+                                            <input type="number" id="optionFeeAmount" class="form-input-field" placeholder="请输入期权费金额" step="0.01" min="0.01" max="999999999.99" required>
+                                        </div>
+                                    </div>
+                                    <div class="input-error" id="optionFeeAmountError" style="display: none;"></div>
                                 </div>
                             </div>
 
@@ -712,12 +730,63 @@
                                     <img src="../src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
                                 </div>
                             </div>
+                            <div class="form-option" data-value="option">
+                                <div class="option-content">
+                                    <span class="option-label">期权</span>
+                                </div>
+                                <div class="option-selected">
+                                    <img src="../src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="bottom-bar">
                             <div class="popup-indicator"></div>
                         </div>
 
+                        <!-- 弹层手机话筒 -->
+                        <div class="phone-speaker-wrap">
+                            <div class="phone-speaker">
+                                <div class="speaker-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 期权费用类型选择弹窗 -->
+                <div class="base-mask" id="optionFeeTypeMask" style="display: none;">
+                    <div class="popup-container">
+                        <section class="section-popup-title">
+                            <div class="popup-title-container">
+                                <div class="popup-title-icon-wrapper"></div>
+                                <div class="popup-title-main-text">选择期权费用类型</div>
+                                <div class="popup-title-action-btn">确定</div>
+                            </div>
+                        </section>
+
+                        <div class="pad-vertical-0" style="margin-bottom: 20px;">
+                            <div class="form-option" data-value="income">
+                                <div class="option-content">
+                                    <span class="option-label">收入</span>
+                                </div>
+                                <div class="option-selected">
+                                    <img src="../src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                                </div>
+                            </div>
+                            <div class="form-option" data-value="expense">
+                                <div class="option-content">
+                                    <span class="option-label">支出</span>
+                                </div>
+                                <div class="option-selected">
+                                    <img src="../src/assets/images/selected.png" alt="已选中" class="selected-icon not-selected">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-bar">
+                            <div class="popup-indicator"></div>
+                        </div>
+                        
                         <!-- 弹层手机话筒 -->
                         <div class="phone-speaker-wrap">
                             <div class="phone-speaker">
@@ -778,6 +847,98 @@
                     </div>
                 </div>
 
+                <!-- 有效期选择弹窗 -->
+                <div class="base-mask" id="expiryDateMask" style="display: none;">
+                    <div class="popup-container">
+                        <section class="fb-popup-container">
+                            <div class="fb-popup-panel">
+                                <section class="section-popup-title">
+                                    <div class="popup-title-container">
+                                        <div class="popup-title-icon-wrapper"></div>
+                                        <div class="popup-title-main-text">选择有效期</div>
+                                        <div class="popup-title-action-btn">确定</div>
+                                    </div>
+                                </section>
+
+                                <section class="pad-vertical-0" data-picker="range">
+                                    <div class="date-picker-panel">
+                                        <div class="date-column" id="yearColumn">
+                                            <div class="date-item selected">2024</div>
+                                            <div class="date-item">2025</div>
+                                            <div class="date-item">2026</div>
+                                            <div class="date-item">2027</div>
+                                            <div class="date-item">2028</div>
+                                            <div class="date-item">2029</div>
+                                            <div class="date-item">2030</div>
+                                        </div>
+                                        <div class="date-column" id="monthColumn">
+                                            <div class="date-item selected">1月</div>
+                                            <div class="date-item">2月</div>
+                                            <div class="date-item">3月</div>
+                                            <div class="date-item">4月</div>
+                                            <div class="date-item">5月</div>
+                                            <div class="date-item">6月</div>
+                                            <div class="date-item">7月</div>
+                                            <div class="date-item">8月</div>
+                                            <div class="date-item">9月</div>
+                                            <div class="date-item">10月</div>
+                                            <div class="date-item">11月</div>
+                                            <div class="date-item">12月</div>
+                                        </div>
+                                        <div class="date-column" id="dayColumn">
+                                            <div class="date-item selected">1日</div>
+                                            <div class="date-item">2日</div>
+                                            <div class="date-item">3日</div>
+                                            <div class="date-item">4日</div>
+                                            <div class="date-item">5日</div>
+                                            <div class="date-item">6日</div>
+                                            <div class="date-item">7日</div>
+                                            <div class="date-item">8日</div>
+                                            <div class="date-item">9日</div>
+                                            <div class="date-item">10日</div>
+                                            <div class="date-item">11日</div>
+                                            <div class="date-item">12日</div>
+                                            <div class="date-item">13日</div>
+                                            <div class="date-item">14日</div>
+                                            <div class="date-item">15日</div>
+                                            <div class="date-item">16日</div>
+                                            <div class="date-item">17日</div>
+                                            <div class="date-item">18日</div>
+                                            <div class="date-item">19日</div>
+                                            <div class="date-item">20日</div>
+                                            <div class="date-item">21日</div>
+                                            <div class="date-item">22日</div>
+                                            <div class="date-item">23日</div>
+                                            <div class="date-item">24日</div>
+                                            <div class="date-item">25日</div>
+                                            <div class="date-item">26日</div>
+                                            <div class="date-item">27日</div>
+                                            <div class="date-item">28日</div>
+                                            <div class="date-item">29日</div>
+                                            <div class="date-item">30日</div>
+                                            <div class="date-item">31日</div>
+                                        </div>
+                                    </div>
+                                    <div class="line-container">
+                                        <div class="ele-line"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </section>
+
+                        <div class="bottom-bar">
+                            <div class="popup-indicator"></div>
+                        </div>
+                        
+                        <!-- 弹层手机话筒 -->
+                        <div class="phone-speaker-wrap">
+                            <div class="phone-speaker">
+                                <div class="speaker-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 手机话筒 -->
                 <div class="phone-speaker-wrap">
                     <div class="phone-speaker">
@@ -789,6 +950,8 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="../src/js/base/element.js"></script>
+    <script src="../src/js/form/date-filters.js"></script>
     <script src="js/database_v2.js"></script>
     <script src="js/add-product_v2.js"></script>
 </body>

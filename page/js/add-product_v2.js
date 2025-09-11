@@ -202,7 +202,7 @@ class AddProductPage {
 
 
         // 期限单位选择
-        const periodUnitFields = ['depositPeriodUnit', 'loanPeriodUnit', 'creditPeriodUnit'];
+        const periodUnitFields = ['depositPeriodUnit', 'loanPeriodUnit'];
         periodUnitFields.forEach(fieldId => {
             const field = document.getElementById(fieldId);
             if (field) {
@@ -211,6 +211,22 @@ class AddProductPage {
                 });
             }
         });
+
+        // 有效期选择
+        const expiryDateField = document.getElementById('creditExpiryDate');
+        if (expiryDateField) {
+            expiryDateField.addEventListener('click', () => {
+                this.showExpiryDateOptions();
+            });
+        }
+
+        // 期权费用类型选择
+        const optionFeeTypeField = document.getElementById('optionFeeType');
+        if (optionFeeTypeField) {
+            optionFeeTypeField.addEventListener('click', () => {
+                this.showOptionFeeTypeOptions();
+            });
+        }
 
         // 表单提交
         document.getElementById('productForm').addEventListener('submit', (e) => {
@@ -263,7 +279,7 @@ class AddProductPage {
      */
     bindForeignFields() {
         // 即期/远期字段
-        const spotForwardFields = ['sellAmount', 'exchangeRate'];
+        const spotForwardFields = ['sellAmount', 'buyAmount', 'exchangeRate'];
         spotForwardFields.forEach(fieldId => {
             const field = document.getElementById(fieldId);
             if (field) {
@@ -428,13 +444,37 @@ class AddProductPage {
      */
     calculateSpotForward() {
         const sellAmount = parseFloat(document.getElementById('sellAmount').value) || 0;
+        const buyAmount = parseFloat(document.getElementById('buyAmount').value) || 0;
         const exchangeRate = parseFloat(document.getElementById('exchangeRate').value) || 0;
 
-        if (sellAmount > 0 && exchangeRate > 0) {
-            const buyAmount = sellAmount * exchangeRate;
-            document.getElementById('buyAmount').value = this.formatAmount(buyAmount);
-        } else {
-            document.getElementById('buyAmount').value = '';
+        // 获取当前触发事件的字段
+        const activeElement = document.activeElement;
+        const activeFieldId = activeElement ? activeElement.id : '';
+
+        // 如果输入了卖出金额和汇率，计算买入金额
+        if (sellAmount > 0 && exchangeRate > 0 && (activeFieldId === 'sellAmount' || activeFieldId === 'exchangeRate')) {
+            const calculatedBuyAmount = sellAmount * exchangeRate;
+            document.getElementById('buyAmount').value = this.formatAmount(calculatedBuyAmount);
+        }
+        // 如果输入了买入金额和汇率，计算卖出金额
+        else if (buyAmount > 0 && exchangeRate > 0 && activeFieldId === 'buyAmount') {
+            const calculatedSellAmount = buyAmount / exchangeRate;
+            document.getElementById('sellAmount').value = this.formatAmount(calculatedSellAmount);
+        }
+        // 如果汇率变化且两个金额都有值，根据最后编辑的字段重新计算
+        else if (sellAmount > 0 && buyAmount > 0 && exchangeRate > 0 && activeFieldId === 'exchangeRate') {
+            // 汇率变化时，保持卖出金额不变，重新计算买入金额
+            const calculatedBuyAmount = sellAmount * exchangeRate;
+            document.getElementById('buyAmount').value = this.formatAmount(calculatedBuyAmount);
+        }
+        // 如果输入不足，清空计算结果
+        else if (exchangeRate === 0) {
+            if (sellAmount === 0) {
+                document.getElementById('buyAmount').value = '';
+            }
+            if (buyAmount === 0) {
+                document.getElementById('sellAmount').value = '';
+            }
         }
     }
 
@@ -800,36 +840,11 @@ class AddProductPage {
             errors.push({ field: 'creditAmount', message: '金额不能超过999,999,999.99' });
         }
 
-        // 验证期限单位
-        const periodUnitField = document.getElementById('creditPeriodUnit');
-        const periodUnit = periodUnitField.dataset.value || periodUnitField.value;
-        if (!periodUnit) {
-            errors.push({ field: 'creditPeriodUnit', message: '请选择期限单位' });
-        }
-
-        // 验证期限
-        const period = parseInt(document.getElementById('creditPeriod').value);
-        if (!period || period <= 0) {
-            errors.push({ field: 'creditPeriod', message: '期限需为正整数' });
-        } else if (periodUnit) {
-            // 根据期限单位设置不同的最大值
-            let maxPeriod = 1825; // 默认最大天数
-            let errorMessage = '期限不能超过1825天';
-
-            if (periodUnit === 'year') {
-                maxPeriod = 5; // 最大5年
-                errorMessage = '期限不能超过5年';
-            } else if (periodUnit === 'month') {
-                maxPeriod = 60; // 最大60个月
-                errorMessage = '期限不能超过60个月';
-            } else if (periodUnit === 'day') {
-                maxPeriod = 1825; // 最大1825天
-                errorMessage = '期限不能超过1825天';
-            }
-
-            if (period > maxPeriod) {
-                errors.push({ field: 'creditPeriod', message: errorMessage });
-            }
+        // 验证有效期
+        const expiryDateField = document.getElementById('creditExpiryDate');
+        const expiryDate = expiryDateField.dataset.value || expiryDateField.value;
+        if (!expiryDate) {
+            errors.push({ field: 'creditExpiryDate', message: '请选择有效期' });
         }
 
         // 验证手续费金额
@@ -855,6 +870,8 @@ class AddProductPage {
                 this.validateSpotForwardFields(errors);
             } else if (productName === 'swap') {
                 this.validateSwapFields(errors);
+            } else if (productName === 'option') {
+                this.validateOptionFields(errors);
             }
         }
     }
@@ -891,6 +908,14 @@ class AddProductPage {
             errors.push({ field: 'exchangeRate', message: '汇率需为正数' });
         } else if (exchangeRate > 9999.99) {
             errors.push({ field: 'exchangeRate', message: '汇率不能超过9999.99' });
+        }
+
+        // 验证买入金额
+        const buyAmount = parseFloat(document.getElementById('buyAmount').value);
+        if (!buyAmount || buyAmount <= 0) {
+            errors.push({ field: 'buyAmount', message: '买入金额需为正数且保留2位小数' });
+        } else if (buyAmount > 999999999.99) {
+            errors.push({ field: 'buyAmount', message: '买入金额不能超过999,999,999.99' });
         }
     }
 
@@ -948,6 +973,26 @@ class AddProductPage {
         // 验证掉期一致性
         if (nearBuyCurrency && farSellCurrency && nearBuyCurrency !== farSellCurrency) {
             errors.push({ field: 'farSellCurrency', message: '近端买入币种与远端卖出币种必须一致' });
+        }
+    }
+
+    /**
+     * 验证期权字段
+     */
+    validateOptionFields(errors) {
+        // 验证期权费用类型
+        const optionFeeTypeField = document.getElementById('optionFeeType');
+        const optionFeeType = optionFeeTypeField.dataset.value || optionFeeTypeField.value;
+        if (!optionFeeType) {
+            errors.push({ field: 'optionFeeType', message: '请选择期权费用类型' });
+        }
+
+        // 验证期权费金额
+        const optionFeeAmount = parseFloat(document.getElementById('optionFeeAmount').value);
+        if (!optionFeeAmount || optionFeeAmount <= 0) {
+            errors.push({ field: 'optionFeeAmount', message: '期权费金额需为正数且保留2位小数' });
+        } else if (optionFeeAmount > 999999999.99) {
+            errors.push({ field: 'optionFeeAmount', message: '期权费金额不能超过999,999,999.99' });
         }
     }
 
@@ -1055,15 +1100,14 @@ class AddProductPage {
         const currencyField = document.getElementById('creditCurrency');
         const currency = currencyField.dataset.value || currencyField.value;
 
-        const periodUnitField = document.getElementById('creditPeriodUnit');
-        const periodUnit = periodUnitField.dataset.value || periodUnitField.value;
+        const expiryDateField = document.getElementById('creditExpiryDate');
+        const expiryDate = expiryDateField.dataset.value || expiryDateField.value;
 
         const data = {
             ...baseData,
             currency: currency,
             amount: parseFloat(document.getElementById('creditAmount').value),
-            period: parseInt(document.getElementById('creditPeriod').value),
-            periodUnit: periodUnit,
+            expiryDate: expiryDate,
             feeAmount: parseFloat(document.getElementById('creditFeeAmount').value)
         };
 
@@ -1083,6 +1127,8 @@ class AddProductPage {
                 foreignType = 'foreign_forward';
             } else if (productName === 'swap') {
                 foreignType = 'foreign_swap';
+            } else if (productName === 'option') {
+                foreignType = 'foreign_option';
             }
         }
 
@@ -1126,6 +1172,14 @@ class AddProductPage {
                 farRate: parseFloat(document.getElementById('farRate').value),
                 farSellAmount: parseFloat(document.getElementById('farSellAmount').value) || 0,
                 finalIncome: parseFloat(document.getElementById('finalIncome').value) || 0
+            });
+        } else if (foreignType === 'foreign_option') {
+            const optionFeeTypeField = document.getElementById('optionFeeType');
+            const optionFeeType = optionFeeTypeField.dataset.value || optionFeeTypeField.value;
+            
+            Object.assign(data, {
+                optionFeeType: optionFeeType,
+                optionFeeAmount: parseFloat(document.getElementById('optionFeeAmount').value)
             });
         }
 
@@ -1328,9 +1382,10 @@ class AddProductPage {
      * 衍生产品子类型变化处理
      */
     onDerivativeTypeChange(type) {
-        // 隐藏外汇子表单
+        // 隐藏所有外汇子表单
         document.getElementById('spotForwardForm').style.display = 'none';
         document.getElementById('swapForm').style.display = 'none';
+        document.getElementById('optionForm').style.display = 'none';
 
         if (type === 'forward') {
             document.getElementById('spotForwardForm').style.display = 'block';
@@ -1341,6 +1396,8 @@ class AddProductPage {
             // 更新掉期汇率提示和币种关联
             this.updateSwapRatePlaceholders();
             this.updateSwapCurrencyFields();
+        } else if (type === 'option') {
+            document.getElementById('optionForm').style.display = 'block';
         }
     }
 
@@ -1489,6 +1546,117 @@ class AddProductPage {
             } else if (fieldId === 'loanPeriodUnit') {
                 this.calculateLoan();
             }
+        }
+        
+        // 隐藏弹窗
+        mask.style.display = 'none';
+    }
+
+    /**
+     * 显示有效期选择弹窗
+     */
+    showExpiryDateOptions() {
+        const mask = document.getElementById('expiryDateMask');
+        mask.style.display = 'flex';
+        
+        // 绑定确定按钮事件
+        const confirmBtn = mask.querySelector('.popup-title-action-btn');
+        confirmBtn.onclick = () => {
+            this.confirmExpiryDateSelection();
+        };
+        
+        // 让组件库的JavaScript自动处理日期选择器初始化
+        
+        // 绑定遮罩点击关闭事件
+        mask.onclick = (e) => {
+            if (e.target === mask) {
+                mask.style.display = 'none';
+            }
+        };
+    }
+
+
+    /**
+     * 确认有效期选择
+     */
+    confirmExpiryDateSelection() {
+        const mask = document.getElementById('expiryDateMask');
+        const yearColumn = document.getElementById('yearColumn');
+        const monthColumn = document.getElementById('monthColumn');
+        const dayColumn = document.getElementById('dayColumn');
+        
+        // 获取选中的值
+        const selectedYear = yearColumn.querySelector('.date-item.selected').textContent;
+        const selectedMonth = monthColumn.querySelector('.date-item.selected').textContent;
+        const selectedDay = dayColumn.querySelector('.date-item.selected').textContent;
+        
+        // 格式化日期
+        const year = selectedYear;
+        const month = selectedMonth.replace('月', '').padStart(2, '0');
+        const day = selectedDay.replace('日', '').padStart(2, '0');
+        
+        const formattedDate = `${year}-${month}-${day}`;
+        const displayDate = `${year}年${month}月${day}日`;
+        
+        // 更新输入框显示和存储实际值
+        const inputField = document.getElementById('creditExpiryDate');
+        inputField.value = displayDate;
+        inputField.dataset.value = formattedDate;
+        
+        // 隐藏弹窗
+        mask.style.display = 'none';
+    }
+
+    /**
+     * 显示期权费用类型选择弹窗
+     */
+    showOptionFeeTypeOptions() {
+        const mask = document.getElementById('optionFeeTypeMask');
+        mask.style.display = 'flex';
+        
+        // 绑定确定按钮事件
+        const confirmBtn = mask.querySelector('.popup-title-action-btn');
+        confirmBtn.onclick = () => {
+            this.confirmOptionFeeTypeSelection();
+        };
+        
+        // 绑定选项点击事件
+        const options = mask.querySelectorAll('.form-option');
+        options.forEach(option => {
+            option.onclick = () => {
+                // 移除其他选中状态
+                options.forEach(o => {
+                    o.querySelector('.selected-icon').classList.add('not-selected');
+                });
+                // 添加当前选中状态
+                option.querySelector('.selected-icon').classList.remove('not-selected');
+            };
+        });
+        
+        // 绑定遮罩点击关闭事件
+        mask.onclick = (e) => {
+            if (e.target === mask) {
+                mask.style.display = 'none';
+            }
+        };
+    }
+
+    /**
+     * 确认期权费用类型选择
+     */
+    confirmOptionFeeTypeSelection() {
+        const mask = document.getElementById('optionFeeTypeMask');
+        const selectedOption = mask.querySelector('.form-option .selected-icon:not(.not-selected)');
+        
+        if (selectedOption) {
+            const optionElement = selectedOption.closest('.form-option');
+            const value = optionElement.dataset.value;
+            const text = optionElement.querySelector('.option-label').textContent;
+            
+            // 更新输入框显示和存储实际值
+            const inputField = document.getElementById('optionFeeType');
+            inputField.value = text;
+            inputField.dataset.value = value;
         }
         
         // 隐藏弹窗

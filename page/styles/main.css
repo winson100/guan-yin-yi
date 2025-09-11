@@ -171,6 +171,12 @@
     color: var(--color-white);
 }
 
+/* 期权产品样式 */
+.product-type.option {
+    background-color: #8B4513; /* 马鞍棕色 - 期权 */
+    color: var(--color-white);
+}
+
 /* 衍生品产品样式 */
 .product-type.derivative {
     background-color: #20B2AA; /* 浅海绿色 - 衍生品 */
@@ -350,7 +356,7 @@
 /* 响应式设计 */
 @media (max-width: 480px) {
     .product-list-container {
-        padding: var(--spacing-md);
+        padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
     }
     
     .bottom-actions {

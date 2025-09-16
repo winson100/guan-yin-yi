@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>布局测试</title>
+    <style>
+        body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        .test-container {
+            width: 375px;
+            height: 667px;
+            border: 1px solid #ddd;
+            margin: 20px auto;
+            position: relative;
+            background: white;
+        }
+
+        /* 模拟iPhone样式 */
+        .iphone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 30px;
+            background: black;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+
+        .iphone-screen {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+        }
+
+        /* 模拟状态栏 */
+        .status-bar {
+            height: 20px;
+            background: #f8f8f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 12px;
+            color: #333;
+        }
+
+        /* 模拟导航栏 */
+        .nav-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        /* 主内容区域 */
+        .main-content {
+            height: calc(100vh - 88px); /* 减去状态栏和导航栏的高度 */
+            overflow: hidden;
+        }
+
+        /* 滚动容器 */
+        .scrollable-content {
+            height: 100%;
+            overflow-y: auto;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+        /* 滚动条样式 */
+        .scrollable-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+        }
+
+        /* 测试内容 */
+        .test-content {
+            padding: 20px 0;
+        }
+
+        .announcement-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid #e6e6e6;
+        }
+
+        .announcement-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .announcement-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0 0 8px 0;
+        }
+
+        .announcement-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .announcement-body {
+            padding: 20px;
+        }
+
+        .text-content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* 生成大量测试内容 */
+        .long-content {
+            height: 2000px;
+            background: linear-gradient(to bottom, #f0f0f0, #ffffff, #f0f0f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; margin: 20px;">布局测试 - 模拟iPhone屏幕</h1>
+
+    <div class="test-container">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+            <div class="status-bar">
+                <span>9:41</span>
+                <div style="display: flex; gap: 4px;">
+                    <span>📶</span>
+                    <span>📶</span>
+                    <span>🔋</span>
+                </div>
+            </div>
+
+            <div class="nav-bar">
+                <span>⬅️</span>
+                <span>公告详情</span>
+                <span>🏠</span>
+            </div>
+
+            <div class="main-content">
+                <div class="scrollable-content">
+                    <div class="test-content">
+                        <div class="announcement-item">
+                            <div class="announcement-header">
+                                <h3 class="announcement-title">测试公告标题</h3>
+                                <div class="announcement-meta">
+                                    <span>维护人：张三</span>
+                                    <span>维护时间：2025-01-18 10:30</span>
+                                </div>
+                            </div>
+                            <div class="announcement-body">
+                                <div class="text-content">
+                                    这是一段测试文字内容，用于测试滚动功能是否正常工作。
+                                    这是一段测试文字内容，用于测试滚动功能是否正常工作。
+                                    这是一段测试文字内容，用于测试滚动功能是否正常工作。
+                                    这是一段测试文字内容，用于测试滚动功能是否正常工作。
+                                    这是一段测试文字内容，用于测试滚动功能是否正常工作。
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="announcement-item">
+                            <div class="announcement-header">
+                                <h3 class="announcement-title">另一个测试公告</h3>
+                                <div class="announcement-meta">
+                                    <span>维护人：李四</span>
+                                    <span>维护时间：2025-01-17 15:20</span>
+                                </div>
+                            </div>
+                            <div class="announcement-body">
+                                <div class="text-content">
+                                    这是第二段测试内容，用于验证多个公告的显示效果。
+                                    这是第二段测试内容，用于验证多个公告的显示效果。
+                                    这是第二段测试内容，用于验证多个公告的显示效果。
+                                    这是第二段测试内容，用于验证多个公告的显示效果。
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 模拟大量内容来测试滚动 -->
+                        <div class="long-content">
+                            📜 向下滚动查看更多内容<br>
+                            这是很长的内容区域<br>
+                            用于测试滚动条功能
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 20px;">
+        <p><strong>测试说明：</strong></p>
+        <ul style="text-align: left; display: inline-block;">
+            <li>上方模拟了iPhone屏幕的布局</li>
+            <li>内容区域应该有滚动条</li>
+            <li>可以上下滚动查看内容</li>
+            <li>公告项目之间有间距分隔</li>
+            <li>布局应该适配375px宽度</li>
+        </ul>
+    </div>
+</body>
+</html>

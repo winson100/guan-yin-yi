@@ -5,6 +5,7 @@
 class AddProductPage {
     constructor() {
         this.currentProductType = '';
+        this.currentGroup = 'group1'; // 默认组
         
         // 汇率默认值配置 (以CNY为基准)
         this.exchangeRates = {
@@ -128,6 +129,9 @@ class AddProductPage {
      */
     async init() {
         try {
+            // 获取URL参数
+            this.getUrlParams();
+            
             // 初始化数据库
             await window.productDB.init();
             
@@ -137,6 +141,17 @@ class AddProductPage {
         } catch (error) {
             console.error('页面初始化失败:', error);
             this.showError('页面初始化失败，请刷新重试');
+        }
+    }
+
+    /**
+     * 获取URL参数
+     */
+    getUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const group = urlParams.get('group');
+        if (group && (group === 'group1' || group === 'group2')) {
+            this.currentGroup = group;
         }
     }
 
@@ -1048,7 +1063,8 @@ class AddProductPage {
 
         const baseData = {
             type: productType,
-            name: productName
+            name: productName,
+            group: this.currentGroup
         };
 
         if (productType === 'deposit' || productType === 'loan') {

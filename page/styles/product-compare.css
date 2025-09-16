@@ -1,0 +1,283 @@
+/* 产品组合比较页面样式 */
+
+.main-content {
+    height: 694px;
+    overflow-y: auto;
+    background-color: var(--background-color);
+}
+
+.scrollable-content {
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+/* 产品组区域 */
+.group-section {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg) 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.group-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color-primary);
+    margin: 0;
+}
+
+.group-product-count {
+    font-size: var(--font-size-sm);
+    color: var(--text-color-secondary);
+    background-color: var(--background-color-light);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+}
+
+/* 币种收益区域 */
+.currency-income-section {
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-subtitle {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-color-primary);
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.currency-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.currency-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) 0;
+    background-color: var(--background-color-light);
+}
+
+.currency-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.currency-name {
+    font-size: var(--font-size-26);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-color-primary);
+}
+
+.currency-count {
+    font-size: var(--font-size-24);
+    color: var(--text-color-secondary);
+}
+
+.currency-amount {
+    font-size: var(--font-size-26);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color-primary);
+}
+
+.currency-amount.positive {
+    color: var(--success-color);
+}
+
+.currency-amount.negative {
+    color: var(--error-color);
+}
+
+/* 人民币汇总区域 */
+.cny-summary-section {
+    margin-top: var(--spacing-lg);
+}
+
+.cny-summary-card {
+    background-color: var(--background-color-light);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg) 0;
+}
+
+
+.cny-breakdown {
+    margin-bottom: var(--spacing-lg);
+}
+
+.cny-breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-color-light);
+}
+
+.cny-breakdown-item:last-child {
+    border-bottom: none;
+}
+
+.cny-breakdown-label {
+    font-size: var(--font-size-24);
+    color: var(--text-color-secondary);
+}
+
+.cny-breakdown-amount {
+    font-size: var(--font-size-26);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-color-primary);
+}
+
+.cny-breakdown-amount.positive {
+    color: var(--success-color);
+}
+
+.cny-breakdown-amount.negative {
+    color: var(--error-color);
+}
+
+.cny-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-md);
+    border-top: 2px solid var(--border-color);
+}
+
+.cny-label {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color-primary);
+}
+
+.cny-amount {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--theme-color-5);
+}
+
+.cny-amount.positive {
+    color: var(--auxiliary-color-ac3);
+}
+
+.cny-amount.negative {
+    color: var(--auxiliary-color-ac2);
+}
+
+/* 空状态 */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.empty-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.6;
+}
+
+.empty-text {
+    font-size: var(--font-size-md);
+    color: var(--text-color-secondary);
+    margin: 0;
+}
+
+/* 比较结果区域 */
+.comparison-section {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg) 0;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid var(--primary-color);
+}
+
+.comparison-header {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-color);
+    margin: 0;
+    text-align: center;
+}
+
+.comparison-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.comparison-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--background-color-light);
+    border-radius: var(--border-radius-md);
+}
+
+.comparison-label {
+    font-size: var(--font-size-26);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-color-primary);
+}
+
+.comparison-value {
+    font-size: var(--font-size-26);
+    font-weight: var(--font-weight-bold);
+    color: var(--theme-color-5);
+}
+
+.comparison-value.positive {
+    color: var(--theme-color-5);
+}
+
+.comparison-value.negative {
+    color: var(--theme-color-5);
+}
+
+.comparison-value.neutral {
+    color: var(--theme-color-5);
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .scrollable-content {
+        padding: var(--spacing-md);
+        gap: var(--spacing-md);
+    }
+    
+    .group-section,
+    .comparison-section {
+        padding: var(--spacing-md);
+    }
+    
+    .group-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .comparison-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+}

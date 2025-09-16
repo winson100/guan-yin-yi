@@ -52,44 +52,93 @@
 
                 <!-- 主内容区域 -->
                 <div class="main-content">
-                    <!-- 公告区域 -->
-                    <div class="emphasis-tip" id="announcementTip">
-                        <div class="tip-content-orange">最新报价信息已更新，点击查看详情。</div>
-                    </div>
-                    <!-- 产品列表 -->
-                    <div class="product-list-container"> 
-                        <div class="product-list-header">
-                            <h2 class="list-title">产品列表</h2>
-                            <div class="list-count" id="productCount">共 0 个产品</div>
+                    <div class="main-content-container">
+                        <!-- 公告区域 -->
+                        <div class="emphasis-tip" id="announcementTip">
+                            <div class="tip-content-orange">最新报价信息已更新，点击查看详情。</div>
+                        </div>
+                    
+                    <!-- 产品组1 -->
+                    <div class="product-group-container">
+                        <div class="product-group-header">
+                            <h2 class="group-title">产品组1</h2>
+                            <div class="group-count" id="group1Count">共 0 个产品</div>
                         </div>
                         
-                        <div class="product-list" id="productList">
-                            <!-- 产品列表将通过JavaScript动态生成 -->
+                        <div class="product-list" id="group1ProductList">
+                            <!-- 产品组1列表将通过JavaScript动态生成 -->
                         </div>
                         
-                        <!-- 空状态 -->
-                        <div class="empty-state" id="emptyState" style="display: none;">
+                        <!-- 产品组1空状态 -->
+                        <div class="empty-state" id="group1EmptyState" style="display: none;">
                             <img src="../src/assets/images/emptypage.png" alt="暂无产品" class="empty-icon">
+                            <p class="empty-text">暂无产品，请添加新产品开始测算</p>
                             <div class="empty-action">
-                                <button class="btn-medium btn-secondary" id="addProductBtnEmpty">
+                                <button class="btn-medium btn-secondary" id="addProductGroup1EmptyBtn">
                                     <span class="btn-text">添加新产品</span>
                                 </button>
                             </div>
+                        </div>
+                        
+                        <!-- 产品组1操作按钮 -->
+                        <div class="group-actions" id="group1Actions" style="display: none;">
+                            <button class="btn-medium btn-secondary" id="addProductGroup1Btn">
+                                <span class="btn-text">添加新产品</span>
+                            </button>
+                            <button class="btn-medium btn-outline" id="clearGroup1Btn">
+                                <span class="btn-text">清空产品</span>
+                            </button>
+                            <button class="btn-medium btn-primary" id="summaryGroup1Btn">
+                                <span class="btn-text">汇总收益</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 产品组2 -->
+                    <div class="product-group-container">
+                        <div class="product-group-header">
+                            <h2 class="group-title">产品组2</h2>
+                            <div class="group-count" id="group2Count">共 0 个产品</div>
+                        </div>
+                        
+                        <div class="product-list" id="group2ProductList">
+                            <!-- 产品组2列表将通过JavaScript动态生成 -->
+                        </div>
+                        
+                        <!-- 产品组2空状态 -->
+                        <div class="empty-state" id="group2EmptyState" style="display: none;">
+                            <img src="../src/assets/images/emptypage.png" alt="暂无产品" class="empty-icon">
                             <p class="empty-text">暂无产品，请添加新产品开始测算</p>
+                            <div class="empty-action">
+                                <button class="btn-medium btn-secondary" id="addProductGroup2EmptyBtn">
+                                    <span class="btn-text">添加新产品</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 产品组2操作按钮 -->
+                        <div class="group-actions" id="group2Actions" style="display: none;">
+                            <button class="btn-medium btn-secondary" id="addProductGroup2Btn">
+                                <span class="btn-text">添加新产品</span>
+                            </button>
+                            <button class="btn-medium btn-outline" id="clearGroup2Btn">
+                                <span class="btn-text">清空产品</span>
+                            </button>
+                            <button class="btn-medium btn-primary" id="summaryGroup2Btn">
+                                <span class="btn-text">汇总收益</span>
+                            </button>
                         </div>
                     </div>
 
+                    </div>
                 </div>
                 
                 <!-- 底部按钮区域 -->
                 <div class="bottom-actions">
                     <section class="section">
-                        <div class="btn-group-2">
-                            <button class="btn-large btn-secondary" id="addProductBtn">
-                                <span class="btn-text">添加新产品</span>
-                            </button>
-                            <button class="btn-large btn-primary" id="summaryBtn">
-                                <span class="btn-text">汇总收益</span>
+                        <div class="btn-group-1">
+                            <button class="btn-large btn-primary" id="compareBtn">
+                                <span class="btn-text">产品组合比较</span>
                             </button>
                         </div>
                     </section>
@@ -111,6 +160,20 @@
                             <div class="dlg-footer dlg-footer--horizontal">
                                 <button class="dlg-action-btn" id="cancelDeleteBtn">取消</button>
                                 <button class="dlg-action-btn dlg-action-btn--primary" id="confirmDeleteBtn">确认</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- 清空产品确认弹窗 -->
+                <div class="base-mask" id="clearGroupMask" style="display: none;">
+                    <div class="dialog-popup-container">
+                        <section class="dlg-container">
+                            <div class="dlg-title">确认清空</div>
+                            <div class="dlg-content" id="clearGroupContent">确定要清空该产品组的所有产品吗？此操作不可恢复。</div>
+                            <div class="dlg-footer dlg-footer--horizontal">
+                                <button class="dlg-action-btn" id="cancelClearGroupBtn">取消</button>
+                                <button class="dlg-action-btn dlg-action-btn--primary" id="confirmClearGroupBtn">确认</button>
                             </div>
                         </section>
                     </div>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过期功能调试</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1000px; margin: 0 auto; padding: 20px; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .btn { padding: 8px 16px; margin: 5px; background: #409eff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .btn:hover { background: #66b1ff; }
+        .log { background: #f5f5f5; padding: 10px; border-radius: 4px; font-family: monospace; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #f5f5f5; }
+        .success { color: #67c23a; }
+        .error { color: #f56c6c; }
+        .warning { color: #e6a23c; }
+        input { padding: 5px; margin: 5px; border: 1px solid #ddd; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>过期功能调试工具</h1>
+
+    <div class="section">
+        <h3>1. 测试过期逻辑</h3>
+        <input type="date" id="test-date" style="margin-right: 10px;">
+        <button class="btn" onclick="testExpiryLogic()">测试过期逻辑</button>
+        <div id="expiry-log" class="log"></div>
+    </div>
+
+    <div class="section">
+        <h3>2. 添加历史数据（用于测试过期）</h3>
+        <button class="btn" onclick="addHistoricalData()">添加昨天的数据</button>
+        <button class="btn" onclick="addOldData()">添加3天前的数据</button>
+        <div id="history-log" class="log"></div>
+    </div>
+
+    <div class="section">
+        <h3>3. 查看当前数据状态</h3>
+        <button class="btn" onclick="checkCurrentData()">检查当前数据</button>
+        <div id="current-log" class="log"></div>
+    </div>
+
+    <div class="section">
+        <h3>4. 手动刷新状态</h3>
+        <button class="btn" onclick="refreshStatus()">刷新所有记录状态</button>
+        <div id="refresh-log" class="log"></div>
+    </div>
+
+    <script src="js/database.js"></script>
+    <script src="js/calculatorService.js"></script>
+
+    <script>
+        let dbService = null;
+        let calcService = null;
+
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️';
+            element.textContent += `[${timestamp}] ${prefix} ${message}\n`;
+            element.scrollTop = element.scrollHeight;
+        }
+
+        async function initServices() {
+            try {
+                if (!dbService) {
+                    dbService = window.databaseService;
+                    await dbService.init();
+                }
+
+                if (!calcService) {
+                    calcService = window.calculatorService;
+                }
+
+                await calcService.init();
+                return true;
+            } catch (error) {
+                log('expiry-log', '服务初始化失败: ' + error.message, 'error');
+                return false;
+            }
+        }
+
+        function testExpiryLogic() {
+            document.getElementById('expiry-log').textContent = '';
+
+            const testDate = document.getElementById('test-date').value;
+            if (!testDate) {
+                log('expiry-log', '请选择测试日期', 'warning');
+                return;
+            }
+
+            // 模拟过期检查逻辑
+            const createTime = new Date(testDate + 'T00:00:00.000Z').toISOString();
+            const isExpired = calcService.checkRecordExpired(createTime);
+
+            log('expiry-log', `测试日期: ${testDate}`);
+            log('expiry-log', `创建时间: ${createTime}`);
+            log('expiry-log', `是否过期: ${isExpired ? '是' : '否'}`);
+
+            const createDate = new Date(createTime);
+            const today = new Date();
+            const createDateOnly = new Date(createDate.getFullYear(), createDate.getMonth(), createDate.getDate());
+            const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            const diffTime = todayOnly.getTime() - createDateOnly.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            log('expiry-log', `天数差: ${diffDays} 天`);
+            log('expiry-log', `过期判断: ${diffDays >= 2 ? '已过期' : '有效'}`);
+        }
+
+        async function addHistoricalData() {
+            document.getElementById('history-log').textContent = '';
+
+            const success = await initServices();
+            if (!success) return;
+
+            try {
+                // 创建昨天的数据
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                const yesterdayStr = yesterday.toISOString();
+
+                const testData = {
+                    title: `昨天的数据 ${new Date().toLocaleTimeString()}`,
+                    maintainer: '测试用户',
+                    contentBlocks: [{
+                        id: 'test_' + Date.now(),
+                        type: 'text',
+                        content: '这是昨天创建的数据',
+                        order: 0
+                    }],
+                    createTime: yesterdayStr,
+                    updateTime: yesterdayStr
+                };
+
+                log('history-log', '准备添加昨天的数据...');
+                const result = await calcService.addCalculatorSetting(testData);
+                log('history-log', `数据添加成功，ID: ${result.id}`, 'success');
+
+            } catch (error) {
+                log('history-log', '添加历史数据失败: ' + error.message, 'error');
+            }
+        }
+
+        async function addOldData() {
+            document.getElementById('history-log').textContent = '';
+
+            const success = await initServices();
+            if (!success) return;
+
+            try {
+                // 创建3天前的数据
+                const oldDate = new Date();
+                oldDate.setDate(oldDate.getDate() - 3);
+                const oldDateStr = oldDate.toISOString();
+
+                const testData = {
+                    title: `3天前的数据 ${new Date().toLocaleTimeString()}`,
+                    maintainer: '测试用户',
+                    contentBlocks: [{
+                        id: 'test_' + Date.now(),
+                        type: 'text',
+                        content: '这是3天前创建的数据，应该已过期',
+                        order: 0
+                    }],
+                    createTime: oldDateStr,
+                    updateTime: oldDateStr
+                };
+
+                log('history-log', '准备添加3天前的数据...');
+                const result = await calcService.addCalculatorSetting(testData);
+                log('history-log', `数据添加成功，ID: ${result.id}`, 'success');
+
+            } catch (error) {
+                log('history-log', '添加历史数据失败: ' + error.message, 'error');
+            }
+        }
+
+        async function checkCurrentData() {
+            document.getElementById('current-log').innerHTML = '';
+
+            const success = await initServices();
+            if (!success) return;
+
+            try {
+                const data = await calcService.getCalculatorSettings();
+                log('current-log', `找到 ${data.length} 条记录`, 'success');
+
+                if (data.length === 0) {
+                    log('current-log', '数据库为空');
+                    return;
+                }
+
+                let tableHtml = '<table><thead><tr><th>ID</th><th>标题</th><th>状态</th><th>创建时间</th><th>过期状态</th><th>过期信息</th></tr></thead><tbody>';
+
+                data.forEach(item => {
+                    const createTime = item.createTimeFormatted || '未知';
+                    const statusText = item.statusText || '未知';
+                    const expireInfo = item.expireInfo || '未知';
+
+                    tableHtml += `<tr>
+                        <td>${item.id}</td>
+                        <td>${item.title || '无标题'}</td>
+                        <td>${statusText}</td>
+                        <td>${createTime}</td>
+                        <td>${item.isExpired ? '已过期' : '有效'}</td>
+                        <td>${expireInfo}</td>
+                    </tr>`;
+                });
+
+                tableHtml += '</tbody></table>';
+                document.getElementById('current-log').innerHTML += tableHtml;
+
+            } catch (error) {
+                log('current-log', '获取数据失败: ' + error.message, 'error');
+            }
+        }
+
+        async function refreshStatus() {
+            document.getElementById('refresh-log').textContent = '';
+
+            const success = await initServices();
+            if (!success) return;
+
+            try {
+                log('refresh-log', '刷新所有记录状态...');
+                const data = await calcService.getCalculatorSettings();
+                log('refresh-log', `已刷新 ${data.length} 条记录的状态`, 'success');
+
+                const expiredCount = data.filter(item => item.isExpired).length;
+                const activeCount = data.filter(item => !item.isExpired).length;
+
+                log('refresh-log', `有效记录: ${activeCount} 条`);
+                log('refresh-log', `过期记录: ${expiredCount} 条`);
+
+            } catch (error) {
+                log('refresh-log', '刷新状态失败: ' + error.message, 'error');
+            }
+        }
+
+        // 设置默认测试日期为昨天
+        window.addEventListener('load', () => {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            document.getElementById('test-date').value = yesterday.toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>

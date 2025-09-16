@@ -1,0 +1,292 @@
+/* 公告详情页面样式 - 内容直接放在scrollable-content中 */
+
+/* 滚动容器样式 - 确保内容可以滚动 */
+.scrollable-content {
+    padding: 16px;
+    min-height: 400px;
+    max-height: calc(100vh - 120px); /* 减去导航栏和状态栏的高度 */
+    overflow-y: auto;
+    overflow-x: hidden; /* 防止水平滚动 */
+    -webkit-overflow-scrolling: touch; /* iOS滚动优化 */
+    box-sizing: border-box;
+}
+
+/* 确保主内容区域不溢出 */
+.main-content {
+    height: calc(100vh - 88px); /* 减去状态栏和导航栏的高度 */
+    overflow: hidden;
+}
+
+/* 自定义滚动条样式 */
+.scrollable-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* 加载状态样式 */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    color: #666666;
+}
+
+.loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #409eff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 公告列表样式 */
+.announcement-list {
+    width: 100%;
+}
+
+/* 单个公告样式 */
+.announcement-item {
+    background: #ffffff;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: none;
+}
+
+.announcement-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #f5f5f5;
+}
+
+.announcement-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c2c2c;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.announcement-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #5a5a5a;
+}
+
+.announcement-maintainer {
+    font-weight: 500;
+    color: #4a4a4a;
+}
+
+.announcement-time {
+    color: #6a6a6a;
+}
+
+/* 公告内容样式 */
+.announcement-body {
+    padding: 20px;
+    background: #ffffff;
+}
+
+/* 内容块样式 */
+.content-block {
+    margin-bottom: 20px;
+}
+
+.content-block:last-child {
+    margin-bottom: 0;
+}
+
+/* 文字块样式 */
+.text-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1a1a1a;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* 图片块样式 */
+.image-content {
+    margin: 16px 0;
+}
+
+.image-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.image-caption {
+    font-size: 14px;
+    color: #555555;
+    text-align: center;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* 公告分隔符 */
+.announcement-separator {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #cccccc 50%, transparent 100%);
+    margin: 24px 0;
+}
+
+/* 空状态样式 */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+    color: #666666;
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 16px;
+    color: #666666;
+}
+
+/* 响应式设计 */
+@media (max-width: 375px) {
+    .scrollable-content {
+        padding: 12px;
+        max-height: calc(100vh - 100px); /* 在小屏幕上稍微减少高度 */
+    }
+
+    .main-content {
+        height: calc(100vh - 80px); /* 在小屏幕上调整高度 */
+    }
+
+    .announcement-header {
+        padding: 12px 16px;
+    }
+
+    .announcement-title {
+        font-size: 16px;
+    }
+
+    .announcement-meta {
+        font-size: 11px;
+    }
+
+    .announcement-body {
+        padding: 16px;
+    }
+
+    .text-content {
+        font-size: 15px;
+    }
+
+    .empty-state {
+        padding: 60px 20px;
+    }
+}
+
+/* 大屏幕优化 */
+@media (min-width: 376px) {
+    .scrollable-content {
+        max-height: calc(100vh - 140px); /* 在大屏幕上增加高度 */
+    }
+
+    .main-content {
+        height: calc(100vh - 100px);
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .announcement-item {
+        background: #2d2d2d;
+        border-color: #444;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .announcement-header {
+        background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 100%);
+        border-bottom-color: #555;
+    }
+
+    .announcement-title {
+        color: #e6e6e6;
+    }
+
+    .announcement-meta {
+        color: #ccc;
+    }
+
+    .announcement-maintainer {
+        color: #66b1ff;
+    }
+
+    .announcement-time {
+        color: #999;
+    }
+
+    .text-content {
+        color: #e6e6e6;
+    }
+
+    .announcement-separator {
+        background: linear-gradient(90deg, transparent 0%, #555 50%, transparent 100%);
+    }
+}
+
+/* 动画效果 */
+.announcement-item {
+    animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 加载动画延迟 */
+.announcement-item:nth-child(1) { animation-delay: 0.1s; }
+.announcement-item:nth-child(2) { animation-delay: 0.2s; }
+.announcement-item:nth-child(3) { animation-delay: 0.3s; }
+.announcement-item:nth-child(4) { animation-delay: 0.4s; }
+.announcement-item:nth-child(5) { animation-delay: 0.5s; }

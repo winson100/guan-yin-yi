@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品组合收益测算器 - 后台管理系统</title>
+    <!-- 引入Element UI样式 -->
+    <link rel="stylesheet" href="../assets/lib/element-ui/index.css">
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <div id="app">
+        <el-container class="admin-container">
+            <!-- 头部导航 -->
+            <el-header class="admin-header">
+                <div class="header-content">
+                    <h1 class="system-title">产品组合收益测算器管理系统</h1>
+                    <div class="header-actions">
+                        <el-button type="text" @click="logout">退出登录</el-button>
+                    </div>
+                </div>
+            </el-header>
+
+            <el-container>
+                <!-- 侧边栏 -->
+                <el-aside width="200px" class="admin-sidebar">
+                    <el-menu
+                        :default-active="activeMenu"
+                        class="sidebar-menu"
+                        @select="handleMenuSelect">
+                        <el-menu-item index="calculator-settings">
+                            <i class="el-icon-setting"></i>
+                            <span slot="title">测算器设置</span>
+                        </el-menu-item>
+                        <el-menu-item index="system-settings">
+                            <i class="el-icon-s-tools"></i>
+                            <span slot="title">系统设置</span>
+                        </el-menu-item>
+                    </el-menu>
+                </el-aside>
+
+                <!-- 主内容区 -->
+                <el-main class="admin-main">
+                    <!-- 测算器设置页面 -->
+                    <div v-if="currentPage === 'calculator-settings'" class="page-content">
+                        <div class="page-header">
+                            <h2>测算器设置</h2>
+                            <el-button type="primary" @click="goToAddPage">
+                                <i class="el-icon-plus"></i>
+                                新增
+                            </el-button>
+                        </div>
+
+                        <!-- 查询条件 -->
+                        <el-card class="search-card" shadow="never">
+                            <el-form :model="searchForm" :inline="true" class="search-form">
+                                <el-form-item label="状态">
+                                    <el-select v-model="searchForm.status" placeholder="请选择状态" clearable>
+                                        <el-option label="生效" value="active"></el-option>
+                                        <el-option label="失效" value="inactive"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" @click="searchData">
+                                        <i class="el-icon-search"></i>
+                                        查询
+                                    </el-button>
+                                    <el-button @click="resetSearch">
+                                        <i class="el-icon-refresh"></i>
+                                        重置
+                                    </el-button>
+                                </el-form-item>
+                            </el-form>
+                        </el-card>
+
+                        <!-- 数据列表 -->
+                        <el-card class="table-card" shadow="never">
+                            <el-table
+                                :data="tableData"
+                                v-loading="loading"
+                                @selection-change="handleSelectionChange"
+                                style="width: 100%">
+                                <el-table-column type="selection" width="55"></el-table-column>
+                                <el-table-column prop="id" label="序号" width="80"></el-table-column>
+                                <el-table-column prop="title" label="标题" min-width="200"></el-table-column>
+                                <el-table-column prop="status" label="状态" width="120">
+                                    <template slot-scope="scope">
+                                        <div class="status-column">
+                                            <el-tag :type="scope.row.status === 'active' ? 'success' : 'info'">
+                                                {{ scope.row.statusText }}
+                                            </el-tag>
+                                            <span v-if="scope.row.isExpired" class="expired-info">({{ scope.row.expireInfo }})</span>
+                                        </div>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="maintainer" label="维护人" width="120"></el-table-column>
+                                <el-table-column prop="updateTime" label="维护时间" width="180"></el-table-column>
+                                <el-table-column label="操作" width="200" fixed="right">
+                                    <template slot-scope="scope">
+                                        <el-button size="mini" @click="editItem(scope.row)">修改</el-button>
+                                        <el-button 
+                                            size="mini" 
+                                            type="danger" 
+                                            @click="deleteItem(scope.row)"
+                                            :disabled="scope.row.status === 'inactive'">
+                                            删除
+                                        </el-button>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+
+                            <!-- 分页 -->
+                            <div class="pagination-container">
+                                <el-pagination
+                                    @size-change="handleSizeChange"
+                                    @current-change="handleCurrentChange"
+                                    :current-page="pagination.currentPage"
+                                    :page-sizes="[10, 20, 50, 100]"
+                                    :page-size="pagination.pageSize"
+                                    layout="total, sizes, prev, pager, next, jumper"
+                                    :total="pagination.total">
+                                </el-pagination>
+                            </div>
+                        </el-card>
+                    </div>
+
+                    <!-- 系统设置页面 -->
+                    <div v-if="currentPage === 'system-settings'" class="page-content">
+                        <div class="page-header">
+                            <h2>系统设置</h2>
+                        </div>
+                        <el-card>
+                            <p>系统设置功能开发中...</p>
+                        </el-card>
+                    </div>
+                </el-main>
+            </el-container>
+        </el-container>
+    </div>
+
+    <!-- 引入Vue.js -->
+    <script src="../assets/lib/vue/vue.min.js"></script>
+    <!-- 引入Element UI -->
+    <script src="../assets/lib/element-ui/index.js"></script>
+    <!-- 引入开发工具 -->
+    <script src="../assets/lib/stagewise-dev.js"></script>
+    <!-- 引入业务逻辑 -->
+    <script src="../js/database.js"></script>
+    <script src="../js/calculatorService.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

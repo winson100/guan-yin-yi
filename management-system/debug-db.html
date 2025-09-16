@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据库调试</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .btn { padding: 8px 16px; margin: 5px; background: #409eff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .btn:hover { background: #66b1ff; }
+        .btn.danger { background: #f56c6c; }
+        .btn.danger:hover { background: #f78989; }
+        .log { background: #f5f5f5; padding: 10px; border-radius: 4px; font-family: monospace; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #f5f5f5; }
+        .success { color: #67c23a; }
+        .error { color: #f56c6c; }
+        input, select { padding: 5px; margin: 5px; border: 1px solid #ddd; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>数据库调试工具</h1>
+
+    <div class="section">
+        <h3>1. 检查IndexedDB状态</h3>
+        <button class="btn" onclick="checkDB()">检查数据库</button>
+        <div id="db-log" class="log"></div>
+    </div>
+
+    <div class="section">
+        <h3>2. 查看所有数据</h3>
+        <button class="btn" onclick="viewAllData()">查看所有数据</button>
+        <div id="data-log" class="log"></div>
+    </div>
+
+    <div class="section">
+        <h3>3. 添加测试数据</h3>
+        <button class="btn" onclick="addTestData()">添加测试数据</button>
+        <div id="add-log" class="log"></div>
+    </div>
+
+    <div class="section">
+        <h3>4. 测试获取数据</h3>
+        <input type="text" id="test-id" placeholder="输入ID">
+        <select id="id-type">
+            <option value="auto">自动转换</option>
+            <option value="string">字符串</option>
+            <option value="number">数字</option>
+        </select>
+        <button class="btn" onclick="getDataById()">获取数据</button>
+        <div id="get-log" class="log"></div>
+    </div>
+
+    <div class="section">
+        <h3>5. 清空数据库</h3>
+        <button class="btn danger" onclick="clearDB()">清空所有数据</button>
+        <div id="clear-log" class="log"></div>
+    </div>
+
+    <script src="js/database.js"></script>
+    <script src="js/calculatorService.js"></script>
+
+    <script>
+        let dbService = null;
+        let calcService = null;
+
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : 'ℹ️';
+            element.textContent += `[${timestamp}] ${prefix} ${message}\n`;
+            element.scrollTop = element.scrollHeight;
+        }
+
+        async function initServices() {
+            try {
+                if (!dbService) {
+                    dbService = window.databaseService;
+                    await dbService.init();
+                    log('db-log', '数据库初始化成功', 'success');
+                }
+
+                if (!calcService) {
+                    calcService = window.calculatorService;
+                    await calcService.init();
+                    log('db-log', '计算器服务初始化成功', 'success');
+                }
+
+                return true;
+            } catch (error) {
+                log('db-log', '服务初始化失败: ' + error.message, 'error');
+                return false;
+            }
+        }
+
+        async function checkDB() {
+            document.getElementById('db-log').textContent = '';
+
+            if (!window.indexedDB) {
+                log('db-log', '浏览器不支持IndexedDB', 'error');
+                return;
+            }
+
+            log('db-log', '浏览器支持IndexedDB');
+
+            const success = await initServices();
+            if (!success) return;
+
+            if (dbService.db) {
+                log('db-log', `数据库连接成功: ${dbService.db.name} v${dbService.db.version}`, 'success');
+                const stores = Array.from(dbService.db.objectStoreNames);
+                log('db-log', `对象存储: ${stores.join(', ')}`, 'success');
+            } else {
+                log('db-log', '数据库连接失败', 'error');
+            }
+        }
+
+        async function viewAllData() {
+            document.getElementById('data-log').innerHTML = '';
+
+            const success = await initServices();
+            if (!success) return;
+
+            try {
+                const data = await calcService.getCalculatorSettings();
+                log('data-log', `找到 ${data.length} 条记录`, 'success');
+
+                if (data.length === 0) {
+                    log('data-log', '数据库为空');
+                    return;
+                }
+
+                let tableHtml = '<table><thead><tr><th>ID</th><th>类型</th><th>标题</th><th>状态</th><th>内容块</th><th>创建时间</th></tr></thead><tbody>';
+
+                data.forEach(item => {
+                    const idType = typeof item.id;
+                    const contentBlocks = item.contentBlocks || [];
+                    const createTime = item.createTime ? new Date(item.createTime).toLocaleString() : '未知';
+
+                    tableHtml += `<tr>
+                        <td>${item.id} (${idType})</td>
+                        <td>${item.title || '无标题'}</td>
+                        <td>${item.status || 'unknown'}</td>
+                        <td>${contentBlocks.length} 个</td>
+                        <td>${createTime}</td>
+                    </tr>`;
+                });
+
+                tableHtml += '</tbody></table>';
+                document.getElementById('data-log').innerHTML += tableHtml;
+
+            } catch (error) {
+                log('data-log', '获取数据失败: ' + error.message, 'error');
+            }
+        }
+
+        async function addTestData() {
+            document.getElementById('add-log').textContent = '';
+
+            const success = await initServices();
+            if (!success) return;
+
+            try {
+                const testData = {
+                    title: '测试数据 ' + new Date().toLocaleTimeString(),
+                    maintainer: '测试用户',
+                    contentBlocks: [{
+                        id: 'test_' + Date.now(),
+                        type: 'text',
+                        content: '这是测试内容',
+                        order: 0
+                    }]
+                };
+
+                log('add-log', '准备添加数据...');
+                log('add-log', JSON.stringify(testData, null, 2));
+
+                const result = await calcService.addCalculatorSetting(testData);
+
+                log('add-log', `数据添加成功，ID: ${result.id} (类型: ${typeof result.id})`, 'success');
+                log('add-log', '请刷新页面查看最新数据');
+
+            } catch (error) {
+                log('add-log', '添加数据失败: ' + error.message, 'error');
+                console.error('添加数据错误:', error);
+            }
+        }
+
+        async function getDataById() {
+            document.getElementById('get-log').textContent = '';
+
+            const inputId = document.getElementById('test-id').value.trim();
+            const idType = document.getElementById('id-type').value;
+
+            if (!inputId) {
+                log('get-log', '请输入ID', 'error');
+                return;
+            }
+
+            const success = await initServices();
+            if (!success) return;
+
+            try {
+                let searchId = inputId;
+
+                if (idType === 'number') {
+                    searchId = parseInt(inputId);
+                } else if (idType === 'string') {
+                    searchId = String(inputId);
+                }
+                // auto模式保持原样
+
+                log('get-log', `搜索ID: ${searchId} (类型: ${typeof searchId})`);
+
+                const data = await calcService.getCalculatorSettingById(searchId);
+
+                if (data) {
+                    log('get-log', '找到数据:', 'success');
+                    log('get-log', JSON.stringify(data, null, 2));
+                } else {
+                    log('get-log', `未找到ID为 ${searchId} 的数据`, 'error');
+                    log('get-log', '请检查ID类型是否正确（数字 vs 字符串）');
+                }
+
+            } catch (error) {
+                log('get-log', '获取数据失败: ' + error.message, 'error');
+                console.error('获取数据错误:', error);
+            }
+        }
+
+        async function clearDB() {
+            if (!confirm('确定要清空所有数据吗？此操作不可恢复！')) {
+                return;
+            }
+
+            document.getElementById('clear-log').textContent = '';
+
+            const success = await initServices();
+            if (!success) return;
+
+            try {
+                await dbService.clearAllData();
+                log('clear-log', '所有数据已清空', 'success');
+            } catch (error) {
+                log('clear-log', '清空数据失败: ' + error.message, 'error');
+            }
+        }
+
+        // 页面加载时自动检查
+        window.addEventListener('load', () => {
+            setTimeout(checkDB, 100);
+        });
+    </script>
+</body>
+</html>

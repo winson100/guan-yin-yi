@@ -6,7 +6,7 @@
 class ProductDatabase {
     constructor() {
         this.dbName = 'ProductCalculatorDB';
-        this.dbVersion = 1;
+        this.dbVersion = 2; // 增加版本号以支持组字段
         this.storeName = 'products';
         this.db = null;
     }
@@ -29,6 +29,8 @@ class ProductDatabase {
 
             request.onupgradeneeded = (event) => {
                 const db = event.target.result;
+                const transaction = event.target.transaction;
+                const oldVersion = event.oldVersion;
                 
                 // 创建产品存储对象
                 if (!db.objectStoreNames.contains(this.storeName)) {
@@ -40,6 +42,15 @@ class ProductDatabase {
                     // 创建索引
                     store.createIndex('type', 'type', { unique: false });
                     store.createIndex('createTime', 'createTime', { unique: false });
+                    store.createIndex('group', 'group', { unique: false });
+                } else if (oldVersion < 2) {
+                    // 从版本1升级到版本2，添加group索引
+                    const store = transaction.objectStore(this.storeName);
+                    
+                    // 检查是否已有group索引，如果没有则添加
+                    if (!store.indexNames.contains('group')) {
+                        store.createIndex('group', 'group', { unique: false });
+                    }
                 }
             };
         });
@@ -99,6 +110,61 @@ class ProductDatabase {
                 reject(new Error('获取产品列表失败'));
             };
         });
+    }
+
+    /**
+     * 根据组获取产品
+     */
+    async getProductsByGroup(group) {
+        if (!this.db) {
+            await this.init();
+        }
+
+        return new Promise((resolve, reject) => {
+            const transaction = this.db.transaction([this.storeName], 'readonly');
+            const store = transaction.objectStore(this.storeName);
+            
+            // 尝试使用group索引
+            try {
+                const index = store.index('group');
+                const request = index.getAll(group);
+
+                request.onsuccess = () => {
+                    // 按创建时间排序（从旧到新）
+                    const products = request.result.sort((a, b) => a.createTime - b.createTime);
+                    resolve(products);
+                };
+
+                request.onerror = () => {
+                    // 如果索引查询失败，使用备用方案
+                    this.getProductsByGroupFallback(group, resolve, reject);
+                };
+            } catch (error) {
+                // 如果索引不存在，使用备用方案
+                this.getProductsByGroupFallback(group, resolve, reject);
+            }
+        });
+    }
+
+    /**
+     * 备用方案：通过获取所有产品然后过滤来获取组产品
+     */
+    getProductsByGroupFallback(group, resolve, reject) {
+        const transaction = this.db.transaction([this.storeName], 'readonly');
+        const store = transaction.objectStore(this.storeName);
+        const request = store.getAll();
+
+        request.onsuccess = () => {
+            // 过滤指定组的产品，如果没有group字段则默认为group1
+            const products = request.result.filter(product => 
+                (product.group || 'group1') === group
+            ).sort((a, b) => a.createTime - b.createTime);
+            resolve(products);
+        };
+
+        request.onerror = () => {
+            reject(new Error('获取组产品列表失败'));
+        };
     }
 
     /**

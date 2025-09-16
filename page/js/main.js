@@ -5,6 +5,7 @@
 class MainPage {
     constructor() {
         this.currentDeleteId = null;
+        this.currentClearGroup = null;
         this.init();
     }
 
@@ -42,19 +43,37 @@ class MainPage {
             this.goHome();
         });
 
-        // 添加新产品按钮
-        document.getElementById('addProductBtn').addEventListener('click', () => {
-            this.goToAddProduct();
+        // 产品组1按钮
+        document.getElementById('addProductGroup1EmptyBtn').addEventListener('click', () => {
+            this.goToAddProduct('group1');
+        });
+        document.getElementById('addProductGroup1Btn').addEventListener('click', () => {
+            this.goToAddProduct('group1');
+        });
+        document.getElementById('clearGroup1Btn').addEventListener('click', () => {
+            this.clearGroup('group1');
+        });
+        document.getElementById('summaryGroup1Btn').addEventListener('click', () => {
+            this.goToSummary('group1');
         });
 
-        // 空状态添加新产品按钮
-        document.getElementById('addProductBtnEmpty').addEventListener('click', () => {
-            this.goToAddProduct();
+        // 产品组2按钮
+        document.getElementById('addProductGroup2EmptyBtn').addEventListener('click', () => {
+            this.goToAddProduct('group2');
+        });
+        document.getElementById('addProductGroup2Btn').addEventListener('click', () => {
+            this.goToAddProduct('group2');
+        });
+        document.getElementById('clearGroup2Btn').addEventListener('click', () => {
+            this.clearGroup('group2');
+        });
+        document.getElementById('summaryGroup2Btn').addEventListener('click', () => {
+            this.goToSummary('group2');
         });
 
-        // 汇总收益按钮
-        document.getElementById('summaryBtn').addEventListener('click', () => {
-            this.goToSummary();
+        // 产品组合比较按钮
+        document.getElementById('compareBtn').addEventListener('click', () => {
+            this.goToCompare();
         });
 
         // 删除确认弹窗
@@ -64,6 +83,15 @@ class MainPage {
 
         document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
             this.confirmDelete();
+        });
+
+        // 清空产品组确认弹窗
+        document.getElementById('cancelClearGroupBtn').addEventListener('click', () => {
+            this.hideClearGroupDialog();
+        });
+
+        document.getElementById('confirmClearGroupBtn').addEventListener('click', () => {
+            this.confirmClearGroup();
         });
 
         // 帮助弹窗（保留，因为HTML中还有帮助弹窗）
@@ -82,39 +110,63 @@ class MainPage {
      */
     async loadProductList() {
         try {
-            const productList = document.getElementById('productList');
-            const emptyState = document.getElementById('emptyState');
-            const productCount = document.getElementById('productCount');
-
-            // 显示加载状态
-            productList.innerHTML = '<div class="loading">加载中...</div>';
-
             // 获取产品数据
             const products = await window.productDB.getAllProducts();
             
-            // 更新产品数量
-            productCount.textContent = `共 ${products.length} 个产品`;
-
-            if (products.length === 0) {
-                // 显示空状态
-                productList.style.display = 'none';
-                emptyState.style.display = 'block';
-                return;
-            }
-
-            // 隐藏空状态
-            emptyState.style.display = 'none';
-            productList.style.display = 'block';
-
-            // 渲染产品列表
-            productList.innerHTML = products.map(product => this.renderProductItem(product)).join('');
-
-            // 绑定产品项事件
+            // 按组分组产品
+            const group1Products = products.filter(product => (product.group || 'group1') === 'group1');
+            const group2Products = products.filter(product => product.group === 'group2');
+            
+            // 加载产品组1
+            await this.loadProductGroup('group1', group1Products);
+            
+            // 加载产品组2
+            await this.loadProductGroup('group2', group2Products);
+            
+            // 统一绑定产品项事件
             this.bindProductEvents();
 
         } catch (error) {
             console.error('加载产品列表失败:', error);
             this.showError('加载产品列表失败');
+        }
+    }
+
+    /**
+     * 加载指定组的产品列表
+     */
+    async loadProductGroup(groupId, products) {
+        try {
+            const productList = document.getElementById(`${groupId}ProductList`);
+            const emptyState = document.getElementById(`${groupId}EmptyState`);
+            const groupActions = document.getElementById(`${groupId}Actions`);
+            const groupCount = document.getElementById(`${groupId}Count`);
+
+            // 显示加载状态
+            productList.innerHTML = '<div class="loading">加载中...</div>';
+
+            // 更新产品数量
+            groupCount.textContent = `共 ${products.length} 个产品`;
+
+            if (products.length === 0) {
+                // 显示空状态，隐藏操作按钮
+                productList.style.display = 'none';
+                emptyState.style.display = 'block';
+                groupActions.style.display = 'none';
+                return;
+            }
+
+            // 隐藏空状态，显示操作按钮
+            emptyState.style.display = 'none';
+            productList.style.display = 'block';
+            groupActions.style.display = 'flex';
+
+            // 渲染产品列表
+            productList.innerHTML = products.map(product => this.renderProductItem(product)).join('');
+
+        } catch (error) {
+            console.error(`加载${groupId}产品列表失败:`, error);
+            this.showError(`加载${groupId}产品列表失败`);
         }
     }
 
@@ -533,9 +585,19 @@ class MainPage {
     /**
      * 编辑产品
      */
-    editProduct(productId) {
-        // 跳转到编辑页面
-        window.location.href = `edit-product.html?id=${productId}`;
+    async editProduct(productId) {
+        try {
+            // 获取产品信息以确定组
+            const product = await window.productDB.getProductById(productId);
+            const group = product.group || 'group1';
+            
+            // 跳转到编辑页面，传递组参数
+            window.location.href = `edit-product.html?id=${productId}&group=${group}`;
+        } catch (error) {
+            console.error('获取产品信息失败:', error);
+            // 如果获取失败，使用默认组
+            window.location.href = `edit-product.html?id=${productId}&group=group1`;
+        }
     }
 
     /**
@@ -697,15 +759,110 @@ class MainPage {
         messageElement.className = `${type}-message`;
         messageElement.textContent = message;
         
-        const container = document.querySelector('.product-list-container');
-        container.insertBefore(messageElement, container.firstChild);
-        
-        // 3秒后自动移除
-        setTimeout(() => {
-            if (messageElement.parentNode) {
-                messageElement.parentNode.removeChild(messageElement);
+        // 使用主内容容器作为消息容器
+        const container = document.querySelector('.main-content-container');
+        if (container) {
+            container.insertBefore(messageElement, container.firstChild);
+            
+            // 3秒后自动移除
+            setTimeout(() => {
+                if (messageElement.parentNode) {
+                    messageElement.parentNode.removeChild(messageElement);
+                }
+            }, 3000);
+        } else {
+            // 如果容器不存在，使用简单的alert作为备用方案
+            alert(message);
+        }
+    }
+
+    /**
+     * 跳转到添加产品页面（带组参数）
+     */
+    goToAddProduct(group = 'group1') {
+        window.location.href = `add-product_v2.html?group=${group}`;
+    }
+
+    /**
+     * 跳转到汇总收益页面（带组参数）
+     */
+    goToSummary(group = 'group1') {
+        window.location.href = `summary.html?group=${group}`;
+    }
+
+    /**
+     * 清空指定组的所有产品
+     */
+    async clearGroup(group) {
+        try {
+            const products = await window.productDB.getAllProducts();
+            const groupProducts = products.filter(product => (product.group || 'group1') === group);
+            
+            if (groupProducts.length === 0) {
+                this.showMessage(`${group === 'group1' ? '产品组1' : '产品组2'}暂无产品`, 'info');
+                return;
             }
-        }, 3000);
+
+            // 显示确认弹层
+            this.showClearGroupDialog(group);
+
+        } catch (error) {
+            console.error('清空产品组失败:', error);
+            this.showError('清空产品组失败');
+        }
+    }
+
+    /**
+     * 显示清空产品组确认弹层
+     */
+    showClearGroupDialog(group) {
+        this.currentClearGroup = group;
+        const groupName = group === 'group1' ? '产品组1' : '产品组2';
+        document.getElementById('clearGroupContent').textContent = `确定要清空${groupName}的所有产品吗？此操作不可恢复。`;
+        document.getElementById('clearGroupMask').style.display = 'flex';
+    }
+
+    /**
+     * 确认清空产品组
+     */
+    async confirmClearGroup() {
+        try {
+            const group = this.currentClearGroup;
+            const products = await window.productDB.getAllProducts();
+            const groupProducts = products.filter(product => (product.group || 'group1') === group);
+
+            // 删除组内所有产品
+            for (const product of groupProducts) {
+                await window.productDB.deleteProduct(product.id);
+            }
+
+            this.showMessage(`已清空${group === 'group1' ? '产品组1' : '产品组2'}的所有产品`, 'success');
+            
+            // 隐藏弹层
+            this.hideClearGroupDialog();
+            
+            // 重新加载产品列表
+            await this.loadProductList();
+
+        } catch (error) {
+            console.error('清空产品组失败:', error);
+            this.showError('清空产品组失败');
+        }
+    }
+
+    /**
+     * 隐藏清空产品组确认弹层
+     */
+    hideClearGroupDialog() {
+        document.getElementById('clearGroupMask').style.display = 'none';
+        this.currentClearGroup = null;
+    }
+
+    /**
+     * 跳转到产品组合比较页面
+     */
+    goToCompare() {
+        window.location.href = 'product-compare.html';
     }
 }
 

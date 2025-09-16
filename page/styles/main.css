@@ -9,11 +9,17 @@
     bottom: 120px; /* 底部操作栏和手机话筒高度 */
     left: 0;
     right: 0;
-    display: flex;
-    flex-direction: column;
+    height: 622px;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+}
+
+/* 主内容容器 */
+.main-content-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
 
@@ -29,7 +35,76 @@
     z-index: var(--z-index-tooltip);
 }
 
-/* 产品列表容器 */
+/* 产品组容器 */
+.product-group-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-lg);
+}
+
+.product-group-container:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* 产品组头部 */
+.product-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--color-white);
+}
+
+.group-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color-primary);
+    margin: 0;
+}
+
+.group-count {
+    font-size: var(--font-size-sm);
+    color: var(--text-color-secondary);
+}
+
+/* 产品组操作按钮 */
+.group-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--color-white);
+    border-top: 1px solid var(--border-color);
+}
+
+.group-actions .btn-medium {
+    flex: 1;
+}
+
+/* 按钮组合样式 - 一行一个按钮 */
+.btn-group-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    width: 100%;
+}
+
+/* 按钮样式 - 轮廓按钮 */
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--auxiliary-color-ac3);
+    color: var(--auxiliary-color-ac3);
+}
+
+.btn-outline:hover {
+    background-color: var(--auxiliary-color-ac3);
+    color: var(--color-white);
+}
+
+/* 产品列表容器（保持向后兼容） */
 .product-list-container {
     flex: 1;
     display: flex;
@@ -42,6 +117,7 @@
 /* 公告区域 */
 .announcement-section {
     padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -53,6 +129,18 @@
 .announcement-section .emphasis-tip:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 公告区域的emphasis-tip样式 */
+#announcementTip {
+    margin-bottom: var(--spacing-lg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#announcementTip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* 产品列表头部 */
@@ -304,6 +392,7 @@
 }
 
 .empty-action {
+    margin-top: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }
 

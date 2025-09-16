@@ -32,6 +32,58 @@
 
 
 
+/* 公告信息区域 */
+.announcement-section {
+    padding: var(--spacing-lg);
+    background: var(--color-white);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.announcement-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.announcement-item {
+    background: var(--background-color);
+    border-radius: var(--border-radius-base);
+    padding: var(--spacing-md);
+    border-left: 4px solid var(--primary-color);
+}
+
+.announcement-title {
+    font-size: var(--font-size-28);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-color-primary);
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.announcement-content {
+    font-size: var(--font-size-26);
+    color: var(--text-color-secondary);
+    line-height: 1.5;
+}
+
+.announcement-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-24);
+    color: var(--text-color-disabled);
+}
+
+.announcement-time {
+    font-size: var(--font-size-24);
+    color: var(--text-color-disabled);
+}
+
+.announcement-maintainer {
+    font-size: var(--font-size-24);
+    color: var(--text-color-disabled);
+}
+
 /* 币种收益区域 */
 .currency-income-section {
     padding: var(--spacing-lg);

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增测算器设置 - 后台管理系统</title>
+    <!-- 引入Element UI样式 -->
+    <link rel="stylesheet" href="../assets/lib/element-ui/index.css">
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/content-editor.css">
+</head>
+<body>
+    <div id="app">
+        <el-container class="admin-container">
+            <!-- 头部导航 -->
+            <el-header class="admin-header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <el-button type="text" @click="goBack" class="back-btn">
+                            <i class="el-icon-arrow-left"></i>
+                            返回
+                        </el-button>
+                        <h1 class="page-title">新增测算器设置</h1>
+                    </div>
+                </div>
+            </el-header>
+
+            <el-main class="admin-main">
+                <div class="form-container">
+                    <el-form :model="form" :rules="rules" ref="form" label-width="120px">
+                        <!-- 基本信息 -->
+                        <el-card class="form-card" shadow="never">
+                            <div slot="header" class="card-header">
+                                <span>基本信息</span>
+                            </div>
+                            
+                            <el-form-item label="标题" prop="title">
+                                <el-input 
+                                    v-model="form.title" 
+                                    placeholder="请输入标题"
+                                    maxlength="100"
+                                    show-word-limit>
+                                </el-input>
+                            </el-form-item>
+                            
+                            <el-form-item label="状态" prop="status">
+                                <el-tag type="success">生效</el-tag>
+                                <span class="form-tip">新增记录默认为生效状态</span>
+                            </el-form-item>
+                            
+                            <el-form-item label="维护人" prop="maintainer">
+                                <el-input 
+                                    v-model="form.maintainer" 
+                                    placeholder="请输入维护人"
+                                    maxlength="50">
+                                </el-input>
+                            </el-form-item>
+                        </el-card>
+
+                        <!-- 内容编辑 -->
+                        <el-card class="form-card" shadow="never">
+                            <div slot="header" class="card-header">
+                                <span>内容编辑</span>
+                                <div class="card-actions">
+                                    <el-button size="small" type="primary" @click="addTextBlock">
+                                        <i class="el-icon-edit"></i>
+                                        添加文字
+                                    </el-button>
+                                    <el-button size="small" type="success" @click="addImageBlock">
+                                        <i class="el-icon-picture"></i>
+                                        添加图片
+                                    </el-button>
+                                </div>
+                            </div>
+                            
+                            <!-- 内容编辑器 -->
+                            <div class="content-editor">
+                                <div v-if="contentBlocks.length === 0" class="empty-content">
+                                    <i class="el-icon-document"></i>
+                                    <p>点击上方按钮开始添加内容</p>
+                                </div>
+                                
+                                <div v-else class="content-blocks">
+                                    <div 
+                                        v-for="(block, index) in contentBlocks" 
+                                        :key="block.id"
+                                        class="content-block"
+                                        :class="{ 'is-active': activeBlockIndex === index }">
+                                        
+                                        <!-- 文字块 -->
+                                        <div v-if="block.type === 'text'" class="text-block">
+                                            <div class="block-header">
+                                                <span class="block-type">文字段落 {{ index + 1 }}</span>
+                                                <div class="block-actions">
+                                                    <el-button size="mini" @click="moveBlockUp(index)" :disabled="index === 0">
+                                                        <i class="el-icon-arrow-up"></i>
+                                                    </el-button>
+                                                    <el-button size="mini" @click="moveBlockDown(index)" :disabled="index === contentBlocks.length - 1">
+                                                        <i class="el-icon-arrow-down"></i>
+                                                    </el-button>
+                                                    <el-button size="mini" type="danger" @click="removeBlock(index)">
+                                                        <i class="el-icon-delete"></i>
+                                                    </el-button>
+                                                </div>
+                                            </div>
+                                            <el-input
+                                                type="textarea"
+                                                v-model="block.content"
+                                                :rows="4"
+                                                placeholder="请输入文字内容..."
+                                                @focus="setActiveBlock(index)">
+                                            </el-input>
+                                        </div>
+                                        
+                                        <!-- 图片块 -->
+                                        <div v-else-if="block.type === 'image'" class="image-block">
+                                            <div class="block-header">
+                                                <span class="block-type">图片 {{ index + 1 }}</span>
+                                                <div class="block-actions">
+                                                    <el-button size="mini" @click="moveBlockUp(index)" :disabled="index === 0">
+                                                        <i class="el-icon-arrow-up"></i>
+                                                    </el-button>
+                                                    <el-button size="mini" @click="moveBlockDown(index)" :disabled="index === contentBlocks.length - 1">
+                                                        <i class="el-icon-arrow-down"></i>
+                                                    </el-button>
+                                                    <el-button size="mini" type="danger" @click="removeBlock(index)">
+                                                        <i class="el-icon-delete"></i>
+                                                    </el-button>
+                                                </div>
+                                            </div>
+                                            
+                                            <div v-if="!block.imageData" class="image-upload-area">
+                                                <el-upload
+                                                    class="image-uploader"
+                                                    :action="uploadAction"
+                                                    :show-file-list="false"
+                                                    :before-upload="(file) => beforeImageUpload(file, index)"
+                                                    :on-success="(response, file) => handleImageSuccess(response, file, index)"
+                                                    :on-error="(error, file) => handleImageError(error, file, index)">
+                                                    <div class="upload-placeholder">
+                                                        <i class="el-icon-upload"></i>
+                                                        <p>点击上传图片</p>
+                                                        <p class="upload-tip">支持 JPG、PNG、GIF 格式，单个文件不超过 5MB</p>
+                                                    </div>
+                                                </el-upload>
+                                            </div>
+                                            
+                                            <div v-else class="image-preview">
+                                                <img :src="block.imageData.url" :alt="block.imageData.fileName">
+                                                <div class="image-info">
+                                                    <span>{{ block.imageData.fileName }}</span>
+                                                    <el-button size="mini" type="text" @click="changeImage(index)">
+                                                        <i class="el-icon-edit"></i>
+                                                        更换图片
+                                                    </el-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </el-card>
+
+                        <!-- 操作按钮 -->
+                        <div class="form-actions">
+                            <el-button @click="goBack">取消</el-button>
+                            <el-button @click="resetForm">重置</el-button>
+                            <el-button type="primary" @click="saveForm" :loading="saving">
+                                <i class="el-icon-check"></i>
+                                保存
+                            </el-button>
+                        </div>
+                    </el-form>
+                </div>
+            </el-main>
+        </el-container>
+    </div>
+
+    <!-- 隐藏的文件输入 -->
+    <input 
+        type="file" 
+        ref="imageInput" 
+        accept="image/*" 
+        style="display: none" 
+        @change="handleImageSelect">
+
+    <!-- 引入Vue.js -->
+    <script src="../assets/lib/vue/vue.min.js"></script>
+    <!-- 引入Element UI -->
+    <script src="../assets/lib/element-ui/index.js"></script>
+    <!-- 引入开发工具 -->
+    <script src="../assets/lib/stagewise-dev.js"></script>
+    <!-- 引入业务逻辑 -->
+    <script src="../js/database.js"></script>
+    <script src="../js/calculatorService.js"></script>
+    <script src="../js/contentEditor.js"></script>
+    <script src="../js/add.js"></script>
+</body>
+</html>

@@ -43,7 +43,7 @@
                         <div class="nav-left">
                             <img src="../src/assets/icons/arrow-left.svg" alt="返回" class="nav-icon" id="backBtn">
                         </div>
-                        <div class="nav-title">汇总收益</div>
+                        <div class="nav-title" id="navTitle">汇总收益</div>
                         <div class="nav-right">
                             <img src="../src/assets/icons/home.svg" alt="首页" class="nav-icon" id="homeBtn">
                         </div>
@@ -53,6 +53,14 @@
                 <!-- 主内容区域 -->
                 <div class="main-content">
                     <div class="scrollable-content">
+
+                        <!-- 公告信息区域 -->
+                        <div class="announcement-section" id="announcementSection" style="display: none;">
+                            <h2 class="section-title">公告信息</h2>
+                            <div class="announcement-list" id="announcementList">
+                                <!-- 公告信息将通过JavaScript动态生成 -->
+                            </div>
+                        </div>
 
                         <!-- 币种收益列表 -->
                         <div class="currency-income-section">
@@ -106,7 +114,8 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="js/database.js"></script>
+    <script src="js/database_v2.js"></script>
+    <script src="js/announcement-service.js"></script>
     <script src="js/summary.js"></script>
 </body>
 </html>

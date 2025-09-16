@@ -7,6 +7,7 @@ class SummaryPage {
         this.products = [];
         this.currencyIncomes = {};
         this.exchangeRates = {};
+        this.currentGroup = 'group1'; // 默认组
 
         // 汇率默认值配置 (以CNY为基准)
         this.defaultExchangeRates = {
@@ -126,6 +127,31 @@ class SummaryPage {
     }
 
     /**
+     * 获取URL参数
+     */
+    getUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const group = urlParams.get('group');
+        if (group && (group === 'group1' || group === 'group2')) {
+            this.currentGroup = group;
+        }
+        
+        // 更新页面标题
+        this.updatePageTitle();
+    }
+
+    /**
+     * 更新页面标题
+     */
+    updatePageTitle() {
+        const navTitle = document.getElementById('navTitle');
+        if (navTitle) {
+            const groupName = this.currentGroup === 'group1' ? '产品组1' : '产品组2';
+            navTitle.textContent = `${groupName}汇总收益`;
+        }
+    }
+
+    /**
      * 初始化默认汇率
      */
     initializeDefaultRates() {
@@ -147,14 +173,27 @@ class SummaryPage {
      */
     async init() {
         try {
+            // 获取URL参数
+            this.getUrlParams();
+            
             // 初始化数据库
             await window.productDB.init();
+
+            // 初始化公告服务
+            try {
+                await window.announcementService.init();
+            } catch (error) {
+                console.warn('公告服务初始化失败，将不显示公告信息:', error);
+            }
 
             // 初始化默认汇率
             this.initializeDefaultRates();
 
             // 绑定事件
             this.bindEvents();
+
+            // 加载公告信息
+            await this.loadAnnouncements();
 
             // 加载产品数据并计算收益
             await this.loadAndCalculate();
@@ -181,6 +220,100 @@ class SummaryPage {
     }
 
     /**
+     * 加载公告信息
+     */
+    async loadAnnouncements() {
+        try {
+            console.log('开始加载公告信息...');
+            
+            if (!window.announcementService) {
+                console.warn('公告服务不可用');
+                return;
+            }
+
+            console.log('公告服务可用，开始获取数据...');
+            const announcements = await window.announcementService.getActiveAnnouncements();
+            console.log('获取到公告数据:', announcements);
+            
+            this.renderAnnouncements(announcements);
+        } catch (error) {
+            console.error('加载公告信息失败:', error);
+            // 显示简单的错误提示
+            this.showAnnouncementError(error.message);
+        }
+    }
+
+    /**
+     * 渲染公告信息
+     */
+    renderAnnouncements(announcements) {
+        const announcementSection = document.getElementById('announcementSection');
+        const announcementList = document.getElementById('announcementList');
+
+        if (!announcements || announcements.length === 0) {
+            announcementSection.style.display = 'none';
+            return;
+        }
+
+        announcementSection.style.display = 'block';
+        
+        const announcementHtml = announcements.map(announcement => {
+            const contentHtml = this.renderAnnouncementContent(announcement.contentBlocks || []);
+            const updateTime = window.announcementService.formatDateTime(announcement.updateTime);
+            
+            return `
+                <div class="announcement-item">
+                    <div class="announcement-title">${announcement.title || '公告'}</div>
+                    <div class="announcement-content">${contentHtml}</div>
+                    <div class="announcement-meta">
+                        <span class="announcement-time">${updateTime}</span>
+                        <span class="announcement-maintainer">${announcement.maintainer || '系统'}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        announcementList.innerHTML = announcementHtml;
+    }
+
+    /**
+     * 渲染公告内容块
+     */
+    renderAnnouncementContent(contentBlocks) {
+        if (!contentBlocks || contentBlocks.length === 0) {
+            return '<p>暂无内容</p>';
+        }
+
+        return contentBlocks.map(block => {
+            if (block.type === 'text') {
+                return `<p>${block.content || ''}</p>`;
+            } else if (block.type === 'image') {
+                return `<img src="${block.imageData || ''}" alt="公告图片" style="max-width: 100%; height: auto; margin: 8px 0;">`;
+            }
+            return '';
+        }).join('');
+    }
+
+    /**
+     * 显示公告错误信息
+     */
+    showAnnouncementError(message) {
+        const announcementSection = document.getElementById('announcementSection');
+        const announcementList = document.getElementById('announcementList');
+        
+        announcementSection.style.display = 'block';
+        announcementList.innerHTML = `
+            <div class="announcement-item" style="border-left-color: #dc3545; background: #f8d7da;">
+                <div class="announcement-title" style="color: #721c24;">公告加载失败</div>
+                <div class="announcement-content" style="color: #721c24;">
+                    <p>无法加载公告信息: ${message}</p>
+                    <p><small>请检查浏览器控制台查看详细错误信息</small></p>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
      * 加载产品数据并计算收益
      */
     async loadAndCalculate() {
@@ -188,8 +321,8 @@ class SummaryPage {
             // 显示加载状态
             this.showLoading();
             
-            // 获取所有产品
-            this.products = await window.productDB.getAllProducts();
+            // 获取指定组的产品
+            this.products = await window.productDB.getProductsByGroup(this.currentGroup);
             
             // 计算各币种收益
             this.calculateCurrencyIncomes();

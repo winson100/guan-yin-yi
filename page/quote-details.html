@@ -10,47 +10,29 @@
     <link rel="stylesheet" href="../src/styles/base/display-page.css">
     <link rel="stylesheet" href="../src/styles/base/section.css">
     <link rel="stylesheet" href="../src/styles/base/element.css">
-    <link rel="stylesheet" href="../src/styles/base/iphone-preview.css">
+    <link rel="stylesheet" href="../src/styles/base/mobile-layout.css">
     <link rel="stylesheet" href="../src/styles/components/bar/nav-bar.css">
-    <link rel="stylesheet" href="../src/styles/components/bar/status-bar.css">
-    <link rel="stylesheet" href="../src/styles/components/bar/phone-speaker.css">
     
     <!-- 页面样式 -->
     <link rel="stylesheet" href="styles/announcement-details.css">
 </head>
 <body>
-    <div class="iphone-container">
-        <div class="iphone-notch"></div>
-        <div class="iphone-screen">
-            <div class="content-area">
-                <!-- 状态栏 -->
-                <section class="statusbar-wrapper">
-                    <div class="statusbar">
-                        <div class="statusbar-time">9:41</div>
-                        <div class="statusbar-icons">
-                            <img src="../src/assets/images/signal.png" alt="信号" class="statusbar-signal">
-                            <img src="../src/assets/images/WiFi.png" alt="WiFi" class="statusbar-wifi">
-                            <img src="../src/assets/images/battery.png" alt="电池" class="statusbar-battery">
-                        </div>
-                    </div>
-                </section>
+    <!-- 导航栏 - 固定定位 -->
+    <div class="nav-bar nav-bar-white">
+        <div class="nav-left">
+            <img src="../src/assets/icons/arrow-left.svg" alt="返回" class="nav-icon" id="backBtn">
+        </div>
+        <div class="nav-title">公告详情</div>
+        <div class="nav-right">
+            <img src="../src/assets/icons/home.svg" alt="首页" class="nav-icon" id="homeBtn">
+        </div>
+    </div>
 
-                <!-- 导航栏 -->
-                <section class="pad-vertical-0">
-                    <div class="nav-bar nav-bar-white">
-                        <div class="nav-left">
-                            <img src="../src/assets/icons/arrow-left.svg" alt="返回" class="nav-icon" id="backBtn">
-                        </div>
-                        <div class="nav-title">公告详情</div>
-                        <div class="nav-right">
-                            <img src="../src/assets/icons/home.svg" alt="首页" class="nav-icon" id="homeBtn">
-                        </div>
-                    </div>
-                </section>
+    <!-- 主内容区域 -->
+    <div class="content-area">
 
-                <!-- 主内容区域 -->
-                <div class="main-content">
-                    <div class="scrollable-content">
+        <!-- 可滚动内容容器 -->
+        <div class="scrollable-main-content">
                         <!-- 加载状态 -->
                         <div id="loadingState" class="loading-state">
                             <div class="loading-spinner"></div>
@@ -67,16 +49,6 @@
                             <div class="empty-icon">📄</div>
                             <p>暂无公告内容</p>
                         </div>
-                    </div>
-                </div>
-                
-                <!-- 手机话筒 -->
-                <section class="phone-speaker-wrap">
-                    <div class="phone-speaker">
-                        <div class="speaker-bar"></div>
-                    </div>
-                </section>
-            </div>
         </div>
     </div>
 

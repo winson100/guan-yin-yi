@@ -2,55 +2,25 @@
  * 存贷组合产品测算器 - 添加产品页面样式
  */
 
+/* 页面特定的弹层样式已移至组件库中统一处理 */
+
 /* 有效期选择弹窗特殊样式 */
 #expiryDateMask .popup-container {
-    height: 256px;
+    height: auto;
     max-height: 80vh;
 }
 
-/* 主内容区域 - 固定高度，内容可滚动 */
-.main-content {
-    position: absolute;
-    top: 88px; /* 导航栏高度 */
-    bottom: 120px; /* 底部操作栏和手机话筒高度 */
-    left: 0;
-    right: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    /* 防止滚动穿透 */
-    overscroll-behavior: contain;
-}
+/* 删除底部指示器 - 不再需要 */
 
-/* 状态栏固定定位 */
-.statusbar-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: var(--z-index-tooltip);
-    background-color: var(--background-color);
-}
+/* 删除主内容区域固定定位样式 - 已在mobile-layout.css中统一处理 */
+
+/* 删除状态栏样式 - 不再需要 */
 
 
 
-/* 导航栏容器定位 */
-section.pad-vertical-0 {
-    position: absolute;
-    top: 44px; /* 状态栏高度 */
-    left: 0;
-    right: 0;
-    z-index: var(--z-index-tooltip);
-}
+/* 删除导航栏容器定位 - 已在mobile-layout.css中统一处理 */
 
-/* 手机话筒固定在手机框底部 */
-.phone-speaker-wrap {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: var(--z-index-tooltip);
-}
+/* 删除手机话筒样式 - 不再需要 */
 
 /* 表单容器 */
 .product-form {
@@ -259,20 +229,63 @@ section.pad-vertical-0 {
 
 /* 底部按钮区域 */
 .bottom-actions {
-    position: absolute;
-    bottom: 30px; /* 在手机话筒上方，高度等于phone-speaker的高度 */
+    position: fixed;
+    bottom: 0;
     left: 0;
     right: 0;
     border-top: 1px solid var(--border-color);
     background: var(--background-color);
     z-index: var(--z-index-tooltip);
-    padding: var(--spacing-lg); /* 添加内边距 */
+    padding: var(--spacing-lg);
+    padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom));
+}
+
+/* 弹窗遮罩 - 全屏固定定位，从底部弹起 */
+.base-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: var(--z-index-modal);
+    padding: 0; /* 确保没有内边距 */
+    margin: 0; /* 确保没有外边距 */
+}
+
+/* 弹窗容器 - 底部弹起样式，完全吸底 */
+.popup-container {
+    width: 100%;
+    max-width: 100vw;
+    background: var(--color-white);
+    border-radius: 16px 16px 0 0; /* 顶部圆角 */
+    animation: slideInUp 0.3s ease-out;
+    transform-origin: bottom center;
+    margin: 0; /* 确保没有外边距 */
+    padding: 0; /* 移除容器自身的内边距 */
+    box-sizing: border-box;
+}
+
+/* 底部弹起动画 */
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* 响应式设计 */
 @media (max-width: 480px) {
     .bottom-actions {
         padding: var(--spacing-md);
+        padding-bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom));
     }
     
     .foreign-sub-form {

@@ -8,6 +8,16 @@
     text-align: center;
 }
 
+/* 弹层标题区域容器 */
+.section-popup-title {
+    background: var(--color-white);
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 /* 图标容器与图片 */
 .popup-title-icon-wrapper {
     width: var(--icon-size-medium);

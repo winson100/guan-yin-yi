@@ -23,6 +23,9 @@ class MainPage {
             // 加载产品列表
             await this.loadProductList();
             
+            // 监听页面可见性变化，当从其他页面返回时重新加载数据
+            this.bindVisibilityChangeEvent();
+            
         } catch (error) {
             console.error('页面初始化失败:', error);
             this.showError('页面初始化失败，请刷新重试');
@@ -110,12 +113,18 @@ class MainPage {
      */
     async loadProductList() {
         try {
+            console.log('开始加载产品列表...');
+            
             // 获取产品数据
             const products = await window.productDB.getAllProducts();
+            console.log('获取到的所有产品:', products);
             
             // 按组分组产品
             const group1Products = products.filter(product => (product.group || 'group1') === 'group1');
             const group2Products = products.filter(product => product.group === 'group2');
+            
+            console.log('产品组1:', group1Products.length, '个产品');
+            console.log('产品组2:', group2Products.length, '个产品');
             
             // 加载产品组1
             await this.loadProductGroup('group1', group1Products);
@@ -126,10 +135,31 @@ class MainPage {
             // 统一绑定产品项事件
             this.bindProductEvents();
 
+            console.log('产品列表加载完成');
+
         } catch (error) {
             console.error('加载产品列表失败:', error);
             this.showError('加载产品列表失败');
         }
+    }
+
+    /**
+     * 绑定页面可见性变化事件
+     */
+    bindVisibilityChangeEvent() {
+        // 监听页面可见性变化
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                console.log('页面变为可见，重新加载产品列表');
+                this.loadProductList();
+            }
+        });
+
+        // 监听页面焦点变化（备用方案）
+        window.addEventListener('focus', () => {
+            console.log('页面获得焦点，重新加载产品列表');
+            this.loadProductList();
+        });
     }
 
     /**
@@ -759,8 +789,8 @@ class MainPage {
         messageElement.className = `${type}-message`;
         messageElement.textContent = message;
         
-        // 使用主内容容器作为消息容器
-        const container = document.querySelector('.main-content-container');
+        // 修复：使用正确的容器类名
+        const container = document.querySelector('.scrollable-main-content');
         if (container) {
             container.insertBefore(messageElement, container.firstChild);
             
@@ -771,8 +801,15 @@ class MainPage {
                 }
             }, 3000);
         } else {
-            // 如果容器不存在，使用简单的alert作为备用方案
-            alert(message);
+            // 备用方案：如果找不到主容器，就添加到body
+            document.body.appendChild(messageElement);
+            
+            // 3秒后自动移除
+            setTimeout(() => {
+                if (messageElement.parentNode) {
+                    messageElement.parentNode.removeChild(messageElement);
+                }
+            }, 3000);
         }
     }
 

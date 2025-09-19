@@ -1,6 +1,6 @@
 /* 复杂弹层组件 */
 .cdlg-container {
-    width: 375px;
+    width: 100%; max-width: 100vw;
 }
 
 /* 复杂弹层主体样式 */

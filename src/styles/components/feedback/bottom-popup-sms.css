@@ -1,7 +1,7 @@
 /* 短信验证码组件样式 */
 
 .sms-popup__container {
-    width: 375px;
+    width: 100%; max-width: 100vw;
     background-color: var(--color-white);
     border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
     overflow: hidden;

@@ -33,7 +33,7 @@
             display: flex;
             gap: 20px;
             justify-content: center;
-            flex-wrap: wrap;
+            flex-direction: column;
             margin-top: 30px;
         }
         .btn {
@@ -47,8 +47,11 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: inline-block;
-            min-width: 200px;
+            display: block;
+            width: calc(100% - 60px);
+            max-width: 240px;
+            margin: 0 auto;
+            box-sizing: border-box;
         }
         .btn:hover {
             transform: translateY(-2px);
@@ -73,10 +76,6 @@
             h1 {
                 font-size: 2rem;
             }
-            .btn {
-                min-width: 100%;
-                margin-bottom: 10px;
-            }
         }
     </style>
 </head>
@@ -94,16 +93,12 @@
             <a href="management-system/page/index.html" class="btn secondary">
                 ⚙️ 后台管理系统
             </a>
-            <a href="page/debug-announcements.html" class="btn info">
-                🔧 数据调试工具
-            </a>
         </div>
         
         <div class="description" style="margin-top: 30px; font-size: 14px;">
             <strong>重要提示：</strong>
             <br>• 请确保通过同一个地址（如 localhost:8000）访问所有模块
             <br>• 后台管理系统和手机端共享数据，需要在同一域名下使用
-            <br>• 如果公告信息不显示，请使用调试工具检查数据状态
         </div>
     </div>
 </body>

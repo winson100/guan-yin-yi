@@ -10,10 +10,8 @@
     <link rel="stylesheet" href="../src/styles/base/display-page.css">
     <link rel="stylesheet" href="../src/styles/base/section.css">
     <link rel="stylesheet" href="../src/styles/base/element.css">
-    <link rel="stylesheet" href="../src/styles/base/iphone-preview.css">
+    <link rel="stylesheet" href="../src/styles/base/mobile-layout.css">
     <link rel="stylesheet" href="../src/styles/components/bar/nav-bar.css">
-    <link rel="stylesheet" href="../src/styles/components/bar/status-bar.css">
-    <link rel="stylesheet" href="../src/styles/components/bar/phone-speaker.css">
     <link rel="stylesheet" href="../src/styles/components/feedback/dialog.css">
     <link rel="stylesheet" href="../src/styles/components/base/button-combination.css">
     
@@ -21,46 +19,23 @@
     <link rel="stylesheet" href="styles/summary.css">
 </head>
 <body>
-    <div class="iphone-container">
-        <div class="iphone-notch"></div>
-        <div class="iphone-screen">
-            <div class="content-area">
-                <!-- 状态栏 -->
-                <section class="statusbar-wrapper">
-                    <div class="statusbar">
-                        <div class="statusbar-time">9:41</div>
-                        <div class="statusbar-icons">
-                            <img src="../src/assets/images/signal.png" alt="信号" class="statusbar-signal">
-                            <img src="../src/assets/images/WiFi.png" alt="WiFi" class="statusbar-wifi">
-                            <img src="../src/assets/images/battery.png" alt="电池" class="statusbar-battery">
-                        </div>
-                    </div>
-                </section>
+    <!-- 导航栏 - 固定定位 -->
+    <div class="nav-bar nav-bar-white">
+        <div class="nav-left">
+            <img src="../src/assets/icons/arrow-left.svg" alt="返回" class="nav-icon" id="backBtn">
+        </div>
+        <div class="nav-title" id="navTitle">汇总收益</div>
+        <div class="nav-right">
+            <img src="../src/assets/icons/home.svg" alt="首页" class="nav-icon" id="homeBtn">
+        </div>
+    </div>
 
-                <!-- 导航栏 -->
-                <section class="pad-vertical-0">
-                    <div class="nav-bar nav-bar-white">
-                        <div class="nav-left">
-                            <img src="../src/assets/icons/arrow-left.svg" alt="返回" class="nav-icon" id="backBtn">
-                        </div>
-                        <div class="nav-title" id="navTitle">汇总收益</div>
-                        <div class="nav-right">
-                            <img src="../src/assets/icons/home.svg" alt="首页" class="nav-icon" id="homeBtn">
-                        </div>
-                    </div>
-                </section>
+    <!-- 主内容区域 -->
+    <div class="content-area">
 
-                <!-- 主内容区域 -->
-                <div class="main-content">
-                    <div class="scrollable-content">
+        <!-- 可滚动内容容器 -->
+        <div class="scrollable-main-content">
 
-                        <!-- 公告信息区域 -->
-                        <div class="announcement-section" id="announcementSection" style="display: none;">
-                            <h2 class="section-title">公告信息</h2>
-                            <div class="announcement-list" id="announcementList">
-                                <!-- 公告信息将通过JavaScript动态生成 -->
-                            </div>
-                        </div>
 
                         <!-- 币种收益列表 -->
                         <div class="currency-income-section">
@@ -80,13 +55,6 @@
                         <!-- 人民币汇总收益 -->
                         <div class="cny-summary-section">
                             <div class="cny-summary-card">
-                                <!-- 手续费汇总 -->
-                                <div class="fee-summary-section">
-                                    <div class="fee-summary-header">
-                                        <div class="fee-label">手续费汇总</div>
-                                        <div class="fee-amount" id="feeTotalAmount">0.00 CNY</div>
-                                    </div>
-                                </div>
 
                                 <div class="cny-breakdown" id="cnyBreakdown">
                                     <!-- 人民币收益明细将通过JavaScript动态生成 -->
@@ -98,24 +66,11 @@
                             </div>
                         </div>
 
-                    </div>
-                </div>
-                
-
-                
-                <!-- 手机话筒 -->
-                <section class="phone-speaker-wrap">
-                    <div class="phone-speaker">
-                        <div class="speaker-bar"></div>
-                    </div>
-                </section>
-            </div>
         </div>
     </div>
 
     <!-- JavaScript -->
     <script src="js/database_v2.js"></script>
-    <script src="js/announcement-service.js"></script>
     <script src="js/summary.js"></script>
 </body>
 </html>

@@ -1,0 +1,110 @@
+/* 
+ * 移动端布局样式文件
+ * 替代原有的 iphone-preview.css，适配真实移动端浏览器
+ */
+
+/* 全局重置和基础布局 */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    /* 支持iOS安全区域 */
+    padding-top: env(safe-area-inset-top);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    min-height: 100dvh; /* 动态视窗高度，更适合移动端 */
+    background-color: var(--neutral-color-nc10);
+    font-family: var(--font-family);
+    /* 禁止橡皮筋效果 */
+    overscroll-behavior: none;
+    /* 优化触摸滚动 */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 主内容区域 */
+.content-area {
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--neutral-color-nc10);
+    /* 为固定导航栏预留顶部空间 */
+    padding-top: calc(44px + env(safe-area-inset-top));
+}
+
+/* 可滚动主内容区域 */
+.scrollable-main-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* 优化移动端滚动性能 */
+    -webkit-overflow-scrolling: touch;
+    /* 导航栏和tab栏都是fixed，内容区域可以占满剩余空间 */
+    min-height: calc(100vh - 44px - env(safe-area-inset-top));
+    min-height: calc(100dvh - 44px - env(safe-area-inset-top));
+}
+
+/* 有底部tab栏的页面专用样式 */
+.scrollable-main-content.with-bottom-tabs {
+    /* 为固定底部tab栏预留滚动空间 */
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
+}
+
+/* 适配有按钮区域的页面 */
+.scrollable-main-content.with-button-area {
+    /* 减去导航栏44px + 按钮区域72px + 安全区域 */
+    min-height: calc(100vh - 116px - env(safe-area-inset-top));
+    min-height: calc(100dvh - 116px - env(safe-area-inset-top));
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+}
+
+/* 适配有顶部选项卡的页面 */
+.scrollable-main-content.with-top-tabs {
+    /* 减去导航栏44px + 顶部选项卡44px + 安全区域 */
+    min-height: calc(100vh - 88px - env(safe-area-inset-top));
+    min-height: calc(100dvh - 88px - env(safe-area-inset-top));
+}
+
+/* 横屏适配 */
+@media (orientation: landscape) {
+    .scrollable-main-content {
+        min-height: calc(100vh - 44px - env(safe-area-inset-top));
+        min-height: calc(100dvh - 44px - env(safe-area-inset-top));
+    }
+    
+    .scrollable-main-content.with-button-area {
+        min-height: calc(100vh - 116px - env(safe-area-inset-top));
+        min-height: calc(100dvh - 116px - env(safe-area-inset-top));
+    }
+}
+
+/* 大屏设备限制最大宽度 */
+@media (min-width: 768px) {
+    .content-area {
+        max-width: 768px;
+        margin: 0 auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* 小屏设备优化 */
+@media (max-width: 320px) {
+    .content-area {
+        font-size: 14px;
+    }
+}
+
+/* 修复iOS Safari底部安全区域问题 */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .content-area {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}

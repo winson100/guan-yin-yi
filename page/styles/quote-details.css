@@ -97,7 +97,7 @@
 }
 
 /* 响应式设计 */
-@media (max-width: 375px) {
+@media (max-width: 480px) {
     .scrollable-content {
         padding: 0 12px;
     }

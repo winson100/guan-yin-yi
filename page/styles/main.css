@@ -2,38 +2,38 @@
  * 存贷组合产品测算器 - 主页面样式
  */
 
-/* 主内容区域 - 固定高度，内容可滚动 */
-.main-content {
-    position: absolute;
-    top: 88px; /* 导航栏高度 */
-    bottom: 120px; /* 底部操作栏和手机话筒高度 */
-    left: 0;
-    right: 0;
-    height: 622px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* 主内容容器 */
-.main-content-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-}
-
-
-
-
-
-/* 手机话筒固定在手机框底部 */
-.phone-speaker-wrap {
-    position: absolute;
+/* 底部按钮区域 - 固定定位 */
+.bottom-actions {
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    border-top: 1px solid var(--border-color);
+    background: var(--background-color);
     z-index: var(--z-index-tooltip);
+    padding: var(--spacing-lg);
+    padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom));
 }
+
+/* 弹窗遮罩 - 改为固定定位全屏 */
+.base-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-modal);
+}
+
+
+
+
+
+/* 删除手机话筒相关样式 - 不再需要 */
 
 /* 产品组容器 */
 .product-group-container {
@@ -351,7 +351,7 @@
 
 .detail-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-md) var(--spacing-sm);
 }
 
@@ -407,35 +407,9 @@
     margin: 0;
 }
 
-/* 底部按钮区域 */
-.bottom-actions {
-    position: absolute;
-    bottom: 30px; /* 在手机话筒上方，高度等于phone-speaker的高度 */
-    left: 0;
-    right: 0;
-    border-top: 1px solid var(--border-color);
-    background: var(--background-color);
-    z-index: var(--z-index-tooltip);
-}
+/* 底部按钮区域样式已移动到上方 */
 
-/* 弹窗遮罩 */
-.base-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: var(--z-index-modal);
-}
-
-/* 为iPhone容器内的弹窗提供定位上下文 */
-.iphone-screen {
-    position: relative;
-}
+/* 弹窗遮罩样式已移动到上方 */
 
 .dialog-popup-container {
     width: 90%;
@@ -453,7 +427,16 @@
     }
     
     .detail-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-sm) var(--spacing-xs);
+    }
+    
+    .detail-label {
+        font-size: var(--font-size-22);
+    }
+    
+    .detail-value {
+        font-size: var(--font-size-24);
     }
 }
 

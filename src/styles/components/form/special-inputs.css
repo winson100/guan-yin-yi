@@ -1,6 +1,6 @@
 /* 特殊输入框组件样式 */
 .input-section {
-    width: 375px;
+    width: 100%; max-width: 100vw;
     background-color: var(--color-white);
     border-radius: var(--border-radius-base);
     overflow: hidden;

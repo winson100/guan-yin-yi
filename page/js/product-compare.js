@@ -9,6 +9,7 @@ class ProductComparePage {
         this.group1CurrencyIncomes = {};
         this.group2CurrencyIncomes = {};
         this.exchangeRates = {};
+        this.inputTimers = {};
 
         // 汇率默认值配置 (以CNY为基准)
         this.defaultExchangeRates = {
@@ -127,6 +128,7 @@ class ProductComparePage {
         this.init();
     }
 
+
     /**
      * 初始化页面
      */
@@ -189,52 +191,56 @@ class ProductComparePage {
      */
     calculateGroupIncomes(groupId, products) {
         const currencyIncomes = {};
-        let totalFeeAmount = 0;
 
-        products.forEach(product => {
-            const income = this.getProductIncome(product);
-            const currency = this.getProductCurrency(product);
-            
+        // 初始化币种数据结构的方法
+        const initCurrencyData = (currency) => {
             if (!currencyIncomes[currency]) {
                 currencyIncomes[currency] = {
                     amount: 0,
                     count: 0,
-                    products: []
+                    products: [],
+                    depositInterest: 0,      // 存款利息
+                    loanInterest: 0,         // 贷款利息
+                    swapEndIncome: 0,        // 掉期期末收益
+                    feeAmount: 0,           // 手续费金额（只有CNY）
+                    spotSellAmount: 0,      // 即期卖出金额
+                    spotBuyAmount: 0,       // 即期买入金额
+                    forwardSellAmount: 0,   // 远期卖出金额
+                    forwardBuyAmount: 0,    // 远期买入金额
+                    optionFee: 0            // 期权费（只有CNY）
                 };
             }
-            
-            currencyIncomes[currency].amount += income;
-            currencyIncomes[currency].count += 1;
-            currencyIncomes[currency].products.push(product);
+        };
 
-            // 计算手续费
-            const feeCNY = this.getProductFeeCNY(product);
-            totalFeeAmount += feeCNY;
+        products.forEach(product => {
+            // 根据产品类型计算各项收益，外汇产品需要分别处理两种币种
+            this.calculateProductIncomeByType(product, currencyIncomes, initCurrencyData);
+        });
+
+        // 计算每个币种的最终收益
+        Object.keys(currencyIncomes).forEach(currency => {
+            const data = currencyIncomes[currency];
+            data.amount = data.depositInterest - data.loanInterest + data.swapEndIncome 
+                        - data.feeAmount - data.spotSellAmount + data.spotBuyAmount 
+                        - data.forwardSellAmount + data.forwardBuyAmount + data.optionFee;
         });
 
         if (groupId === 'group1') {
             this.group1CurrencyIncomes = currencyIncomes;
-            this.group1TotalFeeAmount = totalFeeAmount;
         } else {
             this.group2CurrencyIncomes = currencyIncomes;
-            this.group2TotalFeeAmount = totalFeeAmount;
         }
     }
 
     /**
-     * 获取产品手续费（人民币）
+     * 根据产品类型计算各项收益
      */
-    getProductFeeCNY(product) {
-        // 手续费原始数据就是按照人民币输入的，直接返回
-        return parseFloat(product.feeAmount) || 0;
-    }
-
-    /**
-     * 获取产品收益
-     */
-    getProductIncome(product) {
+    calculateProductIncomeByType(product, currencyIncomes, initCurrencyData) {
         switch (product.type) {
             case 'deposit':
+                const depositCurrency = product.currency || 'CNY';
+                initCurrencyData(depositCurrency);
+                
                 const depositAmount = parseFloat(product.amount) || 0;
                 const depositRate = parseFloat(product.rate) || 0;
                 const depositPeriod = parseFloat(product.period) || 0;
@@ -247,9 +253,15 @@ class ProductComparePage {
                     depositDays = depositPeriod * 365;
                 }
                 
-                return (depositAmount * depositRate * depositDays) / 36500;
+                currencyIncomes[depositCurrency].depositInterest += (depositAmount * depositRate * depositDays) / 36500;
+                currencyIncomes[depositCurrency].count += 1;
+                currencyIncomes[depositCurrency].products.push(product);
+                break;
 
             case 'loan':
+                const loanCurrency = product.currency || 'CNY';
+                initCurrencyData(loanCurrency);
+                
                 const loanAmount = parseFloat(product.amount) || 0;
                 const loanRate = parseFloat(product.rate) || 0;
                 const loanPeriod = parseFloat(product.period) || 0;
@@ -262,53 +274,122 @@ class ProductComparePage {
                     loanDays = loanPeriod * 365;
                 }
                 
-                return -(loanAmount * loanRate * loanDays) / 36500;
+                currencyIncomes[loanCurrency].loanInterest += (loanAmount * loanRate * loanDays) / 36500;
+                currencyIncomes[loanCurrency].count += 1;
+                currencyIncomes[loanCurrency].products.push(product);
+                
+                // 贷款手续费（人民币）
+                const loanFeeAmount = parseFloat(product.feeAmount) || 0;
+                if (loanFeeAmount > 0) {
+                    initCurrencyData('CNY');
+                    currencyIncomes['CNY'].feeAmount += loanFeeAmount;
+                }
+                break;
 
             case 'credit':
-                const creditAmount = parseFloat(product.amount) || 0;
-                const creditRate = parseFloat(product.rate) || 0;
-                const creditPeriod = parseFloat(product.period) || 0;
-                const creditUnit = product.periodUnit || 'day';
+                const creditCurrency = product.currency || 'CNY';
+                initCurrencyData(creditCurrency);
                 
-                let creditDays = creditPeriod;
-                if (creditUnit === 'month') {
-                    creditDays = creditPeriod * 30;
-                } else if (creditUnit === 'year') {
-                    creditDays = creditPeriod * 365;
+                const creditFeeAmount = parseFloat(product.feeAmount) || 0;
+                
+                // 信用证手续费（人民币）
+                if (creditFeeAmount > 0) {
+                    initCurrencyData('CNY');
+                    currencyIncomes['CNY'].feeAmount += creditFeeAmount;
                 }
                 
-                return (creditAmount * creditRate * creditDays) / 36500;
+                currencyIncomes[creditCurrency].count += 1;
+                currencyIncomes[creditCurrency].products.push(product);
+                break;
 
             case 'foreign_spot':
-            case 'foreign_forward':
-            case 'foreign_swap':
-                const sellAmount = parseFloat(product.sellAmount) || 0;
-                const buyAmount = parseFloat(product.buyAmount) || 0;
-                const exchangeRate = parseFloat(product.exchangeRate) || 0;
+                const spotSellCurrency = product.sellCurrency || 'CNY';
+                const spotBuyCurrency = product.buyCurrency || 'USD';
+                const spotSellAmount = parseFloat(product.sellAmount) || 0;
+                const spotBuyAmount = parseFloat(product.buyAmount) || 0;
                 
-                if (exchangeRate > 0) {
-                    return sellAmount - (buyAmount / exchangeRate);
-                }
-                return 0;
+                // 初始化两种币种
+                initCurrencyData(spotSellCurrency);
+                initCurrencyData(spotBuyCurrency);
+                
+                // 卖出币种：减少卖出金额
+                currencyIncomes[spotSellCurrency].spotSellAmount += spotSellAmount;
+                currencyIncomes[spotSellCurrency].count += 1;
+                currencyIncomes[spotSellCurrency].products.push(product);
+                
+                // 买入币种：增加买入金额
+                currencyIncomes[spotBuyCurrency].spotBuyAmount += spotBuyAmount;
+                break;
+
+            case 'foreign_forward':
+                const forwardSellCurrency = product.sellCurrency || 'CNY';
+                const forwardBuyCurrency = product.buyCurrency || 'USD';
+                const forwardSellAmount = parseFloat(product.sellAmount) || 0;
+                const forwardBuyAmount = parseFloat(product.buyAmount) || 0;
+                
+                // 初始化两种币种
+                initCurrencyData(forwardSellCurrency);
+                initCurrencyData(forwardBuyCurrency);
+                
+                // 卖出币种：减少远期卖出金额
+                currencyIncomes[forwardSellCurrency].forwardSellAmount += forwardSellAmount;
+                currencyIncomes[forwardSellCurrency].count += 1;
+                currencyIncomes[forwardSellCurrency].products.push(product);
+                
+                // 买入币种：增加远期买入金额
+                currencyIncomes[forwardBuyCurrency].forwardBuyAmount += forwardBuyAmount;
+                break;
+
+            case 'foreign_swap':
+                const nearSellCurrency = product.nearSellCurrency || 'CNY';
+                const nearBuyCurrency = product.nearBuyCurrency || 'USD';
+                const farSellCurrency = product.farSellCurrency || 'USD';
+                const farBuyCurrency = product.farBuyCurrency || 'CNY';
+                
+                const swapEndIncome = parseFloat(product.finalIncome) || 0; // 期末收益
+                
+                // 初始化相关币种
+                initCurrencyData(nearSellCurrency);
+                initCurrencyData(nearBuyCurrency);
+                initCurrencyData(farSellCurrency);
+                initCurrencyData(farBuyCurrency);
+                
+                // 掉期产品的收益计算：
+                // 期末收益已经是净收益，包含了近端和远端交易的差额
+                // 不需要再分别计算近端和远端的交易金额，避免重复计算
+                
+                // 掉期期末收益（通常以远端卖出币种计算）
+                currencyIncomes[farSellCurrency].swapEndIncome += swapEndIncome;
+                
+                // 产品计数：只在近端卖出币种计算
+                currencyIncomes[nearSellCurrency].count += 1;
+                currencyIncomes[nearSellCurrency].products.push(product);
+                break;
 
             case 'foreign_option':
                 const optionFeeAmount = parseFloat(product.optionFeeAmount) || 0;
                 const optionFeeType = product.optionFeeType;
                 
+                // 期权费都是人民币
+                initCurrencyData('CNY');
+                
                 if (optionFeeType === 'income') {
-                    return optionFeeAmount;
+                    currencyIncomes['CNY'].optionFee += optionFeeAmount;
                 } else if (optionFeeType === 'expense') {
-                    return -optionFeeAmount;
+                    currencyIncomes['CNY'].optionFee -= optionFeeAmount;
                 }
-                return 0;
+                
+                currencyIncomes['CNY'].count += 1;
+                currencyIncomes['CNY'].products.push(product);
+                break;
 
             default:
-                return 0;
+                break;
         }
     }
 
     /**
-     * 获取产品币种
+     * 获取产品主要币种（用于显示目的，仅作参考）
      */
     getProductCurrency(product) {
         switch (product.type) {
@@ -318,8 +399,9 @@ class ProductComparePage {
                 return product.currency || 'CNY';
             case 'foreign_spot':
             case 'foreign_forward':
+                return product.sellCurrency || 'CNY'; // 以卖出币种为主要币种
             case 'foreign_swap':
-                return product.sellCurrency || 'USD';
+                return product.nearSellCurrency || 'CNY'; // 掉期产品以近端卖出币种为主要币种
             case 'foreign_option':
                 return 'CNY';
             default:
@@ -332,24 +414,19 @@ class ProductComparePage {
      */
     renderPage() {
         // 渲染产品组1
-        this.renderGroup('group1', this.group1Products, this.group1CurrencyIncomes, this.group1TotalFeeAmount);
+        this.renderGroup('group1', this.group1Products, this.group1CurrencyIncomes);
         
         // 渲染产品组2
-        this.renderGroup('group2', this.group2Products, this.group2CurrencyIncomes, this.group2TotalFeeAmount);
-        
-        // 渲染比较结果
-        this.renderComparison();
+        this.renderGroup('group2', this.group2Products, this.group2CurrencyIncomes);
     }
 
     /**
      * 渲染指定组的数据
      */
-    renderGroup(groupId, products, currencyIncomes, totalFeeAmount) {
+    renderGroup(groupId, products, currencyIncomes) {
         const countElement = document.getElementById(`${groupId}Count`);
         const currencyListElement = document.getElementById(`${groupId}CurrencyList`);
         const emptyStateElement = document.getElementById(`${groupId}EmptyState`);
-        const cnyBreakdownElement = document.getElementById(`${groupId}CnyBreakdown`);
-        const cnyTotalElement = document.getElementById(`${groupId}CnyTotalAmount`);
 
         // 更新产品数量
         countElement.textContent = `共 ${products.length} 个产品`;
@@ -358,8 +435,6 @@ class ProductComparePage {
             // 显示空状态
             currencyListElement.style.display = 'none';
             emptyStateElement.style.display = 'block';
-            cnyBreakdownElement.innerHTML = '';
-            cnyTotalElement.textContent = '0.00';
             return;
         }
 
@@ -367,18 +442,45 @@ class ProductComparePage {
         emptyStateElement.style.display = 'none';
         currencyListElement.style.display = 'block';
 
-        // 渲染币种收益列表
-        this.renderCurrencyList(currencyListElement, currencyIncomes);
-
-        // 计算并渲染人民币汇总
-        const cnyTotal = this.calculateCnyTotal(currencyIncomes);
-        this.renderCnyBreakdown(cnyBreakdownElement, currencyIncomes, cnyTotal, totalFeeAmount);
-        cnyTotalElement.textContent = this.formatAmount(cnyTotal);
-        cnyTotalElement.className = `cny-amount ${cnyTotal >= 0 ? 'positive' : 'negative'}`;
+        // 渲染币种收益列表（简化版，不包含汇率输入）
+        this.renderSimpleCurrencyList(currencyListElement, currencyIncomes);
     }
 
     /**
-     * 渲染币种收益列表
+     * 渲染简化版币种收益列表（不包含汇率输入）
+     */
+    renderSimpleCurrencyList(container, currencyIncomes) {
+        // 过滤掉收益为0的币种
+        const currencies = Object.keys(currencyIncomes).filter(currency => {
+            const amount = currencyIncomes[currency].amount;
+            return Math.abs(amount) > 0.01; // 保留两位小数精度，小于0.01视为0
+        }).sort();
+        
+        if (currencies.length === 0) {
+            container.innerHTML = '<div class="empty-text">暂无币种收益数据</div>';
+            return;
+        }
+
+        container.innerHTML = currencies.map(currency => {
+            const data = currencyIncomes[currency];
+            const amount = data.amount;
+            const currencyName = this.getCurrencyName(currency);
+            
+            return `
+                <div class="currency-item simple-currency-item">
+                    <div class="currency-info">
+                        <div class="currency-name">${currencyName}</div>
+                    </div>
+                    <div class="currency-amount ${amount >= 0 ? 'positive' : 'negative'}">
+                        ${this.formatAmount(amount)} ${currency}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    /**
+     * 渲染币种收益列表（原版，包含汇率输入）
      */
     renderCurrencyList(container, currencyIncomes) {
         const currencies = Object.keys(currencyIncomes).sort();
@@ -392,115 +494,76 @@ class ProductComparePage {
             const data = currencyIncomes[currency];
             const amount = data.amount;
             const count = data.count;
+            const isCNY = currency === 'CNY';
             
-            return `
-                <div class="currency-item">
-                    <div class="currency-info">
-                        <div class="currency-name">${currency}</div>
-                        <div class="currency-count">${count} 个产品</div>
-                    </div>
-                    <div class="currency-amount ${amount >= 0 ? 'positive' : 'negative'}">
-                        ${this.formatAmount(amount)} ${currency}
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
+            const currencyName = this.getCurrencyName(currency);
+            
+            // 获取当前汇率
+            let currentRate = this.exchangeRates[currency];
 
-    /**
-     * 计算人民币汇总
-     */
-    calculateCnyTotal(currencyIncomes) {
-        let totalCny = 0;
-        
-        Object.keys(currencyIncomes).forEach(currency => {
-            const amount = currencyIncomes[currency].amount;
-            if (currency === 'CNY') {
-                totalCny += amount;
+            const hasRate = currentRate && currentRate > 0;
+            const cnyConverted = hasRate ? amount * currentRate : (isCNY ? amount : 0);
+            
+            if (isCNY) {
+                // 人民币显示为单行
+                return `
+                    <div class="currency-item cny-item">
+                        <div class="currency-info">
+                            <div class="currency-name">${currencyName}</div>
+                        </div>
+                        <div class="currency-amount ${amount >= 0 ? 'positive' : 'negative'}">
+                            ${this.formatAmount(amount)} ${currency}
+                        </div>
+                    </div>
+                `;
             } else {
-                // 转换为人民币
-                const rate = this.getExchangeRate(currency, 'CNY');
-                totalCny += amount * rate;
+                // 外币显示为3个垂直排列的容器
+                return `
+                    <div class="currency-item foreign-currency-item ${hasRate ? 'has-rate' : 'no-rate'}" data-currency="${currency}">
+                        <!-- 容器1：币种名称和金额 -->
+                        <div class="currency-container">
+                            <div class="currency-info">
+                                <div class="currency-name">${currencyName}</div>
+                            </div>
+                            <div class="currency-amount ${amount >= 0 ? 'positive' : 'negative'}">
+                                ${this.formatAmount(amount)} ${currency}
+                            </div>
+                        </div>
+                        
+                        <!-- 容器2：汇率输入 -->
+                        <div class="rate-container">
+                            <div class="rate-input-group">
+                                <div class="rate-label">汇率</div>
+                                <input type="number"
+                                       class="rate-input"
+                                       data-currency="${currency}"
+                                       placeholder="请输入${currency}对CNY汇率"
+                                       step="0.01"
+                                       min="0.01"
+                                       max="9999.99"
+                                       value="">
+                            </div>
+                            <div class="rate-error" data-currency="${currency}" style="display: none;"></div>
+                        </div>
+                        
+                        <!-- 容器3：兑换人民币 -->
+                        <div class="conversion-container">
+                            <div class="conversion-title">${currencyName}兑换人民币</div>
+                            <div class="conversion-amount ${hasRate ? 'has-rate' : 'no-rate'} ${hasRate ? (cnyConverted >= 0 ? 'positive' : 'negative') : ''}">
+                                ${hasRate ? this.formatAmount(cnyConverted) + ' CNY' : '请输入汇率'}
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
-        });
+        }).join('');
         
-        return totalCny;
+        // 绑定汇率输入事件
+        this.bindRateInputEvents();
     }
 
-    /**
-     * 渲染人民币明细
-     */
-    renderCnyBreakdown(container, currencyIncomes, totalCny, totalFeeAmount = 0) {
-        const currencies = Object.keys(currencyIncomes).sort();
-        const breakdownItems = [];
 
-        currencies.forEach(currency => {
-            const amount = currencyIncomes[currency].amount;
-            let cnyAmount = amount;
-            let label = `${currency}收益`;
 
-            if (currency !== 'CNY') {
-                const rate = this.getExchangeRate(currency, 'CNY');
-                cnyAmount = amount * rate;
-                label = `${currency}收益 (汇率: ${rate})`;
-            }
-
-            if (Math.abs(cnyAmount) > 0.01) {
-                breakdownItems.push({
-                    label: label,
-                    amount: cnyAmount
-                });
-            }
-        });
-
-        // 添加手续费汇总作为最后一个列表项
-        breakdownItems.push({
-            label: '手续费汇总',
-            amount: totalFeeAmount
-        });
-
-        if (breakdownItems.length === 0) {
-            container.innerHTML = '<div class="empty-text">暂无收益明细</div>';
-            return;
-        }
-
-        container.innerHTML = breakdownItems.map(item => `
-            <div class="cny-breakdown-item">
-                <div class="cny-breakdown-label">${item.label}</div>
-                <div class="cny-breakdown-amount ${item.amount >= 0 ? 'positive' : 'negative'}">
-                    ${this.formatAmount(item.amount)} CNY
-                </div>
-            </div>
-        `).join('');
-    }
-
-    /**
-     * 渲染比较结果
-     */
-    renderComparison() {
-        const group1CnyTotal = this.calculateCnyTotal(this.group1CurrencyIncomes);
-        const group2CnyTotal = this.calculateCnyTotal(this.group2CurrencyIncomes);
-        const difference = group1CnyTotal - group2CnyTotal;
-
-        const incomeDifferenceElement = document.getElementById('incomeDifference');
-        const recommendedGroupElement = document.getElementById('recommendedGroup');
-
-        // 显示收益差异
-        incomeDifferenceElement.textContent = `${this.formatAmount(Math.abs(difference))} CNY`;
-        incomeDifferenceElement.className = `comparison-value ${difference > 0 ? 'positive' : difference < 0 ? 'negative' : 'neutral'}`;
-
-        // 显示推荐方案
-        if (Math.abs(difference) < 0.01) {
-            recommendedGroupElement.textContent = '收益相当';
-            recommendedGroupElement.className = 'comparison-value neutral';
-        } else if (difference > 0) {
-            recommendedGroupElement.textContent = '产品组1';
-            recommendedGroupElement.className = 'comparison-value positive';
-        } else {
-            recommendedGroupElement.textContent = '产品组2';
-            recommendedGroupElement.className = 'comparison-value positive';
-        }
-    }
 
     /**
      * 获取汇率
@@ -508,6 +571,11 @@ class ProductComparePage {
     getExchangeRate(fromCurrency, toCurrency) {
         if (fromCurrency === toCurrency) {
             return 1;
+        }
+
+        // 优先使用用户设置的汇率
+        if (this.exchangeRates[fromCurrency] && toCurrency === 'CNY') {
+            return this.exchangeRates[fromCurrency];
         }
 
         // 先尝试直接汇率
@@ -526,6 +594,47 @@ class ProductComparePage {
         }
 
         return 1; // 默认汇率
+    }
+
+    /**
+     * 获取币种名称
+     */
+    getCurrencyName(currency) {
+        const currencyNames = {
+            'CNY': '人民币',
+            'USD': '美元',
+            'EUR': '欧元',
+            'GBP': '英镑',
+            'HKD': '港币',
+            'JPY': '日元',
+            'AUD': '澳元',
+            'CAD': '加元',
+            'SGD': '新加坡元',
+            'CHF': '瑞士法郎'
+        };
+        return currencyNames[currency] || currency;
+    }
+
+    /**
+     * 获取汇率默认值
+     */
+    getDefaultExchangeRate(fromCurrency, toCurrency) {
+        // 如果是相同币种，返回1
+        if (fromCurrency === toCurrency) {
+            return 1;
+        }
+
+        // 从默认汇率配置中查找
+        if (this.defaultExchangeRates[fromCurrency] && this.defaultExchangeRates[fromCurrency][toCurrency]) {
+            return this.defaultExchangeRates[fromCurrency][toCurrency];
+        }
+
+        // 尝试反向查找
+        if (this.defaultExchangeRates[toCurrency] && this.defaultExchangeRates[toCurrency][fromCurrency]) {
+            return 1 / this.defaultExchangeRates[toCurrency][fromCurrency];
+        }
+
+        return null;
     }
 
     /**
@@ -550,6 +659,150 @@ class ProductComparePage {
      */
     goHome() {
         window.location.href = 'index.html';
+    }
+
+    /**
+     * 绑定汇率输入事件
+     */
+    bindRateInputEvents() {
+        // 先移除所有现有的事件监听器
+        document.querySelectorAll('.rate-input').forEach(input => {
+            input.removeEventListener('input', this.handleRateInput);
+            input.removeEventListener('blur', this.handleRateBlur);
+        });
+        
+        // 重新绑定事件监听器
+        document.querySelectorAll('.rate-input').forEach(input => {
+            input.addEventListener('input', this.handleRateInput.bind(this));
+            input.addEventListener('blur', this.handleRateBlur.bind(this));
+        });
+    }
+
+    /**
+     * 处理汇率输入事件
+     */
+    handleRateInput(e) {
+        const currency = e.target.dataset.currency;
+        const value = e.target.value;
+        
+        // 清除之前的定时器
+        if (this.inputTimers && this.inputTimers[currency]) {
+            clearTimeout(this.inputTimers[currency]);
+        }
+        
+        if (!this.inputTimers) {
+            this.inputTimers = {};
+        }
+        
+        // 设置3秒延迟计算
+        this.inputTimers[currency] = setTimeout(() => {
+            const rate = parseFloat(value);
+            this.onRateChange(currency, rate, e.target);
+        }, 3000);
+    }
+
+    /**
+     * 处理汇率失焦事件
+     */
+    handleRateBlur(e) {
+        const currency = e.target.dataset.currency;
+        const value = e.target.value;
+        
+        // 清除定时器
+        if (this.inputTimers && this.inputTimers[currency]) {
+            clearTimeout(this.inputTimers[currency]);
+        }
+        
+        // 失焦时立即计算
+        const rate = parseFloat(value);
+        this.onRateChange(currency, rate, e.target);
+        
+        // 验证汇率
+        this.validateRate(e.target);
+    }
+
+    /**
+     * 汇率变化处理
+     */
+    onRateChange(currency, rate, inputElement) {
+        // 清除错误状态
+        this.clearRateError(currency);
+        
+        // 更新汇率
+        if (rate && rate > 0) {
+            this.exchangeRates[currency] = rate;
+        } else {
+            delete this.exchangeRates[currency];
+        }
+        
+        // 更新汇率转换显示
+        this.updateRateConversionDisplay(currency);
+        
+        // 重新计算和渲染所有数据
+        this.loadAndCalculate();
+    }
+
+    /**
+     * 更新汇率转换显示
+     */
+    updateRateConversionDisplay(currency) {
+        const currencyItems = document.querySelectorAll(`[data-currency="${currency}"].currency-item`);
+        currencyItems.forEach(currencyItem => {
+            const rate = this.exchangeRates[currency];
+            const conversionAmount = currencyItem.querySelector('.conversion-amount');
+            
+            if (conversionAmount) {
+                if (rate && rate > 0) {
+                    // 获取原币种金额
+                    const amountText = currencyItem.querySelector('.currency-amount').textContent;
+                    const amount = parseFloat(amountText.replace(/[^\d.-]/g, ''));
+                    const cnyConverted = amount * rate;
+                    
+                    conversionAmount.textContent = this.formatAmount(cnyConverted) + ' CNY';
+                    conversionAmount.className = `conversion-amount has-rate ${cnyConverted >= 0 ? 'positive' : 'negative'}`;
+                } else {
+                    conversionAmount.textContent = '请输入汇率';
+                    conversionAmount.className = 'conversion-amount no-rate';
+                }
+            }
+        });
+    }
+
+    /**
+     * 验证汇率
+     */
+    validateRate(inputElement) {
+        const currency = inputElement.dataset.currency;
+        const rate = parseFloat(inputElement.value);
+        
+        if (inputElement.value && (!rate || rate <= 0)) {
+            this.showRateError(currency, '汇率需为正数');
+            inputElement.classList.add('error');
+        } else {
+            this.clearRateError(currency);
+            inputElement.classList.remove('error');
+        }
+    }
+
+    /**
+     * 显示汇率错误
+     */
+    showRateError(currency, message) {
+        const errorElement = document.querySelector(`[data-currency="${currency}"].rate-error`);
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+    }
+
+    /**
+     * 清除汇率错误
+     */
+    clearRateError(currency) {
+        const errorElement = document.querySelector(`[data-currency="${currency}"].rate-error`);
+        if (errorElement) {
+            errorElement.style.display = 'none';
+        }
     }
 
     /**

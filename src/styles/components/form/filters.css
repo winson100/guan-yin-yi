@@ -1,6 +1,6 @@
 /* 筛选组件样式 */
 .filter-section {
-    width: 375px;
+    width: 100%; max-width: 100vw;
     background-color: var(--color-white);
     border-radius: var(--border-radius-none);
     overflow: hidden;

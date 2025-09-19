@@ -342,18 +342,86 @@ body {
 
 ```css
 /* ❌ 修改前：固定高度计算 */
-.scrollable-main-content {
-    height: calc(812px - 44px - 44px - 60px - 30px);
+.main-content {
+    position: absolute;
+    top: 88px;
+    bottom: 120px;
+    height: 622px;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-/* ✅ 修改后：flex布局自适应 */
-.scrollable-main-content {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+/* ✅ 修改后：删除固定定位的主内容区域 */
+/* 主内容区域样式已在mobile-layout.css中统一处理 */
+```
+
+### 6.2 底部固定按钮处理
+
+将底部按钮从绝对定位改为固定定位，并简化HTML结构避免重复内边距：
+
+**HTML结构简化：**
+```html
+<!-- ❌ 修改前：重复嵌套导致双重内边距 -->
+<div class="bottom-actions">
+    <section class="section">  <!-- 有内边距 -->
+        <div class="btn-group-1">
+            <button>...</button>
+        </div>
+    </section>
+</div>
+
+<!-- ✅ 修改后：直接结构，避免重复内边距 -->
+<div class="bottom-actions">  <!-- 直接在这里设置内边距 -->
+    <div class="btn-group-1">
+        <button>...</button>
+    </div>
+</div>
+```
+
+**CSS样式修改：**
+```css
+/* ❌ 修改前：绝对定位 */
+.bottom-actions {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+}
+
+/* ✅ 修改后：固定定位 + 合适的内边距 */
+.bottom-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-lg);
+    padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom));
+    z-index: var(--z-index-tooltip);
+}
+```
+
+### 6.3 弹窗遮罩处理
+
+将弹窗遮罩从iPhone容器内改为全屏：
+
+```css
+/* ❌ 修改前：相对于iPhone容器 */
+.base-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* ✅ 修改后：全屏固定定位 */
+.base-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-index-modal);
 }
 ```
 
@@ -496,6 +564,13 @@ body {
 可以使用以下命令批量修改：
 
 ```bash
+# 批量替换固定宽度343px为响应式宽度
+find src/styles -name "*.css" -exec sed -i '' 's/width: 343px;/width: 100%; max-width: 100vw; margin: 0;/g' {} \;
+
+# 批量替换固定宽度375px为响应式宽度  
+find src/styles -name "*.css" -exec sed -i '' 's/width: 375px;/width: 100%; max-width: 100vw;/g' {} \;
+
+# 批量更新媒体查询断点
 find . -name "*.css" -exec sed -i '' 's/@media (max-width: 375px)/@media (max-width: 480px)/g' {} \;
 ```
 

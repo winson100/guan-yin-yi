@@ -7,6 +7,13 @@ class AddProductPage {
         this.currentProductType = '';
         this.currentGroup = 'group1'; // 默认组
         
+        // 即期外汇字段状态跟踪
+        this.spotFieldStatus = {
+            sellAmount: { isCalculated: false, lastModified: null },
+            exchangeRate: { isCalculated: false, lastModified: null },
+            buyAmount: { isCalculated: false, lastModified: null }
+        };
+        
         // 汇率默认值配置 (以CNY为基准)
         this.exchangeRates = {
             'CNY': {
@@ -299,7 +306,10 @@ class AddProductPage {
             const field = document.getElementById(fieldId);
             if (field) {
                 field.addEventListener('input', () => {
-                    this.calculateSpotForward();
+                    this.onSpotFieldInput(fieldId);
+                });
+                field.addEventListener('blur', () => {
+                    this.onSpotFieldBlur(fieldId);
                 });
             }
         });
@@ -312,7 +322,10 @@ class AddProductPage {
             const field = document.getElementById(fieldId);
             if (field) {
                 field.addEventListener('input', () => {
-                    this.calculateSwap();
+                    this.onSwapFieldInput(fieldId);
+                });
+                field.addEventListener('blur', () => {
+                    this.onSwapFieldBlur(fieldId);
                 });
             }
         });
@@ -331,6 +344,9 @@ class AddProductPage {
 
         // 清除错误提示
         this.clearAllErrors();
+
+        // 重置即期字段状态跟踪
+        this.resetSpotFieldStatus();
 
         // 更新产品名称显示
         this.updateProductNameDisplay(type);
@@ -382,6 +398,17 @@ class AddProductPage {
         // 清除产品名称值
         productNameInput.value = '';
         productNameInput.dataset.value = '';
+    }
+
+    /**
+     * 重置即期字段状态跟踪
+     */
+    resetSpotFieldStatus() {
+        this.spotFieldStatus = {
+            sellAmount: { isCalculated: false, lastModified: null },
+            exchangeRate: { isCalculated: false, lastModified: null },
+            buyAmount: { isCalculated: false, lastModified: null }
+        };
     }
 
     /**
@@ -455,41 +482,236 @@ class AddProductPage {
     }
 
     /**
+     * 即期字段输入事件处理
+     */
+    onSpotFieldInput(fieldId) {
+        const field = document.getElementById(fieldId);
+        const value = field.value.trim();
+        
+        // 记录字段被用户修改
+        this.spotFieldStatus[fieldId].isCalculated = false;
+        this.spotFieldStatus[fieldId].lastModified = Date.now();
+        
+        // 如果字段被清空，不执行计算，避免重新填入值
+        if (value === '') {
+            return;
+        }
+        
+        // 执行计算
+        this.calculateSpotForward(fieldId);
+    }
+
+    /**
+     * 即期字段失焦事件处理
+     */
+    onSpotFieldBlur(fieldId) {
+        const field = document.getElementById(fieldId);
+        const value = parseFloat(field.value) || 0;
+        
+        // 如果字段被清空，清除相关的计算字段
+        if (value === 0 && field.value.trim() === '') {
+            this.clearSpotRelatedFields(fieldId);
+        }
+    }
+
+    /**
+     * 掉期字段输入事件处理
+     */
+    onSwapFieldInput(fieldId) {
+        const field = document.getElementById(fieldId);
+        const value = field.value.trim();
+        
+        // 如果字段被清空，不执行计算，避免重新填入值
+        if (value === '') {
+            return;
+        }
+        
+        // 执行计算
+        this.calculateSwap();
+    }
+
+    /**
+     * 掉期字段失焦事件处理
+     */
+    onSwapFieldBlur(fieldId) {
+        const field = document.getElementById(fieldId);
+        const value = parseFloat(field.value) || 0;
+        
+        // 如果字段被清空，清除相关的计算字段
+        if (value === 0 && field.value.trim() === '') {
+            this.clearSwapRelatedFields(fieldId);
+        }
+    }
+
+    /**
+     * 清除掉期相关计算字段
+     */
+    clearSwapRelatedFields(clearedFieldId) {
+        // 当掉期字段被清空时，清除依赖该字段计算的其他字段
+        if (clearedFieldId === 'nearSellAmount' || clearedFieldId === 'nearRate') {
+            // 近端卖出金额或近端汇率被清空，清除所有计算字段
+            document.getElementById('nearBuyAmount').value = '';
+            document.getElementById('farSellAmount').value = '';
+            document.getElementById('farBuyAmount').value = '';
+            document.getElementById('finalIncome').value = '';
+        } else if (clearedFieldId === 'farRate') {
+            // 远端汇率被清空，清除远端相关金额和期末收益
+            document.getElementById('farSellAmount').value = '';
+            document.getElementById('farBuyAmount').value = '';
+            document.getElementById('finalIncome').value = '';
+        }
+    }
+
+    /**
+     * 清除即期/远期相关计算字段
+     */
+    clearSpotRelatedFields(clearedFieldId) {
+        // 当某个字段被清空时，清除依赖该字段计算的其他字段
+        if (clearedFieldId === 'sellAmount') {
+            // 卖出金额被清空，清除买入金额（如果是计算得出的）
+            if (this.spotFieldStatus.buyAmount.isCalculated) {
+                document.getElementById('buyAmount').value = '';
+                this.spotFieldStatus.buyAmount.isCalculated = false;
+            }
+        } else if (clearedFieldId === 'exchangeRate') {
+            // 汇率被清空，清除买入金额（如果是计算得出的）
+            if (this.spotFieldStatus.buyAmount.isCalculated) {
+                document.getElementById('buyAmount').value = '';
+                this.spotFieldStatus.buyAmount.isCalculated = false;
+            }
+        } else if (clearedFieldId === 'buyAmount') {
+            // 买入金额被清空，不需要清除其他字段
+        }
+        
+        // 重置被清空字段的状态
+        this.spotFieldStatus[clearedFieldId].isCalculated = false;
+    }
+
+    /**
+     * 重新计算被清空的字段（已废弃，保留以防兼容性问题）
+     */
+    recalculateEmptyField(emptyFieldId) {
+        // 此方法已被 clearSpotRelatedFields 替代
+        // 保留空实现以防其他地方调用
+    }
+
+    /**
      * 计算即期/远期产品
      */
-    calculateSpotForward() {
+    calculateSpotForward(triggeredFieldId = '') {
         const sellAmount = parseFloat(document.getElementById('sellAmount').value) || 0;
-        const buyAmount = parseFloat(document.getElementById('buyAmount').value) || 0;
         const exchangeRate = parseFloat(document.getElementById('exchangeRate').value) || 0;
+        const buyAmount = parseFloat(document.getElementById('buyAmount').value) || 0;
 
-        // 获取当前触发事件的字段
-        const activeElement = document.activeElement;
-        const activeFieldId = activeElement ? activeElement.id : '';
+        // 统计有值的字段数量
+        const fieldValues = { sellAmount, exchangeRate, buyAmount };
+        const nonZeroFields = Object.keys(fieldValues).filter(key => fieldValues[key] > 0);
+        
+        // 如果少于2个字段有值，不进行计算
+        if (nonZeroFields.length < 2) {
+            return;
+        }
+        
+        // 如果所有三个字段都有值，根据最后修改的字段确定计算方向
+        if (nonZeroFields.length === 3) {
+            this.handleThreeFieldsCalculation(triggeredFieldId, fieldValues);
+            return;
+        }
+        
+        // 如果恰好有两个字段有值，计算第三个字段
+        if (nonZeroFields.length === 2) {
+            this.handleTwoFieldsCalculation(nonZeroFields, fieldValues);
+        }
+    }
 
-        // 如果输入了卖出金额和汇率，计算买入金额
-        if (sellAmount > 0 && exchangeRate > 0 && (activeFieldId === 'sellAmount' || activeFieldId === 'exchangeRate')) {
+    /**
+     * 处理三个字段都有值的情况
+     */
+    handleThreeFieldsCalculation(triggeredFieldId, fieldValues) {
+        const { sellAmount, exchangeRate, buyAmount } = fieldValues;
+        
+        if (triggeredFieldId === 'sellAmount') {
+            // 修改卖出金额，重新计算买入金额
+            const newBuyAmount = sellAmount * exchangeRate;
+            document.getElementById('buyAmount').value = this.formatAmount(newBuyAmount);
+            this.spotFieldStatus.buyAmount.isCalculated = true;
+            this.spotFieldStatus.sellAmount.isCalculated = false;
+        } else if (triggeredFieldId === 'buyAmount') {
+            // 修改买入金额，重新计算卖出金额
+            const newSellAmount = buyAmount / exchangeRate;
+            document.getElementById('sellAmount').value = this.formatAmount(newSellAmount);
+            this.spotFieldStatus.sellAmount.isCalculated = true;
+            this.spotFieldStatus.buyAmount.isCalculated = false;
+        } else if (triggeredFieldId === 'exchangeRate') {
+            // 修改汇率时，智能选择保持哪个金额字段
+            this.handleExchangeRateChange(sellAmount, exchangeRate, buyAmount);
+        }
+    }
+
+    /**
+     * 处理汇率变化的智能计算
+     */
+    handleExchangeRateChange(sellAmount, exchangeRate, buyAmount) {
+        // 获取最后被用户输入（非计算）的金额字段
+        const sellAmountIsCalculated = this.spotFieldStatus.sellAmount.isCalculated;
+        const buyAmountIsCalculated = this.spotFieldStatus.buyAmount.isCalculated;
+        
+        // 如果买入金额是计算出来的，保持卖出金额不变，重新计算买入金额
+        if (buyAmountIsCalculated && !sellAmountIsCalculated) {
+            const newBuyAmount = sellAmount * exchangeRate;
+            document.getElementById('buyAmount').value = this.formatAmount(newBuyAmount);
+            this.spotFieldStatus.buyAmount.isCalculated = true;
+        }
+        // 如果卖出金额是计算出来的，保持买入金额不变，重新计算卖出金额
+        else if (sellAmountIsCalculated && !buyAmountIsCalculated) {
+            const newSellAmount = buyAmount / exchangeRate;
+            document.getElementById('sellAmount').value = this.formatAmount(newSellAmount);
+            this.spotFieldStatus.sellAmount.isCalculated = true;
+        }
+        // 如果两个金额都是用户输入的，或者状态不明确，根据最后修改时间决定
+        else {
+            const sellLastModified = this.spotFieldStatus.sellAmount.lastModified || 0;
+            const buyLastModified = this.spotFieldStatus.buyAmount.lastModified || 0;
+            
+            // 保持最后修改的金额字段不变
+            if (buyLastModified > sellLastModified) {
+                // 买入金额是最后修改的，保持买入金额，重新计算卖出金额
+                const newSellAmount = buyAmount / exchangeRate;
+                document.getElementById('sellAmount').value = this.formatAmount(newSellAmount);
+                this.spotFieldStatus.sellAmount.isCalculated = true;
+            } else {
+                // 卖出金额是最后修改的，或者时间相同时默认保持卖出金额
+                const newBuyAmount = sellAmount * exchangeRate;
+                document.getElementById('buyAmount').value = this.formatAmount(newBuyAmount);
+                this.spotFieldStatus.buyAmount.isCalculated = true;
+            }
+        }
+        
+        // 汇率本身不是计算出来的
+        this.spotFieldStatus.exchangeRate.isCalculated = false;
+    }
+
+    /**
+     * 处理两个字段有值的情况
+     */
+    handleTwoFieldsCalculation(nonZeroFields, fieldValues) {
+        const { sellAmount, exchangeRate, buyAmount } = fieldValues;
+        
+        if (nonZeroFields.includes('sellAmount') && nonZeroFields.includes('exchangeRate')) {
+            // 有卖出金额和汇率，计算买入金额
             const calculatedBuyAmount = sellAmount * exchangeRate;
             document.getElementById('buyAmount').value = this.formatAmount(calculatedBuyAmount);
-        }
-        // 如果输入了买入金额和汇率，计算卖出金额
-        else if (buyAmount > 0 && exchangeRate > 0 && activeFieldId === 'buyAmount') {
+            this.spotFieldStatus.buyAmount.isCalculated = true;
+        } else if (nonZeroFields.includes('buyAmount') && nonZeroFields.includes('exchangeRate')) {
+            // 有买入金额和汇率，计算卖出金额
             const calculatedSellAmount = buyAmount / exchangeRate;
             document.getElementById('sellAmount').value = this.formatAmount(calculatedSellAmount);
-        }
-        // 如果汇率变化且两个金额都有值，根据最后编辑的字段重新计算
-        else if (sellAmount > 0 && buyAmount > 0 && exchangeRate > 0 && activeFieldId === 'exchangeRate') {
-            // 汇率变化时，保持卖出金额不变，重新计算买入金额
-            const calculatedBuyAmount = sellAmount * exchangeRate;
-            document.getElementById('buyAmount').value = this.formatAmount(calculatedBuyAmount);
-        }
-        // 如果输入不足，清空计算结果
-        else if (exchangeRate === 0) {
-            if (sellAmount === 0) {
-                document.getElementById('buyAmount').value = '';
-            }
-            if (buyAmount === 0) {
-                document.getElementById('sellAmount').value = '';
-            }
+            this.spotFieldStatus.sellAmount.isCalculated = true;
+        } else if (nonZeroFields.includes('sellAmount') && nonZeroFields.includes('buyAmount')) {
+            // 有卖出金额和买入金额，计算汇率
+            const calculatedExchangeRate = buyAmount / sellAmount;
+            document.getElementById('exchangeRate').value = this.formatAmount(calculatedExchangeRate);
+            this.spotFieldStatus.exchangeRate.isCalculated = true;
         }
     }
 
@@ -528,13 +750,6 @@ class AddProductPage {
             const placeholder = `请输入${sellCurrency}兑${buyCurrency}汇率`;
             exchangeRateField.placeholder = placeholder;
             
-            // 如果汇率字段为空，自动填充默认汇率
-            if (!exchangeRateField.value) {
-                const defaultRate = this.getExchangeRate(sellCurrency, buyCurrency);
-                if (defaultRate !== null) {
-                    exchangeRateField.value = defaultRate.toFixed(4);
-                }
-            }
         } else {
             exchangeRateField.placeholder = '请输入汇率';
         }
@@ -560,13 +775,6 @@ class AddProductPage {
             const nearPlaceholder = `请输入${nearSellCurrency}兑${nearBuyCurrency}汇率`;
             nearRateField.placeholder = nearPlaceholder;
             
-            // 如果近端汇率字段为空，自动填充默认汇率
-            if (!nearRateField.value) {
-                const defaultRate = this.getExchangeRate(nearSellCurrency, nearBuyCurrency);
-                if (defaultRate !== null) {
-                    nearRateField.value = defaultRate.toFixed(4);
-                }
-            }
         } else {
             nearRateField.placeholder = '请输入近端汇率';
         }
@@ -577,13 +785,6 @@ class AddProductPage {
             const farPlaceholder = `请输入${nearBuyCurrency}兑${nearSellCurrency}汇率`;
             farRateField.placeholder = farPlaceholder;
             
-            // 如果远端汇率字段为空，自动填充默认汇率
-            if (!farRateField.value) {
-                const defaultRate = this.getExchangeRate(nearBuyCurrency, nearSellCurrency);
-                if (defaultRate !== null) {
-                    farRateField.value = defaultRate.toFixed(4);
-                }
-            }
         } else {
             farRateField.placeholder = '请输入远端汇率';
         }
@@ -689,27 +890,44 @@ class AddProductPage {
             // 清除所有错误
             this.clearAllErrors();
 
+            console.log('开始保存产品...');
+            
             // 验证表单
             const validationResult = this.validateForm();
             if (!validationResult.isValid) {
+                console.log('表单验证失败:', validationResult.errors);
                 this.showValidationErrors(validationResult.errors);
                 return;
             }
+            console.log('表单验证通过');
 
             // 收集表单数据
             const productData = this.collectFormData();
             if (!productData) {
+                console.log('收集表单数据失败');
                 return;
+            }
+            console.log('收集到的产品数据:', productData);
+
+            // 确保数据库已初始化
+            if (!window.productDB.db) {
+                console.log('初始化数据库...');
+                await window.productDB.init();
             }
 
             // 保存产品
-            await this.saveProduct(productData);
+            console.log('保存产品到数据库...');
+            const result = await this.saveProduct(productData);
+            console.log('产品保存成功，ID:', result);
 
             // 显示成功消息
+            console.log('显示成功消息...');
             this.showSuccess('产品添加成功');
 
             // 返回主页面
+            console.log('准备返回主页面...');
             setTimeout(() => {
+                console.log('执行页面跳转...');
                 this.goBack();
             }, 1500);
 
@@ -909,28 +1127,45 @@ class AddProductPage {
             errors.push({ field: 'buyCurrency', message: '请选择买入币种' });
         }
 
-        // 验证卖出金额
-        const sellAmount = parseFloat(document.getElementById('sellAmount').value);
-        if (!sellAmount || sellAmount <= 0) {
-            errors.push({ field: 'sellAmount', message: '卖出金额需为正数且保留2位小数' });
-        } else if (sellAmount > 999999999.99) {
-            errors.push({ field: 'sellAmount', message: '卖出金额不能超过999,999,999.99' });
-        }
+        // 获取三个字段的值
+        const sellAmount = parseFloat(document.getElementById('sellAmount').value) || 0;
+        const exchangeRate = parseFloat(document.getElementById('exchangeRate').value) || 0;
+        const buyAmount = parseFloat(document.getElementById('buyAmount').value) || 0;
 
-        // 验证汇率
-        const exchangeRate = parseFloat(document.getElementById('exchangeRate').value);
-        if (!exchangeRate || exchangeRate <= 0) {
-            errors.push({ field: 'exchangeRate', message: '汇率需为正数' });
-        } else if (exchangeRate > 9999.99) {
-            errors.push({ field: 'exchangeRate', message: '汇率不能超过9999.99' });
-        }
+        // 统计有值的字段数量
+        const fieldValues = { sellAmount, exchangeRate, buyAmount };
+        const nonZeroFields = Object.keys(fieldValues).filter(key => fieldValues[key] > 0);
 
-        // 验证买入金额
-        const buyAmount = parseFloat(document.getElementById('buyAmount').value);
-        if (!buyAmount || buyAmount <= 0) {
-            errors.push({ field: 'buyAmount', message: '买入金额需为正数且保留2位小数' });
-        } else if (buyAmount > 999999999.99) {
-            errors.push({ field: 'buyAmount', message: '买入金额不能超过999,999,999.99' });
+        // 至少需要有两个字段有值
+        if (nonZeroFields.length < 2) {
+            if (sellAmount <= 0) {
+                errors.push({ field: 'sellAmount', message: '卖出金额需为正数且保留2位小数' });
+            }
+            if (exchangeRate <= 0) {
+                errors.push({ field: 'exchangeRate', message: '汇率需为正数' });
+            }
+            if (buyAmount <= 0) {
+                errors.push({ field: 'buyAmount', message: '买入金额需为正数且保留2位小数' });
+            }
+        } else {
+            // 验证有值字段的数值范围
+            if (sellAmount > 0) {
+                if (sellAmount > 999999999.99) {
+                    errors.push({ field: 'sellAmount', message: '卖出金额不能超过999,999,999.99' });
+                }
+            }
+            
+            if (exchangeRate > 0) {
+                if (exchangeRate > 9999.99) {
+                    errors.push({ field: 'exchangeRate', message: '汇率不能超过9999.99' });
+                }
+            }
+            
+            if (buyAmount > 0) {
+                if (buyAmount > 999999999.99) {
+                    errors.push({ field: 'buyAmount', message: '买入金额不能超过999,999,999.99' });
+                }
+            }
         }
     }
 
@@ -1207,7 +1442,8 @@ class AddProductPage {
      * 保存产品
      */
     async saveProduct(productData) {
-        await window.productDB.addProduct(productData);
+        const result = await window.productDB.addProduct(productData);
+        return result;
     }
 
     /**
@@ -1265,8 +1501,14 @@ class AddProductPage {
         messageElement.className = `${type}-message`;
         messageElement.textContent = message;
         
-        const container = document.querySelector('.main-content');
-        container.insertBefore(messageElement, container.firstChild);
+        // 修复：使用正确的容器类名
+        const container = document.querySelector('.scrollable-main-content');
+        if (container) {
+            container.insertBefore(messageElement, container.firstChild);
+        } else {
+            // 备用方案：如果找不到主容器，就添加到body
+            document.body.appendChild(messageElement);
+        }
         
         // 3秒后自动移除
         setTimeout(() => {

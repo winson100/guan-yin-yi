@@ -151,22 +151,6 @@ class SummaryPage {
         }
     }
 
-    /**
-     * 初始化默认汇率
-     */
-    initializeDefaultRates() {
-        // 为所有外币设置默认汇率（如果用户还没有设置的话）
-        const foreignCurrencies = ['USD', 'EUR', 'GBP', 'HKD', 'JPY', 'AUD', 'CAD', 'SGD', 'CHF'];
-
-        foreignCurrencies.forEach(currency => {
-            if (!this.exchangeRates[currency] || this.exchangeRates[currency] <= 0) {
-                const defaultRate = this.getDefaultExchangeRate(currency, 'CNY');
-                if (defaultRate && defaultRate > 0) {
-                    this.exchangeRates[currency] = defaultRate;
-                }
-            }
-        });
-    }
 
     /**
      * 初始化页面
@@ -179,21 +163,8 @@ class SummaryPage {
             // 初始化数据库
             await window.productDB.init();
 
-            // 初始化公告服务
-            try {
-                await window.announcementService.init();
-            } catch (error) {
-                console.warn('公告服务初始化失败，将不显示公告信息:', error);
-            }
-
-            // 初始化默认汇率
-            this.initializeDefaultRates();
-
             // 绑定事件
             this.bindEvents();
-
-            // 加载公告信息
-            await this.loadAnnouncements();
 
             // 加载产品数据并计算收益
             await this.loadAndCalculate();
@@ -219,99 +190,6 @@ class SummaryPage {
         });
     }
 
-    /**
-     * 加载公告信息
-     */
-    async loadAnnouncements() {
-        try {
-            console.log('开始加载公告信息...');
-            
-            if (!window.announcementService) {
-                console.warn('公告服务不可用');
-                return;
-            }
-
-            console.log('公告服务可用，开始获取数据...');
-            const announcements = await window.announcementService.getActiveAnnouncements();
-            console.log('获取到公告数据:', announcements);
-            
-            this.renderAnnouncements(announcements);
-        } catch (error) {
-            console.error('加载公告信息失败:', error);
-            // 显示简单的错误提示
-            this.showAnnouncementError(error.message);
-        }
-    }
-
-    /**
-     * 渲染公告信息
-     */
-    renderAnnouncements(announcements) {
-        const announcementSection = document.getElementById('announcementSection');
-        const announcementList = document.getElementById('announcementList');
-
-        if (!announcements || announcements.length === 0) {
-            announcementSection.style.display = 'none';
-            return;
-        }
-
-        announcementSection.style.display = 'block';
-        
-        const announcementHtml = announcements.map(announcement => {
-            const contentHtml = this.renderAnnouncementContent(announcement.contentBlocks || []);
-            const updateTime = window.announcementService.formatDateTime(announcement.updateTime);
-            
-            return `
-                <div class="announcement-item">
-                    <div class="announcement-title">${announcement.title || '公告'}</div>
-                    <div class="announcement-content">${contentHtml}</div>
-                    <div class="announcement-meta">
-                        <span class="announcement-time">${updateTime}</span>
-                        <span class="announcement-maintainer">${announcement.maintainer || '系统'}</span>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        announcementList.innerHTML = announcementHtml;
-    }
-
-    /**
-     * 渲染公告内容块
-     */
-    renderAnnouncementContent(contentBlocks) {
-        if (!contentBlocks || contentBlocks.length === 0) {
-            return '<p>暂无内容</p>';
-        }
-
-        return contentBlocks.map(block => {
-            if (block.type === 'text') {
-                return `<p>${block.content || ''}</p>`;
-            } else if (block.type === 'image') {
-                return `<img src="${block.imageData || ''}" alt="公告图片" style="max-width: 100%; height: auto; margin: 8px 0;">`;
-            }
-            return '';
-        }).join('');
-    }
-
-    /**
-     * 显示公告错误信息
-     */
-    showAnnouncementError(message) {
-        const announcementSection = document.getElementById('announcementSection');
-        const announcementList = document.getElementById('announcementList');
-        
-        announcementSection.style.display = 'block';
-        announcementList.innerHTML = `
-            <div class="announcement-item" style="border-left-color: #dc3545; background: #f8d7da;">
-                <div class="announcement-title" style="color: #721c24;">公告加载失败</div>
-                <div class="announcement-content" style="color: #721c24;">
-                    <p>无法加载公告信息: ${message}</p>
-                    <p><small>请检查浏览器控制台查看详细错误信息</small></p>
-                </div>
-            </div>
-        `;
-    }
 
     /**
      * 加载产品数据并计算收益
@@ -461,11 +339,8 @@ class SummaryPage {
         }
 
         // 如果手续费币种不是人民币，需要汇率转换
-        // 优先使用用户设置的汇率，如果没有则使用默认汇率
+        // 使用用户设置的汇率
         let rate = this.exchangeRates[feeCurrency];
-        if (!rate || rate <= 0) {
-            rate = this.getDefaultExchangeRate(feeCurrency, 'CNY');
-        }
 
         if (rate && rate > 0) {
             return feeAmount * rate;
@@ -511,47 +386,66 @@ class SummaryPage {
         const incomeClass = this.getIncomeClass(data.total);
         const isCNY = currency === 'CNY';
 
-        // 获取当前汇率（优先用户设置的，如果没有则使用默认值）
+        // 获取当前汇率
         let currentRate = this.exchangeRates[currency];
-        if (!currentRate || currentRate <= 0) {
-            currentRate = this.getDefaultExchangeRate(currency, 'CNY');
-        }
 
         const hasRate = currentRate && currentRate > 0;
         const cnyConverted = hasRate ? data.total * currentRate : (isCNY ? data.total : 0);
         
-        return `
-            <div class="currency-item ${hasRate ? 'has-rate' : 'no-rate'}" data-currency="${currency}">
-                <div class="currency-header">
-                    <div class="currency-info">
-                        <div class="currency-name">${currencyName}</div>
-                    </div>
-                    <div class="currency-income">
-                        <div class="income-amount ${incomeClass}">${this.formatAmountWithSign(data.total)} ${currency}</div>
-                        ${!isCNY && hasRate ? `
-                            <div class="income-label">${this.formatCNYAmountWithSign(cnyConverted)}</div>
-                        ` : ''}
+        if (isCNY) {
+            // 人民币显示为单行，使用颜色区分
+            return `
+                <div class="currency-item cny-item" data-currency="${currency}">
+                    <div class="currency-header">
+                        <div class="currency-info">
+                            <div class="currency-name">${currencyName}</div>
+                        </div>
+                        <div class="currency-income">
+                            <div class="income-amount ${incomeClass}">${this.formatAmountWithSign(data.total)} ${currency}</div>
+                        </div>
                     </div>
                 </div>
-                
-                ${!isCNY ? `
+            `;
+        } else {
+            // 外币显示为三行
+            return `
+                <div class="currency-item foreign-currency-item ${hasRate ? 'has-rate' : 'no-rate'}" data-currency="${currency}">
+                    <!-- 第一行：币种名称和金额 -->
+                    <div class="currency-header">
+                        <div class="currency-info">
+                            <div class="currency-name">${currencyName}</div>
+                        </div>
+                        <div class="currency-income">
+                            <div class="income-amount ${incomeClass}">${this.formatAmountWithSign(data.total)} ${currency}</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第二行：汇率输入 -->
                     <div class="exchange-rate-section">
                         <div class="rate-input-group">
                             <div class="rate-label">汇率</div>
                             <input type="number"
                                    class="rate-input"
                                    data-currency="${currency}"
-                                   placeholder="请输入${currency}对人民币汇率"
+                                   placeholder="请输入${currency}对CNY汇率"
                                    step="0.01"
                                    min="0.01"
                                    max="9999.99"
-                                   value="${currentRate && currentRate > 0 ? currentRate.toFixed(4) : ''}">
+                                   value="">
                         </div>
                         <div class="rate-error" data-currency="${currency}" style="display: none;"></div>
                     </div>
-                ` : ''}
-            </div>
-        `;
+                    
+                    <!-- 第三行：兑换人民币金额 -->
+                    <div class="cny-conversion-section">
+                        <div class="conversion-label">${currencyName}兑换人民币</div>
+                        <div class="conversion-amount ${hasRate ? 'has-rate' : 'no-rate'} ${hasRate ? this.getIncomeClass(cnyConverted) : ''}">
+                            ${hasRate ? this.formatCNYAmountWithSign(cnyConverted) : '请输入汇率'}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
     }
 
     /**
@@ -676,26 +570,22 @@ class SummaryPage {
             return;
         }
         
-        const incomeElement = currencyItem.querySelector('.currency-income');
         const data = this.currencyIncomes[currency];
         const rate = this.exchangeRates[currency];
         
         if (rate && rate > 0) {
             const cnyConverted = data.total * rate;
-            const incomeLabel = incomeElement.querySelector('.income-label');
+            const conversionAmount = currencyItem.querySelector('.conversion-amount');
             
-            if (incomeLabel) {
-                incomeLabel.textContent = `${this.formatCNYAmountWithSign(cnyConverted)}`;
-            } else {
-                const newLabel = document.createElement('div');
-                newLabel.className = 'income-label';
-                newLabel.textContent = `${this.formatCNYAmountWithSign(cnyConverted)}`;
-                incomeElement.appendChild(newLabel);
+            if (conversionAmount) {
+                conversionAmount.textContent = this.formatCNYAmountWithSign(cnyConverted);
+                conversionAmount.className = `conversion-amount has-rate ${this.getIncomeClass(cnyConverted)}`;
             }
         } else {
-            const incomeLabel = incomeElement.querySelector('.income-label');
-            if (incomeLabel) {
-                incomeLabel.remove();
+            const conversionAmount = currencyItem.querySelector('.conversion-amount');
+            if (conversionAmount) {
+                conversionAmount.textContent = '请输入汇率';
+                conversionAmount.className = 'conversion-amount no-rate';
             }
         }
     }
@@ -772,7 +662,6 @@ class SummaryPage {
     calculateCNYSummary() {
         const cnyTotalAmount = document.getElementById('cnyTotalAmount');
         const cnyBreakdown = document.getElementById('cnyBreakdown');
-        const feeTotalAmount = document.getElementById('feeTotalAmount');
         
         let totalCNY = 0;
         const breakdownItems = [];
@@ -802,10 +691,6 @@ class SummaryPage {
             }
         });
         
-        // 更新手续费汇总显示（手续费是支出，显示为负数）
-        if (feeTotalAmount) {
-            feeTotalAmount.textContent = this.formatCNYAmountWithSign(-this.totalFeesCNY);
-        }
         
         // 添加手续费汇总到明细中
         if (this.totalFeesCNY !== 0) {

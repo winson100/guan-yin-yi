@@ -2,87 +2,17 @@
  * 存贷组合产品测算器 - 汇总收益页面样式
  */
 
-/* 主内容区域 */
-.main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    padding-bottom: 30px; /* 为手机话筒留出空间 */
-}
+/* 主内容区域布局由 mobile-layout.css 统一处理 */
 
 /* 可滚动内容容器 */
-.scrollable-content {
-    height: 693px;
+.scrollable-main-content {
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* 手机话筒固定在手机框底部 */
-.phone-speaker-wrap {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: var(--z-index-tooltip);
+    box-sizing: border-box;
 }
 
 
 
-/* 公告信息区域 */
-.announcement-section {
-    padding: var(--spacing-lg);
-    background: var(--color-white);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.announcement-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-}
-
-.announcement-item {
-    background: var(--background-color);
-    border-radius: var(--border-radius-base);
-    padding: var(--spacing-md);
-    border-left: 4px solid var(--primary-color);
-}
-
-.announcement-title {
-    font-size: var(--font-size-28);
-    font-weight: var(--font-weight-semibold);
-    color: var(--text-color-primary);
-    margin: 0 0 var(--spacing-sm) 0;
-}
-
-.announcement-content {
-    font-size: var(--font-size-26);
-    color: var(--text-color-secondary);
-    line-height: 1.5;
-}
-
-.announcement-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: var(--spacing-sm);
-    font-size: var(--font-size-24);
-    color: var(--text-color-disabled);
-}
-
-.announcement-time {
-    font-size: var(--font-size-24);
-    color: var(--text-color-disabled);
-}
-
-.announcement-maintainer {
-    font-size: var(--font-size-24);
-    color: var(--text-color-disabled);
-}
 
 /* 币种收益区域 */
 .currency-income-section {
@@ -110,11 +40,23 @@
     border-bottom: 1px solid var(--border-color);
 }
 
-.currency-item.no-rate {
-    padding: 16px 0;
+/* 人民币项目样式 */
+.currency-item.cny-item {
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.currency-item.has-rate {
+/* 外币项目样式 */
+.currency-item.foreign-currency-item {
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.currency-item.foreign-currency-item.no-rate {
+    padding: var(--spacing-md) 0;
+}
+
+.currency-item.foreign-currency-item.has-rate {
     padding: var(--spacing-lg) 0;
 }
 
@@ -144,7 +86,6 @@
 .income-amount {
     font-size: var(--font-size-26);
     font-weight: var(--font-weight-medium);
-    color: var(--theme-color-5);
 }
 
 .income-label {
@@ -179,6 +120,49 @@
     color: var(--text-color-primary);
     background: var(--background-color);
     transition: all 0.3s ease;
+}
+
+/* 兑换人民币区域 */
+.cny-conversion-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-color-light);
+}
+
+.conversion-label {
+    font-size: var(--font-size-24);
+    color: var(--text-color-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.conversion-amount {
+    font-size: var(--font-size-26);
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.3s ease;
+}
+
+.conversion-amount.has-rate {
+    color: var(--text-color-primary);
+}
+
+.conversion-amount.has-rate.positive {
+    color: var(--auxiliary-color-ac1); /* 正数用红色 */
+}
+
+.conversion-amount.has-rate.negative {
+    color: var(--auxiliary-color-ac2); /* 负数用绿色 */
+}
+
+.conversion-amount.has-rate.zero {
+    color: var(--text-color-primary); /* 零用黑色 */
+}
+
+.conversion-amount.no-rate {
+    color: var(--text-color-disabled);
+    font-style: italic;
 }
 
 /* 删除数字输入框的步进器 */
@@ -226,30 +210,7 @@
     padding: var(--spacing-lg);
 }
 
-/* 手续费汇总区域 */
-.fee-summary-section {
-    margin-bottom: var(--spacing-lg);
-    padding-bottom: var(--spacing-lg);
-    border-bottom: 1px solid var(--border-color);
-}
 
-.fee-summary-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.fee-label {
-    font-size: var(--font-size-28);
-    font-weight: var(--font-weight-medium);
-    color: var(--text-color-primary);
-}
-
-.fee-amount {
-    font-size: var(--font-size-32);
-    font-weight: var(--font-weight-semibold);
-    color: var(--auxiliary-color-ac2); /* 手续费显示为绿色（负数） */
-}
 
 .cny-summary-header {
     display: flex;
@@ -363,13 +324,13 @@
     }
     
     .rate-input-group {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        align-items: center;
     }
     
     .rate-label {
-        min-width: auto;
-        margin-bottom: var(--spacing-xs);
+        min-width: 60px;
+        margin-bottom: 0;
     }
 }
 
@@ -429,17 +390,22 @@
 
 
 
-/* 收益正负值样式 */
-.income-amount.positive {
-    color: var(--auxiliary-color-ac3);
+/* 原币种金额（外币）统一使用黑色，因为这是中间计算值 */
+.currency-item.foreign-currency-item .income-amount {
+    color: var(--text-color-primary);
 }
 
-.income-amount.negative {
-    color: var(--auxiliary-color-ac2);
+/* 人民币金额使用颜色区分，因为这是最终值 */
+.currency-item.cny-item .income-amount.positive {
+    color: var(--auxiliary-color-ac1); /* 正数用红色 */
 }
 
-.income-amount.zero {
-    color: var(--text-color-secondary);
+.currency-item.cny-item .income-amount.negative {
+    color: var(--auxiliary-color-ac2); /* 负数用绿色 */
+}
+
+.currency-item.cny-item .income-amount.zero {
+    color: var(--text-color-primary); /* 零用黑色 */
 }
 
 

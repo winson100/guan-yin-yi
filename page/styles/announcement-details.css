@@ -1,38 +1,29 @@
-/* 公告详情页面样式 - 内容直接放在scrollable-content中 */
+/* 公告详情页面样式 */
 
-/* 滚动容器样式 - 确保内容可以滚动 */
-.scrollable-content {
+/* 主内容区域布局由 mobile-layout.css 统一处理 */
+
+/* 滚动容器样式 */
+.scrollable-main-content {
     padding: 16px;
-    min-height: 400px;
-    max-height: calc(100vh - 120px); /* 减去导航栏和状态栏的高度 */
-    overflow-y: auto;
-    overflow-x: hidden; /* 防止水平滚动 */
-    -webkit-overflow-scrolling: touch; /* iOS滚动优化 */
     box-sizing: border-box;
 }
 
-/* 确保主内容区域不溢出 */
-.main-content {
-    height: calc(100vh - 88px); /* 减去状态栏和导航栏的高度 */
-    overflow: hidden;
-}
-
 /* 自定义滚动条样式 */
-.scrollable-content::-webkit-scrollbar {
+.scrollable-main-content::-webkit-scrollbar {
     width: 6px;
 }
 
-.scrollable-content::-webkit-scrollbar-track {
+.scrollable-main-content::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.1);
     border-radius: 3px;
 }
 
-.scrollable-content::-webkit-scrollbar-thumb {
+.scrollable-main-content::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 3px;
 }
 
-.scrollable-content::-webkit-scrollbar-thumb:hover {
+.scrollable-main-content::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.5);
 }
 
@@ -184,14 +175,9 @@
 }
 
 /* 响应式设计 */
-@media (max-width: 375px) {
-    .scrollable-content {
+@media (max-width: 480px) {
+    .scrollable-main-content {
         padding: 12px;
-        max-height: calc(100vh - 100px); /* 在小屏幕上稍微减少高度 */
-    }
-
-    .main-content {
-        height: calc(100vh - 80px); /* 在小屏幕上调整高度 */
     }
 
     .announcement-header {
@@ -221,12 +207,8 @@
 
 /* 大屏幕优化 */
 @media (min-width: 376px) {
-    .scrollable-content {
-        max-height: calc(100vh - 140px); /* 在大屏幕上增加高度 */
-    }
-
-    .main-content {
-        height: calc(100vh - 100px);
+    .scrollable-main-content {
+        padding: 20px;
     }
 }
 

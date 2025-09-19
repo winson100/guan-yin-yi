@@ -1,6 +1,6 @@
 /* 步骤条组件 */
 .steps-container {
-    width: 375px;
+    width: 100%; max-width: 100vw;
     background-color: var(--background-color);
     border-radius: var(--border-radius-large);
     overflow: hidden;

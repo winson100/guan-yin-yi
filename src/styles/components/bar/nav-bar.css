@@ -7,8 +7,15 @@
     align-items: center;
     height: 44px;
     width: 100%;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-index-navigation);
     box-sizing: border-box;
+    /* 支持iOS安全区域 */
+    padding-top: env(safe-area-inset-top);
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 /* 导航栏标题 */

@@ -2,52 +2,78 @@
 .section {
     background-color: var(--background-color);
     padding: var(--spacing-lg);
-    width: 343px;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
 }
 
 /* 上边距为0，其余16px */
 .pad-top-0 {
     background-color: var(--background-color);
     padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
-    width: 343px;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
 }
 
 /* 下边距为0，其余16px */
 .pad-bottom-0 {
     background-color: var(--background-color);
     padding: var(--spacing-lg) var(--spacing-lg) 0 var(--spacing-lg);
-    width: 343px;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
 }
 
 /* 上下为0，左右16px */
 .pad-vertical-0 {
     background-color: var(--background-color);
     padding: 0 var(--spacing-lg);
-    width: 343px;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+}
+
+/* 弹层中的pad-vertical-0样式覆盖 */
+.popup-container .pad-vertical-0 {
+    background-color: var(--color-white);
+    padding: 0 var(--spacing-lg);
+    padding-bottom: calc(var(--spacing-lg) + env(safe-area-inset-bottom)); /* 底部安全区域 */
+    margin: 0;
+    max-height: 60vh;
+    overflow-y: auto;
 }
 
 /* 透明背景样式 */
 .section-transparent {
     padding: var(--spacing-lg);
-    width: 343px;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
 }
 
 /* 透明背景上边距为0，其余16px */
 .section-transparent-top-0 {
     padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
-    width: 343px;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
 }
 
 /* 透明背景下边距为0，其余16px */
 .section-transparent-bottom-0 {
     padding: var(--spacing-lg) var(--spacing-lg) 0 var(--spacing-lg);
-    width: 343px;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
 }
 
 /* 透明背景上下为0，左右16px */
 .section-transparent-vertical-0 {
     padding: 0 var(--spacing-lg);
-    width: 343px;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
 }
 
 /* 底部弹层标题，周16px内边距，上圆角 */
@@ -56,20 +82,20 @@
     align-items: center;
     background-color: var(--background-color);
     padding: var(--spacing-lg);
-    width: 343px;
+    width: 100%; max-width: 100vw; margin: 0;
     border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
     border-bottom: 1px solid var(--border-color);
 }
 
 .section-full-width {
     background-color: var(--color-white);
-    width: 375px;
+    width: 100%; max-width: 100vw;
     overflow: hidden;
 }
 
 /* 底部弹窗容器结构 */
 .popup-container {
-    width: 375px;
+    width: 100%; max-width: 100vw;
     justify-content: center;
     position: absolute;
     left: 0;
